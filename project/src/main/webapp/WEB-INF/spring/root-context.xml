@@ -23,26 +23,27 @@
 	<!-- <context:component-scan base-package="com.project.aop"></context:component-scan> -->
 
 	<!-- hikari를 사용하기 위해서 (MI, 2023/07/25) -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
 		<property name="username" value="jsp"></property>
 		<property name="password" value="1234">	</property>
-	</bean>
+	</bean> -->
 	
-	<!-- .gitignore 설정 관련-->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="${spring.datasource.driverClassName}" />
-    <property name="url" value="${spring.datasource.url}" />
-    <property name="username" value="${spring.datasource.username}" />
-    <property name="password" value="${spring.datasource.password}" />
-</bean>
 
 	<!-- ref = "객체" (MI, 2023/07/25)-->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+<!-- 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 	  <constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
-
+ -->
+	<!-- .gitignore 설정 관련-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="${spring.datasource.driverClassName}" />
+	    <property name="url" value="${spring.datasource.url}" />
+	    <property name="username" value="${spring.datasource.username}" />
+	    <property name="password" value="${spring.datasource.password}" />
+	</bean>
+	
 	<!-- mybatis를 사용하기 위함 (MI, 2023/07/25) -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
