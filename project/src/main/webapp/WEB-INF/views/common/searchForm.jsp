@@ -12,19 +12,22 @@
 		<div class="row g-3 justify-content-center">
 		  <div class="col-auto">
 		    <!-- 카테고리 종류별 -->
-		    <select name="sField" class="form-select" aria-label="Default select example">
+		    <%-- <select name="sField" class="form-select" aria-label="Default select example">
 			  <option value="종류별" >종류별</option>
 			  <option value="간식" ${pDto.cri.SField eq '간식'? 'selected' : '' }>간식</option>
 			  <option value="밥" ${pDto.cri.SField eq '밥'? 'selected' : '' }>밥</option>
 			  <option value="면" ${pDto.cri.SField eq '밥'? 'selected' : '' }>면</option>
-			</select>
+			</select> --%>
 		  <!-- 카테고리 재료별 -->
-		    <select name="sField" class="form-select" aria-label="Default select example">
+		    <%-- <select name="sField" class="form-select" aria-label="Default select example">
 			  <option value="재료별" >재료별</option>
 			  <option value="과일류" ${pDto.cri.SField eq '과일류'? 'selected' : '' }>과일류</option>
 			  <option value="달걀/유제품" ${pDto.cri.SField eq '달걀/유제품'? 'selected' : '' }>달걀/유제품</option>
 			  <option value="육류" ${pDto.cri.SField eq '육류'? 'selected' : '' }>육류</option>
-			</select>
+			</select> --%>
+			<select name="sField" class="form-select" aria-label="Default select example">
+			  <option value="cateName" >재료명</option>
+			 </select>
 		  </div>
 		  <div class="col-sm-6">
 		    <input type="text" name="sWord" class="form-control" value="${pDto.cri.SWord}" placeholder="검색어">

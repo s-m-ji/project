@@ -4,29 +4,50 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.project.mapper.RecipeMapper">
-	<select id="getRecList" resultType="com.project.vo.BoardVO">
-		<![CDATA[ SELECT * FROM (
-						SELECT t.*, ROWNUM rn FROM (
-							SELECT bno, title, C_NO
-							FROM rec_board WHERE bno > 0 
-							]]>
-							<include refid="criteria"></include>
-							 ORDER BY bno DESC ) t
-								) WHERE rn BETWEEN #{startNo} AND #{endNo} 
+<!-- 	<select id="getRecList" resultType="com.project.vo.BoardVO">
+			SELECT * FROM rec_board_test 	
+	</select> -->
+<select id="getRecList" resultType="com.project.vo.BoardVO">
+		SELECT *
+				FROM (
+				  SELECT t.*, ROWNUM rn
+				  FROM (
+				    SELECT rt.B_NO, rt.title, rt.regdate, rc.CATETIER, rc.cateName, rc.cateParent
+				    FROM rec_board_test rt
+				    INNER JOIN rec_category rc ON rt.C_NO = rc.C_NO
+				    WHERE rt.B_NO > 0 <include refid="criteria"></include>
+				    ORDER BY rt.B_NO DESC
+				  ) t
+				)
+				WHERE rn BETWEEN #{startNo} AND #{endNo}
 	
 	</select>
+	
+	<select id="getListTotalCnt" resultType="int">
+		SELECT COUNT(*)
+			FROM (
+			  SELECT rt.B_NO, rt.title, rt.regdate, rc.CATETIER, rc.cateName, rc.cateParent
+			  FROM rec_board_test rt
+			  INNER JOIN rec_category rc ON rt.C_NO = rc.C_NO
+			  WHERE rt.B_NO > 0 <include refid="criteria"></include>
+			 )
+	</select>
+	
+	<select id="getOne" resultType="com.mimi.vo.BoardVO">
+		SELECT * FROM rec_board_test WHERE B_NO = #{b_NO}
+	</select>
 
-<sql id="criteria">
+	<sql id="criteria">
 		<choose>
-			<when test="sField == 'title'">
-				AND title LIKE '%'||#{sWord}||'%'
+			<when test="sField == 'cateName'">
+				AND rc.cateName LIKE '%'||#{sWord}||'%'
 			</when>
-			<when test="sField == 'content'">
+			<!-- <when test="sField == 'content'">
 				AND content LIKE '%'||#{sWord}||'%'
 			</when>
 			<when test="sField == 'writer'">
 				AND writer LIKE '%'||#{sWord}||'%'
-			</when>
+			</when> -->
 		</choose>
 	</sql>
 	

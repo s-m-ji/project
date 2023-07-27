@@ -6,6 +6,9 @@ import lombok.Data;
 public class Criteria {
 	
 	private String sField = ""; // 검색 조건
+	
+	//private String sType = ""; // 검색 조건 : 종류별
+	//private String sIngr = ""; // 검색 조건 : 재료별
 	private String sWord = ""; // 검색어
 	
 	

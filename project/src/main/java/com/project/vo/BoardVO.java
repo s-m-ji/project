@@ -6,7 +6,7 @@ import lombok.Data;
 public class BoardVO {
 
 	// rec_board_test로 사용
-	private int bno;
+	private int B_NO;
 	private String title;
 	private String nickName;
 	private String regdate;

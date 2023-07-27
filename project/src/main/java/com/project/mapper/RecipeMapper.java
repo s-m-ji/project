@@ -11,4 +11,6 @@ public interface RecipeMapper {
 
 	public int getListTotalCnt(Criteria cri);
 
+	public BoardVO getOne(int b_NO);
+
 }

@@ -15,19 +15,31 @@ import com.project.vo.Criteria;
 public class RecipeServiceImpl implements RecipeService {
 	
 	@Autowired
-	private RecipeMapper rMapper;
+	RecipeMapper rMapper;
 
 	// ※ 현재 rec_table VO가 없어서 BoardVO로 대체 테스트 중
 	@Override
 	public void getRecList(Model model, Criteria cri) {
+		System.out.println("=========================== getRecList 실행");
 		List<BoardVO> list = rMapper.getRecList(cri);
-		int totalCnt = rMapper.getListTotalCnt(cri);
-		PageDto pageDto = new PageDto(cri, totalCnt);
-		
+		System.out.println("*** list : " + list);
 		model.addAttribute("list", list);
-		model.addAttribute("tCnt", totalCnt);
-		model.addAttribute("pDto", pageDto);
+		
+		int totalCnt = rMapper.getListTotalCnt(cri); 
+		System.out.println("totalCnt : "  + totalCnt);
 
+		PageDto pageDto = new PageDto(cri, totalCnt);
+		System.out.println("pageDto : "  + pageDto);
+		
+		model.addAttribute("tCnt", totalCnt); 
+		model.addAttribute("pDto", pageDto);
+		
+
+	}
+
+	@Override
+	public BoardVO getOne(int b_NO) {
+		return rMapper.getOne(b_NO);
 	}
 
 }

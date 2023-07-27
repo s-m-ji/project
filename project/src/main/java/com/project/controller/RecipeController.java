@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.vo.BoardVO;
 import com.project.service.RecipeService;
 import com.project.vo.Criteria;
 
@@ -31,8 +32,15 @@ public class RecipeController {
 	
 	@GetMapping("list_test")
 	public void getRecList_test(Model model, Criteria cri) {
+		System.out.println("================================ getRecList_test 실행");
 		rService.getRecList(model, cri);
-		
+	}
+	
+	@GetMapping("view")
+	public void getOne(Model model,BoardVO paramVO) {
+		System.out.println("================================ getOne 실행");
+		BoardVO board = rService.getOne(paramVO.getB_NO());
+		model.addAttribute("book", board);
 	}
 	
 	
