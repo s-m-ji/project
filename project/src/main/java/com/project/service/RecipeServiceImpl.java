@@ -21,12 +21,13 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void getList(Model model, Criteria cri) {
 		List<BoardVO> list = rMapper.getList(cri);
-		int totalCnt = rMapper.getListTotalCnt(cri);
-		PageDto pageDto = new PageDto(cri, totalCnt);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("tCnt", totalCnt);
-		model.addAttribute("pDto", pageDto);
+//		int totalCnt = rMapper.getListTotalCnt(cri);
+		/*
+		 * PageDto pageDto = new PageDto(cri, totalCnt);
+		 * 
+		 * model.addAttribute("list", list); model.addAttribute("tCnt", totalCnt);
+		 * model.addAttribute("pDto", pageDto);
+		 */
 	}
 
 }
