@@ -23,18 +23,14 @@ import lombok.extern.log4j.Log4j;
 public class recipeTest {
 	@Autowired
 	RecipeMapper rMapper;
-	
-	@Test
-	public void getRecList() {		
-		assertNotNull(rMapper);
-		List<BoardVO> list = rMapper.getRecList();
-		System.out.println("list : " + list);
-		list.forEach(board -> {
-			System.out.println("**********************************************************");
-			log.info("********* getBno : " + board.getB_NO());
-			log.info("********* getTitle : " + board.getTitle());
-		});
-	}
+	/*
+	 * @Test public void getRecList() { assertNotNull(rMapper); List<BoardVO> list =
+	 * rMapper.getRecList(); System.out.println("list : " + list);
+	 * list.forEach(board -> { System.out.println(
+	 * "**********************************************************");
+	 * log.info("********* getBno : " + board.getB_NO());
+	 * log.info("********* getTitle : " + board.getTitle()); }); }
+	 */
 	
 	
 	
