@@ -19,8 +19,8 @@ public class RecipeServiceImpl implements RecipeService {
 
 	// ※ 현재 rec_table VO가 없어서 BoardVO로 대체 테스트 중
 	@Override
-	public void getList(Model model, Criteria cri) {
-		List<BoardVO> list = rMapper.getList(cri);
+	public void getRecList(Model model, Criteria cri) {
+		List<BoardVO> list = rMapper.getRecList(cri);
 		int totalCnt = rMapper.getListTotalCnt(cri);
 		PageDto pageDto = new PageDto(cri, totalCnt);
 		
