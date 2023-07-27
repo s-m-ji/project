@@ -35,7 +35,7 @@ public class memberTest {
 			log.info(member.getDelYNStr());
 		});
 	}
-	
+	// 회원 삭제 
 	@Test
 	public void delMember() {
 		int res = memberMapper.delMem("17", "Y");
