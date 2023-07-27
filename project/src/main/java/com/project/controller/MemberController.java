@@ -12,19 +12,14 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
-@RequestMapping("/recipe/*")
 public class MemberController {
 
 	@Autowired
 	MemberService memberservice;
 
-	@GetMapping("list")
-	public void test() {
-
-	};
 
 	// 회원 목록 조회
-	 @GetMapping("admin") 
+	 @GetMapping("/recipe/admin") 
 	 public void memberList(Model model){
 	 memberservice.memberList(model); 
 	};
