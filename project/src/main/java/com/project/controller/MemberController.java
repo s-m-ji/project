@@ -17,7 +17,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberservice;
 
-
+//
 	// 회원 목록 조회
 	 @GetMapping("/recipe/admin") 
 	 public void memberList(Model model){
