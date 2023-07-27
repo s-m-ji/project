@@ -27,6 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
 		model.addAttribute("list", list);
 		model.addAttribute("tCnt", totalCnt);
 		model.addAttribute("pDto", pageDto);
+
 	}
 
 }

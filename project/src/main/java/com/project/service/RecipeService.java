@@ -8,6 +8,6 @@ import com.project.vo.Criteria;
 @Service
 public interface RecipeService {
 
-	public void getList(Model model, Criteria cri);
+	public void getRecList(Model model, Criteria cri);
 
 }

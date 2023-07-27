@@ -7,6 +7,8 @@ import com.project.vo.Criteria;
 
 public interface RecipeMapper {
 
-	List<BoardVO> getList(Criteria cri);
+	public List<BoardVO> getRecList(Criteria cri);
+
+	public int getListTotalCnt(Criteria cri);
 
 }

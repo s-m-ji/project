@@ -18,12 +18,19 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberMapper membermapper;
 	
+	// 회원 목록 조회 
 	@Override
 	public List<MemberVo> memberList(Model model) {
-		List<MemberVo> list = membermapper.memberList(model);
+		List<MemberVo> list = membermapper.memberList();
 		model.addAttribute("list", list);
 		log.info("list ===="+ list);
 		return null;
+	}
+	
+	// 탈퇴 회원 선택 삭제
+	@Override
+	public int delMem(String mno, String delyn) {
+		return membermapper.delMem(mno, delyn);
 	}
 
 }

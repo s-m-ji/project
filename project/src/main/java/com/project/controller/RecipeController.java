@@ -26,12 +26,12 @@ public class RecipeController {
 	 * @author 지상미
 	 */
 	@GetMapping("list")
-	public void getList(Model model, Criteria cri) {
-		rService.getList(model, cri);
+	public void getRecList(Model model, Criteria cri) {
 	}
 	
 	@GetMapping("list_test")
-	public void getList_test() {
+	public void getRecList_test(Model model, Criteria cri) {
+		rService.getRecList(model, cri);
 		
 	}
 	

@@ -4,5 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.project.mapper.RecipeMapper">
+	<select id="getRecList" resultType="com.project.vo.BoardVO">
+		<![CDATA[ SELECT * FROM (
+						SELECT t.*, ROWNUM rn FROM (
+							SELECT bno, title, C_NO
+							FROM rec_board WHERE bno > 0 
+							]]>
+							<include refid="criteria"></include>
+							 ORDER BY bno DESC ) t
+								) WHERE rn BETWEEN #{startNo} AND #{endNo} 
+	
+	</select>
 
+<sql id="criteria">
+		<choose>
+			<when test="sField == 'title'">
+				AND title LIKE '%'||#{sWord}||'%'
+			</when>
+			<when test="sField == 'content'">
+				AND content LIKE '%'||#{sWord}||'%'
+			</when>
+			<when test="sField == 'writer'">
+				AND writer LIKE '%'||#{sWord}||'%'
+			</when>
+		</choose>
+	</sql>
+	
 </mapper>
