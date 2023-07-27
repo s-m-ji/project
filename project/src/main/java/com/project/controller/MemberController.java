@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.service.MemberService;
+import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
 
 import lombok.extern.log4j.Log4j;
@@ -24,50 +25,33 @@ public class MemberController {
 	@Autowired
 	MemberService memberservice;
 
-
+	
 	// 회원 목록 조회
 	 @GetMapping("/recipe/admin") 
-	 public void memberList(Model model){
-	 List<MemberVo> list =  memberservice.memberList(model); 
-	 log.info("controller" +  list);
+	 public void memberList(Criteria cri,Model model){
+	 memberservice.memberList(cri, model); 
+	 log.info("cri" +  cri);
+	 
 	};
+	
 	
 	// 회원 체크박스 삭제 
 	@PostMapping("/recipe/delMem")
 	public String delMem(@RequestParam("delMno") String[] delMno, Model model)  {
 		
-		 // 미신청 회원 
-		 List<String> delNmem = new ArrayList<String>();
-		 
-		 // 신청 회원 
-		 List<String> delYmem = new ArrayList<String>();
-		 
 		for(String mno : delMno) {
-		
 			int delCnt = memberservice.delMem(mno, "Y");
-			log.info("삭제 건수 : " + delCnt);
-			
-			if(delCnt == 0) {
+			if(delCnt <= 0) {
 				// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기 
-				delNmem.add(mno);
+				System.out.println(delCnt);
+				model.addAttribute("message", "미신청 회원이므로 삭제할 수 없습니다.");
 				
-			}else if(delCnt > 0 ){
+			}else{
 				// 삭제건수가 있는 경우 탈퇴(신청) 
-				delYmem.add(mno);
-			}else {
-				
+				System.out.println(delCnt);
+				model.addAttribute("message", "탈퇴 신청이 정상적으로 처리되었습니다.");
 			}
 		}
-		
-		if(!delNmem.isEmpty()) {
-			String delNmnos = String.join(",", delNmem);
-			model.addAttribute("delNmnos", delNmnos);
-		}
-		if(!delYmem.isEmpty()) {
-			String delYmnos = String.join(",", delYmem);
-			model.addAttribute("delYmnos", delYmnos);
-		}
-		
 		return "redirect:/recipe/admin";
 	};
 }

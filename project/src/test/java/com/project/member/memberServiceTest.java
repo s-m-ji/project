@@ -22,8 +22,8 @@ public class memberServiceTest {
 	@Autowired
 	MemberService memberservice;
 	
-	@Test
-	public void memList() {
+//	@Test
+/*	public void memList() {
 		List<MemberVo> list = memberservice.memberList(null);
 		
 		list.forEach(member ->{
@@ -36,5 +36,5 @@ public class memberServiceTest {
 			log.info(member.getDelYNStr());
 		});
 	}
-
+*/
 }

@@ -8,6 +8,7 @@
  *
  * Date: 2023-05-11T18:29Z
  */
+console.log('jquery 연결');
 ( function( global, factory ) {
 
 	"use strict";
