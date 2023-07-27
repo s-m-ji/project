@@ -1,5 +1,7 @@
 package com.project.member;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.mapper.MemberMapper;
+import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
 
 import lombok.extern.log4j.Log4j;
@@ -23,7 +26,7 @@ public class memberTest {
 	
 	@Test
 	public void memberList() {
-		List<MemberVo> list = memberMapper.memberList();
+		List<MemberVo> list = memberMapper.memberList(null);
 		
 		list.forEach(member ->{
 			log.info("memberVo ==== ");
@@ -42,5 +45,10 @@ public class memberTest {
 		System.out.println("탈퇴 신청 Y : 삭제 ");
 		log.info("결과 : "+ res);
 		
+	}
+	@Test
+	public void getTotalCnt() {
+		//int res = memberMapper.getTotalCnt();
+		//log.info(res);
 	}
 }

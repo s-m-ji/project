@@ -32,8 +32,6 @@ function toggleCheckboxes() {
 </head>
 <body>
 
-<!--  검색 조건  -->
-
 <form action = "/recipe/delMem" method="post">
 	<!-- 탈퇴 삭제 버튼 -->
 <input type="submit" id = "deleteBtn"  value="회원 탈퇴">

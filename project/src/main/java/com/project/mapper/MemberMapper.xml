@@ -6,41 +6,45 @@
 <mapper namespace="com.project.mapper.MemberMapper">
 
 <!-- member 목록 조회 -->
-<select id="memberList" resultType="com.project.vo.MemberVo">
+<!-- <select id="memberList" resultType="com.project.vo.MemberVo">
 	<![CDATA[
 		SELECT mno,email,name,nickname, pnum,TO_CHAR(reg_date, 'YY/MM/DD') reg_dateStr, grade, DECODE(delYN, 'Y', '신청', '미신청') delYNStr, pw FROM rec_member order by mno desc
 	]]>
 </select>
-
-
-<!--  페이징 + 검색조건 목록 .VER
- <select id="">
+ -->
+  <!-- 페이징 + 검색조건 목록 .VER -->
+ <select id="memberList" resultType="com.project.vo.MemberVo">
 <![CDATA[SELECT * FROM ( 
-	SELECT ROWNUM RN, T.* from ( 
-		SELECT mno,email,name,nickname, pnum, TO_CHAR(reg_date, 'YY/MM/DD') reg_dateStr , grade, DECODE(delYN, 'Y', '신청', '미신청') delYNStr from rec_member where mno>0 ]]>
+	SELECT ROWNUM RN, T.* FROM( 
+		select mno,email,name,nickname, pnum, TO_CHAR(reg_date, 'YY/MM/DD') reg_dateStr , grade, DECODE(delYN, 'Y', '신청', '미신청') delYNStr from rec_member where mno>0 ]]>
 		<include refid="criteria"></include> order by mno desc
 		) t 
-	) where rn between 1 and 10;
+	) where rn between 1 and 10
 </select>
 
--->
-
-<!-- <sql id="criteria">
-	<choose>
-		<when test="searchField == 'title'">
-			and name like '%'||#{searchWorld}||'%'
-		</when>
-		<when test="searchField == 'content'">
-			and grade like '%'||#{searchWorld}||'%' 
-		</when>
-		<when test="searchField == 'writer'">
-			and delYN like '%'||#{searchWorld}||'%' 
-		</when>
-	</choose>
-</sql>  -->
+<!-- 회원 총 건수  -->
+<select id="getTotalCnt" resultType="int">
+	select count(*) from rec_member where 1=1 <include refid="criteria"></include>
+</select>
 
 <!-- 회원 삭제 -->
 <delete id="delMem" parameterType="java.lang.String" statementType="PREPARED">
 	delete from rec_member where mno = #{mno} and delyn = #{delyn}
 </delete>
+
+
+<!-- 공통 검색조건1) 회원  -->
+<sql id="criteria">
+	<choose>
+		<when test="sField  == 'name'">
+			and name like '%'||#{sWord}||'%'
+		</when>
+		<when test="sField  == 'grade'">
+			and grade like '%'||#{sWord}||'%' 
+		</when>
+		<when test="sField  == 'delYN'">
+			and delYN like '%'||#{sWord}||'%' 
+		</when>
+	</choose>
+</sql>  
 </mapper>
