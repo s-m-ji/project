@@ -16,9 +16,7 @@
 				    		 rc.c1depth, rc.c2depth, rc.cateName, rc.C_NO
 				    FROM rec_board_test rt
 				    INNER JOIN rec_category rc ON rt.C_NO = rc.C_NO
-				    WHERE rt.B_NO > 0 AND rc.c1depth = #{c1depth}
-				AND rc.c2depth = #{c1depth}
-				AND rc.cateName LIKE '%'||#{sWord}||'%'
+				    WHERE rt.B_NO > 0  <include refid="criteria"></include>
 				    ORDER BY rt.B_NO DESC
 				  ) t
 				)
@@ -43,16 +41,11 @@
 	<sql id="criteria">
 		<choose>
 			<when test="c1depth == '1' or c2depth == '11' or c2depth == '12' or c2depth == '13'">
-				AND rc.c1depth = #{c1depth}
-				AND rc.c2depth = #{c1depth}
+				 <!-- AND rc.c1depth = #{c1depth}
+				AND rc.c2depth = #{c1depth}  -->
 				AND rc.cateName LIKE '%'||#{sWord}||'%'
 			</when>
-			<when test="c1depth == '2' or c2depth == '21' or c2depth == '22' or c2depth == '23'">
-				AND rc.cateName LIKE '%'||#{sWord}||'%'
-			</when>
-			<when test="c1depth == '3' or c2depth == '31' or c2depth == '32' or c2depth == '33'">
-				AND rc.cateName LIKE '%'||#{sWord}||'%'
-			</when>
+			
 		</choose>
 	</sql>
 	

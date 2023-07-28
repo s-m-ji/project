@@ -16,6 +16,31 @@
     <!-- bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/resources/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/resources/css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="/resources/css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/resources/css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+
+	<!-- Bootstrap DateTimePicker -->
+	<link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="/resources/css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="/resources/js/modernizr-2.6.2.min.js"></script>
 
 	<!-- Custom js (MI, 2023/07/26) -->
     <script src='/resources/js/custom.js'></script>

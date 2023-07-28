@@ -2,11 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java,maven
 
 
-mybatis-config.xml
-log4j.xml
 
-lecture
-target
 pom.properties
 .classpath
 MANIFEST.MF

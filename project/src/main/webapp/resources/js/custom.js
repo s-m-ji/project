@@ -41,7 +41,7 @@
 		document.searchForm.submit();
 	}
 	
-	function requestAction(url,b_no) {
+	function requestAction(url, b_no) {
 		//e.preventDefault();
 		searchForm.action = url;
 		searchForm.b_no.value = b_no;

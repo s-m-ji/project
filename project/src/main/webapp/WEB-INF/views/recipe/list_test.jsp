@@ -15,8 +15,11 @@
 			    <input id="delNoInput" type="hidden" name="bno" value="">
 			</form> -->
 			<%@ include file="../common/searchForm.jsp" %>
+			
 			<br>
-	      <div class="list-group w-auto">
+	      <div class="gtco-section">
+		<div class="gtco-container">
+			<div class="row">
 	      <p>게시글은 총 <b>${tCnt}</b>개 입니다.</p>
 	      <c:choose>
 				<c:when test="${empty list}">
@@ -27,7 +30,23 @@
 				
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
-			        <a
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<a href="/resources/images/img_1.jpg" class="fh5co-card-item image-popup" onclick="requestAction('./view', ${list.b_NO})">
+							<figure>
+								<div class="overlay"><i class="ti-plus"></i></div>
+								<img src="/resources/images/img_1.jpg" alt="Image" class="img-responsive">
+							</figure>
+							<div class="fh5co-text">
+							 <div><input type="checkbox" class="chkBox" name="bno" value="${list.b_NO}"></div>
+					            <p class="mb-0 opacity-75">${list.title}</p>
+					            <h6 class="mb-0">${list.nickName}</h6>
+					            <p class="mb-0 opacity-75">${list.regdate}</p>
+					            <p class="mb-0 opacity-75">cateName : ${list.cateName}</p>
+				           		<small class="opacity-50 text-nowrap">c_NO : ${list.c_NO}</small>
+							</div>
+						</a>
+					</div>
+			        <%-- <a
 			          href="#"
 			          onclick="requestAction('./view', ${list.b_NO})"
 			          class="list-group-item list-group-item-action d-flex gap-3 py-3"
@@ -40,14 +59,15 @@
 			            <div><h6 class="mb-0">${list.nickName}</h6></div>
 			            <div><p class="mb-0 opacity-75">${list.regdate}</p></div>
 			            <div><p class="mb-0 opacity-75">cateName : ${list.cateName}</p></div>
-			            <div><p class="mb-0 opacity-75">cateParent : ${list.cateParent}</p></div>
 			           <small class="opacity-50 text-nowrap">c_NO : ${list.c_NO}</small>
 			          </div>
-			        </a>
+			        </a> --%>
 	        		</c:forEach>
 				</c:otherwise>
 			</c:choose>
 	      </div>
+	      </div>
+		</div>
 	      <%@ include file="../common/pageNavi.jsp" %>
 		</div>
 	</section>
