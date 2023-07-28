@@ -30,7 +30,6 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("list", list);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageDto", pageDto);
-		model.addAttribute("cri", cri);
 		
 		return null;
 	}

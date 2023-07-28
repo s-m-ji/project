@@ -11,9 +11,12 @@ public class MemberVo {
 	private String nickname;
 	private String pnum;
 	private String reg_date;
-	private String grade;
+	private int gno;
 	private String delyn;
 	
 	private String delYNStr; // 탈퇴 신청 여부 (신청 , '') ${member.delYNStr}
 	private String reg_dateStr; // 가입일
+	
+	private String grade;
+	private String benefit;
 }
