@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Criteria {
 	
-	//private String sField = ""; // 검색 조건
+	private String sField = ""; // 검색 조건
 	
 	private String c1depth = ""; // 검색 조건 : 첫번째 셀렉트 박스
 	private String c2depth = ""; // 검색 조건 : 두번째 셀렉트 박스
