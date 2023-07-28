@@ -33,7 +33,7 @@
 			 )
 	</select>
 	
-	<select id="getOne" resultType="com.mimi.vo.BoardVO">
+	<select id="getOne" resultType="com.project.vo.BoardVO">
 		SELECT * FROM rec_board_test WHERE B_NO = #{b_NO}
 	</select>
 
