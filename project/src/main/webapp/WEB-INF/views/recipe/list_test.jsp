@@ -9,20 +9,15 @@
 	<section id="main" style="border: 3px dashed #ed786a;">
 		<div class="container">
 	      <div class="bg-light p-5 rounded">
-	        <h1>📚 목록 보기 📚 </h1>
-	        <p class="lead"></p>
-	        <a class="btn btn-sm btn-dark" href="./write" role="button" target="_blank">글쓰기</a>
-	        <a class="btn btn-sm btn-dark" href="#" role="button" onclick="deletelist();">선택한 글 삭제하기</a> 
+	        <h1>🍉 Recipe 🍉 </h1>
 	      </div>
-	      
-			<form id="deleteForm" action="./delete">
+			<!-- <form id="deleteForm" action="./delete">
 			    <input id="delNoInput" type="hidden" name="bno" value="">
-			</form>
-	
-		<%@ include file="../common/searchForm.jsp" %>
+			</form> -->
+			<%@ include file="../common/searchForm.jsp" %>
+			<br>
 	      <div class="list-group w-auto">
 	      <p>게시글은 총 <b>${tCnt}</b>개 입니다.</p>
-	      
 	      <c:choose>
 				<c:when test="${empty list}">
 				<div class="d-flex gap-2 w-100 justify-content-between">
@@ -39,11 +34,14 @@
 			          aria-current="true"
 			        >
 			          <div class="d-flex gap-2 w-100 justify-content-between">
+			           <small class="opacity-50 text-nowrap">b_NO : ${list.b_NO}</small>
 			            <div><input type="checkbox" class="chkBox" name="bno" value="${list.b_NO}"></div>
 			            <div><p class="mb-0 opacity-75">${list.title}</p></div>
 			            <div><h6 class="mb-0">${list.nickName}</h6></div>
 			            <div><p class="mb-0 opacity-75">${list.regdate}</p></div>
-			           <small class="opacity-50 text-nowrap">${list.c_NO}</small>
+			            <div><p class="mb-0 opacity-75">cateName : ${list.cateName}</p></div>
+			            <div><p class="mb-0 opacity-75">cateParent : ${list.cateParent}</p></div>
+			           <small class="opacity-50 text-nowrap">c_NO : ${list.c_NO}</small>
 			          </div>
 			        </a>
 	        		</c:forEach>

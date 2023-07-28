@@ -41,10 +41,10 @@
 		document.searchForm.submit();
 	}
 	
-	function requestAction(url,bno) {
+	function requestAction(url,b_no) {
 		//e.preventDefault();
 		searchForm.action = url;
-		searchForm.bno.value = bno;
+		searchForm.b_no.value = b_no;
 		searchForm.submit();
 	}
 	

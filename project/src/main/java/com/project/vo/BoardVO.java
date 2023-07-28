@@ -10,6 +10,8 @@ public class BoardVO {
 	private String title;
 	private String nickName;
 	private String regdate;
+	private String cateName;
+	private String cateParent;
 	private int C_NO;
 	
 }

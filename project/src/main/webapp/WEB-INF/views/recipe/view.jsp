@@ -346,7 +346,11 @@
 	
 	<script src="https://kit.fontawesome.com/4863a16a12.js" crossorigin="anonymous"></script>
 
+	board.b_no : 
 	<input type="text" value="${board.b_no}">
+	<br>
+	param.b_no : 
+	<input type="text" value="${param.b_no}">
 	
     <!-- 상단 -->
     <div class="header" >

@@ -41,6 +41,7 @@ public class RecipeController {
 		System.out.println("================================ getOne 실행");
 		BoardVO board = rService.getOne(paramVO.getB_NO());
 		model.addAttribute("book", board);
+		
 	}
 	
 	
