@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.project.mapper.MemberMapper;
 import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
+import com.project.vo.NoticeVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -50,5 +51,31 @@ public class memberTest {
 	public void getTotalCnt() {
 		//int res = memberMapper.getTotalCnt();
 		//log.info(res);
+	}
+	@Test
+	public void noticeList() {
+		List<NoticeVo> list =  memberMapper.noticeList(null);
+		list.forEach(notice ->{
+			log.info(notice.getNno());
+			log.info(notice.getNtitle());
+			log.info(notice.getNcontent());
+			log.info(notice.getNcount());
+			log.info(notice.getGubun());
+			
+			log.info(list);
+		});
+	}
+	@Test
+	public void noticeWrite() {
+		NoticeVo noticevo = new NoticeVo();
+		noticevo.setNtitle("7월 혜택");
+		noticevo.setNcontent("여름맞이 기념으로 이벤트를 진행합니다.");
+		noticevo.setGubun("이벤트");
+		noticevo.setNwriter("admin");
+		
+		int res = memberMapper.noticeWrite(noticevo);
+		assertEquals(res, 1);
+		
+		log.info(noticevo);
 	}
 }

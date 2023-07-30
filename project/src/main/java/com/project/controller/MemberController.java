@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.service.MemberService;
 import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
+import com.project.vo.NoticeVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -37,10 +38,10 @@ public class MemberController {
 	 public void memberList(Criteria cri,Model model){
 
 	 memberservice.memberList(cri, model); 
-	 System.out.println("cri 출력 이것은 syso : " + cri);
+	 System.out.println("🐧회원 : " + cri);
 	};
 	
-	
+
 	// 회원 체크박스 삭제 
 	@PostMapping("delMem")
 	public String delMem(@RequestParam("delMno") String[] delMno, Model model, RedirectAttributes rttr)  {
@@ -68,8 +69,32 @@ public class MemberController {
 		}
 		return  "/recipe/message";
 	};
+	// 공지 조회하기
+	@GetMapping("notice")
+	public void noticeList(Criteria cri,Model model) {
+		memberservice.noticeList(cri ,model);
+		System.out.println("🐥 공지 : " + cri);
+	
+	};
 	
 	// 공지 등록하기 
-	
-	// 공지 조회하기 
+	@PostMapping("writeAction")
+	public String noticeWrite(NoticeVo noticevo, Model model, RedirectAttributes rttr) {
+		int res = memberservice.noticeWrite(noticevo);
+		
+		String message = "";
+		if(res > 0) {
+			System.out.println("게시글 등록 res : " + res);
+			message = noticevo.getNno() + "번 글이 등록되었습니다.";
+			System.out.println("메세지 : " + message);
+			rttr.addFlashAttribute("message", message);
+			return "redirect:/recipe/notice";
+		}else {
+			message = "공지사항 게시 중 오류 발생하였습니다.";
+			System.out.println("메세지2 : " + message);
+			model.addAttribute("message", message);
+			return  "/recipe/message";
+		}
+		
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
+import com.project.vo.NoticeVo;
 
 public interface MemberMapper {
 	
@@ -18,5 +19,14 @@ public interface MemberMapper {
 
 	// 회원 삭제 
 	public int delMem(@Param("mno")String mno,@Param("delyn")String delyn);
+	
+	// 공지 목록 조회 
+	public List<NoticeVo> noticeList(Criteria cri);
+	
+	// 공지 등록 
+	public int noticeWrite(NoticeVo noticevo);
+	
+	// 공지 총 건수 
+	public int getTotalNcnt(Criteria cri);
 	
 }

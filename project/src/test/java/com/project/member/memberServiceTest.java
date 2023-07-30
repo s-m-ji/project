@@ -1,5 +1,7 @@
 package com.project.member;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.project.service.MemberService;
 import com.project.vo.MemberVo;
+import com.project.vo.NoticeVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -37,4 +40,10 @@ public class memberServiceTest {
 		});
 	}
 */
+	/*
+	 * @Test public void noticeList() { List<NoticeVo> notice =
+	 * memberservice.noticeList(); notice.forEach(list ->{ log.info(list.getNno());
+	 * 
+	 * }); }
+	 */
 }

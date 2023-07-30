@@ -23,8 +23,7 @@ function toggleCheckboxes() {
        chkBox[i].checked = isChecked;
     }
   }
-  // 탈퇴여부에 따라 alert 알림
- // alert("${param.message}");
+
   
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	function go(page){
@@ -59,7 +58,7 @@ function toggleCheckboxes() {
 </form> 	
 
 <!-- 회원 목록 조회 및 삭제 기능 --> 
-<p>게시글은 총 <b>${totalCnt}</b>개 입니다.</p>
+<p> 총 <b>${totalCnt}</b>개🪐</p>
 <form action = "/recipe/delMem" method="post">
 	
 <input type="submit" id = "deleteBtn"  value="회원 탈퇴">
@@ -105,7 +104,7 @@ function toggleCheckboxes() {
                 </c:if>
                 </c:forEach>
             </table>
-            
+            </form>
             <!--  페이지 블럭 생성 -->
             <div class ="div">
 		<c:set var="pageDto" value="${pageDto}"/>
@@ -126,5 +125,11 @@ function toggleCheckboxes() {
 		</c:if>
 		</div>
 		
-<!-- Footer -->
+<!-- ================================여기부터 공지사항 ============================================ -->
+
+<h4> 여기부터 공지사항 </h4>
+
+<%-- <%@ include file = "../recipe/notice.jsp" %> --%>
+
+ <!-- Footer -->
 <%-- 	 <%@ include file="../common/footer.jsp" %> --%>

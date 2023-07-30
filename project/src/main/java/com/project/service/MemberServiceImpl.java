@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import com.project.mapper.MemberMapper;
 import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
+import com.project.vo.NoticeVo;
 import com.project.vo.PageDto;
 
 import lombok.extern.log4j.Log4j;
@@ -44,6 +45,32 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int delMem(String mno, String delyn) {
 		return membermapper.delMem(mno, delyn);
+	}
+	
+	// 공지 목록 조회
+	@Override
+	public List<NoticeVo> noticeList(Criteria cri,Model model) {
+		List<NoticeVo> notList = membermapper.noticeList(cri);
+		int totalNcnt = membermapper.getTotalNcnt(cri);
+		PageDto pageDto = new PageDto(cri, totalNcnt);
+		
+		model.addAttribute("notList", notList);
+		model.addAttribute("totalNcnt", totalNcnt);
+		model.addAttribute("pageDto", pageDto);
+		
+		return null;
+	}
+	// 공지 글 등록
+	@Override
+	public int noticeWrite(NoticeVo noticevo) {
+		int res = membermapper.noticeWrite(noticevo);
+		return res;
+	}
+
+	// 공지 총 건수 
+	@Override
+	public int getTotalNcnt(Criteria cri) {
+		return membermapper.getTotalNcnt(cri);
 	}
 
 
