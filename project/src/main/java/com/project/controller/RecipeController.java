@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.vo.BoardVO;
 import com.project.service.RecipeService;
@@ -34,7 +35,9 @@ public class RecipeController {
 	public void getRecList_test(Model model, Criteria cri) {
 		System.out.println("================================ getRecList_test 실행");
 		rService.getRecList(model, cri);
+		//model.addAttribute("orderBy", true);
 	}
+
 	
 	@GetMapping("view")
 	public void getOne(Model model,BoardVO paramVO) {

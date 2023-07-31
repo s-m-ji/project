@@ -6,13 +6,20 @@ import lombok.Data;
 public class BoardVO {
 
 	private int B_NO; // 게시글 번호
-	private int C_NO; // 카테고리 번호
+	private int C_NO1; // 카테고리 번호
+	private int C_NO2; // 카테고리 번호
 	private int I_NO; // 재료 번호
 	
 	private String title;
 	private String nickName;
 	private String regdate;
-	private String cateName; // 카테고리명
+	private String intro;
+	private String boomup;
+	
+	private String cateName1; // 카테고리명
+	private String cateName2; // 카테고리명
+
+	private String newpost; // 신규 글 여부 
 	
 	private String I_NAME; // 재료명
 	

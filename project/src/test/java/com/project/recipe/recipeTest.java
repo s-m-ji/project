@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.mapper.RecipeMapper;
 import com.project.vo.BoardVO;
+import com.project.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -23,16 +24,23 @@ import lombok.extern.log4j.Log4j;
 public class recipeTest {
 	@Autowired
 	RecipeMapper rMapper;
-	/*
-	 * @Test public void getRecList() { assertNotNull(rMapper); List<BoardVO> list =
-	 * rMapper.getRecList(); System.out.println("list : " + list);
-	 * list.forEach(board -> { System.out.println(
-	 * "**********************************************************");
-	 * log.info("********* getBno : " + board.getB_NO());
-	 * log.info("********* getTitle : " + board.getTitle()); }); }
-	 */
 	
+	@Test public void getRecList() {
+		// assertNotNull(rMapper);
+		Criteria cri = new Criteria();
+		cri.setC1("1");
+		List<BoardVO> list = rMapper.getRecList(cri);
+		log.info("*********** list : " + list);
+		
+	}
 	
+	@Test public void getListTotalCnt() {
+		Criteria cri = new Criteria();
+		cri.setC1("1"); 
+		int res = rMapper.getListTotalCnt(cri);
+		log.info("*********** res : " + res);
+		
+	}
 	
 }
 

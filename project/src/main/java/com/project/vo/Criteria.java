@@ -7,8 +7,8 @@ public class Criteria {
 	
 	private String sField = ""; // 검색 조건
 	
-	private String c1depth = ""; // 검색 조건 : 첫번째 셀렉트 박스
-	private String c2depth = ""; // 검색 조건 : 두번째 셀렉트 박스
+	private String c1 = ""; // 검색 조건 : 첫번째 셀렉트 박스
+	private String c2 = ""; // 검색 조건 : 두번째 셀렉트 박스
 	
 	private String sWord = ""; // 검색어
 	
@@ -18,6 +18,9 @@ public class Criteria {
 	
 	private int startNo = 1;
 	private int endNo = 10;
+	
+	private boolean orderBy; // list.jsp 최신순,추천순 정렬
+	
 	
 	
 	// 페이지 정보가 넘어오면 알아서 start & end를 자동 설정하기 위함

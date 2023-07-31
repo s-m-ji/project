@@ -12,30 +12,37 @@
 				FROM (
 				  SELECT t.*, ROWNUM rn
 				  FROM (
-				    SELECT rc.catename, rc.C_NO,
-			                rt.title, rt.regdate, rt.nickname,
-			                 rm.B_NO,
-			                  ri.I_NO, ri.I_NAME
-				        FROM rec_board rt, rec_category rc, rec_material rm, rec_ingredients ri
-				            WHERE rc.C_NO = rt.C_NO
-				            AND rt.B_NO = rm.B_NO
-				            AND rm.I_NO = ri.I_NO
+				          SELECT rt.title, rt.regdate, rt.nickname, rt.intro, rt.b_no, rt.boomup,
+				          			CASE WHEN rt.regdate >= TRUNC(SYSDATE) - 3 THEN 'new' ELSE '' END AS newpost,
+				          			rc.C_NO1, rc.C_NO2, rc.catename1, rc.catename2 
+				          	FROM rec_board rt, rec_category rc
+				          	 WHERE rc.C_NO1 = rt.C_NO1
+				          	  AND rc.C_NO2 = rt.C_NO2
+				          	  AND intro LIKE '%' || #{sWord} || '%'
 				            <include refid="criteria"></include>
-				        ORDER BY B_NO DESC
+					        <choose>
+			                    <when test="orderBy">
+			                        <include refid="orderByRegidate"></include>
+			                    </when>
+			                    <otherwise>
+			                        <include refid="orderByBoomUp"></include>
+			                    </otherwise>
+			                </choose>
 				  ) t
 				)
 				WHERE rn BETWEEN #{startNo} AND #{endNo}
-	
 	</select>
+	
 	
 	<select id="getListTotalCnt" resultType="int">
 		SELECT COUNT(*)
 			FROM (
 			  SELECT *
-			  FROM rec_board rt, rec_category rc, rec_material rm, rec_ingredients ri
-		            WHERE rc.C_NO = rt.C_NO
-		            AND rt.B_NO = rm.B_NO
-		            AND rm.I_NO = ri.I_NO <include refid="criteria"></include>
+		       FROM rec_board rt, rec_category rc
+		          	 WHERE rc.C_NO1 = rt.C_NO1
+		          	  AND rc.C_NO2 = rt.C_NO2
+		          	  AND intro LIKE '%' || #{sWord} || '%'
+		            <include refid="criteria"></include>
 			 )
 	</select>
 	
@@ -44,12 +51,21 @@
 	</select>
 
 	<sql id="criteria">
-		<choose>
-			<when test="c2depth = 'c2depth'">
-				AND ri.I_NAME LIKE '%'||#{sWord}||'%'
-			</when>
-			
-		</choose>
+    <choose>
+        <!-- c1, c2에 따라 조건을 추가하는 부분 -->
+        <when test="c1 != null and c1 != ''">
+		    AND rc.C_NO1 = #{c1}
+		    <if test="c2 != null and c2 != ''">
+		        AND rc.C_NO2 = #{c2}
+		    </if>
+		</when>
+    </choose>
 	</sql>
+	
+	<sql id="orderByRegidate"> ORDER BY rt.regdate DESC </sql>
+	<sql id="orderByBoomUp"> ORDER BY rt.boomup DESC </sql>
+	
+	
+
 	
 </mapper>
