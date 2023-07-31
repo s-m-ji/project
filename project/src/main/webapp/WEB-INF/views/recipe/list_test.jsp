@@ -5,6 +5,8 @@
     <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
 	
+	<!-- test -->
+	
 	<!-- Main -->
 	<section id="main" style="border: 3px dashed #ed786a;">
 		<div class="container">
@@ -31,18 +33,18 @@
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
 					<div class="col-lg-4 col-md-4 col-sm-6">
-						<a href="/resources/images/img_1.jpg" class="fh5co-card-item image-popup" onclick="requestAction('./view', ${list.b_NO})">
+						<a href="#" class="fh5co-card-item image-popup" onclick="requestAction('./view', ${list.b_NO})">
 							<figure>
-								<div class="overlay"><i class="ti-plus"></i></div>
-								<img src="/resources/images/img_1.jpg" alt="Image" class="img-responsive">
+								<div class="overlay"><i class="bi bi-box-arrow-up-right"></i></div>
+								<img src="/resources/images/꼬시래기물냉면.jpg" alt="Image" class="img-responsive">
 							</figure>
 							<div class="fh5co-text">
-							 <div><input type="checkbox" class="chkBox" name="bno" value="${list.b_NO}"></div>
-					            <p class="mb-0 opacity-75">${list.title}</p>
-					            <h6 class="mb-0">${list.nickName}</h6>
-					            <p class="mb-0 opacity-75">${list.regdate}</p>
-					            <p class="mb-0 opacity-75">cateName : ${list.cateName}</p>
-				           		<small class="opacity-50 text-nowrap">c_NO : ${list.c_NO}</small>
+							 <%-- <div><input type="checkbox" class="chkBox" name="bno" value="${list.b_NO}"></div> --%>
+					            <p class="mb-0 opacity-75">게시글 제목 : ${list.title}</p>
+					            <p class="mb-0 opacity-75">등록일 : ${list.regdate}</p>
+					            <p class="mb-0 opacity-75">재료명 : ${list.i_NAME}</p>
+					            <h6 class="mb-0">작성자 닉넴 : ${list.nickName}</h6>
+				           		<small class="opacity-50 text-nowrap">카테고리번호 : ${list.c_NO}</small>
 							</div>
 						</a>
 					</div>

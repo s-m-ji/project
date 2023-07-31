@@ -38,16 +38,20 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/resources/css/style.css">
+	
+	<!-- Custom css (MI, 2023/07/28) -->
+	<link rel="stylesheet" href="/resources/css/mimi_custom.css">
 
 	<!-- Modernizr JS -->
 	<script src="/resources/js/modernizr-2.6.2.min.js"></script>
+	
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
 	<!-- Custom js (MI, 2023/07/26) -->
     <script src='/resources/js/custom.js'></script>
     <script src='/resources/js/common.js'></script>
     
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
 </head>
 <body>

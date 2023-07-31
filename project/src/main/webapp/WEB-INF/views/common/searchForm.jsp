@@ -17,17 +17,17 @@
 			    $('#c2depth').empty();
 			    
 			    if(type == '1') { 
-			        $('#c2depth').append("<option value='11' >밥</option>'");
-			        $('#c2depth').append("<option value='12' >면</option>'");
-			        $('#c2depth').append("<option value='13' >간식</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 1</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 2</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 3</option>'");
 			    } else if (type == '2') {  
-			        $('#c2depth').append("<option value='21' >과일류</option>'");
-			        $('#c2depth').append("<option value='22' >달걀/유제품</option>'");
-			        $('#c2depth').append("<option value='23' >육류</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 4</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 5</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 6</option>'");
 			    } else if ( type == '3') {  
-			        $('#c2depth').append("<option value='31' >명절</option>'");
-			        $('#c2depth').append("<option value='32' >도시락</option>'");
-			        $('#c2depth').append("<option value='33' >안주</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 7</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 8</option>'");
+			        $('#c2depth').append("<option value='c2depth' >카테고리 9</option>'");
 			    }
 			    document.getElementById("c2depth").style.display = "";
 			    

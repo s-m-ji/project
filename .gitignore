@@ -2,9 +2,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java,maven
 
 
-
-pom.properties
-.classpath
 MANIFEST.MF
 
 
