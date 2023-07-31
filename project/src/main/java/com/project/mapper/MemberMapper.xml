@@ -43,10 +43,9 @@
 	) WHERE RN BETWEEN #{startNo} and #{endNo}
 </select>
 
-
 <!--  공지 총 건수 -->
 <select id="getTotalNcnt" resultType="int">
-select count(*) from rec_notice <include refid="nCriteria"></include>
+select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 </select>
 
 
@@ -57,7 +56,6 @@ select count(*) from rec_notice <include refid="nCriteria"></include>
 </selectKey>
 	insert into REC_NOTICE (nno, nwriter, gubun, ntitle, ncontent) values (#{nno}, #{nwriter}, #{gubun}, #{ntitle}, #{ncontent})
 </insert>
-
 
 
 <!-- 공통 검색조건1) 회원  -->
@@ -78,14 +76,14 @@ select count(*) from rec_notice <include refid="nCriteria"></include>
 <!-- 공통 검색조건2) 공지  -->
 <sql id="nCriteria">
 	<choose>
-		<when test="sField  == '1'">
+		<when test="sField  == '일반'">
 			and gubun like '%일반%'
 		</when>
-		<when test="sField  == '2'">
+		<when test="sField  == '이벤트'">
 			and gubun like '%이벤트%'
 		</when>
-		<when test="sField  == '3'">
-			and gubun like '%자주묻는질문%'
+		<when test="sField  == '자주 묻는 질문'">
+			and gubun like '%자주 묻는 질문%'
 		</when>
 	</choose>
 </sql>  

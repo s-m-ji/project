@@ -36,9 +36,14 @@ public class MemberController {
 	// 회원 목록 조회
 	 @GetMapping("admin") 
 	 public void memberList(Criteria cri,Model model){
-
+		 
+	
 	 memberservice.memberList(cri, model); 
 	 System.out.println("🐧회원 : " + cri);
+	 
+	 // 공지 목록 
+	memberservice.noticeList(cri ,model);
+	System.out.println("🐥 공지 : " + cri);
 	};
 	
 

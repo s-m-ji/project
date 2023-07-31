@@ -52,11 +52,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<NoticeVo> noticeList(Criteria cri,Model model) {
 		List<NoticeVo> notList = membermapper.noticeList(cri);
 		int totalNcnt = membermapper.getTotalNcnt(cri);
-		PageDto pageDto = new PageDto(cri, totalNcnt);
+		PageDto pageDtoN = new PageDto(cri, totalNcnt);
 		
 		model.addAttribute("notList", notList);
 		model.addAttribute("totalNcnt", totalNcnt);
-		model.addAttribute("pageDto", pageDto);
+		model.addAttribute("pageDtoN", pageDtoN);
 		
 		return null;
 	}

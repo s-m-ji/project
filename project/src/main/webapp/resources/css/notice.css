@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+
+*{
+    border: 0;
+    background-color: rgb(255, 255, 255);
+    list-style: none;
+    padding: 5px;
+   
+}
+/*!sc*/
+.hziaxr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid hsl(210,20%,86%,1);
+    
+}
+
+/*중요 공지 */
+.hziaxr > p {
+    min-width: 68px;
+    font-family: Regular,sans-serif;
+    font-size: 18px;
+    -webkit-letter-spacing: -0.45px;
+    -moz-letter-spacing: -0.45px;
+    -ms-letter-spacing: -0.45px;
+    letter-spacing: -0.45px;
+    color: hsl(230,20%,46%,1);
+    margin-right: 59px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+/*!sc*/
+@media screen and (max-width: 1200px) {
+    .hziaxr {
+        padding:24px 7px 24px 0;
+        align-items: flex-start;
+    }
+
+    .hziaxr > p {
+        min-width: 45px;
+        font-size: 12px;
+        letter-spacing: -0.25px;
+        margin-right: 22px;
+        line-height: 21px;
+    }
+}
+
+/*!sc*/
+data-styled.g295[id="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0"] {
+    content: "hziaxr,"
+}
+
+/*!sc*/
+.iUcEVv {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*테이블 크기 */
+@media screen and (max-width: 1200px) {
+    .iUcEVv {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .iUcEVv > p:first-child {
+        font-family: Medium,sans-serif;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: -0.55px;
+    }
+
+    .iUcEVv > p:last-child {
+        font-family: Light,sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.3px;
+    }
+}
+
+
+/* 공지사항선 */
+.laHiqv {
+    position: relative;
+    padding-left: 10px;
+    border-bottom: 1px solid hsl(210,20%,86%,1);
+}
+
+/* 공지사항 선 색깔*/
+.laHiqv:after {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 30px;
+    height: 1px;
+    background-color: hsl(230, 81%, 55%);
+    content: '';
+}
+/*공지사항*/
+@media screen and (max-width: 1200px) {
+    .laHiqv {
+        padding-left: 10px;
+        padding-bottom:9px;
+    }
+
+    .laHiqv > h2 {
+        font-size: 20px;
+        letter-spacing: -0.4px;
+    }
+    /* 파란 색 선 길이*/
+    .laHiqv:after {
+        width: 17px;
+    }
+}
+
+

@@ -5,6 +5,9 @@
 	
 	
 <script src="/resources/assets/js/jquery-3.7.0.js"></script>
+	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 <script type="text/javascript">
 // 선택박스 전체 선택
 function toggleCheckboxes() {
@@ -59,10 +62,12 @@ function toggleCheckboxes() {
 
 <!-- 회원 목록 조회 및 삭제 기능 --> 
 <p> 총 <b>${totalCnt}</b>개🪐</p>
+<div class="list-group w-auto">
+<div class="panel-body">
 <form action = "/recipe/delMem" method="post">
 	
 <input type="submit" id = "deleteBtn"  value="회원 탈퇴">
-<table border="1">
+<table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example">
 
 	<thead>
 		<tr>
@@ -105,8 +110,10 @@ function toggleCheckboxes() {
                 </c:forEach>
             </table>
             </form>
+	</div>
+</div>
             <!--  페이지 블럭 생성 -->
-            <div class ="div">
+            <div class ="div d-md-flex justify-content-md-center">
 		<c:set var="pageDto" value="${pageDto}"/>
 		
 		<!-- 이전버튼 -->
@@ -129,7 +136,8 @@ function toggleCheckboxes() {
 
 <h4> 여기부터 공지사항 </h4>
 
-<%-- <%@ include file = "../recipe/notice.jsp" %> --%>
+ <%@ include file = "../recipe/notice.jsp" %>
+
 
  <!-- Footer -->
-<%-- 	 <%@ include file="../common/footer.jsp" %> --%>
+ <%-- 	 <%@ include file="../common/footer.jsp" %>  --%>

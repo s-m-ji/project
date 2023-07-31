@@ -7,23 +7,22 @@
 <meta charset="UTF-8">
 <title>공지</title>
 	
-	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
-	
 	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  	<!--  notice의 css  -->
  	<link rel="stylesheet" type="text/css" href="../resources/css/notice.css">
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-
+<script>
 function dis(){
-    if($('.dis').css('display') == 'none'){
-        $('.dis').show();
+    if($('#dis').css('display') == 'none'){
+        $('#dis').show();
     }else{
-        $('.dis').hide();
+        $('#dis').hide();
     }
     }
+</script>
+<script type="text/javascript">
 
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
@@ -58,13 +57,12 @@ function dis(){
                     <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv">
                         <h2>공지사항</h2>
                     </div>
-               
                     <c:forEach items="${notList}" var="notice" step="1">
-                    
-                     <c:if test="${empty notList }">
+                    <c:if test="${empty notList }">
                     <p>등록된 공지사항이 없습니다.</p>
                     </c:if>
-             
+              
+                    <c:if test="${not empty notList} ">
                     <ul class="">
                         <li>
                         <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'show' onclick='dis()'>
@@ -81,7 +79,7 @@ function dis(){
                         </span>
                       
                     </button>
-                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI dis" >
+                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI" id='dis'>
                         <ul>
                             <li> ${notice.ncontent }</li>
                             <li> ${notice.nwriter}</li>
@@ -92,8 +90,10 @@ function dis(){
                     </div>
                 </li>
                 </ul>
-                </c:forEach>     
+                </c:if>
+                </c:forEach>
                 </section>
+                
                 
  <!--  페이지 블럭 생성 -->
             <div class ="div d-md-flex justify-content-md-center">
