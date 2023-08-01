@@ -50,7 +50,7 @@
 </head>
 <body>
 	<%-- pDto.cri.sWord : ${pDto.cri.sWord } 이렇게 클래스 내에 선언한 필드명 그대로 소문자 s라고 썼더니 안 나옴 그런 속성을 찾을 수 없다고함... 엉엉 --%>
-	<form action="./list_test" name="searchForm">
+	<form action="./com_list" name="searchForm">
 		<!-- view.jsp를 위한 게시글 번호 -->
 		<input type="text" name="b_no" value="${param.b_no}">
 		<div class="container text-center">

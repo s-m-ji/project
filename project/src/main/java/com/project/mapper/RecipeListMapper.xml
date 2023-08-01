@@ -12,9 +12,14 @@
 				FROM (
 				  SELECT t.*, ROWNUM rn
 				  FROM (
-				          SELECT rt.title, rt.regdate, rt.nickname, rt.intro, rt.b_no, rt.boomup,
-				          			CASE WHEN rt.regdate >= TRUNC(SYSDATE) - 3 THEN 'new' ELSE '' END AS newpost,
-				          			rc.C_NO1, rc.C_NO2, rc.catename1, rc.catename2 
+				         SELECT rt.title, rt.nickname, rt.intro, rt.b_no, rt.boomup, rt.viewcnt,
+				          		CASE WHEN rt.regdate >= TRUNC(SYSDATE) - 3 THEN 'new' ELSE '' END AS newpost,
+				          		CASE WHEN TO_CHAR(rt.regdate, 'YYYY/MM/DD') = TO_CHAR(SYSDATE, 'YYYY/MM/DD') 
+				          			THEN TRUNC(ROUND((SYSDATE - rt.regdate) * 24, 2)) || '시간 전'  
+				          			<![CDATA[ WHEN rt.regdate >= TRUNC(SYSDATE) - 7 AND rt.regdate < TRUNC(SYSDATE) ]]>
+				          			THEN TRUNC(ROUND(SYSDATE - rt.regdate)) || '일 전'
+				          			ELSE TO_CHAR(rt.regdate, 'YYYY/MM/DD') END AS regdate,
+				          				rc.C_NO1, rc.C_NO2, rc.catename1, rc.catename2 
 				          	FROM rec_board rt, rec_category rc
 				          	 WHERE rc.C_NO1 = rt.C_NO1
 				          	  AND rc.C_NO2 = rt.C_NO2

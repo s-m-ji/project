@@ -75,6 +75,9 @@
 				<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
 		</div>
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i>냥냥냥</a>
+		</div>
 	</section>
 </body>
 </html>

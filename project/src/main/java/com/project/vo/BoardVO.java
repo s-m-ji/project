@@ -15,11 +15,13 @@ public class BoardVO {
 	private String regdate;
 	private String intro;
 	private String boomup;
+	private String viewcnt;
 	
 	private String cateName1; // 카테고리명
 	private String cateName2; // 카테고리명
 
 	private String newpost; // 신규 글 여부 
+	// private String regtime; // 신규 글 여부 
 	
 	private String I_NAME; // 재료명
 	

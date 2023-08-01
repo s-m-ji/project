@@ -35,17 +35,34 @@ public class RecipeListController {
 	public void getRecList_test(Model model, Criteria cri) {
 		System.out.println("================================ getRecList_test 실행");
 		rService.getRecList(model, cri);
-		//model.addAttribute("orderBy", true);
+	}
+	
+	@GetMapping("com_list")
+	public void getComList(Model model, Criteria cri) {
+		System.out.println("================================ getComList 실행");
+		rService.getRecList(model, cri);
 	}
 
 	
-	@GetMapping("view")
-	public void getOne(Model model,BoardVO paramVO) {
+	@GetMapping("view_test")
+	public void getRecOne(Model model,BoardVO paramVO) {
 		System.out.println("================================ getOne 실행");
 		BoardVO board = rService.getOne(paramVO.getB_NO());
 		model.addAttribute("book", board);
 		
 	}
 	
+	@GetMapping("com_view_test")
+	public void getComOne(Model model,BoardVO paramVO) {
+		System.out.println("================================ getOne 실행");
+		BoardVO board = rService.getOne(paramVO.getB_NO());
+		model.addAttribute("book", board);
+		
+	}
+	
+	@GetMapping("load")
+	public void load() {
+		
+	}
 	
 }

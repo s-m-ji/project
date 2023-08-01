@@ -1,9 +1,61 @@
 @charset "UTF-8";
 
+/* 전체 폰트 설정 */
+@font-face {
+		  font-family: "SUITE-Regular";
+		  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2")
+		    format("woff2");
+		  font-weight: 400;
+		  font-style: normal;
+		}
+:not(i) {
+  font-family: "SUITE-Regular" !important;
+} 
+		
+
 /* list_test.jsp */
 
 .gtco-section {
 	padding: 0;	
+}
+
+.listMenuBtm {
+	align-items : center;
+	margin: 0 0 20px 0;
+    transform: translateY(50px);
+    z-index: 100;
+    position: relative;
+}
+.listMenuBtm p {
+	margin:0;
+}
+
+.recListCnt {
+	padding: 0;
+}
+
+.fh5co-card-item.cmn figure {
+	height: 280px;
+}
+
+.fh5co-card-item.cmn figure  {
+	float: left;
+    width: 60%;
+}
+
+.fh5co-card-item.cmn .fh5co-text {
+	    float: left;
+	    width: 40%;
+    height: 280px;
+    padding-top: 50px;
+}
+
+.fh5co-card-item.cmn .fh5co-text:before {
+	top: 0;
+	left: -30px;
+	height: 100%;
+	width: 50px;
+    transform: skewX(354deg);
 }
 
 .fh5co-card-item figure {
@@ -15,9 +67,18 @@
    background: antiquewhite !important;
 } 
 
-.start-90
-{
+.start-90 {
 	left: 90%;
     color: #fff !important;
+}
+
+.top-10 {
+	top: 10%;
+    
+}
+
+/* pageNavi.jsp */
+.pagination a {
+	font-size: 1em;
 }
 
