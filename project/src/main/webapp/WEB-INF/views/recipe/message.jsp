@@ -34,8 +34,16 @@
 		
 		const myModalEl = document.getElementById('myModal')
 		myModalEl.addEventListener('hidden.bs.modal', event => {
-		  history.go(-1);
-		})
+			// 닫기 버튼을 누르게 되면 url 로 이동! 
+			let url = '${url}';
+				// url의 값이 false가 아닐 경우 url로 가고 false면 백! 
+			if(url){
+				console.log("url : ", url);
+				location.href=url;
+			}else{
+			  history.go(-1);
+			}
+		});
 	}
 	</script>
 	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
@@ -48,7 +56,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">📢Notice</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">📢알림</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

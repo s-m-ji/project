@@ -49,7 +49,7 @@ public class MemberController {
 
 	// 회원 체크박스 삭제 
 	@PostMapping("delMem")
-	public String delMem(@RequestParam("delMno") String[] delMno, Model model, RedirectAttributes rttr)  {
+	public String delMem(@RequestParam("delMno") String[] delMno, Model model)  {
 		
 		for(String mno : delMno) {
 			
@@ -59,16 +59,15 @@ public class MemberController {
 			if(delCnt <= 0) {
 				// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기 
 				System.out.println(delCnt);
-				message = "탈퇴 미신청 회원이므로 삭제할 수 없습니다.";
-//				rttr.addFlashAttribute("message", message); // ${message}
-				model.addAttribute("message", "미신청 회원이므로 삭제할 수 없습니다.");
-				//return  "redirect:/recipe/admin";
+				model.addAttribute("message", "탈퇴 미신청 회원이므로 삭제할 수 없습니다.");
+				model.addAttribute("url", "/recipe/admin");
 				return  "/recipe/message";
 			}else{
 				// 삭제건수가 있는 경우 탈퇴(신청) 
 				System.out.println(delCnt);
-				message = "탈퇴 신청이 정상적으로 처리되었습니다.";
+				message = "회원 탈퇴 신청이 정상적으로 처리되었습니다.";
 				model.addAttribute("message",message);
+				model.addAttribute("url", "/recipe/admin");
 				return  "/recipe/message";
 			}
 		}
@@ -89,15 +88,13 @@ public class MemberController {
 		
 		String message = "";
 		if(res > 0) {
-			System.out.println("게시글 등록 res : " + res);
 			message = noticevo.getNno() + "번 글이 등록되었습니다.";
-			System.out.println("메세지 : " + message);
-			rttr.addFlashAttribute("message", message);
-			return "redirect:/recipe/notice";
+			model.addAttribute("message",message);
+			model.addAttribute("url", "/recipe/admin");
+			return  "/recipe/message";
 		}else {
-			message = "공지사항 게시 중 오류 발생하였습니다.";
-			System.out.println("메세지2 : " + message);
-			model.addAttribute("message", message);
+			model.addAttribute("message", "공지사항 게시 중 오류 발생하였습니다.");
+			model.addAttribute("url", "/recipe/admin");
 			return  "/recipe/message";
 		}
 		

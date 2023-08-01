@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!-- Header -->
-	
-	
-<script src="/resources/assets/js/jquery-3.7.0.js"></script>
+
+	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
 	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -26,19 +24,16 @@ function toggleCheckboxes() {
        chkBox[i].checked = isChecked;
     }
   }
-
   
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	function go(page){
 		document.searchForm.pageNo.value=page;
 		document.searchForm.submit();
 	}
-  
 </script>
 <%--  <%@ include file="../common/header.jsp" %>  --%>
 </head>
 <body>
-
 <!--  검색폼 (회원명, 회원등급명, 탈퇴신청여부)  -->
 <form name ="searchForm" method ="get" action="/recipe/admin" >
 

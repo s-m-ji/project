@@ -15,15 +15,18 @@
  	<link rel="stylesheet" type="text/css" href="../resources/css/notice.css">
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
+    
 <script type="text/javascript">
-
 function dis(){
-    if($('.dis').css('display') == 'none'){
-        $('.dis').show();
+    let nList = $('.nList'),
+    div = nList.find('#btn');
+
+    if(div.siblings().is(':hidden')){
+      div.siblings().show();
     }else{
-        $('.dis').hide();
+      div.siblings().hide();
     }
-    }
+  }
 
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
@@ -37,7 +40,7 @@ function dis(){
 
 <!--  검색 폼 -->
 <div class="list-group w-auto">
-<form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
+<form name ="noticeForm" method ="get" action="/recipe/admin"  class="row g-3 justify-content-center">
 
 <input type="text" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input>
 
@@ -65,9 +68,9 @@ function dis(){
                     <p>등록된 공지사항이 없습니다.</p>
                     </c:if>
              
-                    <ul class="">
+                <ul class="nList">
                         <li>
-                        <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'show' onclick='dis()'>
+                    <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'btn' onclick='dis()'>
                         <p>${notice.gubun }</p>
                         <div class="ServiceItemstyle__CenterBox-sc-1omzxdj-1 iUcEVv">
                             <p>${notice.ntitle }</p>
@@ -79,9 +82,9 @@ function dis(){
                                 <i class="fa-solid fa-plus " style="color: #4f6996; box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:10;position:relative;max-width:100%; transform: translateY(-3px);"></i>
                             </span>
                         </span>
-                      
                     </button>
-                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI dis" >
+                    
+                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI" id="show">
                         <ul>
                             <li> ${notice.ncontent }</li>
                             <li> ${notice.nwriter}</li>
@@ -89,8 +92,10 @@ function dis(){
                         </ul>
                         <p>안녕하세요, 쉐어잇입니다.
                         </p>
+                        <button type='button' class="btn btn-outline-primary"> 수정 </button>
+                        <button  type='button' class="btn btn-outline-primary"> 삭제 </button>
                     </div>
-                </li>
+               		  </li>
                 </ul>
                 </c:forEach>     
                 </section>
@@ -105,7 +110,7 @@ function dis(){
 		</c:if>
 		
 		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDtoN.startNo }" end="${pageDtoN.endNo }" var="i">
+		<c:forEach begin="${pageDtoN.startNo}" end="${pageDtoN.endNo }" var="i">
 			<input type='button' value='${i}' onclick='goNotice(${i})' class="btn" >
 		</c:forEach>
 		
