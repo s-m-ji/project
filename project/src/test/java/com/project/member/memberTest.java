@@ -78,4 +78,27 @@ public class memberTest {
 		
 		log.info(noticevo);
 	}
+	@Test
+	public void noticeOne() {
+		NoticeVo noticevo = memberMapper.noticeOne(57);
+		log.info(noticevo);
+	}
+	
+	@Test
+	public void noticeDel() {
+		int res = memberMapper.noticeDel(57);
+		log.info(res);
+	}
+	@Test
+	public void noticeUpdate() {
+
+		NoticeVo noticevo = memberMapper.noticeOne(56);
+		noticevo.setNtitle(" 테스트 제목 " );
+		noticevo.setNcontent(" 테스트 내용 " );
+		noticevo.setGubun("일반");
+		
+		int res = memberMapper.noticeUpdate(noticevo);
+		log.info(res);
+	}
+
 }

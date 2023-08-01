@@ -72,6 +72,24 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalNcnt(Criteria cri) {
 		return membermapper.getTotalNcnt(cri);
 	}
+	
+	// 공지 한 건
+	@Override
+	public NoticeVo noticeOne(int nno) {
+		return membermapper.noticeOne(nno);
+	}
+	// 공지 삭제 
+	@Override
+	public int noticeDel(int nno) {
+		return membermapper.noticeDel(nno);
+	}
+	
+	// 공지 수정 
+	@Override
+	public int noticeUpdate(NoticeVo noticevo) {
+		int res = membermapper.noticeUpdate(noticevo);
+		return res;
+	}
 
 
 }

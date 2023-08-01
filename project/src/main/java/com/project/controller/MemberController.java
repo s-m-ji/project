@@ -97,6 +97,42 @@ public class MemberController {
 			model.addAttribute("url", "/recipe/admin");
 			return  "/recipe/message";
 		}
+	}
+	
+	// 공지 수정 페이지 
+	@GetMapping("noticeView")
+	public String noticeList(Criteria cri,Model model, RedirectAttributes rttr) {
+		memberservice.noticeList(cri ,model);
+		System.out.println("🐥 공지 : " + cri);
 		
+		model.addAttribute("message", " 수정 ");
+		return "recipe/message";
+		
+	
+	};
+	/*
+	 * // 공지 수정하기
+	 * 
+	 * @PostMapping("noticeUpdate")
+	 */
+	
+	// 공지 삭제하기 
+	@GetMapping("noticeDel")
+	public String noticeDel(@RequestParam("nno")int nno, Model model) {
+		
+		int res = memberservice.noticeDel(nno);
+		System.out.println(nno);
+		String message= "";
+
+		if(res > 0) {
+			message = nno + "번 글이 삭제되었습니다.";
+			model.addAttribute("message", message);
+			model.addAttribute("url", "/recipe/admin");
+			return "recipe/message";
+		}else {
+			model.addAttribute("message", "게시글 삭제 중 오류 발생하였습니다.");
+			model.addAttribute("url", "/recipe/noticeView");
+			return "/recipe/message";
+		}
 	}
 }

@@ -7,23 +7,27 @@
 <meta charset="UTF-8">
 <title>공지</title>
 	
+	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
+	
 	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  	<!--  notice의 css  -->
  	<link rel="stylesheet" type="text/css" href="../resources/css/notice.css">
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
-<script>
-function dis(){
-    if($('#dis').css('display') == 'none'){
-        $('#dis').show();
-    }else{
-        $('#dis').hide();
-    }
-    }
-</script>
+    
 <script type="text/javascript">
 
+function dis(element){
+ 
+    var $item = $(element).closest('li');
+    if($item.find('.show').is(':hidden')){
+      $item.find('.show').show();
+    }else{
+      $item.find('.show').hide();
+    }
+  }
+  
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
 	document.noticeForm.pageNo.value=page;
@@ -31,12 +35,13 @@ function dis(){
 } 
 
 </script>
+
 </head>
 <body>
 
 <!--  검색 폼 -->
 <div class="list-group w-auto">
-<form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
+<form name ="noticeForm" method ="get" action="/recipe/noticeView"  class="row g-3 justify-content-center">
 
 <input type="text" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input>
 
@@ -51,21 +56,23 @@ function dis(){
 </form> 	
 </div>
 
-<!--  공지목록  -->
-<p> 총 <b>${totalNcnt}</b>개🪐</p>
+
+<!--  공지 사항 목록  -->
+<p> 총 <b>${totalNcnt}</b>개📝</p>
+<form  method="post" accept-charset="UTF-8" name="editForm">
                 <section class="NoticeContentstyle__Container-sc-12y37o4-0 ihesfa">
                     <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv">
-                        <h2>공지사항</h2>
+                        <h2>공지사항 -수정 페이지📝</h2>
                     </div>
+               
                     <c:forEach items="${notList}" var="notice" step="1">
-                    <c:if test="${empty notList }">
+                     <c:if test="${empty notList }">
                     <p>등록된 공지사항이 없습니다.</p>
                     </c:if>
-              
-                    <c:if test="${not empty notList} ">
-                    <ul class="">
+             
+                <ul id="nList">
                         <li>
-                        <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'show' onclick='dis()'>
+                    <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'btn' onclick='dis(this)'>
                         <p>${notice.gubun }</p>
                         <div class="ServiceItemstyle__CenterBox-sc-1omzxdj-1 iUcEVv">
                             <p>${notice.ntitle }</p>
@@ -77,23 +84,46 @@ function dis(){
                                 <i class="fa-solid fa-plus " style="color: #4f6996; box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:10;position:relative;max-width:100%; transform: translateY(-3px);"></i>
                             </span>
                         </span>
-                      
                     </button>
-                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI" id='dis'>
-                        <ul>
-                            <li> ${notice.ncontent }</li>
-                            <li> ${notice.nwriter}</li>
-                            <li> ${notice.ncount }</li>
-                        </ul>
-                        <p>안녕하세요, 쉐어잇입니다.
-                        </p>
+                    
+                    <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI show" >
+                    <h6> 수정하실 내용을 작성해주세요!  </h6>
+                       <ul>
+                <li>
+	  				 <label for="writer" class="form-label">작성자</label>
+	 				 <input type="text" class="form-control" id="writer" name ="writer" value = "${notice.nwriter}" readonly="readonly"></input>
+				</li>
+             	 <li>    
+	 				 <label for="ntitle" class="form-label">제목</label>
+	 				 <input type="text" class="form-control"  id="ntitle"  name ="ntitle" value = "${notice.ntitle }"></input>
+				</li>
+				
+				<li>
+	  				<label for="ncontent" class="form-label">내용</label>
+	  				<textarea class="form-control" id="ncontent" name = "ncontent" rows="3">${notice.ncontent}</textarea>
+			   </li>
+			
+		<%-- 		<li>
+				 <label for="ntitle" class="form-label">구분</label>
+				        <select class="form-select" id="gubun" name='gubun'> 
+				          <option selected value="선택입력">${notice.gubun }</option>
+				          <option value="선택입력">선택입력</option>
+				          <option value="일반">일반</option>
+				          <option value="이벤트">이벤트</option>
+				          <option value="자주 묻는 질문">자주 묻는 질문</option>
+				        </select>
+				</li> --%>
+			 		<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <button type='button' class="btn btn-primary" id="btnEdit">완료 </button>
+                        <button type='reset' class="btn btn-outline-primary" id="btnDel"> 초기화 </button>
+                        </div>
+                       </ul>
                     </div>
-                </li>
+               		  </li>
                 </ul>
-                </c:if>
-                </c:forEach>
+                </c:forEach>     
                 </section>
-                
+</form>
                 
  <!--  페이지 블럭 생성 -->
             <div class ="div d-md-flex justify-content-md-center">
@@ -105,7 +135,7 @@ function dis(){
 		</c:if>
 		
 		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDtoN.startNo }" end="${pageDtoN.endNo }" var="i">
+		<c:forEach begin="${pageDtoN.startNo}" end="${pageDtoN.endNo }" var="i">
 			<input type='button' value='${i}' onclick='goNotice(${i})' class="btn" >
 		</c:forEach>
 		
@@ -115,44 +145,7 @@ function dis(){
 		</c:if>
 		</div>
                 
-                 <!-- 공지 등록 버튼 ver2 -->
-<c:set  value="${notList}" var="notice"></c:set>  
-  <div class="dropdown d-md-flex justify-content-md-e">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-      공지 등록✍🏻
-    </button>
 
-    <input type="hidden" class="form-control" id="nno" name ="nno" placeholder="공지번호" >
-    <form class="dropdown-menu p-4" action="/recipe/writeAction" method="post" accept-charset="UTF-8">
-      
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">작성자</span>
-        <input type="text" class="form-control" id="nwriter" name ="nwriter" value = "admin">
-      </div>
-  
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="gubun">  구분　</label>
-        <select class="form-select" id="gubun" name='gubun'>
-          <option selected>선택입력</option>
-          <option value="일반">일반</option>
-          <option value="이벤트">이벤트</option>
-          <option value="자주 묻는 질문">자주 묻는 질문</option>
-        </select>
-      </div>
-      
-      <div class="mb-4">
-        <input type="text" class="form-control" id="ntitle" name ="ntitle" placeholder="제목" required>
-      </div>
-  
-      <div class="mb-10">
-        <textarea class="form-control" id="ncontent" name = "ncontent" rows="3" placeholder='공지 내용을 입력해주세요' required ></textarea>
-      </div>
-  <br>
-      <div class="mb-3 d-md-flex justify-content-md-center" >
-        <button type="submit" class="btn btn-secondary">등록하기</button>
-      </div>
-    </form>
-  </div> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
                 
 </body>
