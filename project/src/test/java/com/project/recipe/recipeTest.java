@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.project.mapper.RecipeMapper;
+import com.project.mapper.RecipeListMapper;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
 
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class recipeTest {
 	@Autowired
-	RecipeMapper rMapper;
+	RecipeListMapper rMapper;
 	
 	@Test public void getRecList() {
 		// assertNotNull(rMapper);

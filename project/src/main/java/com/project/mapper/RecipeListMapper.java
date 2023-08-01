@@ -5,7 +5,7 @@ import java.util.List;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
 
-public interface RecipeMapper {
+public interface RecipeListMapper {
 
 	public List<BoardVO> getRecList(Criteria cri);
 

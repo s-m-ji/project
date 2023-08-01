@@ -7,7 +7,7 @@ import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
 
 @Service
-public interface RecipeService {
+public interface RecipeListService {
 
 	public void getRecList(Model model, Criteria cri);
 
