@@ -34,6 +34,7 @@ function toggleCheckboxes() {
 <%--  <%@ include file="../common/header.jsp" %>  --%>
 </head>
 <body>
+
 <!--  검색폼 (회원명, 회원등급명, 탈퇴신청여부)  -->
 <form name ="searchForm" method ="get" action="/recipe/admin" >
 
@@ -60,7 +61,6 @@ function toggleCheckboxes() {
 <div class="list-group w-auto">
 <div class="panel-body">
 <form action = "/recipe/delMem" method="post">
-	
 <input type="submit" id = "deleteBtn"  value="회원 탈퇴">
 <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example">
 
@@ -107,7 +107,8 @@ function toggleCheckboxes() {
             </form>
 	</div>
 </div>
-            <!--  페이지 블럭 생성 -->
+
+<!--  페이지 블럭 생성 -->
             <div class ="div d-md-flex justify-content-md-center">
 		<c:set var="pageDto" value="${pageDto}"/>
 		
@@ -130,7 +131,6 @@ function toggleCheckboxes() {
 <!-- ================================여기부터 공지사항 ============================================ -->
 
 <h4> 여기부터 공지사항 </h4>
-
  <%@ include file = "../recipe/notice.jsp" %>
 
 

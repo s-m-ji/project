@@ -57,6 +57,21 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	insert into REC_NOTICE (nno, nwriter, gubun, ntitle, ncontent) values (#{nno}, #{nwriter}, #{gubun}, #{ntitle}, #{ncontent})
 </insert>
 
+<!--  공지 한 건  -->
+<select id="noticeOne" resultType="com.project.vo.NoticeVo">
+	select * from rec_notice where nno = #{nno}
+</select>
+
+<!--  공지 수정  -->
+<update id="noticeUpdate">
+	update rec_notice set ntitle = #{ntitle}, ncontent =#{ncontent}, gubun=#{gubun}, nregdate = sysdate  where nno = #{nno}
+</update>
+
+<!--  공지 삭제  -->
+<delete id="noticeDel">
+	delete from rec_notice where nno = #{nno}
+</delete>
+
 
 <!-- 공통 검색조건1) 회원  -->
 <sql id="criteria">

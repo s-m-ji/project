@@ -29,4 +29,13 @@ public interface MemberService {
 	
 	// 공지 총건수 조회 
 	public int getTotalNcnt(Criteria cri); 
+	
+	// 공지 한건 불러오기 
+	public NoticeVo noticeOne(int nno);
+		
+	// 공지 삭제 
+	public int noticeDel(int nno);
+		
+	// 공지 수정 
+	public int noticeUpdate(NoticeVo noticevo);
 }
