@@ -113,7 +113,7 @@ body {
 	  ["🧀","Cutting cheese"],
 	  ["🥓","Crisping bacon"],
 	  ["🌽","Shucking corn"],
-	  ["🍚","Steaming rice"],
+	  ["🍚","Steaming rice"], /* ㅅㄷㄴㅅ */
 	  ["🍞","Baking bread"],
 	  ["🍷","Uncorking wine"],
 	  ["🍽","Plating dishes"],
