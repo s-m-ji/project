@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.vo.BoardVO;
-import com.project.service.RecipeService;
+import com.project.service.RecipeListService;
 import com.project.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -16,10 +16,10 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 @RequestMapping("/recipe/*")
-public class RecipeController {
+public class RecipeListController {
 	
 	@Autowired
-	RecipeService rService;
+	RecipeListService rService;
 
 	/**
 	 * ▶ list.jsp로 이동
