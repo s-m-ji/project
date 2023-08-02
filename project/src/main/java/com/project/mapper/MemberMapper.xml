@@ -64,7 +64,8 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 
 <!--  공지 수정  -->
 <update id="noticeUpdate">
-	update rec_notice set ntitle = #{ntitle}, ncontent =#{ncontent}, gubun=#{gubun}, nregdate = sysdate  where nno = #{nno}
+	update rec_notice 
+	set ntitle = #{ntitle}, ncontent =#{ncontent}, nregdate = sysdate  where nno = #{nno}
 </update>
 
 <!--  공지 삭제  -->

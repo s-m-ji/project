@@ -1,16 +1,20 @@
 package com.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.service.MemberService;
@@ -33,6 +37,15 @@ public class MemberController {
 	public void message(Model model) {
 		
 	}
+	
+	
+	@GetMapping("home")
+	public void home(Criteria cri,Model model) {
+		 // 공지 목록 
+		memberservice.noticeList(cri ,model);
+		System.out.println("🐥 공지 : " + cri);
+	}
+	
 	// 회원 목록 조회
 	 @GetMapping("admin") 
 	 public void memberList(Criteria cri,Model model){
@@ -85,7 +98,7 @@ public class MemberController {
 	@PostMapping("writeAction")
 	public String noticeWrite(NoticeVo noticevo, Model model, RedirectAttributes rttr) {
 		int res = memberservice.noticeWrite(noticevo);
-		
+		log.info(noticevo.toString());
 		String message = "";
 		if(res > 0) {
 			message = noticevo.getNno() + "번 글이 등록되었습니다.";
@@ -98,23 +111,38 @@ public class MemberController {
 			return  "/recipe/message";
 		}
 	}
-	
+
 	// 공지 수정 페이지 
 	@GetMapping("noticeView")
-	public String noticeList(Criteria cri,Model model, RedirectAttributes rttr) {
+	public void noticeList(Criteria cri,Model model, RedirectAttributes rttr) {
 		memberservice.noticeList(cri ,model);
 		System.out.println("🐥 공지 : " + cri);
 		
-		model.addAttribute("message", " 수정 ");
-		return "recipe/message";
-		
-	
+//		model.addAttribute("message", " 수정 ");
+//		return "recipe/message";
 	};
-	/*
-	 * // 공지 수정하기
-	 * 
-	 * @PostMapping("noticeUpdate")
-	 */
+	
+	  // 공지 수정하기 Action
+	  @PostMapping("noticeUpdate")
+	  @ResponseBody
+	  public String noticeUpdate(NoticeVo noticevo, Model model){
+		  int res = memberservice.noticeUpdate(noticevo);
+			
+		  log.info("수정 : " +  noticevo.toString());
+		  log.info("res " + res);
+		  String message = "";
+			if(res > 0) {
+				message = noticevo.getNno() + "번 글이 수정되었습니다.";
+				model.addAttribute("message",message);
+				model.addAttribute("url", "/recipe/notice");
+				return  "/recipe/message";
+			}else {
+				model.addAttribute("message", "공지사항  수정 오류 발생!! ");
+				model.addAttribute("url", "/recipe/notice");
+				return  "/recipe/message";
+			}
+		
+	  }	
 	
 	// 공지 삭제하기 
 	@GetMapping("noticeDel")
@@ -135,4 +163,6 @@ public class MemberController {
 			return "/recipe/message";
 		}
 	}
+	  
+	  
 }
