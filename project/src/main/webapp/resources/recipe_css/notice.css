@@ -1,13 +1,10 @@
-@charset "UTF-8";
+
 *{
     border: 0;
     background-color: rgb(255, 255, 255);
     list-style: none;
     padding: 5px;
    
-}
-textarea{
-    resize: none;
 }
 
 #nList .show{

@@ -15,6 +15,7 @@ console.log("-------------- common.js 연결 완료! ----------------");
 		}
 	}
 
+	
 	// Post방식 fetch : 요청(url)과  객체(obj) 그리고 함수(callback)를 매개변수로 함
 	function fetchPost(url, obj, callback){
 		try{
@@ -29,3 +30,35 @@ console.log("-------------- common.js 연결 완료! ----------------");
 		}
 	}
 	
+	
+	(function () {
+		
+		// 페이지 상단으로 이동하는 버튼
+		var goToTop = function() {
+
+			$('.js-gotop').on('click', function(event){
+				
+				event.preventDefault();
+
+				$('html, body').animate({
+					scrollTop: $('html').offset().top
+				}, 500, 'easeInOutExpo');
+				
+				return false;
+			});
+
+			$(window).scroll(function(){
+				console.log("뭐야뭐야ㅐ");
+				var $win = $(window);
+				if ($win.scrollTop() > 200) {
+					$('.js-top').addClass('active');
+				} else {
+					$('.js-top').removeClass('active');
+				}
+
+			});
+		};
+		
+		// 함수 호출 추가
+		goToTop();
+	}());

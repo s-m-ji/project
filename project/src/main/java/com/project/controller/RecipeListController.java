@@ -33,7 +33,7 @@ public class RecipeListController {
 	
 	@GetMapping("list_test")
 	public void getRecList_test(Model model, Criteria cri) {
-		System.out.println("================================ getRecList_test 실행");
+		System.out.println("================================ 컨트롤러 getRecList 실행");
 		rService.getRecList(model, cri);
 	}
 	
@@ -46,7 +46,7 @@ public class RecipeListController {
 	
 	@GetMapping("view_test")
 	public void getRecOne(Model model,BoardVO paramVO) {
-		System.out.println("================================ getOne 실행");
+		System.out.println("================================ getRecOne 실행");
 		BoardVO board = rService.getOne(paramVO.getB_NO());
 		model.addAttribute("book", board);
 		
@@ -54,13 +54,13 @@ public class RecipeListController {
 	
 	@GetMapping("com_view_test")
 	public void getComOne(Model model,BoardVO paramVO) {
-		System.out.println("================================ getOne 실행");
+		System.out.println("================================ getComOne 실행");
 		BoardVO board = rService.getOne(paramVO.getB_NO());
 		model.addAttribute("book", board);
 		
 	}
 	
-	@GetMapping("load")
+	@GetMapping("load") // 로딩페이지 
 	public void load() {
 		
 	}

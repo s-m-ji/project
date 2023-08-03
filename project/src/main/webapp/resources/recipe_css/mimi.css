@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* 전체 폰트 설정 */
+/* -------------------- 전체 폰트 설정 -------------------- */
 @font-face {
 		  font-family: "SUITE-Regular";
 		  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2")
@@ -11,9 +11,16 @@
 :not(i) {
   font-family: "SUITE-Regular" !important;
 } 
-		
 
-/* list_test.jsp */
+/* 포인트 색상 */
+
+.btn-primary {
+    background: #F7863B;
+    color: #fff;
+    border: 2px solid #F7863B !important;
+}
+		
+/* -------------------- list_test.jsp -------------------- */
 
 .gtco-section {
 	padding: 0;	
@@ -34,11 +41,12 @@
 	padding: 0;
 }
 
-.fh5co-card-item.cmn figure {
-	height: 280px;
+.fh5co-card-item img {
+	width: 100%;
 }
 
 .fh5co-card-item.cmn figure  {
+	height: 280px;
 	float: left;
     width: 60%;
 }
@@ -62,6 +70,16 @@
 	height: 340px;
 }
 
+.fileDiv {
+ 	    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+.fileDiv mark {
+	background-color: #ccc;
+}
+
 .fh5co-card-item:hover .fh5co-text,
 .fh5co-card-item:hover .fh5co-text:before {
    background: antiquewhite !important;
@@ -77,8 +95,33 @@
     
 }
 
-/* pageNavi.jsp */
+.intro {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+#gtco-counter .counter {
+	display: inline-block;
+}
+
+/* -------------------- pageNavi.jsp -------------------- */
 .pagination a {
 	font-size: 1em;
 }
 
+
+/* -------------------- footer.jsp -------------------- */
+.gototop a.js-gotop {
+	width: 70px;
+    	height: 70px;
+	background: #F7863B;
+	border-radius: 50%;
+} 
+.gototop a.js-gotop:hover {
+	background: rgb(247 134 59 / 70%);
+}
+.gototop a.js-gotop i {
+	font-size: 2em;
+}
