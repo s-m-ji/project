@@ -63,14 +63,17 @@
 		<div class="container">
 
 			<!-- Logo -->
-				<h1 id="logo"><a href="index.html">Strongly Typed</a></h1>
-				<p>A responsive HTML5 site template. Manufactured by HTML5 UP.</p>
+				<h1 id="logo"><a href="index.html">오늘 뭐 먹조 ?</a></h1>
 
 			<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a class="icon solid fa-home" href="index.html"><span>Introduction</span></a></li>
-						<li>
+						<li><a class="icon solid fa-home" href="main.jsp"><span>홈페이지</span></a></li>
+						<li><a class="icon solid fa-cog" href="left-sidebar.html"><span>커뮤니티</span></a></li>
+						<li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>관리자페이지</span></a></li>
+						<li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>로그인</span></a></li>
+						<li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>회원가입</span></a></li>
+						<!-- <li>
 							<a href="#" class="icon fa-chart-bar"><span>Dropdown</span></a>
 							<ul>
 								<li><a href="#">Lorem ipsum dolor</a></li>
@@ -86,12 +89,37 @@
 								</li>
 								<li><a href="#">Veroeros feugiat</a></li>
 							</ul>
-						</li>
-						<li><a class="icon solid fa-cog" href="left-sidebar.html"><span>Left Sidebar</span></a></li>
-						<li><a class="icon solid fa-retweet" href="right-sidebar.html"><span>Right Sidebar</span></a></li>
-						<li><a class="icon solid fa-sitemap" href="no-sidebar.html"><span>No Sidebar</span></a></li>
+						</li> -->
 					</ul>
 				</nav>
 				
+			<!-- 검색 -->
+			<div class="search-wrapper">
+			    <div class="input-holder">
+			    <form action="./list_test" name="searchFormHeader">
+			        <input type="text" name="sWord" class="search-input" placeholder="레시피를 검색하세요." />
+			        <button class="search-icon" onclick="searchToggle(this, event);"><span><i class="bi bi-search"></i></span></button>
+			      </form>
+			    </div>
+			    <span class="close" onclick="searchToggle(this, event);"><i class="bi bi-x-circle"></i></span>
+			</div>
 		</div>
+		<br>
+		<p>김광민 - 김지수 - 서동준 - 이한규 - 정명현 - 지상미</p>
+		<br>
 	</section>
+	
+	<script>
+	function searchToggle(obj, evt){
+	    var container = $(obj).closest('.search-wrapper');
+	        if(!container.hasClass('active')){
+	            container.addClass('active');
+	            evt.preventDefault();
+	        }
+	        else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+	            container.removeClass('active');
+	            // clear input
+	            container.find('.search-input').val('');
+	        }
+	}
+	</script>

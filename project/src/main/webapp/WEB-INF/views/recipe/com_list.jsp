@@ -9,7 +9,7 @@
 	<%@ include file="../common/header.jsp" %>
 	
 	<!-- Main -->
-	<section id="main" style="border: 5px dashed #FBB448;">
+	<section id="main" >
 		<div class="container">
 	      <div class="bg-light p-5 rounded">
 	        <h1 id="test">👩‍🍳  망한요리 👩‍🍳</h1>

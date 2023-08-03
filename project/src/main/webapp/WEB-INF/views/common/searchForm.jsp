@@ -93,7 +93,7 @@
 			</div>
 		</div>
 		<div class="container text-center">
-			<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">
+			<input type="text" name="pageNo" value="${pDto.cri.pageNo}">
 				<div class="d-flex justify-content-between listMenuBtm">
 				<div class="p-2">
 					<select class="form-control" name="amount"

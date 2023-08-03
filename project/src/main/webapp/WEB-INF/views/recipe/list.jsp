@@ -5,7 +5,7 @@
 	<%@ include file="../common/header.jsp" %>
 	
 	<!-- Main -->
-	<section id="main" style="border: 3px dashed #ed786a;">
+	<section id="main">
 		<div class="container">
 			<p style="text-align:center;">☆ ᕕ(๑❛ڡ❛๑)ᕗ ☆</p>
 			<h2 style="text-align:center;">각 페이지 내용은 여기에 !</h2>

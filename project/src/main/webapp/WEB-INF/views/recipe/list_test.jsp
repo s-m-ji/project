@@ -13,7 +13,7 @@
 	</script>
 	
 	<!-- Main -->
-	<section id="main" style="border: 5px dashed #FBB448;">
+	<section id="main" >
 		<div class="container">
 	      <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1></div>
 	      
@@ -44,7 +44,7 @@
 							</figure>
 							<div class="fh5co-text position-relative">
 					            <p class="mb-0">✅ ${list.b_NO}</p>
-					            <p class="mb-0">🍴 ${list.title}</p>
+					            <p class="mb-0 title">🍴 ${list.title}</p>
 					            <p class="mb-0 intro">📝  ${list.intro}</p>
 					            <p class="mb-0">🙋‍♀️‍ ${list.nickName}</p>
 					            <p class="mb-0">👍 ${list.boomup} &nbsp; 👀 ${list.viewcnt}</p> 
