@@ -9,34 +9,26 @@
 	
 	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
 	
+	<!--  모달 창 js -->
+	<script type="text/javascript" src="../resources/js/modal.js"></script>
+	
 	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
- 	<!--  notice의 css  -->
- 	<link rel="stylesheet" type="text/css" href="../resources/css/notice.css">
+ 	
+ 	<!--  notice의 css   ** recipe_css 로 -->
+ 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
+    
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
     
-<script type="text/javascript">
+ 
 
+<script type="text/javascript">
 window.addEventListener('load', function(){
 
-	var btnEdit = document.getElementsByClassName('btnEditN');
 	var btnDel = document.getElementsByClassName('btnDelN');
 	
-	console.log("수정" , btnEdit);
 	console.log("삭제" , btnDel);
-	
-	function btnEditClick(nno){
-		return function(){
-			  var url = '/recipe/noticeView?nno=' + nno;
-			  window.location.href = url;
-		/* 	  
-			viewForm.action='/recipe/noticeView?nno' + nno;
-			viewForm.nno.value = nno;
-			console.log("edit 의 nno : " , nno);
-			 viewForm.submit();  */
-		}
-	}
 	
 	function btnDelClick(nno){
 		return function(){
@@ -49,19 +41,15 @@ window.addEventListener('load', function(){
 		}			
 	}
 	
-	for(var i=0; i<btnEdit.length; i++){
-		 var nno = btnEdit[i].getAttribute('data-nno');
-		 console.log("edit 실행 할 때  의 nno : " , nno);
-		 btnEdit[i].addEventListener('click', btnEditClick(nno));
-	}
-	
 	for(var i=0; i<btnDel.length; i++){
 		 var nno = btnDel[i].getAttribute('data-nno');
 		 console.log("del 실행 할 때  의 nno : " , nno);
 		 btnDel[i].addEventListener('click', btnDelClick(nno));
 	}
+	
+	
 });
-// 공지 클릭 > 상세 
+/* // 공지 클릭 > 상세 
 function dis(element){
  
     var $item = $(element).closest('li');
@@ -71,7 +59,7 @@ function dis(element){
       $item.find('.show').hide();
     }
   }
-  
+   */
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
 	document.noticeForm.pageNo.value=page;
@@ -82,9 +70,9 @@ function dis(element){
 </head>
 <body>
 
-<!--  검색 폼 -->
+<!--검색 폼 -->
 <div class="list-group w-auto">
-<form name ="noticeForm" method ="get" action="/recipe/admin"  class="row g-3 justify-content-center">
+<form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
 
 <input type="text" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input>
 
@@ -99,18 +87,18 @@ function dis(element){
 </form> 	
 </div>
 
-<!--  공지 등록   --> 
+<!--공지 등록   --> 
 <p> 총 <b>${totalNcnt}</b>개🪐</p>
 
 <c:set  value="${notList}" var="notice"></c:set>  
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-      공지 등록하러가기 Go✍🏻
+      공지 등록하러 가기✍🏻
     </button>
 
     <input type="hidden" class="form-control" id="nno" name ="nno" placeholder="공지번호" >
     <form class="dropdown-menu p-4" action="/recipe/writeAction" method="post" accept-charset="UTF-8">
-      
+       <h4 style='line-height: center; text-align: center;'> 공지사항📝</h4>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">작성자</span>
         <input type="text" class="form-control" id="nwriter" name ="nwriter" value = "admin">
@@ -140,7 +128,7 @@ function dis(element){
     </form>
   </div> 
   
-<!--  공지 사항 목록  -->
+<!-- 공지 사항 목록  -->
 <form method="get" name="viewForm" accept-charset="UTF-8" >
  	
                 <section class="NoticeContentstyle__Container-sc-12y37o4-0 ihesfa">
@@ -158,15 +146,15 @@ function dis(element){
                 <ul id="nList">
                         <li>
                     <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'btn' onclick='dis(this)'>
+                        
                         <p>${notice.gubun }</p>
                         <p>${notice.nno}</p>
                        
                         <div class="ServiceItemstyle__CenterBox-sc-1omzxdj-1 iUcEVv">
                             <p>${notice.ntitle }</p>
                             <p>${notice.nregdate }</p>
-                            
+
                         </div>
-                        
                         <span style="box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%">
                             <span>
                                 <i class="fa-solid fa-plus " style="color: #4f6996; box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:10;position:relative;max-width:100%; transform: translateY(-3px);"></i>
@@ -175,41 +163,78 @@ function dis(element){
                     </button>
                     
                     <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI show" >
-                        <ul>
-                            <li>내용🌈  ${notice.ncontent}</li>
-                            <li>작성자🌈  ${notice.nwriter}</li>
-                        </ul>
-                        <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
+                       	<table>
+                       	<tr id="tr${notice.nno}">
+						<td class="writerTD" style="display: none;">${notice.nwriter}</td>
+						<td class="titleTD" style="display: none;">${notice.ntitle}</td> 
+						<td class="contentTD" style="font-size: 20px;">${notice.ncontent}</td>
+                        <td>
+                       	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                       	              <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
                        <%--  <c:if test="${sessionScope.admin == 'y'}"> --%>
-                       	  		<div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <button type='button' class="btn btn-outline-primary btnEditN" data-nno = "${notice.nno}"> 수정 </button>
-                        <button type='button' class="btn btn-outline-primary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
-                        </div>
+                        	<button type="button" class="btn btn-outline-primary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
+                        	<button type='button' class="btn btn-outline-primary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
                        <%--  </c:if> --%>
+                        </div>
+                        </td>
+                        </tr>
+                        </table>
                     </div>
                		  </li>
                 </ul>
                 </c:forEach>     
                 </section>
               </form>
-              
-<!--  페이지 블럭 생성 -->
+<!-- 수정 -Modal -->
+<div id="myModal2" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  role="dialog" style="background: transparent;">
+  <div class="modal-dialog" style="padding: 0; background: transparent;">
+    <div class="modal-content">
+      <div class="modal-header">
+       <!--  <h1 class="modal-title fs-5" id="exampleModalLabel"></h1> -->
+    	  <h4 id="modal-title" class="modal-title"></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <table class="table">
+ 					<tr>
+						<td>작성자</td>
+						<td><input class="form-control" id="nwriterN" type="text"> </td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td><input class="form-control" id="ntitleN" type="text"></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><textarea class="form-control" id="ncontentN" rows="10"></textarea></td>
+					</tr>					
+				</table>
+      </div>
+      <div class="modal-footer">
+          <button type="button" id="modalSubmit" class="btn btn-warning">수정</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 페이지 블럭 생성 -->
             <div class ="div d-md-flex justify-content-md-center">
-		<c:set var="pageDto" value="${pageDto}"/>
+		<c:set var="pageDto" value="${pageDtoN}"/>
 		
 		<!-- 이전버튼 -->
-		<c:if test="${pageDto.prev }">
-			<input type='button' value='이전' onclick='go(${pageDto.startNo-1})' class="btn">
+		<c:if test="${pageDtoN.prev }">
+			<input type='button' value='이전' onclick='goNotice(${pageDtoN.startNo-1})' class="btn">
 		</c:if>
 		
 		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDto.startNo }" end="${pageDto.endNo }" var="i">
-			<input type='button' value='${i }' onclick='go(${i})' class="btn" >
+		<c:forEach begin="${pageDtoN.startNo }" end="${pageDtoN.endNo }" var="i">
+			<input type='button' value='${i }' onclick='goNotice(${i})' class="btn" >
 		</c:forEach>
 		
 		<!-- 다음버튼 -->
-		<c:if test="${pageDto.next }">
-			<input type='button' value='다음' onclick='go(${pageDto.endNo+1})' class="btn">		
+		<c:if test="${pageDtoN.next }">
+			<input type='button' value='다음' onclick='goNotice(${pageDtoN.endNo+1})' class="btn">		
 		</c:if>
 		</div>
 

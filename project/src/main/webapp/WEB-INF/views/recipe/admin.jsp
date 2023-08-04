@@ -2,9 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
-	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 회원 관리</title>
+
+<script src="/resources/assets/js/jquery-3.7.0.js"></script>
+<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 <script type="text/javascript">
 // 선택박스 전체 선택
@@ -113,7 +119,7 @@ function toggleCheckboxes() {
 		<c:set var="pageDto" value="${pageDto}"/>
 		
 		<!-- 이전버튼 -->
-		<c:if test="${pageDto.prev }">
+		<c:if test="${pageDto.prev}">
 			<input type='button' value='이전' onclick='go(${pageDto.startNo-1})' class="btn">
 		</c:if>
 		
@@ -123,16 +129,18 @@ function toggleCheckboxes() {
 		</c:forEach>
 		
 		<!-- 다음버튼 -->
-		<c:if test="${pageDto.next }">
+		<c:if test="${pageDto.next}">
 			<input type='button' value='다음' onclick='go(${pageDto.endNo+1})' class="btn">		
 		</c:if>
 		</div>
 		
 <!-- ================================여기부터 공지사항 ============================================ -->
-
+<%-- 
 <h4> 여기부터 공지사항 </h4>
  <%@ include file = "../recipe/notice.jsp" %>
-
+ --%>
+ </body>
+ </html>
 
  <!-- Footer -->
  <%-- 	 <%@ include file="../common/footer.jsp" %>  --%>

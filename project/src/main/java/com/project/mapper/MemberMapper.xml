@@ -64,7 +64,8 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 
 <!--  공지 수정  -->
 <update id="noticeUpdate">
-	update rec_notice set ntitle = #{ntitle}, ncontent =#{ncontent}, gubun=#{gubun}, nregdate = sysdate  where nno = #{nno}
+	update rec_notice 
+	set ntitle = #{ntitle}, ncontent =#{ncontent}, nregdate = sysdate  where nno = #{nno}
 </update>
 
 <!--  공지 삭제  -->
@@ -103,6 +104,15 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	</choose>
 </sql>  
 
-
-
+<!--  리워드 조회  -->
+<select id="rewardList" resultType="com.project.vo.MemberVo">
+	select E.*
+	FROM (SELECT m.mno, m.name, m.nickname, SUM(b.viewcnt) AS 누적조회수, MAX(b.regdate) AS regdate, g.grade, g.benefit,
+	       RANK() OVER (ORDER BY SUM(b.viewcnt) DESC) AS 순위
+	FROM rec_member m 
+	JOIN rec_grade g ON m.gno = g.gno 
+	JOIN rec_board b ON b.mno = m.mno
+	GROUP BY m.mno, m.name, m.nickname, g.grade, g.benefit) E
+	WHERE ROWNUM  <![CDATA[<= 10]]>
+</select>
 </mapper>

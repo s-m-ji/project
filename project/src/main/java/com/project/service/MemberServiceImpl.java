@@ -91,5 +91,12 @@ public class MemberServiceImpl implements MemberService {
 		return res;
 	}
 
+	@Override
+	public List<MemberVo> rewardList(Model model) {
+		List<MemberVo> rewardList = membermapper.rewardList();
+		model.addAttribute("rewardList", rewardList);
+		return null;
+	}
+
 
 }

@@ -37,4 +37,8 @@ public interface MemberMapper {
 	
 	// 공지 수정 
 	public int noticeUpdate(NoticeVo noticevo);
+
+	// 리워드 조회 
+	public List<MemberVo> rewardList();
+
 }

@@ -19,4 +19,10 @@ public class MemberVo {
 	
 	private String grade;
 	private String benefit;
+	
+	
+	// 리워드 테이블 
+	private String viewcnt;	// 게시글 조회수
+	private String regdate; // 게시글 등록
+	
 }

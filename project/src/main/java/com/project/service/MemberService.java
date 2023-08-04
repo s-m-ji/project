@@ -38,4 +38,7 @@ public interface MemberService {
 		
 	// 공지 수정 
 	public int noticeUpdate(NoticeVo noticevo);
+	
+	// 리워드 목록 조회 
+	public List<MemberVo> rewardList(Model model);
 }
