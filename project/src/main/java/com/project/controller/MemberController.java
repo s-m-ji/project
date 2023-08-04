@@ -23,6 +23,7 @@ import com.project.vo.MemberVo;
 import com.project.vo.NoticeVo;
 
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j
 @Controller
@@ -37,7 +38,6 @@ public class MemberController {
 	public void message(Model model) {
 		
 	}
-	
 	
 	@GetMapping("home")
 	public void home(Criteria cri,Model model) {
@@ -60,8 +60,8 @@ public class MemberController {
 	 System.out.println("🐧회원 : " + cri);
 	 
 	 // 공지 목록 
-	memberservice.noticeList(cri ,model);
-	System.out.println("🐥 공지 : " + cri);
+	 memberservice.noticeList(cri ,model);
+	 System.out.println("🐥 공지 : " + cri);
 	};
 	
 
@@ -91,6 +91,19 @@ public class MemberController {
 		}
 		return  "/recipe/message";
 	};
+	
+	
+	// 회원 등록 페이지
+	@GetMapping("adminInput")
+	public void adminInputMember() {
+		
+	}
+	
+	// 회원 등록
+	@PostMapping("adminInputAction")
+	public void adminInput(MemberVo membervo) {
+
+	}
 	
 	// 공지 조회하기
 	@GetMapping("notice")
@@ -122,6 +135,7 @@ public class MemberController {
 	  @PostMapping("noticeUpdate")
 	  @ResponseBody
 	  public String noticeUpdate(NoticeVo noticevo, Model model){
+		  System.out.println("수정 :"+ noticevo);
 		  int res = memberservice.noticeUpdate(noticevo);
 			
 		  log.info("수정 : " +  noticevo.toString());

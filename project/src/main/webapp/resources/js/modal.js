@@ -33,13 +33,23 @@ $(document).ready(function(){
 		console.log("제목", ntitleN);
 		var ncontentN = tr.eq(2).text(); // 내용
 		console.log("내용", ncontentN);
+		var gubunN = tr.eq(3).text(); // 구분
+		console.log("구분", gubunN);
+		
+		if(gubunN == '일반'){
+			$("#gubunN").val(gubunN);
+		}else if(gubunN == '이벤트'){
+			$("#gubunN").val(gubunN);	
+		}else{
+			$("#gubunN").val(gubunN);
+		}
 		
 		$("#modal-title").text("공지사항 수정📝");
 		
 		$("#nwriterN").val(nwriterN);
-		console.log($("#nwriterN").val(nwriterN));
 		$("#ntitleN").val(ntitleN);
 		$("#ncontentN").val(ncontentN);
+
 		
 		$("#myModal2").modal();
 	});
@@ -58,15 +68,16 @@ $(document).ready(function(){
 			"nno" : nno,
 			"nwriter" : $("#nwriterN").val(),
 			"ntitle" : $("#ntitleN").val(),
-			"ncontent" : $("#ncontentN").val()
+			"ncontent" : $("#ncontentN").val(),
+			"gubun" : $("#gubunN").val()
 		};
-		console.log("submit 버튼 실행 후 data : ", data);
 		
 		$.ajax({
 			url : url,
 			type : type,
 			data : data
 		})
+	
 		location.reload();
 	});
 	

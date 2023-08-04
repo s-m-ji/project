@@ -32,6 +32,15 @@
 	delete from rec_member where mno = #{mno} and delyn = #{delyn}
 </delete>
 
+
+<!-- 회원 등록  -->
+<insert id="adminInput">
+<selectKey keyProperty="mno" order="BEFORE" resultType="int">
+	select seq_member.nextval from dual
+</selectKey>
+	insert into REC_NOTICE (mno, pw, name, nickname, pnum) values (#{mno}, #{pw}, #{name}, #{nickname}, #{pnum})
+</insert>
+
 <!--  공지 조회  -->
 <select id="noticeList" resultType="com.project.vo.NoticeVo">
 	<![CDATA[SELECT * FROM (
@@ -65,7 +74,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 <!--  공지 수정  -->
 <update id="noticeUpdate">
 	update rec_notice 
-	set ntitle = #{ntitle}, ncontent =#{ncontent}, nregdate = sysdate  where nno = #{nno}
+	set ntitle = #{ntitle}, ncontent =#{ncontent}, gubun= #{gubun}, nregdate = sysdate  where nno = #{nno}
 </update>
 
 <!--  공지 삭제  -->

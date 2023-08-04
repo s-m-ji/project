@@ -21,6 +21,9 @@ public interface MemberService {
 	// 회원 선택 삭제
 	public int delMem(@Param("mno")String mno,@Param("delyn")String delyn);
 	
+	// 회원 등록 
+	public int adminInput(MemberVo membervo);
+	
 	// 공지 목록 조회 
 	public List<NoticeVo> noticeList(Criteria cri,Model model);
 	

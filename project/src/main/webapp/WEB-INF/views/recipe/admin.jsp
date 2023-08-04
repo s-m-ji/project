@@ -12,6 +12,9 @@
 <!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+	<!--  notice의 css   ** recipe_css 로 -->
+ 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
+    
 <script type="text/javascript">
 // 선택박스 전체 선택
 function toggleCheckboxes() {
@@ -36,8 +39,12 @@ function toggleCheckboxes() {
 		document.searchForm.pageNo.value=page;
 		document.searchForm.submit();
 	}
-</script>
-<%--  <%@ include file="../common/header.jsp" %>  --%>
+	function inputBtnOnclick() {
+		location.href = "/recipe/adminInput";
+	}
+</script>  
+<%-- <%@ include file="../common/header.jsp" %>  
+ --%>
 </head>
 <body>
 
@@ -68,6 +75,7 @@ function toggleCheckboxes() {
 <div class="panel-body">
 <form action = "/recipe/delMem" method="post">
 <input type="submit" id = "deleteBtn"  value="회원 탈퇴">
+<input type="button" id = "inputBtn"  value="회원 등록" onclick="inputBtnOnclick()" >
 <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example">
 
 	<thead>
@@ -125,7 +133,7 @@ function toggleCheckboxes() {
 		
 		<!-- 페이지번호 출력 -->
 		<c:forEach begin="${pageDto.startNo }" end="${pageDto.endNo }" var="i">
-			<input type='button' value='${i }' onclick='go(${i})' class="btn" >
+			<input type='button' value='${i}' onclick='go(${i})' class="btn" >
 		</c:forEach>
 		
 		<!-- 다음버튼 -->
@@ -134,13 +142,8 @@ function toggleCheckboxes() {
 		</c:if>
 		</div>
 		
-<!-- ================================여기부터 공지사항 ============================================ -->
-<%-- 
-<h4> 여기부터 공지사항 </h4>
- <%@ include file = "../recipe/notice.jsp" %>
- --%>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+   
+
  </body>
  </html>
-
- <!-- Footer -->
- <%-- 	 <%@ include file="../common/footer.jsp" %>  --%>

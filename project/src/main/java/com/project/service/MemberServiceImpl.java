@@ -46,6 +46,14 @@ public class MemberServiceImpl implements MemberService {
 	public int delMem(String mno, String delyn) {
 		return membermapper.delMem(mno, delyn);
 	}
+
+	// 회원 등록
+	@Override
+	public int adminInput(MemberVo membervo) {
+		int res = membermapper.adminInput(membervo);
+		return res;
+	}
+
 	
 	// 공지 목록 조회
 	@Override

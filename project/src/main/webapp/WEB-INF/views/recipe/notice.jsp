@@ -93,7 +93,7 @@ function dis(element){
 <c:set  value="${notList}" var="notice"></c:set>  
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-      공지 등록하러 가기✍🏻
+      공지 등록
     </button>
 
     <input type="hidden" class="form-control" id="nno" name ="nno" placeholder="공지번호" >
@@ -123,7 +123,7 @@ function dis(element){
       </div>
   <br>
       <div class="mb-3 d-md-flex justify-content-md-center" >
-        <button type="submit" class="btn btn-secondary">등록하기</button>
+        <button type="submit" class="btn btn-secondary">작성완료</button>
       </div>
     </form>
   </div> 
@@ -155,11 +155,11 @@ function dis(element){
                             <p>${notice.nregdate }</p>
 
                         </div>
-                        <span style="box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%">
+                    <!--     <span style="box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%">
                             <span>
                                 <i class="fa-solid fa-plus " style="color: #4f6996; box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:10;position:relative;max-width:100%; transform: translateY(-3px);"></i>
                             </span>
-                        </span>
+                        </span> -->
                     </button>
                     
                     <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI show" >
@@ -167,7 +167,8 @@ function dis(element){
                        	<tr id="tr${notice.nno}">
 						<td class="writerTD" style="display: none;">${notice.nwriter}</td>
 						<td class="titleTD" style="display: none;">${notice.ntitle}</td> 
-						<td class="contentTD" style="font-size: 20px;">${notice.ncontent}</td>
+						<td class="contentTD">${notice.ncontent}</td>
+						<td class="gubunTD"  style="display: none;">${notice.gubun}</td>
                         <td>
                        	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                        	              <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
@@ -191,15 +192,27 @@ function dis(element){
     <div class="modal-content">
       <div class="modal-header">
        <!--  <h1 class="modal-title fs-5" id="exampleModalLabel"></h1> -->
-    	  <h4 id="modal-title" class="modal-title"></h4>
+    	  <h4 id="modal-title" class="modal-title" style='padding-left:145px;'></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
        <table class="table">
+       <tbody>
  					<tr>
 						<td>작성자</td>
 						<td><input class="form-control" id="nwriterN" type="text"> </td>
 					</tr>
+					
+					<tr>
+					<td>구분</td>
+                        <td><select class="form-control" id="gubunN" name='gubun'>
+                          <option selected>선택입력</option>
+                          <option value="일반">일반</option>
+                          <option value="이벤트">이벤트</option>
+                          <option value="자주 묻는 질문">자주 묻는 질문</option>
+                        </select>
+					</td>
+                    </tr>		
 					<tr>
 						<td>제목</td>
 						<td><input class="form-control" id="ntitleN" type="text"></td>
@@ -207,10 +220,10 @@ function dis(element){
 					<tr>
 						<td>내용</td>
 						<td><textarea class="form-control" id="ncontentN" rows="10"></textarea></td>
-					</tr>					
+					</tr>
 				</table>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer justify-content-center">
           <button type="button" id="modalSubmit" class="btn btn-warning">수정</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
