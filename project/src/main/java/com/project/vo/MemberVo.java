@@ -1,5 +1,7 @@
 package com.project.vo;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -24,5 +26,7 @@ public class MemberVo {
 	// 리워드 테이블 
 	private String viewcnt;	// 게시글 조회수
 	private String regdate; // 게시글 등록
+	private String startDate; // 시작일
+	private String endDate; // 마감일
 	
 }

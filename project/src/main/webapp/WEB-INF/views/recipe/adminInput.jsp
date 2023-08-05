@@ -52,14 +52,15 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3" style='text-align: center;'>회원등록👨🏻‍👩🏻‍👧🏻‍👦🏼</h4>
+        
+                <input type="hidden" class="form-control" id="mno" name ="mno" placeholder="회원번호" >
         <form class="memberForm" action="/recipe/adminInputAction" method="post"  accept-charset="UTF-8" novalidate>
             <div class="mb-4">
-                <input type="hidden" class="form-control" id="mno" name ="mno" placeholder="회원번호" >
               </div>
 
               <div class=" mb-3">
                 <label for="email">이메일</label>
-                <input type="email" class="form-control" id="email" placeholder="usermali@naver.com" required>
+                <input type="email" class="form-control" id="email" name ="email" placeholder="usermail@naver.com" required>
                 <div class="invalid-feedback">
                   이메일을 등록해주세요.
                 </div>
@@ -67,7 +68,7 @@
 
               <div class=" mb-3">
                 <label for="pw">패스워드</label>
-                <input type="password" class="form-control" id="pw" placeholder="" required>
+                <input type="password" class="form-control" id="pw" name ="pw" required>
                 <div class="invalid-feedback">
                   패스워드를 등록해주세요.
                 </div>
@@ -77,14 +78,14 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name='name' placeholder="username" value="" required>
+              <input type="text" class="form-control" id="name" name='name' placeholder="username" required>
               <div class="invalid-feedback">
                 이름을 등록해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="nickname">닉네임</label>
-              <input type="text" class="form-control" id="nickname" placeholder="ex) 만종원" value="" required>
+              <input type="text" class="form-control" id="nickname"  name ="nickname" placeholder="ex) 만종원"  required>
               <div class="invalid-feedback">
                 닉네임을 등록해주세요.
               </div>
@@ -93,13 +94,12 @@
 
           <div class="mb-3">
             <label for="pnum">전화번호</label>
-            <input type="text" class="form-control" id="pnum" placeholder="" required>
+            <input type="text" class="form-control" id="pnum" name ="pnum" required>
             <div class="invalid-feedback">
               전화번호를 등록해주세요.
             </div>
           </div>
 
-      
           <hr class="mb-4">
           <!-- <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>

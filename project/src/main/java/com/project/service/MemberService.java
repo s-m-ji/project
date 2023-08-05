@@ -1,6 +1,8 @@
 package com.project.service;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,6 @@ public interface MemberService {
 	// 공지 수정 
 	public int noticeUpdate(NoticeVo noticevo);
 	
-	// 리워드 목록 조회 
-	public List<MemberVo> rewardList(Model model);
+	// 리워드 목록
+	public List<MemberVo> rewardList(String startDate, String endDate);
 }

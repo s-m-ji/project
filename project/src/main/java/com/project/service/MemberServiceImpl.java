@@ -1,6 +1,8 @@
 package com.project.service;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,13 +100,20 @@ public class MemberServiceImpl implements MemberService {
 		int res = membermapper.noticeUpdate(noticevo);
 		return res;
 	}
+	// 리워드 조회 
+//	@Override
+//	public List<MemberVo> rewardList(Model model) {
+//		List<MemberVo> rewardList = membermapper.rewardList();
+//		model.addAttribute("rewardList", rewardList);
+//		return null;
+//	}
 
 	@Override
-	public List<MemberVo> rewardList(Model model) {
-		List<MemberVo> rewardList = membermapper.rewardList();
-		model.addAttribute("rewardList", rewardList);
-		return null;
+	public List<MemberVo> rewardList(String startDate, String endDate) {
+		return membermapper.rewardList(startDate, endDate);
 	}
+
+	
 
 
 }

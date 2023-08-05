@@ -1,6 +1,8 @@
 package com.project.mapper;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
@@ -42,6 +44,6 @@ public interface MemberMapper {
 	public int noticeUpdate(NoticeVo noticevo);
 
 	// 리워드 조회 
-	public List<MemberVo> rewardList();
+	public List<MemberVo> rewardList(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
 }
