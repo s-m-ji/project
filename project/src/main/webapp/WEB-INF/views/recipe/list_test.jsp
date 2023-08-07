@@ -31,7 +31,8 @@
 			
 			 <c:choose>
 				<c:when test="${empty list}">
-				<div class="d-flex gap-2 w-100 justify-content-between emptyList">
+				<div class="d-flex gap-2 w-100 emptyList">
+					<p>👩‍🍳 다른 검색어를 입력해보세요 👩‍🍳</p>
 			    </div>
 				</c:when>
 				

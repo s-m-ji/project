@@ -4,7 +4,7 @@ window.addEventListener("load", function(){
 		
 		// ▶ 파일 목록 요청
 		function getFileList(){
-			fetch('/file/list')
+			fetch('/file/recList')
 				.then(response => response.json())
 				.then(map => viewFileList(map));
 		}
@@ -21,7 +21,7 @@ window.addEventListener("load", function(){
 		            let matchingFile = fileList.find(item => item.b_NO === parseInt(bnoValue));
 		            if (matchingFile) {
 		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
-		                let imageTag = "<img src='/display?fileName=" + savePath + "' alt='레시피 사진 " + matchingFile.b_NO + "'>";
+		                let imageTag = "<img src='/recListdisplay?fileName=" + savePath + "' alt='레시피 사진 " + matchingFile.b_NO + "'>";
 		                fileDiv.innerHTML = imageTag; // 해당 fileDiv 태그에 이미지 추가
 		            } else {
 		                fileDiv.innerHTML = '<mark>&nbsp; 등록된 요리 사진이 없습니다. &nbsp;</mark>';
