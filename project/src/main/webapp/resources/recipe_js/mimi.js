@@ -15,7 +15,7 @@
 	 
 	 
 	// 체크박스들을 모두 선택/해제하는 함수
-	 function toggleCheckboxes() {
+	 /*function toggleCheckboxes() {
 	   var adminChkBox = document.getElementById('adminChkBox');
 	   var isChecked = adminChkBox.checked;
 
@@ -25,7 +25,7 @@
 		   chkBox[i].checked = isChecked;
 	   }
 	 }
-	 
+	 */
 	 
 	 // ▶▶▶  게시글 등록/수정 관련
 	function action(url) {
@@ -34,12 +34,12 @@
 	}
 
 	 // ▶▶▶  게시글 페이지네이션
-	function go(page){
+	/*function go(page){
 		//e.preventDefault();
 		document.searchForm.action = "./list_test";
 		document.searchForm.pageNo.value=page;
 		document.searchForm.submit();
-	}
+	}*/
 	
 	function requestAction(url, b_no) {
 		//e.preventDefault();

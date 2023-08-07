@@ -9,7 +9,12 @@
 	<%@ include file="../common/header.jsp" %>
 	
 	<script>
-	
+	// ▶▶▶  게시글 페이지네이션
+	function go(page){
+		document.searchForm.action = "./list_test";
+		document.searchForm.pageNo.value=page;
+		document.searchForm.submit();
+	}
 	</script>
 	
 	<!-- Main -->
@@ -26,8 +31,7 @@
 			
 			 <c:choose>
 				<c:when test="${empty list}">
-				<div class="d-flex gap-2 w-100 justify-content-between">
-			       <div><p>🤷‍♀ 등록된 게시글이 없는걸 ??? 🤷‍♀️</p></div>
+				<div class="d-flex gap-2 w-100 justify-content-between emptyList">
 			    </div>
 				</c:when>
 				
@@ -63,13 +67,13 @@
 						</a>
 					</div>
 	        		</c:forEach>
+			      <%@ include file="../common/pageNavi.jsp" %>
 				</c:otherwise>
 			</c:choose>
 	      </div>
 	      </div>
 	      </div>
 		</div>
-	      <%@ include file="../common/pageNavi.jsp" %>
 		</div>
 	</section>
 		

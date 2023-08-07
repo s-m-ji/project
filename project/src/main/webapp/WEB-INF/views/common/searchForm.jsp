@@ -107,7 +107,7 @@
 					<div id="gtco-counter" class="gtco-section">
 						<div class="gtco-container">
 							<div class="row">
-								<div class=" animate-box" data-animate-effect="fadeInUp">
+								<div class="animate-box" data-animate-effect="fadeInUp">
 									<div class="feature-center">
 									<p style="font-size:20px"> 총
 										<span class="counter js-counter" data-from="0" data-to="${tCnt}" data-speed="1000" data-refresh-interval="50">1</span>

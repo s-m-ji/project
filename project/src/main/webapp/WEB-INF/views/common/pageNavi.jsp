@@ -8,7 +8,7 @@
 <title>pageNavi.jsp</title>
 </head>
 <body>
-	<div class="text-center">
+	<div class="text-center pageNavi">
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item ${pDto.prev? '' : 'disabled'}">
