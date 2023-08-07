@@ -6,23 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>공지</title>
-	
+
 	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
 	
 	<!--  모달 창 js -->
 	<script type="text/javascript" src="../resources/js/modal.js"></script>
-	
-	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
- 	
  	<!--  notice의 css   ** recipe_css 로 -->
  	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
     
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
     
+<!-- 	
+	부트스트랩을 사용하기 위해서 css, js를 추가 합니다.
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ 	 -->
  
-
+ 	<%@ include file="../common/header.jsp" %>
 <script type="text/javascript">
 window.addEventListener('load', function(){
 
@@ -247,7 +247,4 @@ function dis(element){
 		</c:if>
 		</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-            
-</body>
-</html>
+<%@ include file="../common/footer.jsp" %>

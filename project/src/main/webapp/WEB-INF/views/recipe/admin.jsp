@@ -7,13 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title> 회원 관리</title>
+ <%@ include file="../common/header.jsp" %>  
 
+<!-- 
 <script src="/resources/assets/js/jquery-3.7.0.js"></script>
-<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
+부트스트랩을 사용하기 위해서 css, js를 추가 합니다.
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-	<!--  notice의 css   ** recipe_css 로 -->
- 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
+	 notice의 css   ** recipe_css 로
+ 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css"> -->
     
 <script type="text/javascript">
 // 선택박스 전체 선택
@@ -43,7 +45,6 @@ function toggleCheckboxes() {
 		location.href = "/recipe/adminInput";
 	}
 </script>  
- <%@ include file="../common/header.jsp" %>  
 
 </head>
 <body>
@@ -51,7 +52,7 @@ function toggleCheckboxes() {
 <!--  검색폼 (회원명, 회원등급명, 탈퇴신청여부)  -->
 <form name ="searchForm" method ="get" action="/recipe/admin" >
 
-	<input type="text" name ='pageNo' value ="${pageDto.cri.pageNo}"></input>
+	<input type="text" name ='pageNo' value ="${pageDtoA.cri.pageNo}"></input>
 	
 	<table border ='1' width ="100%" class = "formtable">
 		<tr>
@@ -141,9 +142,5 @@ function toggleCheckboxes() {
 			<input type='button' value='다음' onclick='goAdmin(${pageDtoA.endNo+1})' class="btn">		
 		</c:if>
 		</div>
-		
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-   
 
- </body>
- </html>
+<%@ include file="../common/footer.jsp" %>
