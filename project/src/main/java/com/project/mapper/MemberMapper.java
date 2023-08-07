@@ -46,4 +46,7 @@ public interface MemberMapper {
 	// 리워드 조회 
 	public List<MemberVo> rewardList(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
+	// 리워드 수정 
+	public int gradeUpdate(MemberVo membervo);
+
 }

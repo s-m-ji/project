@@ -28,11 +28,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVo> memberList(Criteria cri, Model model) {
 		List<MemberVo> list = membermapper.memberList(cri);
 		int totalCnt = membermapper.getTotalCnt(cri);
-		PageDto pageDto = new PageDto(cri, totalCnt);
+		PageDto pageDtoA = new PageDto(cri, totalCnt);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalCnt", totalCnt);
-		model.addAttribute("pageDto", pageDto);
+		model.addAttribute("pageDtoA", pageDtoA);
 		
 		return null;
 	}
@@ -100,17 +100,17 @@ public class MemberServiceImpl implements MemberService {
 		int res = membermapper.noticeUpdate(noticevo);
 		return res;
 	}
+	
 	// 리워드 조회 
-//	@Override
-//	public List<MemberVo> rewardList(Model model) {
-//		List<MemberVo> rewardList = membermapper.rewardList();
-//		model.addAttribute("rewardList", rewardList);
-//		return null;
-//	}
-
 	@Override
 	public List<MemberVo> rewardList(String startDate, String endDate) {
 		return membermapper.rewardList(startDate, endDate);
+	}
+
+	// 리워드 수정 
+	@Override
+	public int gradeUpdate(MemberVo membervo) {
+		return membermapper.gradeUpdate(membervo);
 	}
 
 	

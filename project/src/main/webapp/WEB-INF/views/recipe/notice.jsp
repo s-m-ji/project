@@ -34,10 +34,6 @@ window.addEventListener('load', function(){
 		return function(){
 				  var url = '/recipe/noticeDel?nno=' + nno;
 				  window.location.href = url;
-					/* 	viewForm.action='/recipe/noticeDel?nno' + nno;
-					viewForm.nno.value = nno;
-					console.log("del 의 nno : " , nno);
-				 	viewForm.submit();  */
 		}			
 	}
 	

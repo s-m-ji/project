@@ -35,7 +35,7 @@ function toggleCheckboxes() {
   }
   
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
-	function go(page){
+	function goAdmin(page){
 		document.searchForm.pageNo.value=page;
 		document.searchForm.submit();
 	}
@@ -43,8 +43,8 @@ function toggleCheckboxes() {
 		location.href = "/recipe/adminInput";
 	}
 </script>  
-<%-- <%@ include file="../common/header.jsp" %>  
- --%>
+ <%@ include file="../common/header.jsp" %>  
+
 </head>
 <body>
 
@@ -57,12 +57,12 @@ function toggleCheckboxes() {
 		<tr>
 		<td align = "center" class = "formtd">
 			<select name ="sField">
-				<option value = "name"${pageDto.cri.SField eq "name" ? "selected" : ""}>회원명</option>
-				<option value = "grade"${pageDto.cri.SField eq "grade" ? "selected" : ""}>회원등급명</option>
-				<option value = "delYN"${pageDto.cri.SField eq "delYN" ? "selected" : ""}>탈퇴신청여부</option>
+				<option value = "name"${pageDtoA.cri.SField eq "name" ? "selected" : ""}>회원명</option>
+				<option value = "grade"${pageDtoA.cri.SField eq "grade" ? "selected" : ""}>회원등급명</option>
+				<option value = "delYN"${pageDtoA.cri.SField eq "delYN" ? "selected" : ""}>탈퇴신청여부</option>
 			</select>
 			
-			<input type="text" name = "sWord" value = "${pageDto.cri.SWord}" ></input>
+			<input type="text" name = "sWord" value = "${pageDtoA.cri.SWord}" ></input>
 			<input type ="submit" value ="검색하기">
 		</td>
 		</tr>
@@ -124,21 +124,21 @@ function toggleCheckboxes() {
 
 <!--  페이지 블럭 생성 -->
             <div class ="div d-md-flex justify-content-md-center">
-		<c:set var="pageDto" value="${pageDto}"/>
+		<c:set var="pageDtoA" value="${pageDtoA}"/>
 		
 		<!-- 이전버튼 -->
-		<c:if test="${pageDto.prev}">
-			<input type='button' value='이전' onclick='go(${pageDto.startNo-1})' class="btn">
+		<c:if test="${pageDtoA.prev}">
+			<input type='button' value='이전' onclick='goAdmin(${pageDtoA.startNo-1})' class="btn">
 		</c:if>
 		
 		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDto.startNo }" end="${pageDto.endNo }" var="i">
-			<input type='button' value='${i}' onclick='go(${i})' class="btn" >
+		<c:forEach begin="${pageDtoA.startNo }" end="${pageDtoA.endNo }" var="i">
+			<input type='button' value='${i}' onclick='goAdmin(${i})' class="btn" >
 		</c:forEach>
 		
 		<!-- 다음버튼 -->
-		<c:if test="${pageDto.next}">
-			<input type='button' value='다음' onclick='go(${pageDto.endNo+1})' class="btn">		
+		<c:if test="${pageDtoA.next}">
+			<input type='button' value='다음' onclick='goAdmin(${pageDtoA.endNo+1})' class="btn">		
 		</c:if>
 		</div>
 		

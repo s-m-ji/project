@@ -134,4 +134,10 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	GROUP BY m.mno, m.name, m.nickname, g.grade, g.benefit) E
 	WHERE ROWNUM  <= 10]]>
 </select>
+
+<!-- 리워드 수정  -->
+<update id="gradeUpdate">
+	UPDATE REC_MEMBER SET gno = #{gno} where mno = #{mno}
+</update>
+
 </mapper>

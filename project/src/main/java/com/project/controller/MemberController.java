@@ -48,26 +48,6 @@ public class MemberController {
 		System.out.println("🐥 공지 : " + cri);
 	}
 	
-	@GetMapping("reward")
-	public void rewardList() {
-		
-	}
-	// 리워드 페이지 (
-	@GetMapping("reward/list/{startDate}/{endDate}")
-	@ResponseBody
-	public Map<String, Object> rewardList(@PathVariable("startDate")String startDate
-										,@PathVariable("endDate")String endDate) {
-		
-		System.out.println(startDate + " endDate : " + endDate );
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<MemberVo> rewardList = memberservice.rewardList(startDate, endDate);
-		System.out.println(rewardList);
-		map.put("rewardList", rewardList);
-		return map;
-	}
-	
-	
 	// 회원 목록 조회
 	 @GetMapping("admin") 
 	 public void memberList(Criteria cri,Model model){
@@ -205,6 +185,35 @@ public class MemberController {
 		}
 	}
 	  
+	@GetMapping("reward")
+	public void rewardList() {
+		
+	}
+	// 리워드 페이지 (
+	@GetMapping("reward/list/{startDate}/{endDate}")
+	@ResponseBody
+	public Map<String, Object> rewardList(@PathVariable("startDate")String startDate
+										,@PathVariable("endDate")String endDate) {
+		
+		System.out.println(startDate + " endDate : " + endDate );
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<MemberVo> rewardList = memberservice.rewardList(startDate, endDate);
+		System.out.println(rewardList);
+		map.put("rewardList", rewardList);
+		return map;
+	}
+	
+	// 리워드 수정 
+	@PostMapping("reward/gradeUpdateAction")
+	@ResponseBody
+	public Map<String, Object> gradeUpdate(@RequestBody MemberVo membervo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int res  = memberservice.gradeUpdate(membervo);
+		map.put("res", res);
+		System.out.println("reward 변경 건수 : " + res);
+		return map;
+	}
 	
 	  
 }

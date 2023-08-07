@@ -100,6 +100,5 @@ public class memberTest {
 		int res = memberMapper.noticeUpdate(noticevo);
 		log.info(res);
 	}
-	
 
 }

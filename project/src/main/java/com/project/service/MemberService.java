@@ -46,4 +46,7 @@ public interface MemberService {
 	
 	// 리워드 목록
 	public List<MemberVo> rewardList(String startDate, String endDate);
+	
+	// 리워드 수정 
+	public int gradeUpdate(MemberVo membervo);
 }
