@@ -18,12 +18,12 @@
 	<!-- 템플릿 css 모음  (MI, 2023/07/26) -->
 	<link rel="stylesheet" href="/resources/assets/css/main.css" />
 	<link rel="stylesheet" href="/resources/css/animate.css">
-	<link rel="stylesheet" href="/resources/css/themify-icons.css">
-	<link rel="stylesheet" href="/resources/css/bootstrap.css"> <!-- 부트스트랩 css 내장 (템플릿 전용) -->
-	<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+	<!-- <link rel="stylesheet" href="/resources/css/themify-icons.css"> -->
+	<!-- <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.min.css">
 	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css"> -->
+	<!-- <link rel="stylesheet" href="/resources/css/bootstrap.css"> --> <!-- 부트스트랩 css 내장 (템플릿 전용) -->
 	<link rel="stylesheet" href="/resources/css/style.css">
 	
 	<!-- ============ recipe 플젝 css 모음 (MI, 2023/07/26) ============ -->	
@@ -36,13 +36,13 @@
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery.waypoints.min.js"></script>
-	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.countTo.js"></script>
+	<!-- <script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
 	<script src="/resources/js/magnific-popup-options.js"></script>
-	<script src="/resources/js/moment.min.js"></script>
 	<script src="/resources/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/resources/js/moment.min.js"></script> -->
 	<script src="/resources/js/main.js"></script>
 	
 	<!-- ============ recipe 플젝 js 모음 (MI, 2023/07/26) ============ -->	
