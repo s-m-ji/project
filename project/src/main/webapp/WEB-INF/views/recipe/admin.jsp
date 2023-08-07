@@ -7,17 +7,54 @@
 <head>
 <meta charset="UTF-8">
 <title> 회원 관리</title>
- <%@ include file="../common/header.jsp" %>  
+<%--  <%@ include file="../common/header.jsp" %>   --%>
 
-<!-- 
+
 <script src="/resources/assets/js/jquery-3.7.0.js"></script>
-부트스트랩을 사용하기 위해서 css, js를 추가 합니다.
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-	 notice의 css   ** recipe_css 로
- 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css"> -->
-    
+<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
+   
+ 
 <script type="text/javascript">
+
+window.addEventListener("load", function(){
+	console.log("-------------- listFile.js 연결 완료! ----------------");
+		getFileList();
+
+		// ▶ 파일 목록 요청
+		function getFileList(){
+			fetch('/recipe/adminList')
+				.then(response => response.json())
+				.then(map => viewFileList(map));
+		}
+
+		// ▶ 파일 목록 조회 
+		function viewFileList(map) {
+		    let fileList = map.FileList; // 파일 목록 배열 저장
+		    let fileDivs = document.querySelectorAll(".fileDiv"); // 모든 fileDiv 태그 선택
+
+		    fileDivs.forEach(function (fileDiv) {
+		        let inputElement = fileDiv.querySelector("input[name='mno']");
+		        if (inputElement !== null) {
+		            let mnoValue = inputElement.value;
+		            let matchingFile = fileList.find(item => item.mno === parseInt(mnoValue));
+		            if (matchingFile) {
+		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
+		                let imageTag = "<img src='/recipe/displayAdmin?filename=" + savePath + "' alt='회원 사진 " + matchingFile.mno + "'  style='max-width: 100px; height: auto;'>";
+		                fileDiv.innerHTML = imageTag; // 해당 fileDiv 태그에 이미지 추가
+		            } else {
+		                fileDiv.innerHTML = '<mark>&nbsp; 등록된 회원 사진이 없습니다. &nbsp;</mark>';
+		            }
+		        } else {
+		            console.log("input[name='mno']가 없는 fileDiv가 있습니다.");
+		        }
+		    });
+		}
+
+
+	});
+	
+
 // 선택박스 전체 선택
 function toggleCheckboxes() {
     var adminChkBox = document.getElementById('adminChkBox');
@@ -90,6 +127,7 @@ function toggleCheckboxes() {
 			<th>가입일</th>
 			<th>회원등급</th>
 			<th>탈퇴신청여부</th>
+			<th> 이미지 </th>
 		</tr>
 	</thead>
 	  <!--  회원 목록 출력하기  -->
@@ -114,6 +152,12 @@ function toggleCheckboxes() {
                         <td>${member.reg_dateStr}</td> 
                         <td>${member.grade}</td>
                         <td>${member.delYNStr}</td>
+                        <td>
+                        <div class="fileDiv">
+                        <input id="mno" type="text" name="mno" value="${member.mno}" placeholder="추후 hidden처리" >
+                        	회원사진
+                        </div>
+                        </td>
                     </tr>
                 </tbody>
                 </c:if>
@@ -143,4 +187,4 @@ function toggleCheckboxes() {
 		</c:if>
 		</div>
 
-<%@ include file="../common/footer.jsp" %>
+<%-- <%@ include file="../common/footer.jsp" %> --%>

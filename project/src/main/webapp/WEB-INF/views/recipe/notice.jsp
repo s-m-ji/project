@@ -6,23 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>공지</title>
-
+	
 	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
 	
 	<!--  모달 창 js -->
-	<script type="text/javascript" src="../resources/js/modal.js"></script>
+	<script type="text/javascript" src="/resources/recipe_js/modal.js"></script>
+	
+	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ 	
  	<!--  notice의 css   ** recipe_css 로 -->
- 	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
+ 	<link rel="stylesheet" type="text/css" href="/resources/recipe_css/notice.css">
     
     <!--  fontawesome -->    
     <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
     
-<!-- 	
-	부트스트랩을 사용하기 위해서 css, js를 추가 합니다.
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
- 	 -->
+ <%@ include file="../common/header.jsp" %> 
  
- 	<%@ include file="../common/header.jsp" %>
+
 <script type="text/javascript">
 window.addEventListener('load', function(){
 
@@ -70,7 +71,7 @@ function dis(element){
 <div class="list-group w-auto">
 <form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
 
-<input type="text" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input>
+<input type="hidden" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input> 
 
   <div class="col-sm-2">
 			<select name ="sField" class="form-select" aria-label="Default select example"  onchange="this.form.submit();" >
@@ -188,7 +189,7 @@ function dis(element){
     <div class="modal-content">
       <div class="modal-header">
        <!--  <h1 class="modal-title fs-5" id="exampleModalLabel"></h1> -->
-    	  <h4 id="modal-title" class="modal-title" style='padding-left:145px;'></h4>
+    	  <h4 id="modal-title" class="modal-title" style='padding-left: 183px;'></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -247,4 +248,7 @@ function dis(element){
 		</c:if>
 		</div>
 
-<%@ include file="../common/footer.jsp" %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+            
+</body>
+</html>

@@ -132,7 +132,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	JOIN rec_board b ON b.mno = m.mno
 	WHERE b.regdate BETWEEN #{startDate} AND #{endDate}
 	GROUP BY m.mno, m.name, m.nickname, g.grade, g.benefit) E
-	WHERE ROWNUM  <= 10]]>
+	WHERE ROWNUM  <= 5]]>
 </select>
 
 <!-- 리워드 수정  -->

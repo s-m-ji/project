@@ -1,12 +1,14 @@
 package com.project.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.vo.Criteria;
 import com.project.vo.MemberVo;
@@ -24,7 +26,7 @@ public interface MemberService {
 	public int delMem(@Param("mno")String mno,@Param("delyn")String delyn);
 	
 	// 회원 등록 
-	public int adminInput(MemberVo membervo);
+	int adminInput(MemberVo membervo, ArrayList<MultipartFile> files) throws Exception;
 	
 	// 공지 목록 조회 
 	public List<NoticeVo> noticeList(Criteria cri,Model model);
@@ -49,4 +51,5 @@ public interface MemberService {
 	
 	// 리워드 수정 
 	public int gradeUpdate(MemberVo membervo);
+
 }

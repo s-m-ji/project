@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리워드관리</title>
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -28,10 +29,8 @@ function getRewardList(){
 	let endDate = document.querySelector("#endDate").value;
 
 	fetchGet('/recipe/reward/list/' + startDate + '/' + endDate, rewardView);
-
 	console.log("startDate : ", startDate, "endDate", endDate);
-/* 	.then(response => response.json())
-	.then(map => rewardView(map)); */
+
 }
 
 // 리스트 조회-콜백함수 
@@ -102,6 +101,7 @@ function gradeUpdate(mno){
 
 function updateView(){
 	getRewardList();
+	alert('회원 등급이 변경되었습니다.');
 }
 
 

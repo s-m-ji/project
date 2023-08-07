@@ -1,12 +1,15 @@
 package com.project.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mapper.MemberMapper;
 import com.project.vo.Criteria;
@@ -22,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberMapper membermapper;
+	
+	@Autowired
+	AdminFileService adminfileservice;
 	
 	 // 회원 목록 조회 (검색조건 + 페이징)
 	@Override
@@ -51,11 +57,13 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원 등록
 	@Override
-	public int adminInput(MemberVo membervo) {
+	@Transactional(rollbackFor = Exception.class)
+	public int adminInput(MemberVo membervo, ArrayList<MultipartFile> files) throws Exception {
 		int res = membermapper.adminInput(membervo);
+		adminfileservice.fileupload(files, membervo.getMno());
+		
 		return res;
 	}
-
 	
 	// 공지 목록 조회
 	@Override
@@ -112,6 +120,8 @@ public class MemberServiceImpl implements MemberService {
 	public int gradeUpdate(MemberVo membervo) {
 		return membermapper.gradeUpdate(membervo);
 	}
+
+	
 
 	
 

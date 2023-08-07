@@ -54,7 +54,7 @@
         <h4 class="mb-3" style='text-align: center;'>회원등록👨🏻‍👩🏻‍👧🏻‍👦🏼</h4>
         
                 <input type="hidden" class="form-control" id="mno" name ="mno" placeholder="회원번호" >
-        <form class="memberForm" action="/recipe/adminInputAction" method="post"  accept-charset="UTF-8" novalidate>
+        <form class="memberForm" action="/recipe/adminInputAction" method="post"  accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
             <div class="mb-4">
               </div>
 
@@ -99,6 +99,15 @@
               전화번호를 등록해주세요.
             </div>
           </div>
+
+    <div class="mb-3">
+            <label for="files">회원 사진</label>
+            <input type="file" class="form-control" id="files" name ="files" required style="border: 1px solid white;">
+            <div class="invalid-feedback">
+             파일을 등록해주세요.
+            </div>
+          </div>
+
 
           <hr class="mb-4">
           <!-- <div class="custom-control custom-checkbox">
