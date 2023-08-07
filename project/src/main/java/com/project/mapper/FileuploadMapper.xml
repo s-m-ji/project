@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
+<mapper namespace="com.project.mapper.FileuploadMapper">
+
+<select id="getFileList" resultType="com.project.vo.FileuploadVo">
+
+	select t.*
+		        , uploadpath||uuid||'_'||filename savePath
+        		, decode(filetype, 'I'
+                			,'s_'||uploadpath||uuid||'_'||filename
+                			,'') s_savePath 
+		  from rec_file t
+		 where b_no= #{b_no} and filetype = 'B'
+
+
+</select>
+
+
+<select id="getRecipeStep" resultType="com.project.vo.FileuploadVo">
+
+	select t.*
+		        , uploadpath||uuid||'_'||filename savePath
+        		, decode(filetype, 'I'
+                			,'s_'||uploadpath||uuid||'_'||filename
+                			,'') s_savePath 
+		  from rec_file t
+		 where b_no= #{b_no} and filetype = 'S'
+
+</select>
+
+<select id="getPhotoReview" resultType="com.project.vo.FileuploadVo">
+
+		SELECT t.*, 
+		      
+		       uploadpath || uuid || '_' || filename AS savePath,
+		       DECODE(filetype, 'I', 's_' || uploadpath || uuid || '_' || filename, '') AS s_savePath,
+		       COUNT(*) OVER() AS photoTotalCnt
+		FROM rec_file t
+		WHERE b_no = #{b_no} AND filetype = 'R'
+		ORDER BY r_no DESC
+		 
+
+</select>
+
+
+<select id="getIngredients" resultType="com.project.vo.FileuploadVo">
+
+		select t.*
+		        , uploadpath||uuid||'_'||filename savePath
+        		, decode(filetype, 'I'
+                			,'s_'||uploadpath||uuid||'_'||filename
+                			,'') s_savePath 
+		  from rec_file t
+		 where i_no= #{i_no} and filetype = 'M'
+
+</select>
+
+
+<insert id="insertFile">
+		insert into REC_FILE (UUID, UPLOADPATH, FILETYPE, FILENAME, R_NO, B_NO)  
+			values (#{uuid}, #{uploadpath}, #{filetype}, #{filename}, #{r_no}, #{b_no})
+	</insert>
+	
+<select id="getFinishImg" resultType="com.project.vo.FileuploadVo">
+	
+	select t.*
+		        , uploadpath||uuid||'_'||filename savePath
+        		, decode(filetype, 'I'
+                			,'s_'||uploadpath||uuid||'_'||filename
+                			,'') s_savePath 
+		  from rec_file t
+		 where b_no= #{b_no} and filetype = 'F'
+	
+</select>	
+
+
+</mapper>

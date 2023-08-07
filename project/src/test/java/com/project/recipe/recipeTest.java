@@ -11,8 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.mapper.RecipeListMapper;
+import com.project.mapper.RecipeMapper;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
+import com.project.vo.RecipeBoardVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,6 +26,9 @@ import lombok.extern.log4j.Log4j;
 public class recipeTest {
 	@Autowired
 	RecipeListMapper rMapper;
+	
+	@Autowired
+	RecipeMapper vMapper;
 	
 	@Test public void getRecList() {
 		// assertNotNull(rMapper);
@@ -41,6 +46,33 @@ public class recipeTest {
 		log.info("*********** res : " + res);
 		
 	}
+	
+	
+	
+	/**
+	 * 이한규 테스트 getOne
+	 */
+	@Test
+	public void getOne() {
+		
+		assertNotNull(vMapper);
+		
+		RecipeBoardVo vo = vMapper.getOne(2);
+		
+		log.info(vo);
+	}
+	
+	
+	@Test
+	public void getOneOrgin() {
+		
+		assertNotNull(rMapper);
+		BoardVO vo =  rMapper.getOne(2);
+	
+		log.info(vo);
+	}
+	
+	
 	
 }
 

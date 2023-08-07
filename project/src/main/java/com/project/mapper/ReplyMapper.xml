@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성 -->
+<mapper namespace="com.project.mapper.ReplyMapper">
+
+
+	<select id="getRecipeReply"
+		resultType="com.project.vo.RecipeReplyVo">
+
+		select *
+		from rec_reply
+		where b_no = #{b_no}
+		order by r_no desc
+
+	</select>
+
+	<insert id="replyWrite">
+
+		<selectKey keyProperty="r_no" order="BEFORE"
+			resultType="int">
+			select SEQ_REPLY.nextval from dual
+		</selectKey>
+
+		insert into rec_reply (r_no, REPLYDATE, reply, b_no, WRITER, STAR)
+		values (#{r_no}, sysdate, #{reply}, #{b_no}, #{writer}, #{star})
+
+	</insert>
+
+
+	<select id="selectPhotoReview"
+		resultType="com.project.vo.RecipeReplyVo">
+
+		select *
+		from rec_reply
+		where r_no = #{r_no}
+
+	</select>
+
+	<select id="getGeneralReply"
+		resultType="com.project.vo.GeneralReplyVo">
+
+		select *
+		from rec_generalreply
+		where b_no = #{b_no}
+		order by gr_no desc
+	</select>
+
+	<insert id="grWrite">
+
+		insert into rec_generalReply values (seq_gr_no.nextval, #{content},
+		#{replyer}, sysdate, sysdate, #{b_no})
+
+	</insert>
+	
+	<delete id="replyDelete">
+		
+		delete rec_reply
+		where r_no = #{r_no}
+		
+	</delete>
+	
+	<update id="replyEdit">
+		
+		update rec_reply
+		set reply = #{reply}
+		where r_no = #{r_no}
+		
+	</update>
+
+</mapper>
