@@ -14,7 +14,7 @@
 	    <li class="page-item ${pDto.prev? '' : 'disabled'}">
 	      <a class="page-link" onclick="go(1)" href="#"><i class="bi bi-chevron-double-left"></i></a>
 	    </li>
-	    <li class="page-item" >
+	    <li class="page-item ${pDto.prev? '' : 'disabled'}" >
 	      <a class="page-link" <c:if test="${pDto.prev}"> onclick="go(${pDto.startNo - 1})"</c:if>  href="#"><i class="bi bi-chevron-left"></i></a>
 	    </li>
 	     <c:forEach begin="${pDto.startNo}" end="${pDto.endNo}" step="1" var="i">
@@ -25,7 +25,7 @@
 	    <li class="page-item ${pDto.next? '' : 'disabled'}">
 	      <a class="page-link" <c:if test="${pDto.next}"> onclick="go(${pDto.endNo + 1})"</c:if> href="#"><i class="bi bi-chevron-right"></i></a>
 	    </li>
-	    <li class="page-item" >
+	    <li class="page-item ${pDto.next? '' : 'disabled'}">
 	      <a class="page-link" onclick="go(${pDto.realEndNo})" href="#"><i class="bi bi-chevron-double-right"></i></a>
 	    </li>
 	  </ul>

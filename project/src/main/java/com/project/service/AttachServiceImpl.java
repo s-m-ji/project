@@ -34,7 +34,7 @@ public class AttachServiceImpl implements AttachService {
 	
 	@Override
 	public List<AttachVO> getAllList() {
-		System.out.println("aMapper 실행  - getAllList");
+		//System.out.println("aMapper 실행  - getAllList");
 		return aMapper.getAllList();
 	}
 

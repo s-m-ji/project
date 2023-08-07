@@ -31,8 +31,6 @@ console.log("-------------- common.js 연결 완료! ----------------");
 	}
 	
 	
-	(function () {
-		
 		// 페이지 상단으로 이동하는 버튼
 		var goToTop = function() {
 
@@ -48,7 +46,6 @@ console.log("-------------- common.js 연결 완료! ----------------");
 			});
 
 			$(window).scroll(function(){
-				console.log("뭐야뭐야ㅐ");
 				var $win = $(window);
 				if ($win.scrollTop() > 200) {
 					$('.js-top').addClass('active');
@@ -61,4 +58,4 @@ console.log("-------------- common.js 연결 완료! ----------------");
 		
 		// 함수 호출 추가
 		goToTop();
-	}());
+		

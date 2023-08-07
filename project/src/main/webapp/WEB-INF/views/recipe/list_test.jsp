@@ -4,6 +4,10 @@
     
     <!-- 브라우저 탭 제목 -->
     <title>레시피 list 파일 有</title>
+   <link rel="stylesheet" href="/resources/css/style.css">
+   <link rel="stylesheet" href="/resources/assets/css/main.css" />
+   <link rel="stylesheet" href="/resources/css/animate.css">
+    <link rel="stylesheet" href="/resources/recipe_css/mimi.css">
     
     <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
@@ -35,11 +39,10 @@
 					<p>👩‍🍳 다른 검색어를 입력해보세요 👩‍🍳</p>
 			    </div>
 				</c:when>
-				
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
 					<div class="col-lg-4 col-md-4 col-sm-6">
-						<a href="#" class="fh5co-card-item image-popup" onclick="requestAction('./view_test', ${list.b_NO})">
+						<a href="#" class="fh5co-card-item" onclick="requestAction('./view_test', ${list.b_NO})">
 							<figure>
 								<div class="overlay"><i class="bi bi-box-arrow-up-right"></i></div>
 								<!-- <img src="/resources/images/꼬시래기물냉면.jpg" alt="Image" class="img-responsive"> -->
