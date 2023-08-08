@@ -331,8 +331,10 @@ console.log('연결 확인 ===================================================')
 		//---------------------------------------------------------------------------------------
 			
 		function viewRecipeStep(map) {
-		   // console.log('조리순서 map 출력 : ', map);
-		    let content = '';
+		    console.log('조리순서 map 출력 : ', map);
+		    
+			
+			let content = '';
 
 		    if (map.recipeStep.length > 0) {
 		        map.recipeStep.forEach(function (item, index) {
@@ -1076,37 +1078,36 @@ console.log('연결 확인 ===================================================')
 		  
 		  let matchedReply = replyList.find((item) => item.r_no == r_no);
 		  
-		  let photoBtn = 
-			  			'<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">'
-			  			+ '<div class="carousel-inner">'	
 		  
-		/*	  			
-         for(let i = 1; i>photoReview.length; i++){
+		  let photoBtn = 
+			  			'<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">'
+			  			+ '<div class="carousel-inner" style="overflow:inherit;">'	
+		  				+ '<div class="carousel-indicators" style="display:none;">';
+			  			
+		  for(let i = 0; i < photoReview.length; i++){
         	 
         	 if(i == 1){
         	
         		 photoBtn +=
         		 
-        		 '<button type="button" style="display: none;" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+i+'" class="active" aria-current="true" aria-label="Slide '+i+'"></button>'
-        	
+        		 '<button type="button" style="background-color: black; opacity: initial;" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+i+'" class="active" aria-current="true" aria-label="Slide '+i+'"></button>';
+        		 	
         	 }else{
         	
         		 photoBtn +=
         		 
-        		'<button type="button" style="display: none;" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+i+'" aria-label="Slide '+i+'"></button>'
+        		'<button type="button" style="background-color: black; opacity: initial;" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+i+'" aria-label="Slide '+i+'"></button>';
                  
         		 
         	 }
         	 
+        	 
              
-         }	*/		  			
-			  			
-		
-			  			
-			  			
-		 
+         }		  			
 		  
-		  
+		  photoBtn +=
+     		 
+     		 '</div>';			  
 			  			
 		if(matchedReply){
 			
@@ -1120,42 +1121,57 @@ console.log('연결 확인 ===================================================')
 			  		
 			  			photoBtn +=
 		  					
-			  				'<div class="carousel-item active photoBtn" data-bs-interval="10000">'
-		  					+	'<img style="height: 400px;" src="/display?fileName=' + savePath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'			  				
-		  					+ '</div>';
+			  				'<div class="carousel-item active photoBtn" data-bs-interval="1000000">'
+		  					+	'<img style="height: 300px; max-width: 500px; margin: 0 auto;" src="/display?fileName=' + savePath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'			  				
+		  					+ '<div class="carousel-caption d-none d-md-block" style="top: 110%; color: black;">'
+		  			        + '<h5>'+replyList[index1].writer+'</h5>'
+		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index1].star +'" ></div><span>'+replyList[index1].replydate+'</span>'
+		  			        + '<p>'+replyList[index1].reply+'</p>'
+		  			        + '</div>'
+		  					+'</div>';
 			  			
-			  			
+			  			console.log('replyList[index1] : ',replyList[index1]);
 			  			
 			  		}else {
 			  			
 			  			photoBtn +=
 			  				
-			  				'<div  class="carousel-item photoBtn">'
-					    	+		'<img style="height: 400px;" src="/display?fileName=' + sPath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'						   
+			  				'<div  class="carousel-item photoBtn" data-bs-interval="1000000">'
+					    	+		'<img style="height: 300px; max-width: 500px; margin: 0 auto;" src="/display?fileName=' + sPath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'	
+					    	+ '<div class="carousel-caption d-none d-md-block" style="top: 110%; color: black;">'
+		  			        + '<h5>'+replyList[index].writer+'</h5>'
+		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index].star +'" ></div><span>'+replyList[index1].replydate+'</span>'
+		  			        + '<p>'+replyList[index].reply+'</p>'
+		  			        + '</div>'
 					    	+    '</div>';
+			  			
+			  			console.log('replyList[index] : ',replyList[index]);
 			  			
 			  		}
 
-			  	
+			  		
 			  	});
 		  
 		}  			
 		  				photoBtn +=
 		  					
 		  					'</div>'
-			  			+		'<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" onclick="prevBtn('+(r_no-1)+')" data-bs-slide="prev" >'
+			  			+		'<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" onclick="prevBtn('+(r_no-1)+')" data-bs-slide="prev" >'
 						+	          '<span style="background-color: #F7863B;" class="carousel-control-prev-icon" aria-hidden="true" ></span>'
 						+	          '<span class="visually-hidden">Previous</span>'
 						+	        '</button>'	      
-		  				+		'<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" onclick="nextBtn('+(r_no+1)+')" data-bs-slide="next" >'
+		  				+		'<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" onclick="nextBtn('+(r_no+1)+')" data-bs-slide="next" >'
 						+	          '<span style="background-color: #F7863B;" class="carousel-control-next-icon" aria-hidden="true" ></span>'
 						+	          '<span class="visually-hidden">Next</span>'
 						+	      '</button>'
 						+   '</div>'
 		  
+
 		  
-		  
-			photoReviewImgDiv.innerHTML = photoBtn;
+			
+		  	photoReviewImgDiv.innerHTML = photoBtn;
+
+			$(".test-score2").score();				
 		  				
 		  				
 			const photoBtnImg = document.querySelectorAll('.photoBtn img');
@@ -1165,6 +1181,7 @@ console.log('연결 확인 ===================================================')
 			photoBtnImg.forEach((img) => {
 				
 			let checkRNO = img.getAttribute('data-rno');
+			
 			console.log('checkRNO : ', checkRNO);
 			
 			
@@ -1188,32 +1205,10 @@ console.log('연결 확인 ===================================================')
 	      
 		  // 함수 하나 만들어서  문자열 return;
           	
-         /* function createReply(){
-        	  
-        	  replyList
-        	  
-        	  let createReply =
-		          '<div id="modalContent">' +
-		          '<div id="modalHead">' +
-		          '<span>' +
-		          matchedReply.writer +
-		          '</span> <div class="test-score2" data-max="5" data-rate="' +
-		          matchedReply.star +
-		          '"></div>' +
-		          '<span>' +
-		          matchedReply.replydate +
-		          '</span>' +
-		          '</div>' +
-		          '<div id="modalContent">' +
-		          matchedReply.reply +
-		          '</div>' +
-		          '</div>';
-        	  
-        	  
-          }		*/  					
+          					
 		  				
 		  				
-	      if (matchedReply) {
+	    /*  if (matchedReply) {
 		        
 	    	  let content =
 		          '<div class="contentHidden'+matchedReply.r_no+'" id="modalContent" data-rno="'+matchedReply.r_no+'">' +
@@ -1237,12 +1232,12 @@ console.log('연결 확인 ===================================================')
 		        // 일치하는 댓글이 없는 경우, 댓글을 표시하는 영역에 메시지를 표시합니다.
 		        photoReviewReplyDiv.innerHTML = '일치하는 댓글이 없습니다.';
 		     
-		      }
+		      }*/
 	      
 	      
 	      
 	     
-	      
+	     /* 
 	      replyList.forEach(function (item, index){
 	    	  
 	    	  let content =
@@ -1264,31 +1259,35 @@ console.log('연결 확인 ===================================================')
 		          '</div>';
 		        
 	    	  	photoReviewReplyDiv.innerHTML += content;
-		        
-	    	  
-	    	  
-	      });
+  
+	      });*/
 	      
 	      
 	      
 	     
 	      
-	      
+		/*	const myCarousel = document.getElementById('myCarousel')
+
+			myCarousel.addEventListener('slide.bs.carousel', event => {
+			  // do something...
+			})*/
 	      
 	      // ==========================================================================
 
 		  // 포토리뷰 전체를 보여주는 부분
-		  let photoList = '<ul>';
+		  let photoList = 
+			  	'<ul style="background-color: white;">';
 
 		  photoReview.forEach(function (item, index) {
 		    let saveP = encodeURIComponent(item.savePath);
 
 		    // 각 이미지마다 고유한 'data-r_no' 속성을 추가하여 중복 불러오기 문제를 해결합니다.
-		    photoList += '<li style="width: 70px;" class="photoList"><img class="w100" name="photoList" src="/display?fileName=' + saveP + '" data-r_no="' + item.r_no + '" data-savePath="'+saveP+'"></li>';
-		  
+		    photoList += '<li style="width: 70px;" class="photoList"><img data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+index+'" class="w100" name="photoList" src="/display?fileName=' + saveP + '" data-r_no="' + item.r_no + '" data-savePath="'+saveP+'"></li>';
+		    			
 		  });
 
-		  photoList += '</ul>'
+		  photoList += '</ul>';
+			  			
 			  
 		  photoReviewModalList.innerHTML = photoList;
 		  
@@ -1300,10 +1299,11 @@ console.log('연결 확인 ===================================================')
 		 
 
 		  // photoList의 각 이미지에 클릭 이벤트 리스너를 추가합니다.
-		  photoListImages.forEach((image) => {
+		  /*photoListImages.forEach((image) => {
 		    
 			  image.addEventListener('click', function () {
-		      // 클릭한 이미지에서 'data-r_no' 속성을 가져옵니다.
+		    
+			  // 클릭한 이미지에서 'data-r_no' 속성을 가져옵니다.
 		      const clickedRNo = image.getAttribute('data-r_no');
 		      const clickedSaveP = image.getAttribute('data-savePath');
 		      console.log('clickedRNo : ', clickedRNo);	
@@ -1319,7 +1319,7 @@ console.log('연결 확인 ===================================================')
 			    : '일치하는 이미지가 없습니다.';
 
 		      // 댓글 정보를 'photoReviewReplyDiv'에 표시합니다.
-		      if (matchedReply) {
+		       if (matchedReply) {
 		        let content =
 		          '<div id="modalContent">' +
 		          '<div id="modalHead">' +
@@ -1342,8 +1342,9 @@ console.log('연결 확인 ===================================================')
 		        // 일치하는 댓글이 없는 경우, 댓글을 표시하는 영역에 메시지를 표시합니다.
 		        photoReviewReplyDiv.innerHTML = '일치하는 댓글이 없습니다.';
 		      }
-		    });
-		  });
+		   
+			  });
+		  });*/
 
 		  modal.style.display = 'block';
 		}
