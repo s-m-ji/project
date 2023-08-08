@@ -66,15 +66,20 @@ function dis(element){
 
 </head>
 <body>
+ <!-- Main -->
+<section id="main">
+	<div class="container">
+
+
 
 <!--검색 폼 -->
-<div class="list-group w-auto">
+<div class="list-group w-auto searchDiv">
 <form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
 
 <input type="hidden" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input> 
 
   <div class="col-sm-2">
-			<select name ="sField" class="form-select" aria-label="Default select example"  onchange="this.form.submit();" >
+			<select name ="sField" class="form-select" aria-label="Default select example" style="width: 200px;"  onchange="this.form.submit();" >
 				<option value="">전체</option>
 				<option value = "일반"${pageDtoN.cri.SField eq "일반" ? "selected" : ""}>일반</option>
 				<option value = "이벤트"${pageDtoN.cri.SField eq "이벤트" ? "selected" : ""}>이벤트</option>
@@ -84,26 +89,30 @@ function dis(element){
 </form> 	
 </div>
 
-<!--공지 등록   --> 
-<p> 총 <b>${totalNcnt}</b>개🪐</p>
+<!--공지 등록   -->
 
+<div style="padding-left: 910px;" > 
+<p style="margin-bottom: 0px;"> 오늘의 공지<b> ${totalNcnt}</b> 개🪐</p>
+</div>
 <c:set  value="${notList}" var="notice"></c:set>  
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
       공지 등록
     </button>
 
+
     <input type="hidden" class="form-control" id="nno" name ="nno" placeholder="공지번호" >
     <form class="dropdown-menu p-4" action="/recipe/writeAction" method="post" accept-charset="UTF-8">
+       <div>
        <h4 style='line-height: center; text-align: center;'> 공지사항📝</h4>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">작성자</span>
         <input type="text" class="form-control" id="nwriter" name ="nwriter" value = "admin">
       </div>
   
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="gubun">  구분　</label>
-        <select class="form-select" id="gubun" name='gubun'>
+      <div class="input-group mb-3" style="padding-top: 10px;">
+        <label class="input-group-text" for="gubun" >  구분　</label>
+        <select class="form-select" id="gubun" name='gubun' style="margin-bottom: 15px;">
           <option selected>선택입력</option>
           <option value="일반">일반</option>
           <option value="이벤트">이벤트</option>
@@ -116,20 +125,28 @@ function dis(element){
       </div>
   
       <div class="mb-10">
-        <textarea class="form-control" id="ncontent" name = "ncontent" rows="3" placeholder='공지 내용을 입력해주세요' required ></textarea>
+        <textarea class="form-control" id="ncontent" name = "ncontent" rows="10" placeholder='공지 내용을 입력해주세요' required ></textarea>
       </div>
   <br>
       <div class="mb-3 d-md-flex justify-content-md-center" >
         <button type="submit" class="btn btn-secondary">작성완료</button>
+        </div>
       </div>
     </form>
+
   </div> 
   
 <!-- 공지 사항 목록  -->
 <form method="get" name="viewForm" accept-charset="UTF-8" >
  	
                 <section class="NoticeContentstyle__Container-sc-12y37o4-0 ihesfa">
-                    <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv">
+                    <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv"
+                    style="
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 860px;
+    margin-left: 30px;">
                         <h2>공지사항</h2>
                     </div>
                
@@ -233,13 +250,13 @@ function dis(element){
 		<c:set var="pageDto" value="${pageDtoN}"/>
 		
 		<!-- 이전버튼 -->
-		<c:if test="${pageDtoN.prev }">
+		<c:if test="${pageDtoN.prev}">
 			<input type='button' value='이전' onclick='goNotice(${pageDtoN.startNo-1})' class="btn">
 		</c:if>
 		
 		<!-- 페이지번호 출력 -->
 		<c:forEach begin="${pageDtoN.startNo }" end="${pageDtoN.endNo }" var="i">
-			<input type='button' value='${i }' onclick='goNotice(${i})' class="btn" >
+			<input type='button' value='${i}' onclick='goNotice(${i})' class="btn" >
 		</c:forEach>
 		
 		<!-- 다음버튼 -->
@@ -247,6 +264,9 @@ function dis(element){
 			<input type='button' value='다음' onclick='goNotice(${pageDtoN.endNo+1})' class="btn">		
 		</c:if>
 		</div>
+
+    </div>
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
             

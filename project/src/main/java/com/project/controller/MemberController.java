@@ -55,9 +55,9 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("adminHOME")
-	public void adminHOME() {
-		
+	@GetMapping("adminHome")
+	public String adminHOME() {
+		return "/recipe/adminHome";
 	}
 	// 회원 목록 조회
 	 @GetMapping("admin") 

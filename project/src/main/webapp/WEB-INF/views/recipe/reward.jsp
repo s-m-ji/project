@@ -20,8 +20,6 @@ window.addEventListener('load', function(){
 	btnDate.addEventListener('click', function(){
 		getRewardList();
 	})
-	
-	
 });
 //리스트 조회 
 function getRewardList(){
@@ -140,6 +138,46 @@ function fetchPost(url, obj, callback){
  
 
 </script>
+    <style type="text/css">
+        .duration {
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 10vh;
+          appearance: none;
+        }
+        
+        .duration input[type='date'] {
+          border: none;
+          outline: none;
+          width: calc(160px);
+          padding: 10px;
+          background: url(../resources/images/schedule.png) no-repeat right 10px center /
+            35px auto; 
+          background-color: #f3efef;
+          background-color: hsla(25, 100%, 92%, 0.698);
+          box-shadow: 2px 2px 5px #fc85379f;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 100%;
+          margin: 0 5px; /* Add margin for spacing between date inputs */
+        }
+        input[type='date']::-webkit-calendar-picker-indicator {
+          opacity: 0;
+          cursor: pointer;
+        }
+        .duration input[type='button']{
+          margin: 10px;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #ffe8d8a9;
+          box-shadow: 0px 0px 5px #fc85379f;
+
+        }
+        
+    </style>
 </head>
 <body>
 
@@ -153,7 +191,6 @@ function fetchPost(url, obj, callback){
 
 <div id = "rewardDiv">
 </div>
-  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
 </body>
