@@ -68,11 +68,11 @@
 	<%-- pDto.cri.sWord : ${pDto.cri.sWord } 이렇게 클래스 내에 선언한 필드명 그대로 소문자 s라고 썼더니 안 나옴 그런 속성을 찾을 수 없다고함... 엉엉 --%>
 	<form action="./list" name="searchForm">
 		<!-- view.jsp를 위한 게시글 번호 -->
-		<input type="text" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
+		<input type="hidden" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
 		<div class="container text-center">
 			<div class="d-flex justify-content-between">
 				<div class="p-2 flex-fill" >
-					<select name="c1" id="c1"
+					<select name="c1" id="c1" class="form-control"
 						onChange="chnQnaType(this.value)">
 						<option value="">카테고리1 선택</option>
 						<option value="1" ${ param.c1 eq '1' ? "selected" : "" }>종류별</option>
@@ -82,7 +82,7 @@
 					</select>
 				</div>
 				<div class="p-2 flex-fill">
-					<select id="c2" name="c2"></select>
+					<select id="c2" name="c2" class="form-control"></select>
 				</div>
 				<div class="p-2 flex-fill">
 					<input type="text" name="sWord" class="form-control" value="${pDto.cri.SWord}" placeholder="검색어">
@@ -93,14 +93,14 @@
 			</div>
 		</div>
 		<div class="container text-center">
-			<input type="text" name="pageNo" value="${pDto.cri.pageNo}">
+			<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">
 				<div class="d-flex justify-content-between listMenuBtm">
 				<div class="p-2">
 					<select class="form-control" name="amount"
 						onchange="changePageSize(this.value)">
-						<option value="10" ${ param.amount eq '10' ? "selected" : "" }>10개씩 보기  </option>
-						<option value="25" ${ param.amount eq '25' ? "selected" : "" }>25개씩 보기</option>
-						<option value="50" ${ param.amount eq '50' ? "selected" : "" }>50개씩 보기</option>
+						<option value="12" ${ param.amount eq '12' ? "selected" : "" }>12개씩 보기  </option>
+						<option value="24" ${ param.amount eq '24' ? "selected" : "" }>25개씩 보기</option>
+						<option value="48" ${ param.amount eq '48' ? "selected" : "" }>50개씩 보기</option>
 					</select>
 				</div>
 				<div class="p-2">

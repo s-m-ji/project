@@ -10,7 +10,11 @@ import com.project.vo.Criteria;
 public interface RecipeListService {
 
 	public void getRecList(Model model, Criteria cri);
+	
+	public void getComList(Model model, Criteria cri);
 
 	public BoardVO getOne(int b_NO);
+	
+	public BoardVO getComOne(int com_BNO);
 
 }

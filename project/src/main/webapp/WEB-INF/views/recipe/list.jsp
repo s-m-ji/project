@@ -6,12 +6,27 @@
     <title>레시피 목록</title>
     
     <!-- css -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	
    <link rel="stylesheet" href="/resources/assets/css/main.css" />
    <link rel="stylesheet" href="/resources/css/style.css">
    <link rel="stylesheet" href="/resources/css/animate.css">
    <link rel="stylesheet" href="/resources/recipe_css/mimi.css">
     
     <!-- js -->
+    <script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.waypoints.min.js"></script>
+	<script src="/resources/js/owl.carousel.min.js"></script>
+	<script src="/resources/js/jquery.countTo.js"></script>
+	<script src="/resources/js/jquery.stellar.min.js"></script>
+	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/magnific-popup-options.js"></script>
+	<script src="/resources/js/moment.min.js"></script>
+	<script src="/resources/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/resources/js/main.js"></script>
+    
     <script src='/resources/recipe_js/listFile.js'></script>    
     <script src='/resources/recipe_js/mimi.js'></script>
     
@@ -28,9 +43,9 @@
 	</script>
 	
 	<!-- Main -->
-	<section id="main" >
-		<div class="container">
-	      <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1></div>
+	<section id="main">
+		<div class="container text-center">
+	      <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1> <sup>※ 제목 추후 삭제</sup></div>
 	      
 			<!-- 검색폼 -->	
 			<%@ include file="../common/searchForm.jsp" %>
@@ -47,7 +62,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
-					<div class="col-lg-4 col-md-4 col-sm-6">
+					<div class="col-lg-3 col-md-3 col-sm-5">
 						<a href="./view?b_no=${list.b_NO}" class="fh5co-card-item">
 						<%-- <a href="#" class="fh5co-card-item" onclick="requestAction('./view', ${list.b_NO})"> --%>
 							<figure>
@@ -62,13 +77,13 @@
 					            <p class="mb-0 intro">📝  ${list.intro}</p>
 					            <p class="mb-0">🙋‍♀️‍ ${list.nickName}</p>
 					            <p class="mb-0">👍 ${list.boomup} &nbsp; 👀 ${list.viewcnt}</p> 
-				           		<p class="mb-0">${list.c_NO1} - ${list.cateName1} , ${list.c_NO2} - ${list.cateName2}</p>
+				           		<p class="mb-0">🛒 ${list.cateName1}, ${list.cateName2}</p>
 				           		<!-- 
 				           			오늘 등록 : 몇시간 전
 				           			일주일 내로 등록 : 며칠 전
 				           			그 외 : 2023/00/00
 				           		 -->
-					            <p class="mb-0">${list.regdate}</p>
+					            <p class="mb-0">📌 ${list.regdate}</p>
 					            <!-- 3일 내로 등록한 글이면 new 표시 -->
 								<c:if test="${ not empty list.newpost}">
 									<span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger"> ${list.newpost} </span>

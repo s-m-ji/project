@@ -1968,8 +1968,8 @@ input, select, textarea {
 
 				#nav > ul > li > a:before {
 					display: inline-block;
-					background: #878787;
-					color: #e4e4e4;
+					background: #fff;
+					color:  #878787;
 					width: 2.25em;
 					font-size: 0.8em;
 					height: 2.25em;

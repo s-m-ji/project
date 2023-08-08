@@ -12,5 +12,12 @@ public interface RecipeListMapper {
 	public int getListTotalCnt(Criteria cri);
 
 	public BoardVO getOne(int b_NO);
+	
+
+	public List<BoardVO> getComList(Criteria cri);
+	
+	public BoardVO getComOne(int b_NO);
+	
+	public int getComListTotalCnt(Criteria cri);
 
 }

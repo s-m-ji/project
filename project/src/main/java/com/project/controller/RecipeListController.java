@@ -42,6 +42,7 @@ public class RecipeListController {
 	public void getComList(Model model, Criteria cri) {
 		System.out.println("================================ getComList 실행");
 		rService.getRecList(model, cri);
+		// rService.getComList(model, cri);
 	}
 
 	

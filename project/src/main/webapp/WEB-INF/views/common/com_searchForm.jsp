@@ -7,7 +7,6 @@
 <title>searchForm.jsp</title>
 </head>
 <body>
-	<%-- pDto.cri.sWord : ${pDto.cri.sWord } 이렇게 클래스 내에 선언한 필드명 그대로 소문자 s라고 썼더니 안 나옴 그런 속성을 찾을 수 없다고함... 엉엉 --%>
 	<form action="./com_list" name="searchForm">
 		<!-- view.jsp를 위한 게시글 번호 -->
 		<input type="text" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
@@ -43,7 +42,7 @@
 									<div class="feature-center">
 									<p style="font-size:20px"> 총
 										<span class="counter js-counter" data-from="0" data-to="${tCnt}" data-speed="1000" data-refresh-interval="50">1</span>
-										 개의 맛있는  레시피가 있습니다.</p>
+										 개의 재밌는 이야기가 있습니다.</p>
 									</div>
 								</div>
 							</div>

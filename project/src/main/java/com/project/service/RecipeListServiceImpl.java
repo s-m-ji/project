@@ -22,7 +22,7 @@ public class RecipeListServiceImpl implements RecipeListService {
 	@Autowired
 	AttachService aService;
 
-	// ※ 현재 rec_table VO가 없어서 BoardVO로 대체 테스트 중
+	// ========== 레시피 게시판 (rec_board)
 	@Override
 	public void getRecList(Model model, Criteria cri) {
 		System.out.println("=========================== 서비스 임플 getRecList 실행");
@@ -38,19 +38,35 @@ public class RecipeListServiceImpl implements RecipeListService {
 		
 		model.addAttribute("tCnt", totalCnt); 
 		model.addAttribute("pDto", pageDto);
-		
-		// 게시글 번호에 해당하는 파일 목록 조회
-		/*
-		 * List<AttachVO> fileList = aService.getList(list.get(0).getB_NO());
-		 * model.addAttribute("file", fileList); System.out.println("여기 파일 있어요 ! : " +
-		 * aService.getList(list.get(0).getB_NO()));
-		 */
-
 	}
 
 	@Override
 	public BoardVO getOne(int b_NO) {
 		return rMapper.getOne(b_NO);
+	}
+
+	
+	// ========== 커뮤니티 게시판 (com_board)
+	@Override
+	public void getComList(Model model, Criteria cri) {
+		System.out.println("=========================== 서비스 임플 getComList 실행");
+		List<BoardVO> list = rMapper.getComList(cri);
+		model.addAttribute("list", list);
+		
+		int totalCnt = rMapper.getComListTotalCnt(cri); 
+		System.out.println("totalCnt : "  + totalCnt);
+
+		PageDto pageDto = new PageDto(cri, totalCnt);
+		System.out.println("pageDto : "  + pageDto);
+		
+		model.addAttribute("tCnt", totalCnt); 
+		model.addAttribute("pDto", pageDto);
+		
+	}
+
+	@Override
+	public BoardVO getComOne(int com_BNO) {
+		return rMapper.getComOne(com_BNO);
 	}
 
 }
