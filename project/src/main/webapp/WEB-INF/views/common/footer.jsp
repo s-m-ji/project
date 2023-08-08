@@ -3,10 +3,7 @@
 
 <!-- Footer -->
 <section id="footer">
-	<div class="container">
-		<header>
-			<!-- <h2>Questions or comments? <strong>Get in touch:</strong></h2> -->
-		</header>
+	<!-- <div class="container">
 		<div class="row">
 			<div class="col-12-medium">
 				<section>
@@ -31,7 +28,7 @@
 				</section>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div id="copyright" class="container">
 		<ul class="links">
 			<li>&copy; 오늘뭐먹조. All rights reserved.</li>

@@ -10,7 +10,7 @@ console.log('연결 확인 ===================================================')
 
 		function openModalAndInitializeStars() {
 		    const modal = document.getElementById("photoReviewModal");
-		    modal.style.display = "block";
+		    modal.style.display = "flex";
 		    initializeStarRatings(); // 모달창의 댓글에 대한 별점 초기화
 		  }
 		
@@ -256,7 +256,7 @@ console.log('연결 확인 ===================================================')
 			    					+'<p>재료정보가 없습니다. 관리자에게 문의 후 재료정보를 추가해주세요!</p>';
 			    ingredientTop.innerHTML = errorMessage;
 			    ingredientInfoDiv.innerHTML =''; // 초기화
-			    modal.style.display = "block";
+			    modal.style.display = "flex";
 			    return;
 			  }
 
@@ -298,7 +298,7 @@ console.log('연결 확인 ===================================================')
 
 			  ingredientInfoDiv.innerHTML = content;
 			  ingredientTop.innerHTML = contentImg;
-			  modal.style.display = "block";
+			  modal.style.display = "flex";
 			}
 
 		
@@ -463,7 +463,7 @@ console.log('연결 확인 ===================================================')
 			
 			
 			stepImgDiv.innerHTML = '<img class="stepImg" src="/display?fileName=' + savePath + '">';
-			modal.style.display = "block";	
+			modal.style.display = "flex";	
 			
 		}
 		
@@ -531,7 +531,7 @@ console.log('연결 확인 ===================================================')
 
 				  photoReviewReplyDiv.innerHTML = content;
 				  $(".test-score2").score();
-				  modal.style.display = "block";
+				  modal.style.display = "flex";
 				}
 		
 		
@@ -871,7 +871,7 @@ console.log('연결 확인 ===================================================')
 				    });
 				  });
 
-				  modal.style.display = 'block';
+				  modal.style.display = 'flex';
 				}
 			
 			
@@ -1006,7 +1006,7 @@ console.log('연결 확인 ===================================================')
 				    });
 				  });
 
-				  modal.style.display = 'block';
+				  modal.style.display = 'flex';
 				}
 			
 // ========================================================================================================================			
@@ -1346,6 +1346,6 @@ console.log('연결 확인 ===================================================')
 			  });
 		  });*/
 
-		  modal.style.display = 'block';
+		  modal.style.display = 'flex';
 		}
 	

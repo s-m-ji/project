@@ -24,6 +24,7 @@ a {
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  text-decoration: none;
 }
 a:hover, a:active, a:focus {
   color: #F7863B;
@@ -58,10 +59,6 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 /* 체크박스 관련 */
-input, select, textarea {
-	appearance: auto;
-}
-
 input[type="checkbox"]
 {
 	accent-color: #F7863B;
@@ -76,45 +73,50 @@ input[type="checkbox"]
 
 
 /* 컨텐츠 섹션  */
-section#main {
-	border: 5px dashed #F7863B;
-	background: #f7863b30;
-	padding: 0;
-}
-
 section#main div.container {
 	background: #fff;
+	width: 85%;
+	border-radius: 1em;
 }
 
-/* input 태그 배경색 */
-
+/* input 배경색 */
 form input[type="text"], form input[type="email"], form input[type="password"], form select, form textarea {
 	    background-color: #e6e6e6 !important;
 }
 
-
-/* -------------------- header.jsp -------------------- */
-#header > div.container {
-	padding: 9em 0 3em 0;
-	    border: none;
-    box-shadow: none;
+.form-control option:hover, 
+.form-control option:checked {
+	background: #F7863B50 !important
 }
 
-nav#nav {
-	    border-bottom: solid 2px #e5e5e5;
-    box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5;
+.form-control:active, .form-control:focus {
+	    outline: #F7863B;
+	    box-shadow: none;
+	    border:2px solid #F7863B;
+}
+
+
+/* -------------------- header.jsp -------------------- */
+#header {
+	background: #f7863b36;
+}
+
+#header > div.container {
+	padding: 9em 0 6em 0;
+	    border: none;
+    box-shadow: none;
 }
 
 .search-wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 68%;
+    top: 85%;
     left:50%;
 }
 
 .search-wrapper .input-holder {    
-    height: 70px;
-    width:70px;
+    height: 75px;
+    width:75px;
     overflow: hidden;
     background: rgba(255,255,255,0);
     border-radius:6px;
@@ -199,7 +201,7 @@ nav#nav {
     transform: rotate(360deg);
 }
 
-.search-wrapper .close {
+.search-wrapper .searchClose {
     position: absolute;
     z-index: 1;
     top:50%;
@@ -211,12 +213,12 @@ nav#nav {
     transition-delay: 0.2s;
 }
 
-.search-wrapper .close i {
+.search-wrapper .searchClose i {
 	font-size: 1.5em;
 	color: #F7863B;
 }
 
-.search-wrapper.active .close {
+.search-wrapper.active .searchClose {
     right:-50px;
     transform: rotate(360deg) translate(-50%, -50%);
     transition: all 1s cubic-bezier(0.000, 0.105, 0.035, 1.570);
@@ -224,8 +226,34 @@ nav#nav {
     opacity: 1;;
 }
 
+.search-wrapper .search-icon:hover {
+	background: #f9a974;
+}
+
+/* 컨텐츠 섹션 */
+section#main {
+    padding: 0;
+} 
+
+section#main {
+    background: #f7863b36;
+} 
+
 
 /* -------------------- footer.jsp -------------------- */
+#footer {
+	padding: 6em 0;
+    border-top: 0;
+    background: #f7863b36;
+}
+
+#copyright {
+    border-top: 0; 
+    text-align: center;
+	margin-top: 0; 
+	padding-top: 0; 
+}
+
 .gototop {
   position: fixed;
   bottom: 20px;

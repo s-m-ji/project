@@ -29,13 +29,14 @@ public class RecipeListController {
 	 */
 	@GetMapping("/recipe/list")
 	public void getRecList(Model model, Criteria cri) {
-	}
-	
-	@GetMapping("/recipe/list_test")
-	public void getRecList_test(Model model, Criteria cri) {
-		System.out.println("================================ 컨트롤러 getRecList 실행");
 		rService.getRecList(model, cri);
 	}
+	
+	/*
+	 * @GetMapping("/recipe/list_test") public void getRecList_test(Model model,
+	 * Criteria cri) {
+	 * System.out.println("================================ 컨트롤러 getRecList 실행"); }
+	 */
 	
 	@GetMapping("/recipe/com_list")
 	public void getComList(Model model, Criteria cri) {
@@ -44,13 +45,15 @@ public class RecipeListController {
 	}
 
 	
-	@GetMapping("/recipe/view_test")
-	public void getRecOne(Model model,BoardVO paramVO) {
-		System.out.println("================================ getRecOne 실행");
-		BoardVO board = rService.getOne(paramVO.getB_NO());
-		model.addAttribute("book", board);
-		
-	}
+	/*
+	 * @GetMapping("/recipe/view_test") public void getRecOne(Model model,BoardVO
+	 * paramVO) {
+	 * System.out.println("================================ getRecOne 실행"); BoardVO
+	 * board = rService.getOne(paramVO.getB_NO()); model.addAttribute("book",
+	 * board);
+	 * 
+	 * }
+	 */
 	
 	@GetMapping("/recipe/com_view_test")
 	public void getComOne(Model model,BoardVO paramVO) {

@@ -322,16 +322,16 @@
 	$(function(){
 		mobileMenuOutsideClick();
 		formTab();
-		// offcanvasMenu();
-		// burgerMenu();
+		offcanvasMenu();
+		burgerMenu();
 		contentWayPoint();
 		dropdown();
-		// owlCarousel();
-		// goToTop();
-		// loaderPage();
+		owlCarousel();
+		goToTop();
+		loaderPage();
 		counterWayPoint();
-		// dateTimeForm();
-		// parallax();
+		dateTimeForm();
+		parallax();
 	});
 
 

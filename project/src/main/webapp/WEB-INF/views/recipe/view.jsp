@@ -1,13 +1,15 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 브라우저 탭 제목 -->
+    <title>레시피 상세</title>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
-<title>Bulletin Board Detail Page</title>
+<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/resources/css/view.css" rel="stylesheet">
 <script src="/resources/js/view.js"></script>
@@ -30,7 +32,6 @@
 	} 
 </style>
 <script type="text/javascript">
-  
 
 	window.addEventListener('load', function(){
   			
@@ -89,18 +90,14 @@
 			// 댓글 출력 
 			getRecipeReply();
 			
-			
-			
 			// 별점
 			initializeStarRatings();
 			
 			// 일반 댓글 출력
 			getGeneralReply();
-			
 		 
 			// 좋아요 버튼 클릭 시 실행되는 함수
 			likeBtn.addEventListener('click', function(){
-				
 				
 				LikeRecipe();
 
@@ -131,13 +128,7 @@
 				
 				let b_no = document.querySelector('#b_no').value;
 				
-				
-				
-				
 				document.querySelector('#star').value = document.querySelector('.starDiv').dataset.max;
-				
-				
-				
 				
 				let formData = new FormData(replyPhotoForm_Test);
 				
@@ -148,12 +139,6 @@
 				console.log("writer : ", writer);
 				
 				console.log("reply : ", reply);
-				
-				
-				
-				
-				
-				
 				
 				for(var pair of formData.entries()){
 					
@@ -203,14 +188,9 @@
 			  }); */
 			//*/
 			
-			
-  
-			
-			
 	        });
 			
 	
-		
 		// 일반 댓글 작성 함수
 		
 		function grWrite(){
@@ -229,6 +209,7 @@
 			
 		}
 	
+		
 		function grRes(map){
 			
 			getGeneralReply();
@@ -242,9 +223,6 @@
 			
 		}
 	
-	
-	
-		
 		
 		function fileuploadRes_Test(map){
 			// 댓글 출력 
@@ -256,10 +234,6 @@
 				alert('후기 작성 중 오류가 발생 하였습니다.')
 			}
 	}
-		
-		
-		
-		
 		
 		
 		// 댓글 작성 함수
@@ -289,9 +263,7 @@
 			
 		}
 		
-		
-		
-	
+			
 		function fileuploadRes(map){
 	   
 	   			console.log(map.result);
@@ -319,9 +291,6 @@
 		}	
 	}
    
-   
-	   
-  	
 	   
 	   function replyRes(map){
 		      // 성공 : 리스트 조회 및 출력
@@ -339,8 +308,6 @@
 		         alert("다른내용");
 		      }
 		   }
-   
-	
    
    
    // 레시피 저장 함수
@@ -366,9 +333,6 @@
 	   	
 	   }
 			
-		
-		
-		
 		 
 	function getGeneralReply(){
 		
@@ -496,16 +460,21 @@
 	<script src="https://kit.fontawesome.com/4863a16a12.js"
 		crossorigin="anonymous"></script>
 
-	<div class="viewContainer bor">
+	<!-- <div class="viewContainer bor"> -->
 
 	<input id="m_no" type="hidden" value="2">
 	
+	 <!-- Header -->
+	<%@ include file="../common/header.jsp" %>
 
+	<section id="main" class="green" >
+		<div class="container">
+			<div class="container">
 	<!-- 상단 -->
 	<div class="header" >
 		<!-- Insert representative photo here -->
 		<div id="headImgDiv"></div>
-		<span><button id="likeBtn">♡  찜하기</button></span>
+		<span><button id="likeBtn">♡<br>찜하기</button></span>
 		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1></div>
 		
 		<div id="headIntroDiv">
@@ -524,34 +493,19 @@
 
 
 	<!-- 재료 -->
-
-
 	<div class="material margin-T12">
 		<div class="sectionTitle MB40T20"><h3 class="h3FW800">재료 <span class="italicTitle">Material</span></h3></div>
-		
-
-
 		<div class="materialContent elementsMargin" id="materialContentDiv"></div>
-		
-    	
 	</div>
-
 
 	<!-- 조리 순서 -->
 	<div class="cooking-order margin-T12">
 		<div class="sectionTitle MB40T20"><h3 class="h3FW800">조리순서 <span class="italicTitle">Step</span></h3></div>
 
-		<div class="recipeStep elementsMargin" id="recipeStepDiv">
-		
-		</div>
-		
+		<div class="recipeStep elementsMargin" id="recipeStepDiv"> </div>
 		
 		<!-- 요리 완성사진 -->
-		<div class="recipeFinishImg" id="recipeFinishImg">
-						
-				
-		</div>
-
+		<div class="recipeFinishImg" id="recipeFinishImg"> </div>
 
 		<div class="regdateDiv regDottd" id="regdate">
 			<span style="float:left; margin-top: 10px; margin-left: 10px"><b>작성일</b> : ${board.regdate }&nbsp;<b>|</b>&nbsp;<b>수정일</b> : ${board.updatedate }</span>
@@ -560,11 +514,9 @@
 	</div>
 
 	<!-- 작성자 정보 -->
-
 	<div class="writerInfoDiv margin-T12">
 		<div class="sectionTitle MB40T20"><h3 class="h3FW800">레시피 작성자 <span class="italicTitle">Writer</span></h3></div>
 		<div id="MemberInfoDiv ">${board.nickname}</div>
-	
 	</div>
 
 	<!-- 요리후기  -->
@@ -572,43 +524,28 @@
 		
 		<!-- 포토리뷰 -->
 		<div class="photo-review">
-
 			<h3 class="h3FW800">포토리뷰 <span id="photoReviewCnt" class="cntClass"></span></h3>
-
-			<div id="photoReviewDiv">
-			</div>
-
+			<div id="photoReviewDiv"></div>
 		</div>
 	</div>
+	
 		<!-- 일반 요리 후기 -->
-			
-			
 		<div class="general-commentContainer margin-T12">	
 		<div style="margin-left: 60px; margin-bottom: 10px;" class="sectionTitle MB40T20"><h3 class="h3FW800">요리후기 <span id="replyCnt" class="cntClass"></span></h3></div>
 			<div class="general-commentContents">
 			<div class="general-comment margin-T12" id="generalCommentDiv"></div>
 			
-			
 			<div class="d-grid gap-2 col-6 mx-auto">
-			  <button id="moreButton" type="button" class="btn btn-success">댓글 전체보기</button>
-			  <button id="reduceBtn" type="button" class="btn btn-success" style="display:none;">댓글 줄이기</button>
+			  <button id="moreButton" type="button" class="btn btn-success">후기 전체보기</button>
+			  <button id="reduceBtn" type="button" class="btn btn-success" style="display:none;">후기 줄이기</button>
 			</div>
 			</div>
-			
-			
-			
 		</div>
 		
-		
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
-		
 		<!-- <button id="moreButton">더보기</button> -->
 		<div class="comment-writing margin-T12">
-
-
-			
 			<form style="height:130px;" id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
-					
 						
 				<div style="position: absolute; margin-top: 110px;" class="starDiv" data-max="5"></div>
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
@@ -621,43 +558,32 @@
 					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px;">
 					<textarea id="reply" name="reply" class="form-control"
 						placeholder="다양한 요리 후기를 작성해주세요!"
-						style="height: 100px; width: 100%; resize: none; border-radius: 0px;"></textarea><span ><button class="writeBtn" style="width:85px; height: 77%; " id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
+						style="height: 100px; resize: none;"></textarea><span ><button class="writeBtn" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
 			
 			</form>	
 		</div>
 		
-		
 		<!-- 일반댓글 표시 -->
-		
 		<div  class="generalReply margin-T12" id="generalReplyContainer">
 			
 			<div class="sectionTitle MB40T20"><h3 class="h3FW800">한줄댓글 <span class="italicTitle">Reply</span></h3></div>
 			
 			<div id="generalReplyDiv"></div>
+		
 			<div class="d-grid gap-2 col-6 mx-auto">
 			  <button id="moreGRButton" type="button" class="btn btn-success">댓글 전체보기</button>
 			  <button id="reduceGRBtn" type="button" class="btn btn-success" style="display:none;">댓글 줄이기</button>
 			</div>
 		
-		
 			<div class="generalReplyWrite bodySection ">
-			
-				
 				<form id="grForm">
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
 					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
-					<textarea style="width: 90%; resize: none; border-radius: 1px; border: 1px solid; border-color: #0000004d;" id="content" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
-				
+					<textarea style=" resize: none;" id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
 					<button id="grBtn" onclick="grWrite()">댓글작성</button>
-			
 				</form>
-			
 			</div>
-			
-			
-		
 		</div>
-
 	
 	<!-- 모달창 -->
 	<div id="ingredientModal" class="modal">
@@ -675,10 +601,9 @@
 		</div>
 	</div>
 
-
 	<div id="photoReviewModal" class="modal">
-		<div style="padding-top: 0px; "class="modal-content">
-			<span style="margin-left: 1030px; display: inline-block;" class="close" onclick="closeModal()">&times;</span>
+		<div style="padding-top: 0px; position: relative;"class="modal-content">
+			<span style="position: absolute; right: 20px;" class="close" onclick="closeModal()">&times;</span>
 			<div style="display:flex; margin-top: 30px">
 			
 			<div id="container">
@@ -689,17 +614,12 @@
 			<div id="photoReviewReplyDiv"></div>
 			</div>
 		
-		
 			<!-- 전체 포토리뷰가 표시되는 부분 -->
 			<div id="photoReviewModalList">
 			</div>	
 			</div>
 			</div>
-		
-
 	</div>
-	
-	
 	
 	<!-- 요리순서 모달창 -->
 	<div id="stepModal" class="modal">
@@ -712,11 +632,7 @@
 		</div>
 	</div>
 	
-	
-	
-	
-	</div>
-	
+	<!-- </div> -->
 	
 	<!-- 최근 방문한 레시피 -->
 	<div class="recently-viewed">
@@ -727,7 +643,12 @@
 		<!-- Add more recently viewed recipes if needed -->
 	</div>
 	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
