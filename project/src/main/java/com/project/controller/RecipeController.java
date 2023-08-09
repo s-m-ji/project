@@ -12,14 +12,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.service.CateService2;
 import com.project.service.FileuploadService;
+import com.project.service.RecBoardService2;
+import com.project.service.RecFileService2;
+import com.project.service.RecMatService2;
+import com.project.service.RecStepService2;
 import com.project.service.RecipeService;
+import com.project.vo.CategoryVO2;
 import com.project.vo.FileuploadVo;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
+import com.project.vo.RecBoardVO2;
+import com.project.vo.RecMatVO2;
+import com.project.vo.RecStepVO2;
 import com.project.vo.RecipeBoardVo;
 import com.project.vo.RecipeReplyVo;
 import com.project.vo.RecipeStepVo;
@@ -33,6 +44,8 @@ public class RecipeController {
 
 	@Autowired
 	RecipeService service;
+	
+	
 	
 	/**
 	 * 레시피 리스트에서 항목 클릭 시 상세 페이지로 이동 될 수 있도록 매핑
@@ -74,6 +87,76 @@ public class RecipeController {
 		
 		
 	}
+	
+	//////////////////////////////////////////////////////////////////  동준  //////////////////////////////////////
+	
+	
+	@GetMapping("/listTest")
+	public String listTest1() {
+		return"/recipe/list_test";
+	}
+	
+	
+	@Autowired
+	RecBoardService2 recservice;
+	
+	@Autowired
+	CateService2 cateservice;
+	
+	
+	@Autowired
+	RecMatService2 matservice;
+	
+	@Autowired
+	RecStepService2 stepservice;
+	
+	@GetMapping("/list2")
+	public String listTest() {
+		System.out.println("리스트페이지 테스트");
+		return "/recipe/rec_list";
+	}
+	
+	@GetMapping("/rec_write")
+	public String recWrite() {
+		
+		
+		
+		return "/recipe/rec_write";
+	}
+	
+	@PostMapping("/postWrite")
+    public String postWrite(RecBoardVO2 recBoardVO, CategoryVO2 catevo 
+    						, RecMatVO2 matvo, RecStepVO2 stepvo 
+    						,  @RequestParam("photos") List<MultipartFile> photos
+    						, Model model) {
+        try {
+            // rec_board에 레시피 정보 등록
+            int res = recservice.insertSelectKey(recBoardVO, photos);
+            int res2 = cateservice.insert(catevo);
+            int res3 = matservice.insert(matvo);
+            int res4 = stepservice.insert(stepvo);
+            if (res > 0 && res2>0 && res3>0 && res4>0) {
+                
+                
+                String msg = recBoardVO.getB_NO() + "번 등록되었습니다";	
+                model.addAttribute("msg", msg);
+                return "redirect:/recipe/list2";
+            } else {
+                String msg = "등록 중 예외사항이 발생하였습니다.11";
+                model.addAttribute("msg", msg);
+                return "/recipe/message";
+            }
+        } catch (Exception e) {
+            String msg = "등록 중 예외사항이 발생하였습니다.22";
+            model.addAttribute("msg", msg);
+            return "/recipe/message";
+        }
+    }
+	
+	
+//////////////////////////////////////////////////////////////// 동준 //////////////////////////////////////
+	
+	
 	
 	@Autowired
 	FileuploadService fileService;

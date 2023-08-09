@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
+<mapper namespace="com.project.mapper.RecMapper2">
+
+<select id="getlist" resultType="com.project.vo.RecBoardVO2">
+
+	select * from rec_board
+
+</select>
+
+<insert id="insert" parameterType="com.project.vo.RecBoardVO2">
+        INSERT INTO rec_board (B_NO, title,  intro,   videoUrl ,cookTip)
+        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videoUrl},#{cookTip})
+    </insert>
+
+
+<insert id="insertSelectKey">
+		<selectKey keyProperty="B_NO" order="BEFORE" resultType="int">
+		select seq_recboard.nextval from dual
+		</selectKey>
+	
+		insert into rec_board (B_NO, title
+						, intro,   videoUrl , cookTip)
+        	   values (#{B_NO}, #{title}, 
+        				 #{intro},   #{videoUrl},#{cookTip})
+	</insert>	
+
+<delete id="delete">
+		delete rec_board where b_no= #{b_no}
+</delete>
+
+
+<select id="getOne" resultType="com.project.vo.RecBoardVO2">
+		select * from rec_board where B_NO=#{B_NO}
+	</select>
+
+<update id="update">
+
+update rec_board
+		set 
+		   		 title = #{title}
+		   		, nickName = #{nickName}
+		   		, regdate = #{regdate}
+		   		, updatedate  = sysdate
+		   		, boomup = #{boomup}
+		   		, intro = #{intro}
+		   		, cookTip = #{cookTip}
+		   		, viewCnt = #{viewCnt}
+		   		, star = #{star}
+		   		, C_NO = #{C_NO}
+		   		, mno = #{mno}
+		   		, videoUrl = #{videoUrl}
+		 where B_NO = #{B_NO}  
+
+</update>
+
+<select id="getTotal" resultType="int">
+	select count(*) from rec_board
+</select>
+
+
+</mapper>
