@@ -40,31 +40,76 @@ console.log('연결 확인 ===================================================')
 		// 상단 img
 		// ======================================================================
 		
-		function viewFileList(map){
-			
-			// 잘 들어왔는지 확인
-			// console.log('map 출력 :', map);
-			let content = '';
-			
-			if(map.list.length > 0) {
-				
-				map.list.forEach(function(item, index){
-					
-					let savePath = encodeURIComponent( item.savePath);
-					// console.log('savePath : ', savePath);
-					
-					content +=
-						
-						'<a><img style="max-width:500px; max-height:500px;" src="/display?fileName=' + savePath +'"></a>';
-				})
-				
-				
-			}else { 
-				content = '등록된 파일이 없습니다.';
-			}
-			
-			headImgDiv.innerHTML = content;
-			
+		/**
+		 * 최근 본 페이지를 로컬스토리지에서 꺼내 올 수 있는 함수입니다.
+		 * @returns
+		 */
+		function recentPage() {
+		    const recentlyViewed = document.getElementById('recentlyViewed');
+		    const recentArray = JSON.parse(localStorage.getItem('recentArray')) || [];
+
+		    
+		    
+		    
+		    const uniqueItems = Array.from(new Set(recentArray.map(item => JSON.stringify(item))))
+		        .map(itemString => JSON.parse(itemString));
+		    let imgTag =''; 
+		    uniqueItems.forEach((item, index) => {
+		      
+		    	
+		    	let savePath = item.savePath;
+		    	
+		    	console.log('item.b_no : ', item.b_no);
+		        console.log('item.savePath : ', item.savePath);
+		        
+		        
+		        imgTag += 
+		        	  '<div class="recentPageDiv">'		        		
+		        	+   '<img style="max-width:180px; max-height:180px;" src="/display?fileName=' + savePath +'">'
+		        	+ '</div>';
+		        
+		    });
+		    
+		    recentlyViewed.innerHTML = imgTag;
+		}
+		
+		
+		function viewFileList(map) {
+		    let bno = document.querySelector('#b_no').value;
+		    console.log('map 출력:', map.list);
+		    let content = '';
+
+		    if (map.list.length > 0) {
+		        const recentArray = JSON.parse(localStorage.getItem('recentArray')) || [];
+
+		        map.list.forEach(function (item, index) {
+		            let savePath = encodeURIComponent(item.savePath);
+
+		            content +=
+		                '<a><img style="max-width:500px; max-height:500px;" src="/display?fileName=' + savePath + '"></a>';
+
+		            // 데이터가 이미 recentArray에 존재하는지 확인
+		            const isDuplicate = recentArray.some(existingItem =>
+		                existingItem.b_no === bno && existingItem.savePath === savePath
+		            );
+
+		            if (!isDuplicate) {
+		                const recent = {
+		                    b_no: bno,
+		                    savePath: savePath
+		                };
+
+		                recentArray.push(recent);
+		            }
+		        });
+
+		        // 업데이트된 recentArray를 localStorage에 저장
+		        localStorage.setItem('recentArray', JSON.stringify(recentArray));
+		    } else {
+		        content = '등록된 파일이 없습니다.';
+		    }
+
+		    headImgDiv.innerHTML = content;
 		}
 			
 		// 요리완성 사진 불러오는 함수 // 
