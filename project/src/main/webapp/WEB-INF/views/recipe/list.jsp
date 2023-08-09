@@ -56,7 +56,7 @@
     		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
     		                let fileExtension = matchingFile.savePath.split('.').pop(); // 파일 확장자 추출
     		                if (fileExtension === "mp4") {
-    		                  let videoTag = "<video autoplay playsinline mute width='100%' height='auto'><source src='/recListdisplay?fileName=" + savePath + "' type='video/mp4'></video>";
+    		                  let videoTag = "<video autoplay='autoplay' muted='muted' playsinline loop width='100%' height='auto'><source src='/recListdisplay?fileName=" + savePath + "' type='video/mp4'></video>";
     		                  fileDiv.innerHTML = videoTag; // 해당 fileDiv 태그에 동영상 추가
     		                } else {
     		                  let imageTag = "<img src='/recListdisplay?fileName=" + savePath + "' alt='레시피 사진 " + matchingFile.b_NO + "'>";

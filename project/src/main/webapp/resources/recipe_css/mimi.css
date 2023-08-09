@@ -156,7 +156,8 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
 }
 
 .fh5co-card-item figure {
-	height: 55%;
+	height: 400px;
+/* 	height: 55%; */
 }
 
 .fileDiv {
