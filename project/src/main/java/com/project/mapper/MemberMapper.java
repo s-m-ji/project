@@ -25,6 +25,12 @@ public interface MemberMapper {
 	// 회원 등록 
 	public int adminInput(MemberVo membervo);
 	
+	// 회원 한건 불러오기 
+	public MemberVo getMemOne(int mno);
+
+	// 회원 수정
+	public int memberUpdate(MemberVo membervo);
+
 	// 공지 목록 조회 
 	public List<NoticeVo> noticeList(Criteria cri);
 	
@@ -48,5 +54,6 @@ public interface MemberMapper {
 
 	// 리워드 수정 
 	public int gradeUpdate(MemberVo membervo);
+
 
 }

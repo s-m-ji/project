@@ -55,15 +55,31 @@ public class MemberServiceImpl implements MemberService {
 		return membermapper.delMem(mno, delyn);
 	}
 
-	// 회원 등록
+	// 회원 등록 + 파일 등록 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int adminInput(MemberVo membervo, ArrayList<MultipartFile> files) throws Exception {
 		int res = membermapper.adminInput(membervo);
+		
 		adminfileservice.fileupload(files, membervo.getMno());
 		
 		return res;
 	}
+	
+	// 회원 한 건 불러오기 
+	@Override
+	public MemberVo getMemOne(int mno) {
+		return membermapper.getMemOne(mno);
+	}
+	
+	// 회원 수정하기 + 파일 수정 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int memberUpdate(MemberVo membervo, ArrayList<MultipartFile> files) throws Exception {
+		int res = membermapper.memberUpdate(membervo);
+		return res;
+	}
+
 	
 	// 공지 목록 조회
 	@Override
@@ -120,8 +136,6 @@ public class MemberServiceImpl implements MemberService {
 	public int gradeUpdate(MemberVo membervo) {
 		return membermapper.gradeUpdate(membervo);
 	}
-
-	
 
 	
 

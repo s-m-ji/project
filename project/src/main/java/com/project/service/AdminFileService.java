@@ -19,6 +19,7 @@ public interface AdminFileService {
 
 	// 조회
 	public List<MemberVo> fileSelect(int mno);
+	
 	// 파일 삭제 
 	public int fileDelete(@Param("mno")int mno, @Param("uuid")String uuid);
 	
@@ -26,9 +27,14 @@ public interface AdminFileService {
 											//			(✨impl을 수정하면 service도 똑같이 맞춰주기!)
 	public int fileupload(List<MultipartFile> files, int mno) throws Exception;
 	
-	
 	// 파일 리스트 전체 조회 
 	public List<MemberVo> getAllList();
+	
+	// 파일 한 건 
+	public List<MemberVo> getOne (@Param("mno") int mno, @Param("uuid") String uuid);
+
+	// 파일 수정 
+	public int fileUpdate(List<MultipartFile> files, int mno);
 }
 
 

@@ -152,42 +152,61 @@ public class AdminFileServiceImpl implements AdminFileService{
 		/** 파일 삭제 */
 		@Override
 		public int fileDelete(int mno, String uuid) {
-				// 파일 삭제 
-			MemberVo membervo = (MemberVo) adminfilemapper.getOne(mno, uuid);
-			
-				// 삭제할 파일 조회 
-			String s_savePath = membervo.getS_savePath();
-			String savePath = membervo.getSavePath();
-			System.out.println("S_savePath : " + s_savePath);
-			System.out.println("savePath : " + savePath);
-			
-				// 삭제 _ savePath
-			if(savePath!= null && !savePath.equals("")) {
-				File file = new File(ATTACHES_DIR + savePath);
-						// 파일이 존재한다면
-				if(file.exists()) {
-						// 파일을 삭제하지 못했다면
-					if(!file.delete()) {
-						System.out.println("path : " + savePath);
-						System.out.println("파일 삭제 실 패!");
-					};
-				}
-				
-			}
-			// 삭제 _ s_savePath
-			if(s_savePath!= null && !s_savePath.equals("")) {
-				File file = new File(ATTACHES_DIR + s_savePath);
-						// 파일이 존재한다면
-				if(file.exists()) {
-						// 파일을 삭제하지 못했다면
-					if(!file.delete()) {
-						System.out.println("path : " + s_savePath);
-						System.out.println("파일 삭제 실 패!");
-					};
-				}
-				
-			}
-			return adminfilemapper.fileDelete(mno, uuid);
+		    // 파일 삭제 
+		    List<MemberVo> membervoList = adminfilemapper.getOne(mno, uuid);
+
+		    if (membervoList != null && !membervoList.isEmpty()) {
+		        MemberVo membervo = membervoList.get(0);
+
+		        // 삭제할 파일 조회 
+		        String s_savePath = membervo.getS_savePath();
+		        String savePath = membervo.getSavePath();
+		        System.out.println("S_savePath : " + s_savePath);
+		        System.out.println("savePath : " + savePath);
+
+		        // 삭제 _ savePath
+		        if (savePath != null && !savePath.equals("")) {
+		            File file = new File(ATTACHES_DIR + savePath);
+		            // 파일이 존재한다면
+		            if (file.exists()) {
+		                // 파일을 삭제하지 못했다면
+		                if (!file.delete()) {
+		                    System.out.println("path : " + savePath);
+		                    System.out.println("파일 삭제 실패!");
+		                }
+		            }
+		        }
+
+		        // 삭제 _ s_savePath
+		        if (s_savePath != null && !s_savePath.equals("")) {
+		            File file = new File(ATTACHES_DIR + s_savePath);
+		            // 파일이 존재한다면
+		            if (file.exists()) {
+		                // 파일을 삭제하지 못했다면
+		                if (!file.delete()) {
+		                    System.out.println("path : " + s_savePath);
+		                    System.out.println("파일 삭제 실패!");
+		                }
+		            }
+		        }
+
+		        return adminfilemapper.fileDelete(mno, uuid);
+		    }
+
+		    return 0; // 혹은 다른 적절한 값을 반환
+		}
+
+		
+		// 파일 한 건
+		@Override
+		public List<MemberVo> getOne(int mno, String uuid) {
+			return adminfilemapper.getOne(mno, uuid);
+		}
+
+		// 파일 수정
+		@Override
+		public int fileUpdate(List<MultipartFile> files, int mno) {
+			return adminfilemapper.fileUpdate(files, mno);
 		}
 
 	

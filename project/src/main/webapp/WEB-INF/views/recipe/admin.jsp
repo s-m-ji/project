@@ -63,7 +63,15 @@
   .searchText{
   	color: white;
   }
-  
+  .aName{
+  	text-decoration: none;
+  	color: #F7863B;
+  }
+  .aName:hover{
+  	text-decoration: none;
+  	color: #F7863B;
+  	border: 1px solid white;
+  }
 </style>
 <script src="/resources/assets/js/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -93,6 +101,7 @@ window.addEventListener("load", function(){
 		            if (matchingFile) {
 		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
 		                let imageTag = "<img src='/recipe/displayAdmin?filename=" + savePath + "' alt='회원 사진 " + matchingFile.mno + "'  style='width: 100px; height: 100px;'class='memImg'>";
+		                //console.log("이것은 imageTag : " , imageTag);
 		                fileDiv.innerHTML = imageTag; // 해당 fileDiv 태그에 이미지 추가
 		            } else {
 		                fileDiv.innerHTML = '<mark>회원사진 미등록</mark>';
@@ -130,6 +139,14 @@ function toggleCheckboxes() {
 	function inputBtnOnclick() {
 		location.href = "/recipe/adminInput";
 	}
+	
+	function adminUpdateAction(url,mno){
+		/* console.log(mno);
+		location.href ="/recipe/adminUpdate?mno="+ mno; */
+		searchForm.action=url;
+ 		searchForm.mno.value=mno;
+ 		searchForm.submit();
+	}
 </script>  
 
 </head>
@@ -141,7 +158,9 @@ function toggleCheckboxes() {
 <!--  검색폼 (회원명, 회원등급명, 탈퇴신청여부)  -->
 <form name ="searchForm" method ="get" action="/recipe/admin" >
 
-	<input type="hidden" name ='pageNo' value ="${pageDtoA.cri.pageNo}"></input>
+	<!-- 파라메터 -->
+	<input type="text" name ="pageNo" value ="${pageDtoA.cri.pageNo}"></input>
+	<input type="text" name ="mno" value= "${member.mno}">
 	
 	<table border ='1' width ="100%" class = "formtable">
 		<tr>
@@ -168,7 +187,7 @@ function toggleCheckboxes() {
     <h6 class="border-bottom pb-2 mb-0">
     </h6>
     <h6 class="border-bottom pb-2 mb-0 checkboxLine">
-      <form action = "/recipe/delMem" method="post">
+      <form action = "/recipe/delMem" method="post" name="updateForm">
         <div id='memInputBtn'>
             <input type="checkbox" class="form-check-input" id="adminChkBox" onclick='toggleCheckboxes()' style="margin-right: 10px;">
             <label class="form-check-label" for="same-address"></label>
@@ -193,14 +212,13 @@ function toggleCheckboxes() {
       </div>
       <div class='memImgDiv'>
         <div class="fileDiv">
-          <input id="mno" class='memImg' type="text" name="mno" value="${member.mno}" placeholder="추후 hidden처리" class='memImg' >
+          <input id="mno" class='memImg' type="hidden" name="mno" value="${member.mno}" placeholder="추후 hidden처리" class='memImg' >
           </div>
-<!--       <img src='../modals/image/pic01.jpg' width='100px' height='100px' class='memImg'> -->
     </div>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
 
         <div class='memName'>
-        <strong class="text-gray-dark" style='color: #F7863B;'>${member.nickname}</strong>
+        <strong class="text-gray-dark" style='color: #F7863B;'><a onclick= "adminUpdateAction('/recipe/adminUpdate', ${member.mno})" href ='#' class="aName">${member.nickname}</a></strong>
         <span class="d-block">${member.name}</span>
       </div>
 

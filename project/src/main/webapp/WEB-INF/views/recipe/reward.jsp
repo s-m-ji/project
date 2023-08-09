@@ -14,6 +14,8 @@
  	<!--  notice의 css   ** recipe_css 로 -->
  	<link rel="stylesheet" type="text/css" href="../resources/recipe_css/notice.css">
  	
+ 	    <!-- Header -->
+	<%@ include file="../common/header.jsp" %>
 <script type="text/javascript">
 window.addEventListener('load', function(){
 	
@@ -49,6 +51,7 @@ function rewardView(map){
         +'<th>닉네임</th>'
         +'<th>누적 조회수</th>'
         +'<th>게시글 등록일</th>'
+        +'<th>탈퇴 신청 여부</th>'
         +'<th>회원 등급</th>'
         +'<th>등급 변경</th>'
         +'<th>혜택</th>'
@@ -64,6 +67,7 @@ function rewardView(map){
 				+'<td>'+reward.nickname+'</td>'
 				+'<td>'+reward.viewcnt+'</td>'
 				+'<td>'+reward.regdate+'</td>'
+				+'<td>'+reward.delYNStr+'</td>'
 				+'<td>'+reward.grade+'</td>'
 				+'<td>'
 				+'<select class="form-select" id="reward'+reward.mno+'" onchange="gradeUpdate(' + reward.mno +')">'
@@ -101,7 +105,6 @@ function updateView(){
 	getRewardList();
 	alert('회원 등급이 변경되었습니다.');
 }
-
 
 //get방식 요청
 function fetchGet(url, callback){
@@ -151,8 +154,8 @@ function fetchPost(url, obj, callback){
         .duration input[type='date'] {
           border: none;
           outline: none;
-          width: calc(160px);
-          padding: 10px;
+          width: calc(180px);
+          padding: 9px;
           background: url(../resources/images/schedule.png) no-repeat right 10px center /
             35px auto; 
           background-color: #f3efef;
@@ -193,5 +196,6 @@ function fetchPost(url, obj, callback){
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
-</body>
-</html>
+		
+	<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>

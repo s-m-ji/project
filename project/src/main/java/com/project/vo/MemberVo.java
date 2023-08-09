@@ -23,6 +23,10 @@ public class MemberVo {
 	private String grade;
 	private String benefit;
 	
+//  우편 번호 , 주소, 상세주소 
+	private String addrZipnum;
+	private String addrBasic;
+	private String addrDetail;
 	
 // (지수) 리워드 테이블 
 	private String viewcnt;	// 게시글 조회수
@@ -39,5 +43,6 @@ public class MemberVo {
 	// 저장된 파일 경로 (uploadpath + uuid + "_" + filename;)
 	private String savePath; // 저장된 파일 경로
 	private String s_savePath; // 저장된 썸네일 경로
+	
 
 }

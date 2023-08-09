@@ -33,6 +33,10 @@
 		DELETE FROM rec_file WHERE mno= #{mno} AND UUID = #{uuid}
 	</delete>
 	
+	<!--  파일 수정  -->
+	<update id="fileUpdate">
+	update rec_file set uuid =#{uuid}, uploadpath = 'uploadpath', filetype= 'M', filename =#{filename}  where mno = #{mno}
+	</update>
 	
 	<!--  한 건 가져와서 삭제  -->
 	<select id="getOne" resultType="com.project.vo.MemberVo">
@@ -43,6 +47,5 @@
 		 where mno = #{mno} and uuid = #{uuid}
 
 	</select>
-
 
 </mapper>

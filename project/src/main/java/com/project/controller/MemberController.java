@@ -133,14 +133,93 @@ public class MemberController {
 		}
 	}
 	
+	
+	// 회원 수정 페이지 
+	@GetMapping("adminUpdate")
+	public String getMemOne(int mno, Model model) {
+		model.addAttribute("memList", memberservice.getMemOne(mno));
+		return "/recipe/adminUpdate";
+	}
+	
+	
+	// 회원 수정 하기 
+	@PostMapping("adminUpdateAction")
+	public String memberUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files) throws Exception{
+		MemberVo mv = memberservice.getMemOne(membervo.getMno());
+		// 이메일, 비밀번호, 이름, 닉네임, 전화번호, 회원사진 
+		mv.setEmail(mv.getEmail());
+		System.out.println(mv.getEmail());
+		mv.setPw(mv.getPw());
+		mv.setName(mv.getName());
+		mv.setNickname(mv.getNickname());
+		mv.setPnum(mv.getPnum());
+
+		memberservice.memberList(cri, model);
+		
+		int res;
+		
+		try {
+			res =  memberservice.memberUpdate(membervo, files);
+			String message;
+		
+			System.out.println("수정 건 수 : " + res);
+			System.out.println("수정된 멤버 : " + membervo + files);
+			if( res > 0) {
+				message = res + "건 수정되었습니다.";
+				
+				model.addAttribute("pageNo", cri.getPageNo());
+				model.addAttribute("sField", cri.getSField());
+				model.addAttribute("sWord", cri.getSWord());
+				model.addAttribute("message", message);
+				model.addAttribute("url", "/recipe/admin?mno=" + mv.getMno());
+			}else {
+				message = "수정 중 오류가 발생하였습니다.";
+				model.addAttribute("message",message);
+				return "/common/message";
+			}
+		} catch (Exception e) {
+			if(e.getMessage().indexOf("첨부파일")>-1) {
+				model.addAttribute("message", e.getMessage());
+			}else {
+				model.addAttribute("message","수정 중 예외 발생!!");
+			}
+		}
+		return "/common/message";
+		
+	}
+/* 파일(업로드) 관련 */
 	// 파일 목록 조회
 	@GetMapping("adminList") // rest 방식으로 호출 할 예정
 	public @ResponseBody Map<String, Object> fileUploadList() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("FileList", adminfileservice.getAllList());
-		System.out.println("FileAllList : " + adminfileservice.getAllList());
+		System.out.println("FileAllList(membercontroller): " + adminfileservice.getAllList());
 		return map;
 	}
+	
+	// 파일 한건 조회 
+	@GetMapping("fileList/{mno}")
+	public @ResponseBody Map<String, Object> fileList(@PathVariable("mno") int mno){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("FileList", adminfileservice.fileSelect(mno));
+		System.out.println("파일 한건 조회 : "+ adminfileservice.fileSelect(mno));
+		return map;
+	}
+	
+	// 파일 삭제 
+	@GetMapping("fileDelete/{mno}/{uuid}")
+	public @ResponseBody Map<String, Object> fileDelete (@PathVariable("mno")int mno, @PathVariable("uuid")String uuid){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int res = adminfileservice.fileDelete(mno, uuid);
+		System.out.println("파일 삭제 : "+ res);
+		if(res > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+	
 	
 	// 파일 이미지 화면에 보여주기 
 	@GetMapping("displayAdmin")

@@ -44,7 +44,7 @@
 
                 <!-- Feature -->
                     <section>
-                        <a href="/recipe/notice" class="image featured"><img src="../resources/images/notice.jpeg" alt=""  style="width: 100%; height: 210px;"/></a>
+                        <a href="/recipe/notice" class="image featured"><img src="../resources/images/notice.jpeg" alt=""  style="width: 100%; height: 278px;"/></a>
                         <header>
                             <h1>공지 관리📝</h1>
                         </header>
@@ -55,7 +55,7 @@
 
                 <!-- Feature -->
                     <section>
-                        <a href="/recipe/reward" class="image featured"><img src="../resources/images/reward2.jpg" alt=""  style="width: 100%; height: 210px;"/></a>
+                        <a href="/recipe/reward" class="image featured"><img src="../resources/images/reward2.jpg" alt=""  style="width: 100%; height: 278px;"/></a>
                         <header>
                             <h1>리워드 관리🏆</h1>
                         </header>

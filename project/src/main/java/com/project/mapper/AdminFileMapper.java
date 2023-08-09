@@ -3,6 +3,7 @@ package com.project.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.vo.AttachVO;
 import com.project.vo.MemberVo;
@@ -23,4 +24,6 @@ public interface AdminFileMapper {
 	// 파일 전체 목록 불러오기 
 	public List<MemberVo> getAllList();
 
+	// 파일 수정 
+	public int fileUpdate(List<MultipartFile> files, int mno);
 }

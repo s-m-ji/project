@@ -38,8 +38,22 @@
 <selectKey keyProperty="mno" order="BEFORE" resultType="int">
 	select seq_member.nextval from dual
 </selectKey>
-	insert into rec_member (mno, email, pw, name, nickname, pnum) values (#{mno}, #{email}, #{pw}, #{name}, #{nickname}, #{pnum})
+	insert into rec_member (mno, email, pw, name, nickname, pnum) 
+					values (#{mno}, #{email}, #{pw}, #{name}, #{nickname}, #{pnum})
 </insert>
+
+
+<!-- 회원 한 건  -->
+<select id="getMemOne" resultType="com.project.vo.MemberVo">
+SELECT * FROM REC_MEMBER WHERE MNO= #{mno}
+</select>
+
+
+<!-- 회원 수정 -->
+<update id="memberUpdate">
+	update rec_member set email =#{email}, pw= #{pw}, name=#{name}, nickname= #{nickname}, pnum= #{pnum}, reg_date = sysdate  where mno = #{mno}
+</update>
+
 
 <!--  공지 조회  -->
 <select id="noticeList" resultType="com.project.vo.NoticeVo">
@@ -123,6 +137,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	, m.nickname
 	, SUM(b.viewcnt) AS viewcnt
 	, MAX(b.regdate) AS regdate
+	, DECODE(m.delyn, 'Y', '신청', '미신청') delYNStr
 	, g.grade
 	, g.benefit
 	,
@@ -131,7 +146,8 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	JOIN rec_grade g ON m.gno = g.gno 
 	JOIN rec_board b ON b.mno = m.mno
 	WHERE b.regdate BETWEEN #{startDate} AND #{endDate}
-	GROUP BY m.mno, m.name, m.nickname, g.grade, g.benefit) E
+	and m.delyn = 'N'
+	GROUP BY m.mno,  m.delyn, m.name, m.nickname, g.grade, g.benefit) E
 	WHERE ROWNUM  <= 5]]>
 </select>
 
