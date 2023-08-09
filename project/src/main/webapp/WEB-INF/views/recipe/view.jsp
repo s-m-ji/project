@@ -50,6 +50,10 @@
    		
 	}
 	
+	#generalReplyWriteDiv{
+		width: 100%;
+	}
+	
 	
 
 </style>
@@ -513,7 +517,7 @@
 	<!-- <div class="viewContainer bor"> -->
 
 	<input id="m_no" type="hidden" value="2">
-	<input id="title" type="text" value="${board.title}">
+	<input id="title" type="hidden" value="${board.title}">
 	
 	 <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
@@ -629,8 +633,10 @@
 			<div class="generalReplyWrite bodySection ">
 				<form id="grForm">
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
-					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
-					<textarea style=" resize: none; margin-top: 29px;" id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
+					<div id="generalReplyWriteDiv">
+					<input style="width:30%;" type="text" id="replyer" name="replyer" placeholder="작성자 입력"><span style="position: absolute;bottom: 485px;margin-left: 560px;color: crimson;"> <b>! 주의 !</b> 아무리 익명이라도 비난 & 욕설 댓글 작성 시 신고 대상이 될 수 있습니다. </span>
+					<textarea style=" resize: none; " id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!"></textarea>
+					</div>
 					<button id="grBtn" onclick="grWrite()">댓글작성</button>
 				</form>
 			</div>
