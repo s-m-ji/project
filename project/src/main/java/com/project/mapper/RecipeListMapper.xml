@@ -12,11 +12,13 @@
 				  FROM (
 				         SELECT rt.title, rt.nickname, rt.intro, rt.b_no, rt.boomup, rt.viewcnt,
 				          		CASE WHEN rt.regdate >= TRUNC(SYSDATE) - 3 THEN 'new' ELSE '' END AS newpost,
-				          		CASE WHEN TO_CHAR(rt.regdate, 'YYYY/MM/DD') = TO_CHAR(SYSDATE, 'YYYY/MM/DD') 
-				          			THEN TRUNC(ROUND((SYSDATE - rt.regdate) * 24, 2)) || '시간 전'  
-				          			<![CDATA[ WHEN rt.regdate >= TRUNC(SYSDATE) - 7 AND rt.regdate < TRUNC(SYSDATE) ]]>
-				          			THEN TRUNC(ROUND(SYSDATE - rt.regdate)) || '일 전'
-				          			ELSE TO_CHAR(rt.regdate, 'YYYY/MM/DD') END AS regdate,
+				          		CASE
+							        WHEN rt.regdate >= TRUNC(SYSDATE) - 1 THEN
+							          FLOOR((SYSDATE - rt.regdate) * 24 * 60) || '분 전'
+							        WHEN rt.regdate >= TRUNC(SYSDATE) - 7 THEN
+							          TRUNC(ROUND(SYSDATE - rt.regdate)) || '일 전'
+							        ELSE
+							          TO_CHAR(rt.regdate, 'YYYY/MM/DD') END AS regdate,
 				          				rc.C_NO1, rc.C_NO2, rc.catename1, rc.catename2 
 				          	FROM rec_board rt, rec_category rc
 				          	 WHERE rc.C_NO1 = rt.C_NO1
@@ -55,7 +57,45 @@
 	
 	
 	<select id="getComList" resultType="com.project.vo.BoardVO">
-			SELECT * FROM com_board
+			SELECT *
+				FROM (
+				  SELECT t.*, ROWNUM rn
+				  FROM (
+				         SELECT  ct.com_bno, ct.nickname, ct.com_title, ct.com_content, ct.replycnt,
+				          		CASE WHEN ct.regdate >= TRUNC(SYSDATE) - 3 THEN 'new' ELSE '' END AS newpost,
+				          		CASE
+								       WHEN ct.regdate >= TRUNC(SYSDATE) - 1 THEN
+								         FLOOR((SYSDATE - ct.regdate) * 24 * 60) || '분 전'
+								       WHEN ct.regdate >= TRUNC(SYSDATE) - 7 THEN
+								         TRUNC(ROUND(SYSDATE - ct.regdate)) || '일 전'
+								       ELSE
+								         TO_CHAR(ct.regdate, 'YYYY/MM/DD') END AS regdate
+				          	FROM com_board ct
+				          	 WHERE com_content LIKE '%' || #{sWord} || '%'
+					        <choose>
+			                    <when test="orderByCom">
+			                        <include refid="orderByRdate"></include>
+			                    </when>
+			                    <otherwise>
+			                        <include refid="orderByRcount"></include>
+			                    </otherwise>
+			                </choose>
+				  ) t
+				)
+				WHERE rn BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="getComOne" resultType="com.project.vo.BoardVO">
+		SELECT * FROM com_board WHERE com_bno = #{COM_BNO}
+	</select>
+	
+	<select id="getComListTotalCnt" resultType="int">
+		SELECT COUNT(*)
+			FROM (
+			  SELECT *
+		       FROM com_board ct
+		          	 WHERE com_content LIKE '%' || #{sWord} || '%'
+			 )
 	</select>
 
 	<sql id="criteria">
@@ -72,6 +112,9 @@
 	
 	<sql id="orderByRegidate"> ORDER BY rt.regdate DESC </sql>
 	<sql id="orderByBoomUp"> ORDER BY rt.boomup DESC </sql>
+	
+	<sql id="orderByRdate"> ORDER BY ct.regdate DESC </sql>
+	<sql id="orderByRcount"> ORDER BY ct.replycnt DESC </sql>
 	
 	
 

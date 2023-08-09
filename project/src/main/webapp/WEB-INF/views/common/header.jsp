@@ -36,7 +36,7 @@
 		<div class="container">
 
 			<!-- Logo -->
-				<h1 id="logo"><a href="index.html">오늘 뭐먹조 ?</a></h1>
+				<h1 id="logo">오늘 뭐먹조 ?</h1>
 
 			<!-- Nav -->
 				<nav id="nav">

@@ -18,8 +18,8 @@
     <context:property-placeholder location="/config/*.properties" /> 
 
 	<!-- bean 객체로 등록하기 (MI, 2023/07/25) -->
-	<context:component-scan base-package="com.project"></context:component-scan>
-	<!-- <context:component-scan base-package="com.project.exception"></context:component-scan> -->
+	<context:component-scan base-package="com.project.service"></context:component-scan>
+	<context:component-scan base-package="com.project.exception"></context:component-scan>
 	<!-- <context:component-scan base-package="com.project.aop"></context:component-scan> -->
 
 	<!-- hikari를 사용하기 위해서 (MI, 2023/06/30) -->
@@ -34,10 +34,7 @@
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 	  <constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
-	
-    <!-- config파일 자동 로드 location="classpath:database.properties"  /!-->
-    <context:property-placeholder location="/config/*.properties" /> 
-	
+		
 	<!-- mybatis를 사용하기 위함 (MI, 2023/07/25) -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>

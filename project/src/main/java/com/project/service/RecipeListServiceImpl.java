@@ -25,7 +25,7 @@ public class RecipeListServiceImpl implements RecipeListService {
 	// ========== 레시피 게시판 (rec_board)
 	@Override
 	public void getRecList(Model model, Criteria cri) {
-		System.out.println("=========================== 서비스 임플 getRecList 실행");
+		System.out.println("[RecipeListServiceImpl] getRecList 실행");
 		List<BoardVO> list = rMapper.getRecList(cri);
 		// System.out.println("*** list : " + list);
 		model.addAttribute("list", list);
@@ -49,7 +49,7 @@ public class RecipeListServiceImpl implements RecipeListService {
 	// ========== 커뮤니티 게시판 (com_board)
 	@Override
 	public void getComList(Model model, Criteria cri) {
-		System.out.println("=========================== 서비스 임플 getComList 실행");
+		System.out.println("[RecipeListServiceImpl] getComList 실행");
 		List<BoardVO> list = rMapper.getComList(cri);
 		model.addAttribute("list", list);
 		

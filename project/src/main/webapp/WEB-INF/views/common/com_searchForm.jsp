@@ -28,7 +28,7 @@
 						onchange="changePageSize(this.value)">
 						<option value="10" ${ param.amount eq '10' ? "selected" : "" }>10개씩
 							보기  </option>
-						<option value="25" ${ param.amount eq '25' ? "selected" : "" }>25개씩
+						<option value="30" ${ param.amount eq '30' ? "selected" : "" }>30개씩
 							보기</option>
 						<option value="50" ${ param.amount eq '50' ? "selected" : "" }>50개씩
 							보기</option>
@@ -49,11 +49,10 @@
 						</div>
 					</div>
 				</div>
-				
 				<div class="p-2">
 					<button type="button" id="orderByRG" class="btn btn-success" onclick="changeOrderBy(true)">최신순</button>
 				    <button type="button" id="orderByBU" class="btn btn-success" onclick="changeOrderBy(false)">추천순</button>
-				    <input type="hidden" id="orderByInput" name="orderBy" value="true">
+				    <input type="hidden" id="orderByInput" name="orderByCom" value="true">
 				</div>
 				</div>
 				<!-- 최신/추천순 정렬 js -->

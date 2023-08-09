@@ -39,17 +39,28 @@ public class ListFileController {
 
 	public static final String ATTACHES_DIR = "C:\\upload\\";
 	
-	// list_test.jsp 파일 목록 조회
+	
+	// list.jsp 파일 목록 조회
 	@GetMapping("/file/recList") // rest 방식으로 호출 할 예정
 	public @ResponseBody Map<String, Object> fileUploadList() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", aService.getAllList());
-		// System.out.println("***** test : " + aService.getAllList());
+		System.out.println("[ListFileController] /file/recList 요청 받음");
 		return map;
 	}
 	
-	@GetMapping("/recListdisplay")
+	// com_list.jsp 파일 목록 조회
+	@GetMapping("/file/comList") // rest 방식으로 호출 할 예정
+	public @ResponseBody Map<String, Object> comFileUploadList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", aService.getAllComList());
+		System.out.println("[ListFileController] /file/comList 요청 받음");
+		return map;
+	}
+	
+	
 	// 이미지를 화면에 보여줍니다
+	@GetMapping("/recListdisplay")
 	public ResponseEntity<byte[]> display(String fileName) {
 		
 		try {
