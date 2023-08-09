@@ -83,11 +83,11 @@ function addCookStep() {
 		</div>
 
 
-		<form class="form-control" method="post" action="/recipe1/postWrite" enctype="multipart/form-data"> >	
-
+		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> >	
+  
 		<!-- 제목 입력란  -->
 			<div class="rec_title">
-				<label>레시피 제목 </label> 
+				<label>레시피 제목ㅇㄹㅇㄹㅇㄹㅇ </label> 
 				<input type="text" name="title" placeholder="예) 학교앞 분식집 떡볶이 만들기" value="${board.title}">
 			</div>
 			
