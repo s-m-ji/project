@@ -20,6 +20,14 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
+	
+	#recentlyContainer{
+		
+		border-top: 5px solid #ddd;
+   		padding-top: 30px;
+   		
+	};	
+
 	.recipeFinishImg {
 		
 		justify-content: center;
@@ -102,6 +110,10 @@
 				LikeRecipe();
 
 			});
+			
+			
+			recentPage();
+			// 최근 본 페이지를 페이지 하단에 출력 할 수 있는 함수 호출
 			
 			/*
 			reduceBtn.addEventListener('click', function(){
@@ -544,7 +556,7 @@
 		
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		<!-- <button id="moreButton">더보기</button> -->
-		<div class="comment-writing margin-T12">
+		<div class="comment-writing margin-T12" style="margin-top: 18px;">
 			<form style="height:130px;" id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
 						
 				<div style="position: absolute; margin-top: 110px;" class="starDiv" data-max="5"></div>
@@ -579,7 +591,7 @@
 				<form id="grForm">
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
 					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
-					<textarea style=" resize: none;" id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
+					<textarea style=" resize: none; margin-top: 29px;" id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
 					<button id="grBtn" onclick="grWrite()">댓글작성</button>
 				</form>
 			</div>
@@ -634,15 +646,20 @@
 	
 	<!-- </div> -->
 	
-	<!-- 최근 방문한 레시피 -->
-	<div class="recently-viewed">
-		<!-- Display recently viewed recipes as clickable images -->
-		<a href="link-to-recipe1"><img src="path/to/recipe1.jpg"
-			alt="Recipe 1"></a> <a href="link-to-recipe2"><img
-			src="path/to/recipe2.jpg" alt="Recipe 2"></a>
-		<!-- Add more recently viewed recipes if needed -->
-	</div>
 	
+	<!-- 최근 방문한 레시피 -->
+	<div id="recentlyContainer">
+		
+		<h5 class="h3FW800">최근 본 레시피</h5>
+		
+		<div id="recentlyViewed" class="recently-viewed">
+			<!-- Display recently viewed recipes as clickable images -->
+			<a href="link-to-recipe1"><img src="path/to/recipe1.jpg"
+				alt="Recipe 1"></a> <a href="link-to-recipe2"><img
+				src="path/to/recipe2.jpg" alt="Recipe 2"></a>
+			<!-- Add more recently viewed recipes if needed -->
+		</div>
+	</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	
 			</div>
