@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
+<mapper namespace="com.project.mapper.ComMapper">
+
+<select id="list" resultType="com.project.vo.ComBoardVO">
+
+select * from com_board
+
+</select>
+
+<insert id="insert">
+  INSERT INTO com_board(com_bno, nickName, com_title, com_content, mno)
+  VALUES(#{com_bno}, #{nickName}, #{com_title}, #{com_content}, #{mno})
+</insert>
+
+
+<insert id="insertSelectKey">
+  <selectKey keyProperty="com_bno" order="BEFORE" resultType="int">
+    select seq_comboard.nextval from dual
+  </selectKey>
+  insert into com_board(com_bno, nickName, com_title, com_content, mno) 
+  values(#{com_bno}, #{nickName}, #{com_title}, #{com_content}, #{mno})
+</insert>
+
+<delete id="delete">
+		delete com_board where com_bno= #{com_bno}
+</delete>
+
+
+<select id="getOne" resultType="com.project.vo.ComBoardVO">
+		select * from com_board where com_bno=#{com_bno}
+</select>
+
+
+
+
+
+<update id="update">
+
+update com_board
+	set com_title = #{com_title}
+		   		, com_content = #{com_content}
+		   		, nickname = #{nickname}
+		   		, regdate = #{regdate}
+		   		, update_date  = sysdate
+		   		, replycnt = #{replycnt}
+		   		, mno = #{mno}
+		 where com_bno = #{com_bno}  
+
+</update>
+
+<select id="getTotal" resultType="int">
+	select count(*) from com_board
+</select>
+
+
+</mapper>

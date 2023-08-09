@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
+<mapper namespace="com.project.mapper.ComFileMapper">
+	<insert id="insert">
+		insert into com_file
+						values (#{uuid}, #{uploadpath}
+									, #{filetype}, #{filename}, #{com_bno})
+	</insert>
+	
+	<select id="getList" resultType="com.project.vo.ComFileVO">
+    SELECT * FROM com_file WHERE com_bno = #{bno}
+	</select>
+	
+	
+	
+	
+	<delete id="delete">	
+		delete tbl_attach 
+ 		 where com_bno = #{com_bno}
+   		   and uuid = #{uuid}
+	</delete>
+	
+	<select id="getOne" resultType="com.project.vo.ComFileVO">
+		select * from com_file where com_bno = #{com_bno}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
