@@ -69,7 +69,7 @@ public class RecipeController {
 		log.info("============== bno " + b_no); 
 		
 		// b_no 를 활용해 데이터 베이스에서 게시글 정보 조회 // 우선 2으로 설정 해둠 수정해야함
-		RecipeBoardVo vo =  service.getOne(2);
+		RecipeBoardVo vo =  service.getOne(b_no);
 		
 		// 객체 정보가 넘어온다..
 		//service.getMaterial(2);
@@ -78,8 +78,8 @@ public class RecipeController {
 		// 재료 정보 조회
 		
 	
-		int replyCnt =service.replyTotalCnt(2);
-		int photoReviewCnt = service.photoTotalCnt(2);
+		int replyCnt =service.replyTotalCnt(b_no);
+		int photoReviewCnt = service.photoTotalCnt(b_no);
 		// key, value 로 이루어진 model 객체를 사용해 /recipe/view 페이지에 데이터 전달.
 		model.addAttribute("replyCnt", replyCnt);
 		model.addAttribute("photoReviewCnt", photoReviewCnt);
@@ -169,7 +169,7 @@ public class RecipeController {
 		System.out.println(" getMaterial 호출 ========================================== ");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<MaterialVo> material = service.getMaterial(2);
+		List<MaterialVo> material = service.getMaterial(bno);
 		
 		map.put("materialList", material);
 		
@@ -185,9 +185,9 @@ public class RecipeController {
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RecipeStepVo> step = service.getRecipeStep(2);
-		List<FileuploadVo> stepFile = fileService.getRecipeStep(2);
-		List<FileuploadVo> finishImgs = fileService.getFinishImg(2);
+		List<RecipeStepVo> step = service.getRecipeStep(bno);
+		List<FileuploadVo> stepFile = fileService.getRecipeStep(bno);
+		List<FileuploadVo> finishImgs = fileService.getFinishImg(bno);
 		
 		map.put("recipeStep", step);
 		map.put("fileStepList", stepFile);
@@ -205,10 +205,10 @@ public class RecipeController {
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RecipeReplyVo> replyList = service.getRecipeReply(2);
+		List<RecipeReplyVo> replyList = service.getRecipeReply(bno);
 		
 		map.put("replyList", replyList);
-		map.put("photoReview", fileService.getPhotoReview(2));
+		map.put("photoReview", fileService.getPhotoReview(bno));
 		
 		return map;
 	}

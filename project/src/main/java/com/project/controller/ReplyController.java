@@ -69,12 +69,12 @@ public class ReplyController {
 		System.out.println(" getRecipeList 호출 ========================================== ");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RecipeReplyVo> replyList = service.getRecipeReply(2);
-		int replyCnt =recipeService.replyTotalCnt(2);
-		int photoReviewCnt = recipeService.photoTotalCnt(2);
+		List<RecipeReplyVo> replyList = service.getRecipeReply(bno);
+		int replyCnt =recipeService.replyTotalCnt(bno);
+		int photoReviewCnt = recipeService.photoTotalCnt(bno);
 		
 		map.put("replyList", replyList);
-		map.put("photoReview", fileService.getPhotoReview(2));
+		map.put("photoReview", fileService.getPhotoReview(bno));
 		map.put("replyCnt", replyCnt);
 		map.put("photoReviewCnt", photoReviewCnt);
 		

@@ -2,7 +2,7 @@
 
  <style>
  		
-		
+	
  		
 	.cntClass{
 		
@@ -718,10 +718,22 @@
             
         }
         
-        
-        .recentPageDiv{
-        	margin-right: 10px;
-        }
+        .recentPageDiv {
+		    margin-right: 10px;
+		    cursor: pointer;
+		    width: min-content;
+		    
+		    /* Initially set the outline to create a hidden effect */
+		    outline: 2px solid transparent; /* Initial transparent outline */
+		    
+		    /* Set the transition effect for the outline color property */
+		    transition: outline-color 0.3s ease;
+		}
+		
+		.recentPageDiv:hover {
+		    /* Change outline color on hover */
+		    outline-color: #F7863B;
+		}
 
         /* Example styles for photo review section */
         .photo-review {

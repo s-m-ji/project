@@ -50,9 +50,9 @@ public class FileuploadController {
 		System.err.println("file/list 실행 =============================");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", service.getFileList(2));
-		map.put("fileStepList", service.getRecipeStep(2));
-		map.put("FinishImgList",service.getFileList(2));
+		map.put("list", service.getFileList(bno));
+		map.put("fileStepList", service.getRecipeStep(bno));
+		map.put("FinishImgList",service.getFileList(bno));
 		
 		return map;
 	}
@@ -65,7 +65,7 @@ public class FileuploadController {
 //	public @ResponseBody Map<String, Object> photoReviewUpload(List<MultipartFile> files
 //											, int b_no
 //											){
-////		int b_no = 2;
+////		int b_no = bno;
 //		System.out.println("/file/photoReview 실행 =====================================");
 //		System.out.println(b_no + "======================================================");
 //		

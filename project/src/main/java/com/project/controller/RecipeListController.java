@@ -23,7 +23,7 @@ public class RecipeListController {
 
 	/**
 	 * ▶ list.jsp로 이동
-	 * @param model
+	 * @param modelW
 	 * @param cri
 	 * @author 지상미
 	 */
