@@ -75,8 +75,9 @@ input[type="checkbox"]
 /* 컨텐츠 섹션  */
 section#main div.container {
 	background: #fff;
-	width: 85%;
 	border-radius: 1em;
+	width: 85%;
+	max-width: 85%;
 }
 
 /* input 배경색 */
@@ -112,6 +113,10 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
     transform: translate(-50%, -50%);
     top: 85%;
     left:50%;
+}
+
+.search-wrapper * {
+	padding: 0;
 }
 
 .search-wrapper .input-holder {    
