@@ -184,7 +184,7 @@ function fetchPost(url, obj, callback){
 </head>
 <body>
 
-<!--  검색 조건  -->
+<!--  검색 조건 ()  -->
 <div class="duration">
 
 <input type="date" id="startDate" name="startDate"/>
