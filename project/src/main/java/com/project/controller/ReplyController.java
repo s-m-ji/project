@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,28 +37,35 @@ public class ReplyController {
 	@Autowired
 	FileuploadService fileService;
 
-	@PostMapping("/reply/photoReply")
-	public Map<String, Object> selectPhotoReview(int r_no, HttpSession session) {
-
-		
-		// 
-		MemberVo member = session.getAttribute("member") == null ?  null : (MemberVo)session.getAttribute("member");
-		
-		// select << 게시물에 nickName << 으로 댓글이 달린 적이 있는지 total, or YN 으로 조회
-		member.getNickname();
-		
+	@GetMapping("/reply/photoReply/{b_no}/{writer}")
+	public @ResponseBody Map<String, Object> selectPhotoReview(@PathVariable("b_no") int b_no, @PathVariable("writer") String writer, HttpSession session) {
 		System.out.println("selectPhotoReview 실행 ==================================");
-
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//====================================================================
+////		session.setAttribute("나는작성자", "나는작성자");
+////		
+////		MemberVo member = session.getAttribute("member") == null ?  null : (MemberVo)session.getAttribute("member");
+////		
+////		String nickName = (String)session.getAttribute("나는작성자");
+////		
+////		map.put("nickName",nickName);
+//		
+//		// select << 게시물에 nickName << 으로 댓글이 달린 적이 있는지 total, or YN 으로 조회
+//		member.getNickname();
 
-		RecipeReplyVo vo = service.selectPhotoReview(r_no);
+		//====================================================================
 
-		if (vo != null) {
+		int res = service.selectPhotoReview(b_no, writer);
 
-			map.put("photoReply", vo);
-			map.put("result", "success");
+		System.err.println("res 출력 ============================================= "  + res);
+
+		if (res > 0) { 
+			
+			map.put("result", "duplicate");
+			
 		} else {
-			map.put("result", "fails");
+			map.put("result", "none");
 		}
 
 		return map;

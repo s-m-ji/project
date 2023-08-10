@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.service.FileuploadService;
 import com.project.service.ReplyService;
+import com.project.vo.FileuploadVo;
 import com.project.vo.RecipeReplyVo;
 
 import lombok.extern.log4j.Log4j;
@@ -140,6 +141,36 @@ public class FileuploadController {
 		}
 		
 		return map;
+	}
+	
+	
+	@GetMapping("/file/getMemberImg/{m_no}")
+	public @ResponseBody Map<String, Object> getMemberImg(@PathVariable("m_no") int m_no){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// FileuploadVo vo =  service.getMemberImg(m_no) != null ? service.getMemberImg(m_no) : null;
+		
+		FileuploadVo vo =  service.getMemberImg(m_no) == null ? null : service.getMemberImg(m_no);
+		
+		
+		
+		if(vo != null){
+			
+			map.put("result", "success");
+			map.put("memberImg", vo);
+			
+		
+		}else {
+			
+			map.put("result", "fails");
+
+		}
+		
+			
+			
+		return map;
+		
 	}
 	
 	

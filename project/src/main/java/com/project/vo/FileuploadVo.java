@@ -13,6 +13,7 @@ public class FileuploadVo {
 	private int i_no;
 	private int b_no;
 	private int s_no;
+	private int m_no;
 	
 	// 저장된 파일 경로
 	private String savePath;

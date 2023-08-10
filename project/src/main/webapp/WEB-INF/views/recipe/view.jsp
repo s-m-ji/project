@@ -21,6 +21,10 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
 	
+		#MemberInfoDiv{
+		display: flex;
+	}
+	
 	.swal-icon--success__line {
 	    height: 5px;
 	    background-color: #a5dc86;
@@ -55,8 +59,13 @@
 	}
 	
 	
+	
 
 </style>
+
+ <!-- Header -->
+	<%@ include file="../common/header.jsp" %>
+
 <script type="text/javascript">
 
 	window.addEventListener('load', function(){
@@ -130,8 +139,17 @@
 			});
 			
 			
-			recentPage();
 			// 최근 본 페이지를 페이지 하단에 출력 할 수 있는 함수 호출
+			recentPage();
+			
+
+			// 요리후기 중복검사
+			ReviewDuplicate();
+			
+			
+			// 작성자 이미지 출력 
+			getMemberImg();
+			
 			
 			/*
 			reduceBtn.addEventListener('click', function(){
@@ -156,6 +174,8 @@
 				
 				event.preventDefault();
 				
+				const writerDiv = document.querySelector('#writerDiv').style.display = "none";
+				
 				let b_no = document.querySelector('#b_no').value;
 				
 				document.querySelector('#star').value = document.querySelector('.starDiv').dataset.max;
@@ -169,6 +189,8 @@
 				console.log("writer : ", writer);
 				
 				console.log("reply : ", reply);
+				
+				document.query
 				
 				for(var pair of formData.entries()){
 					
@@ -350,8 +372,10 @@
 		      console.log('map', map);
 		      
 		      if (map.result == "success"){
-		    	 
+		    	  
+		    	  ReviewDuplicate();
 		    	  getRecipeReply();
+		    	  
 		         
 		         // 댓글 등록, 수정 후 화면 조회 시 입력창 초기화
 		         document.querySelector('#reply').value = "";
@@ -507,6 +531,76 @@
         reader.readAsDataURL(event.target.files[0]);
       }
 	
+	
+	function ReviewDuplicate(){
+		
+		console.log('ReviewDuplicate() 실행 !!!!!!!!!!!!!!!!!!!!!!!!!');
+		let writer = document.querySelector('#writer').value;
+		let b_no = document.querySelector('#b_no').value;
+		
+		console.log("작성자이름 : ", writer)
+		
+		let writerString = String(writer);
+		
+		fetch('/reply/photoReply/' + b_no + '/' + writerString)
+			.then(response => response.json())
+			.then(map => ReviewDuplicateRes(map));
+
+		
+	}
+	
+	function ReviewDuplicateRes(map){
+		
+		const writerDiv = document.querySelector('#writerDiv');
+		
+		console.log("ReviewDuplicateRes(map) 실행 ===========================================================")
+		
+		
+		if(map.result == "duplicate"){
+			
+			writerDiv.style.display = "none";
+			
+		}else{
+			
+			return;
+		}
+		
+	}
+	
+	
+	// 멤버 이미지 겟또 ~
+	function getMemberImg(){
+		
+			let m_no = document.querySelector('#m_no').value;
+			
+			fetchGet('/file/getMemberImg/'+ m_no, getMemberImgRes);
+	}
+	
+	function getMemberImgRes(map){
+		
+		const MemberImg = document.querySelector('#MemberImg');
+		
+		console.log("나 여기있어요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ : ", map.result);
+		
+		
+		if(map.result = "success"){
+			
+			let savePath = encodeURIComponent(map.memberImg.savePath);
+			console.log("멤버이미지 출력 대작전 : ", savePath);
+			
+			let imgTag = '<img style="width: 100px; height: 100px; border-radius: 50%;" src="/display?fileName='+ savePath + '">'
+		
+			MemberImg.innerHTML = imgTag;
+			
+		}else{
+			
+			console.log("멤버이미지 출력 대작전");	
+		}
+			
+		
+	}
+
+	
 
    </script>
 <body>
@@ -516,11 +610,10 @@
 
 	<!-- <div class="viewContainer bor"> -->
 
-	<input id="m_no" type="hidden" value="2">
+	<input id="m_no" type="text" value="${board.mno }">
 	<input id="title" type="hidden" value="${board.title}">
 	
-	 <!-- Header -->
-	<%@ include file="../common/header.jsp" %>
+	
 
 	<section id="main" class="green" >
 		<div class="container">
@@ -571,7 +664,7 @@
 	<!-- 작성자 정보 -->
 	<div class="writerInfoDiv margin-T12">
 		<div class="sectionTitle MB40T20"><h3 class="h3FW800">레시피 작성자 <span class="italicTitle">Writer</span></h3></div>
-		<div id="MemberInfoDiv ">${board.nickname}</div>
+		<div id="MemberInfoDiv"><div id="MemberImg"></div> <span style="margin-left: 20px; padding-top: 20px; font-weight: 900;"> ${board.nickname}</span></div>
 	</div>
 
 	<!-- 요리후기  -->
@@ -599,7 +692,7 @@
 		
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		<!-- <button id="moreButton">더보기</button> -->
-		<div class="comment-writing margin-T12" style="margin-top: 18px;">
+		<div id="writerDiv" class="comment-writing margin-T12" style="margin-top: 18px;">
 			<form style="height:130px;" id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
 						
 				<div style="position: absolute; margin-top: 110px;" class="starDiv" data-max="5"></div>
@@ -608,7 +701,7 @@
 				
 					<input style="display:none;" type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
-					<input type="hidden" id="writer" name="writer" value="나는작성자"> 
+					<input type="hidden" id="writer" name="writer" value="삐용삐용"> 
 				
 					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px; border: 2px solid #ddd;">
 					<textarea id="reply" name="reply" class="form-control"

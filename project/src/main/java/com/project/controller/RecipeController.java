@@ -76,8 +76,7 @@ public class RecipeController {
 		
 		
 		// 재료 정보 조회
-		
-	
+
 		int replyCnt =service.replyTotalCnt(b_no);
 		int photoReviewCnt = service.photoTotalCnt(b_no);
 		// key, value 로 이루어진 model 객체를 사용해 /recipe/view 페이지에 데이터 전달.

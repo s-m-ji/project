@@ -26,5 +26,7 @@ public interface FileuploadService {
 	
 	int insertFile(FileuploadVo vo);
 	
+	public FileuploadVo getMemberImg(int m_no);
+	
 	
 }

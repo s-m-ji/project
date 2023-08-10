@@ -158,4 +158,10 @@ public class FileuploadServiceImpl implements FileuploadService{
 		return mapper.getFinishImg(bno);
 	}
 
+	@Override
+	public FileuploadVo getMemberImg(int m_no) {
+		// TODO Auto-generated method stub
+		return mapper.getMemberImg(m_no);
+	}
+
 }

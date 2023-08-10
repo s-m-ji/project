@@ -30,12 +30,11 @@
 	</insert>
 
 
-	<select id="selectPhotoReview"
-		resultType="com.project.vo.RecipeReplyVo">
+	<select id="selectPhotoReview" resultType="int">
 
-		select *
+		select count(*)
 		from rec_reply
-		where r_no = #{r_no}
+		where b_no = #{b_no} and writer = #{writer}
 
 	</select>
 

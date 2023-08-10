@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.project.vo.GeneralReplyVo;
@@ -15,7 +16,7 @@ public interface ReplyService {
 	
 	public int replyWrite(RecipeReplyVo vo);
 	
-	public RecipeReplyVo selectPhotoReview(int r_no);
+	public int selectPhotoReview(@Param("b_no")int b_no, @Param("writer")String writer);
 	
 	public List<GeneralReplyVo> getGeneralReply(int b_no);
 	

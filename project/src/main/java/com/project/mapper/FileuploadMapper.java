@@ -24,4 +24,6 @@ public interface FileuploadMapper {
 	// 파일 업로드
 	public int insertFile(FileuploadVo vo);
 	
+	public FileuploadVo getMemberImg(int m_no);
+	
 }

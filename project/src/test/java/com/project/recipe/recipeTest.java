@@ -1,5 +1,6 @@
 package com.project.recipe;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.mapper.RecipeListMapper;
 import com.project.mapper.RecipeMapper;
+import com.project.mapper.ReplyMapper;
+import com.project.service.ReplyService;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
 import com.project.vo.RecipeBoardVo;
@@ -29,6 +32,12 @@ public class recipeTest {
 	
 	@Autowired
 	RecipeMapper vMapper;
+	
+	@Autowired
+	ReplyMapper replyMapper;
+	
+	@Autowired
+	ReplyService replySerive;
 	
 	@Test public void getRecList() {
 		// assertNotNull(rMapper);
@@ -72,6 +81,24 @@ public class recipeTest {
 		log.info(vo);
 	}
 	
+	@Test
+	public void dupli() {
+		
+		int res = replyMapper.selectPhotoReview(2, "나는작성자");
+		
+		assertNotEquals(res, 1);
+		
+		log.info(res);
+	}
+	
+	
+	@Test
+	public void dupl() {
+		
+		int res = replySerive.selectPhotoReview(2, "나는작성자");
+		
+		assertNotEquals(1, res);
+	}
 	
 	
 }

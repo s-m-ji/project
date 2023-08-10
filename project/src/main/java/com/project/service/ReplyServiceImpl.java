@@ -31,9 +31,9 @@ public class ReplyServiceImpl implements ReplyService{
 
 
 	@Override
-	public RecipeReplyVo selectPhotoReview(int r_no) {
+	public int selectPhotoReview(int b_no, String writer) {
 		// TODO Auto-generated method stub
-		return replyMapper.selectPhotoReview(r_no);
+		return replyMapper.selectPhotoReview(b_no, writer);
 	}
 
 
