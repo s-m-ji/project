@@ -9,7 +9,12 @@
 <body>
 	<form action="./com_list" name="searchForm">
 		<!-- view.jsp를 위한 게시글 번호 -->
-		<input type="text" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
+		
+		<input type="hidden" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
+		<div class="container text-center">
+		<div class="container text-center">
+		<div class="container text-center">
+		<div class="container text-center">
 		<div class="container text-center">
 			<div class="d-flex justify-content-between">
 				<div class="p-2 flex-fill">
@@ -19,6 +24,10 @@
 					<button type="submit" class="btn btn-primary mb-3" onclick="go(1);">검색</button>
 				</div>
 			</div>
+		</div>
+		</div>
+		</div>
+		</div>
 		</div>
 		<div class="container text-center">
 			<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">

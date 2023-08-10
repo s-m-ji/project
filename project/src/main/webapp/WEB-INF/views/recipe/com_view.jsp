@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- Header -->
+	<%@ include file="../common/header.jsp" %>
+	
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -19,7 +22,6 @@ window.addEventListener('load',function(){
 		viewForm.action='/comboard/edit';
 		viewForm.submit();
 	});
-	
 	
 
 	btnDelete.addEventListener('click', function(){
@@ -144,8 +146,7 @@ function deleteReply(replyNumber) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 <body>
 
-<!-- Header -->
-	<%@ include file="../common/header.jsp" %>
+
 	
 	<section id="main" style="border: 3px dashed #ed786a;">
 

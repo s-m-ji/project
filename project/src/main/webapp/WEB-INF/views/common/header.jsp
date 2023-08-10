@@ -72,7 +72,7 @@
 				
 			<!-- 검색 -->
 			<br>
-			<div class="search-wrapper">
+			<div class="search-wrapper active">
 			    <div class="input-holder">
 			    <form action="./list" name="searchFormHeader">
 			        <input type="text" name="sWord" class="search-input" placeholder="레시피를 검색하세요." />

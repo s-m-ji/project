@@ -8,6 +8,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :not(i) {
   font-family: "NanumSquareNeo-Variable" !important;
 } 
@@ -102,8 +109,15 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
 	background: #f7863b36;
 }
 
+#header h1 {
+	font-family: 'omyu_pretty' !important;
+	font-size: 5em;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+
 #header > div.container {
-	padding: 9em 0 6em 0;
+	padding: 9em 0 7em 0;
 	    border: none;
     box-shadow: none;
 }
@@ -111,7 +125,7 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
 .search-wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 85%;
+    top: 77.5%;
     left:50%;
 }
 

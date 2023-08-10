@@ -26,13 +26,16 @@ public class RecipeListServiceImpl implements RecipeListService {
 	@Override
 	public void getRecList(Model model, Criteria cri) {
 		System.out.println("[RecipeListServiceImpl] getRecList 실행");
+		cri.setAmount(12);
+		cri.setPageNo(cri.getPageNo());
+		
 		List<BoardVO> list = rMapper.getRecList(cri);
 		// System.out.println("*** list : " + list);
 		model.addAttribute("list", list);
 		
 		int totalCnt = rMapper.getListTotalCnt(cri); 
 		System.out.println("totalCnt : "  + totalCnt);
-
+		
 		PageDto pageDto = new PageDto(cri, totalCnt);
 		System.out.println("pageDto : "  + pageDto);
 		

@@ -63,13 +63,32 @@
 		
 	}
 </script>
+<style>
+	
+	.listTopWrap {
+		display: flex;
+		justify-content: between;
+		
+	}
+	
+	.chartWrap {
+		width: 300px;
+		display: flex;
+		justify-content: end;
+	}
+	
+	#listChart{
+		width: 250px;
+	}
+</style>
 </head>
 <body>
-	<%-- pDto.cri.sWord : ${pDto.cri.sWord } 이렇게 클래스 내에 선언한 필드명 그대로 소문자 s라고 썼더니 안 나옴 그런 속성을 찾을 수 없다고함... 엉엉 --%>
+<div class="listTopWrap container">
+	<div class="p-2 flex-fill">
 	<form action="./list" name="searchForm">
 		<!-- view.jsp를 위한 게시글 번호 -->
 		<input type="hidden" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
-		<div class="container text-center">
+		<div class="text-center">
 			<div class="d-flex justify-content-between">
 				<div class="p-2 flex-fill" >
 					<select name="c1" id="c1" class="form-control"
@@ -92,15 +111,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="container text-center">
+		<div class="text-center">
 			<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">
 				<div class="d-flex justify-content-between listMenuBtm">
 				<div class="p-2">
 					<select class="form-control" name="amount"
 						onchange="changePageSize(this.value)">
 						<option value="12" ${ param.amount eq '12' ? "selected" : "" }>12개씩 보기  </option>
-						<option value="24" ${ param.amount eq '24' ? "selected" : "" }>25개씩 보기</option>
-						<option value="48" ${ param.amount eq '48' ? "selected" : "" }>50개씩 보기</option>
+						<option value="24" ${ param.amount eq '24' ? "selected" : "" }>24개씩 보기</option>
+						<option value="48" ${ param.amount eq '48' ? "selected" : "" }>48개씩 보기</option>
 					</select>
 				</div>
 				<div class="p-2">
@@ -139,5 +158,57 @@
 				</script>
 		</div>
 	</form>
+	</div>
+	<div class="chartWrap">
+		<div id="listChart">
+		  <canvas id="doughnutChartCanvas"></canvas>
+		 </div>	
+	</div>
+</div>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+	
+	const canvas = document.getElementById("doughnutChartCanvas");
+		
+	new Chart(document.getElementById("doughnutChartCanvas"), {
+	    type: 'doughnut',
+	    data: {
+	      labels: ["10대", "20대", "30대", "40대", "50대", "60대"],
+	      datasets: [
+	        {
+	          label: "Population (millions)",
+	          /* backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd"], */
+	          /* backgroundColor: ["#f7863b", "#fd9a5c","#ffae7c","#ffc29c","#ffd7bc","#ffebdd"], */
+	          backgroundColor: ["#0879c4", "#538ece","#7ba3d8","#9eb9e2","#bfd0ec","#dfe7f5"],
+
+	          data: [478,1026,1734,784,533,300]
+	        }
+	      ]
+	    },
+	    options: {
+	    	responsive: true,
+	        plugins: {
+	          legend: {
+	            position: 'top',
+	          },
+	          title: {
+	            display: true,
+	            text: '해당 검색어 연령별 조회 결과'
+	          },
+	          font: {
+	            	weight: 'bold',
+	              size: '20px',
+	            }
+	        }
+	    /* ,
+	      
+	      plugins:{
+              legend: {
+                  display: false
+              }
+          } */
+	    }
+	});
+	</script>
 </body>
 </html>

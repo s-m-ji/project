@@ -111,7 +111,7 @@
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
 					<div class="col-lg-6 col-md-6 col-sm-6">
-						<a href="./com_view_test?com_bno=${list.com_bno}" class="fh5co-card-item cmn">
+						<a href="/comboard/view?com_bno=${list.com_bno}" class="fh5co-card-item cmn">
 						<%-- <a href="#" class="fh5co-card-item" onclick="requestAction('./view', ${list.com_bno})"> --%>
 							<figure>
 								<div class="overlay"><i class="bi bi-box-arrow-up-right"></i></div>

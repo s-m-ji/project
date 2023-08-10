@@ -12,17 +12,14 @@ public class Criteria {
 	
 	private String sWord = ""; // 검색어
 	
-	
 	private int pageNo = 1; // 요청 페이지 번호
-	private int amount = 12; // 한 페이지 당 게시물 수
+	private int amount = 10; // 한 페이지 당 게시물 수
 	
 	private int startNo = 1;
-	private int endNo = 12;
+	private int endNo = 10;
 	
-	private boolean orderBy; // list.jsp 최신순,추천순 정렬
-	
+	private boolean orderBy; // list.jsp 최신순,추천순 정렬	
 	private boolean orderByCom; // com_list.jsp 최신순,추천순 정렬
-	
 	
 	
 	// 페이지 정보가 넘어오면 알아서 start & end를 자동 설정하기 위함
