@@ -855,7 +855,7 @@ console.log('연결 확인 ===================================================')
 							     +'<span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' 
 							     + '<p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyDelete('+r_no+')">삭제</p><p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
 							     + '<p class="reply_list_cont cont'+r_no+'" style="position: absolute; top: 20px;">' + reply + '</p><form name="editForm" onSubmit="return false;" style="display:flex;"><input type="hidden" value="'+r_no+'"><input style="width:400px;" type="hidden" id="reply'+r_no+'" class="replyUpdate'+r_no+'" name="replyUpdate" value="'+reply+'"><button class="editBtn'+r_no+'" style="display:none;"onclick="goReplyUpdate('+r_no+')">수정</button></form>'
-							     + '<div class="replyIMGDiV" style="position: absolute; right: 0; top: 0;"><img style="width:80px; height:80px;" src="/display?fileName=' + savePath + '"></div></div>' 
+							     + '<div class="replyIMGDiV" style="position: absolute; right: 0; top: 0;"><a><img onclick=stepModal(\"'+savePath+'\") style="width:80px; height:80px;" src="/display?fileName=' + savePath + '"></a></div></div>' 
 							     
 							    );
 						    	
@@ -1367,8 +1367,8 @@ console.log('연결 확인 ===================================================')
 		  					+	'<img style="height: 300px; max-width: 500px; margin: 0 auto;" src="/display?fileName=' + savePath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'			  				
 		  					+ '<div class="carousel-caption d-none d-md-block" style="top: 110%; color: black;">'
 		  			        + '<h5>'+replyList[index1].writer+'</h5>'
-		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index1].star +'" ></div><span>'+replyList[index1].replydate+'</span>'
-		  			        + '<p>'+replyList[index1].reply+'</p>'
+		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index1].star +'" ></div><span style="margin-left: 10px;  font-size: 13px;  color: #ab8e7d;">'+replyList[index1].replydate+'</span>'
+		  			        + '<p style="font-size:18px;">'+replyList[index1].reply+'</p>'
 		  			        + '</div>'
 		  					+'</div>';
 			  			
@@ -1382,8 +1382,8 @@ console.log('연결 확인 ===================================================')
 					    	+		'<img style="height: 300px; max-width: 500px; margin: 0 auto;" src="/display?fileName=' + sPath + '" class="d-block photoBtn" data-rno="'+item.r_no+'" alt="...">'	
 					    	+ '<div class="carousel-caption d-none d-md-block" style="top: 110%; color: black;">'
 		  			        + '<h5>'+replyList[index].writer+'</h5>'
-		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index].star +'" ></div><span>'+replyList[index1].replydate+'</span>'
-		  			        + '<p>'+replyList[index].reply+'</p>'
+		  			        + '<div class="test-score2" data-max="5" data-rate="' +replyList[index].star +'" ></div><span style="margin-left: 10px;  font-size: 13px;  color: #ab8e7d;">'+replyList[index1].replydate+'</span>'
+		  			        + '<p style="font-size:18px;">'+replyList[index].reply+'</p>'
 		  			        + '</div>'
 					    	+    '</div>';
 			  			
@@ -1398,11 +1398,11 @@ console.log('연결 확인 ===================================================')
 		  				photoBtn +=
 		  					
 		  					'</div>'
-			  			+		'<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" onclick="prevBtn('+(r_no-1)+')" data-bs-slide="prev" >'
+			  			+		'<button style="box-shadow: none;" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" onclick="prevBtn('+(r_no-1)+')" data-bs-slide="prev" >'
 						+	          '<span style="background-color: #F7863B;" class="carousel-control-prev-icon" aria-hidden="true" ></span>'
 						+	          '<span class="visually-hidden">Previous</span>'
 						+	        '</button>'	      
-		  				+		'<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" onclick="nextBtn('+(r_no+1)+')" data-bs-slide="next" >'
+		  				+		'<button style="box-shadow: none;" class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" onclick="nextBtn('+(r_no+1)+')" data-bs-slide="next" >'
 						+	          '<span style="background-color: #F7863B;" class="carousel-control-next-icon" aria-hidden="true" ></span>'
 						+	          '<span class="visually-hidden">Next</span>'
 						+	      '</button>'
@@ -1429,90 +1429,7 @@ console.log('연결 확인 ===================================================')
 			
 			});
 				
-			
-		  				
-		  //
-		  
-		  // Find the correct comment that matches the clicked photo's r_no
-		 
-
-		 /* console.log('matchedReply', matchedReply);
-		  console.log('r_no: ', r_no);
-
-		  
-		  // 모달창에 클릭한 사진의 이미지를 표시합니다.
-	      photoReviewImgDiv.innerHTML = matchedReply
-		    ? '<img style="max-width: 500px; max-height: 300px;" src="/display?fileName=' + savePath + '">'
-		    : '일치하는 이미지가 없습니다.';*/
-	      
-		  // 함수 하나 만들어서  문자열 return;
-          	
-          					
-		  				
-		  				
-	    /*  if (matchedReply) {
-		        
-	    	  let content =
-		          '<div class="contentHidden'+matchedReply.r_no+'" id="modalContent" data-rno="'+matchedReply.r_no+'">' +
-		          '<div id="modalHead">' +
-		          '<span>' +
-		          matchedReply.writer +
-		          '</span> <div class="test-score2" data-max="5" data-rate="' +
-		          matchedReply.star +
-		          '" ></div>' +
-		          '<span>' +
-		          matchedReply.replydate +
-		          '</span>' +
-		          '</div>' +
-		          '<div id="modalContent">' +
-		          matchedReply.reply +
-		          '</div>' +
-		          '</div>';
-		        photoReviewReplyDiv.innerHTML = content;
-		        $(".test-score2").score();
-		      } else {
-		        // 일치하는 댓글이 없는 경우, 댓글을 표시하는 영역에 메시지를 표시합니다.
-		        photoReviewReplyDiv.innerHTML = '일치하는 댓글이 없습니다.';
-		     
-		      }*/
-	      
-	      
-	      
-	     
-	     /* 
-	      replyList.forEach(function (item, index){
-	    	  
-	    	  let content =
-	    		  
-		          '<div style="display:none;" class="contentHidden'+item.r_no+'" id="modalContent" data-rno="'+item.r_no+'">' +
-		          '<div id="modalHead">' +
-		          '<span>' +
-		          item.writer +
-		          '</span> <div class="test-score2" data-max="5" data-rate="' +
-		          item.star +
-		          '" ></div>' +
-		          '<span>' +
-		          item.replydate +
-		          '</span>' +
-		          '</div>' +
-		          '<div id="modalContent">' +
-		          item.reply +
-		          '</div>' +
-		          '</div>';
-		        
-	    	  	photoReviewReplyDiv.innerHTML += content;
-  
-	      });*/
-	      
-	      
-	      
-	     
-	      
-		/*	const myCarousel = document.getElementById('myCarousel')
-
-			myCarousel.addEventListener('slide.bs.carousel', event => {
-			  // do something...
-			})*/
+  	
 	      
 	      // ==========================================================================
 

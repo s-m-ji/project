@@ -644,8 +644,11 @@
 	
 	<!-- 모달창 -->
 	<div id="ingredientModal" class="modal">
-		<div style="width: 500px;" class="modal-content ">
-			<span class="close" onclick="closeModal()">&times;</span>
+		<div style="width: 500px; padding-top: 80px;" class="modal-content ">
+			<div class="modal-header" style="margin-bottom: 20px; padding: 0; padding-bottom: 1px; position: absolute; top: 0; background: #d79d7254; left: 0; width: 100%;">
+				<h5 style="margin: 0; margin-left: 15px; color:#7c9f46; margin-top: 4px">재료 정보</h5><span class="close" style="margin-left: 0;  margin-right: 15px;" onclick="closeModal()">&times;</span>
+			</div> 
+			
 			<div class="ingreModal_wrap">
 			<div class="ingredientImgDiv" id="ingredientTop">
 				<!-- 재료 사진 출력  -->
@@ -659,9 +662,11 @@
 	</div>
 
 	<div id="photoReviewModal" class="modal">
-		<div style="padding-top: 0px; position: relative;"class="modal-content">
-			<span style="position: absolute; right: 20px;" class="close" onclick="closeModal()">&times;</span>
-			<div style="display:flex; margin-top: 30px">
+		<div style="padding-top: 0px; position: relative; width:60%;"class="modal-content">
+			<div class="modal-header" style="position: absolute; width: 100%; left: 0; background-color: #d79d7254;">
+				<h5 style="margin:0px; color: #7c9f46;">포토리뷰</h5><span style="position: absolute; right: 0px; top: 0; margin-right: 20px; margin-top: 5px;" class="close" onclick="closeModal()">&times;</span>
+			</div>
+			<div style="display:flex; margin-top: 30px; padding-top: 100px;">
 			
 			<div id="container">
 			
@@ -680,8 +685,12 @@
 	
 	<!-- 요리순서 모달창 -->
 	<div id="stepModal" class="modal">
-		<div style="width: 1000px; justify-content: center; align-items: center; overflow: hidden;" class="modal-content ">
-			<span style="color: #aaa; font-size: 28px; font-weight: bold; align-self: flex-start; margin-left: 930px; padding-bottom: 15px;" class="close" onclick="closeModal()">&times;</span>
+		
+		
+		<div style="width: 1000px; justify-content: center; align-items: center; overflow: hidden; padding-top: 90px;" class="modal-content">
+				<div class="modal-header" style="width: 100%; position: absolute; padding-bottom: 40px; margin-bottom: 20px; top:0; background-color: #d79d7254;">
+				<span style="color: #aaa; position: absolute; right: 0; top: 0; margin-right: 20px; margin-top: 5px;" class="close" onclick="closeModal()">&times;</span>
+			</div>
 			
 			<div class="stepImgDiv" id="stepImgDiv">
 			
