@@ -9,29 +9,6 @@ window.addEventListener("load", function(){
 				.then(map => viewFileList(map));
 		}
 		
-		
-		// ▶ 파일 확장자 체크
-		function checkExtention(fileName, fileSize){
-			
-			// 정규표현식 : 특정 규칙을 가진 문자열을 검색하거나 치환할 때 사용
-			// 문자열에 정규식 패턴을 만족하는 값이 있으면 true, 아니면 false를 리턴.
-			// .exe, .sh, .zip, .alz로 끝나는 문자열을 판단함 		
-			let regex = new RegExp("(.*?)\.(mp4)$"); 
-			if(regex.test(fileName)){
-				alert("어우 이런 파일 형식은 안돼 얘");
-				return false;
-			}
-			
-			// 최대 크기를 넘어서는 파일을 업로드 시도할 경우 false를 리턴.
-			let maxSize = 1024 * 1024 * 1000;
-			if(maxSize <= fileSize){
-				alert("어우 파일이 너무 크다 얘");
-				return false;
-			}
-			return true; // 이렇게 조건 만족 후 true를 반환해야 !!! 정상적으로 파일을 업로드할 수 있음
-		}
-		
-		
 		// ▶ 파일 목록 조회 
 		function viewFileList(map) {
 		    let fileList = map.list; // 파일 목록 배열 저장

@@ -20,16 +20,42 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
-	.recipeFinishImg {
-		
-		justify-content: center;
-	    display: flex;
-	    margin-bottom: 20px;
-	    padding-top: 20px;
-	    border-top: 2px solid;
-	    border-color: #00000054;
 	
-	} 
+	.swal-icon--success__line {
+	    height: 5px;
+	    background-color: #a5dc86;
+	    display: block;
+	    border-radius: 2px;
+	    position: absolute;
+	    z-index: 2;
+	}
+	
+	.recipeFinishIm button{
+		  box-shadow: none;
+	}
+	
+	.recipeFinishIm {
+		
+		display: flex;
+	    justify-content: center;
+	    border-top: 5px solid #ddd;
+	    padding: 40px;
+	
+	}
+	
+	#recentlyContainer{
+		
+		border-top: 5px solid #ddd;
+   		padding-top: 30px;
+   		
+	}
+	
+	#generalReplyWriteDiv{
+		width: 100%;
+	}
+	
+	
+
 </style>
 <script type="text/javascript">
 
@@ -102,6 +128,10 @@
 				LikeRecipe();
 
 			});
+			
+			
+			recentPage();
+			// 최근 본 페이지를 페이지 하단에 출력 할 수 있는 함수 호출
 			
 			/*
 			reduceBtn.addEventListener('click', function(){
@@ -215,10 +245,23 @@
 			getGeneralReply();
 			
 			if(map.result == 'success'){
-				alert("댓글 입력 성공");
-			
+				
+				
+				swal({
+		                title: "댓글 저장 완료",
+		                text: "",
+		                icon: "success",
+		                button: "완료",
+		                });
+				
+				//
+				
+				alertCustomizing();
+				
 			}else{
-				alert("댓글 입력 중 오류 발생");
+				
+				 swal ( "앗 ! " ,  "댓글입력중 오류 발생 !" ,  "error" );
+				 alertCustomizing();
 			} 
 			
 		}
@@ -229,9 +272,18 @@
 			getRecipeReply();
 			console.log(map.result);
 			if(map.result == 'success'){
-				alert('요리 후기가 작성 되었습니다.');
+				 swal({
+		                title: "요리 후기 작성완료!",
+		                text: "",
+		                icon: "success",
+		                button: "완료",
+		                });
+				 
+				 alertCustomizing();	
+				 
 			}else{
-				alert('후기 작성 중 오류가 발생 하였습니다.')
+				 swal ( "앗 !" ,  "후기 작성중 오류 발생 !" ,  "error" );
+				 alertCustomizing()
 			}
 	}
 		
@@ -329,8 +381,10 @@
 	// 레시피 저장을 알려주는 함수
 	   function LikeRecipeRes(map){
 	   	
-			alert(map.message);
-	   	
+			
+		   swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
+		   alertCustomizing();
+	   		
 	   }
 			
 		 
@@ -463,6 +517,7 @@
 	<!-- <div class="viewContainer bor"> -->
 
 	<input id="m_no" type="hidden" value="2">
+	<input id="title" type="hidden" value="${board.title}">
 	
 	 <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
@@ -505,7 +560,7 @@
 		<div class="recipeStep elementsMargin" id="recipeStepDiv"> </div>
 		
 		<!-- 요리 완성사진 -->
-		<div class="recipeFinishImg" id="recipeFinishImg"> </div>
+		<div class="recipeFinishIm" id="recipeFinishImg"> </div>
 
 		<div class="regdateDiv regDottd" id="regdate">
 			<span style="float:left; margin-top: 10px; margin-left: 10px"><b>작성일</b> : ${board.regdate }&nbsp;<b>|</b>&nbsp;<b>수정일</b> : ${board.updatedate }</span>
@@ -544,7 +599,7 @@
 		
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		<!-- <button id="moreButton">더보기</button> -->
-		<div class="comment-writing margin-T12">
+		<div class="comment-writing margin-T12" style="margin-top: 18px;">
 			<form style="height:130px;" id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
 						
 				<div style="position: absolute; margin-top: 110px;" class="starDiv" data-max="5"></div>
@@ -555,7 +610,7 @@
 				<div id="image_container"></div>			
 					<input type="hidden" id="writer" name="writer" value="나는작성자"> 
 				
-					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px;">
+					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px; border: 2px solid #ddd;">
 					<textarea id="reply" name="reply" class="form-control"
 						placeholder="다양한 요리 후기를 작성해주세요!"
 						style="height: 100px; resize: none;"></textarea><span ><button class="writeBtn" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
@@ -578,8 +633,10 @@
 			<div class="generalReplyWrite bodySection ">
 				<form id="grForm">
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
-					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
-					<textarea style=" resize: none;" id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
+					<div id="generalReplyWriteDiv">
+					<input style="width:30%;" type="text" id="replyer" name="replyer" placeholder="작성자 입력"><span style="position: absolute;bottom: 485px;margin-left: 560px;color: crimson;"> <b>! 주의 !</b> 아무리 익명이라도 비난 & 욕설 댓글 작성 시 신고 대상이 될 수 있습니다. </span>
+					<textarea style=" resize: none; " id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!"></textarea>
+					</div>
 					<button id="grBtn" onclick="grWrite()">댓글작성</button>
 				</form>
 			</div>
@@ -634,17 +691,22 @@
 	
 	<!-- </div> -->
 	
+	
 	<!-- 최근 방문한 레시피 -->
-	<div class="recently-viewed">
-		<!-- Display recently viewed recipes as clickable images -->
-		<a href="link-to-recipe1"><img src="path/to/recipe1.jpg"
-			alt="Recipe 1"></a> <a href="link-to-recipe2"><img
-			src="path/to/recipe2.jpg" alt="Recipe 2"></a>
-		<!-- Add more recently viewed recipes if needed -->
+	<div id="recentlyContainer">
+		
+		<h5 class="h3FW800">최근 본 레시피</h5>
+		
+		<div id="recentlyViewed" class="recently-viewed">
+			<!-- Display recently viewed recipes as clickable images -->
+			<a href="link-to-recipe1"><img src="path/to/recipe1.jpg"
+				alt="Recipe 1"></a> <a href="link-to-recipe2"><img
+				src="path/to/recipe2.jpg" alt="Recipe 2"></a>
+			<!-- Add more recently viewed recipes if needed -->
+		</div>
 	</div>
-	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-	
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 			</div>
 		</div>
 	</section>

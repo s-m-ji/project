@@ -21,6 +21,8 @@ public class Criteria {
 	
 	private boolean orderBy; // list.jsp 최신순,추천순 정렬
 	
+	private boolean orderByCom; // com_list.jsp 최신순,추천순 정렬
+	
 	
 	
 	// 페이지 정보가 넘어오면 알아서 start & end를 자동 설정하기 위함

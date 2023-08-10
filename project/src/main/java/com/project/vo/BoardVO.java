@@ -19,10 +19,14 @@ public class BoardVO {
 	
 	private String cateName1; // 카테고리명
 	private String cateName2; // 카테고리명
-
+	
 	private String newpost; // 신규 글 여부 
-	// private String regtime; // 신규 글 여부 
 	
 	private String I_NAME; // 재료명
+	
+	private int com_bno; // 커뮤니티 게시판 테스트용
+	private String com_content; // 커뮤니티 게시판 테스트용
+	private String com_title; // 커뮤니티 게시판 테스트용 
+	private String replycnt; // 커뮤니티 게시판 테스트용 
 	
 }

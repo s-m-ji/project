@@ -4,22 +4,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>welcome</title>
-
-<!-- 로딩용 페이지입니다. -->
+<title>Insert title here</title>
+<!-- 404 페이지입니다. -->
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
+    @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box; 
+  
+  }
 
 *, *:before, *:after {
   box-sizing: inherit; }
 
 body {
-  background: #F6F4E8;
+  background: #f7863b36;
   color: #313030;
-  font-family: "soleil", Helvetica, sans-serif; }
+  font-family: "soleil", Helvetica, sans-serif;
+  font-family: 'omyu_pretty';
+   }
+  
+  h1, h3 {
+	position: fixed;
+    top: 37.5%;
+    left: 50%;
+    text-align: center;
+    transform: translate3d(-50%, -50%, 0);
+    font-size: 12em;
+    color: #F7863B;
+}
+
+h3 {
+	top: 60%;
+	font-size: 3em;
+}
+  
 
 @keyframes blurIn {
   0% {
@@ -60,10 +86,10 @@ body {
     opacity: 0; } }
 
 #loader {
-  background: #F6F4E8;
+  /* background: #f7863b36; */
   width: 400px;
   position: fixed;
-  top: 50%;
+  top: 30%;
   left: 50%;
   text-align: center;
   transform: translate3d(-50%, -50%, 0); }
@@ -74,13 +100,13 @@ body {
     animation-fill-mode: both; }
   #loader .emoji {
     display: block;
-    font-size: 3.5em;
+    font-size: 4em;
     margin-bottom: 0.2em;
     animation-delay: 0.1s; }
   #loader .text {
     line-height: 1;
     color: #7F6544;
-    font-size: 20px;
+    font-size: 1.75em;
     margin-right: -14px; }
     #loader .text:after {
       content: '';
@@ -97,15 +123,20 @@ body {
     animation-duration: 0.3s;
     animation-timing-function: cubic-bezier(0.58, -0.23, 0.3, 1.3);
     animation-fill-mode: both; }
+    
+
+
 
 </style>
 </head>
 <body>
-	<div id="loader">
-	</div>
+	
+	<div id="loader"></div>
+	<h1>404</h1>
+	<h3>페이지를 찾을 수 없습니다.</h3>
 	<script type="text/javascript">
 	var LOADER_CONTAINER = $("#loader");
-	var LOADER_INTERVAL = 1600;
+	var LOADER_INTERVAL = 2000;
 	var LOADERS = [
 		["🌶","고추를 다져요"],
 		["🔪","칼을 갈아요"],
@@ -124,7 +155,7 @@ body {
 		["🥕","당근의 껍질을 벗겨요"],
 		["🍲","수프를 저어요"],
 		["🐸🍵","차를 쏟아요"],
-		["🍕","피자를 오븐에 굽아요"],
+		["🍕","피자를 오븐에 구워요"],
 		["🔥","버너를 켜요"],
 		["🥔","감자를 구워요"],
 		["🤔","맛을 시험해봐요"],
@@ -151,7 +182,7 @@ body {
 		["🍔","버거를 뒤집어요"],
 		["🍻","잔을 충돌시켜요"],
 		["🍴","식기를 닦아요"],
-		["🍪","쿠키를 굽아요"],
+		["🍪","쿠키를 구워요"],
 		["🍣","스시를 말아요"],
 		["🍶","사케를 데워요"],
 		["🍱","벤토 박스에 담아요"],
@@ -168,7 +199,7 @@ body {
 		["🛎","종을 울려요"],
 		["🍫","초콜릿을 녹여요"],
 		["🍜","라면을 요리해요"],
-		["🥖","바게트를 굽아요"],
+		["🥖","바게트를 구워요"],
 		["❄️","얼음을 베어요"],
 		["🥛","밀크셰이크를 믹스해요"],
 		["🍄","버섯을 다져요"],

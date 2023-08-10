@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ComReplyMapper">
+
+	<!-- 댓글 목록 -->
+	<select id="getList" resultType="java.util.Map">
+
+	select * from com_reply
+	
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="insert">
+		insert into com_reply (R_NO,  reply, com_bno,mno)
+    	values (SEQ_COMREPLY.nextval, #{reply} , #{com_bno},#{mno})
+	</insert>
+
+	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		delete 
+		from	com_reply
+		where 	R_NO =#{R_NO} 
+		
+	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="update">
+		update com_reply
+			set reply = #{reply}
+			, updatedate = sysdate
+			where R_NO = #{R_NO}
+	</update>
+	
+	
+	
+	
+	
+	<select id="getMyReplies" resultType="com.project.vo.ComReplyVO">
+		SELECT R_NO, reply, mno, replydate
+		FROM com_reply
+		WHERE com_bno = #{com_bno}
+		ORDER BY R_NO DESC
+	</select>
+	
+	
+	<select id="getone" resultType="int">
+	
+		select * from com_reply where R_NO = #{R_NO}
+	</select>
+	
+	
+	<select id="getTotalCnt" resultType="int">
+	 	select count(*) from com_reply 
+	</select>
+	
+	
+	<select id="getCom_bnoCnt" resultType="int">
+    	select count(*) from com_reply where com_bno = #{com_bno}
+	</select>
+
+
+
+
+
+</mapper>

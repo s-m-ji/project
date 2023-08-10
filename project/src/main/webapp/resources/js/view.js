@@ -1,9 +1,26 @@
 console.log('연결 확인 ===================================================') 
 	
-
+		// swal 커스텀함수
+		function alertCustomizing(){
+			
+			// 성공swal 커스텀
+			console.log('왜 때문에 실행이 되지 않을까 ?? =============================');
+			document.querySelector('.swal-button').style.backgroundColor= '#F7863B';
+			
+			const elements = document.querySelectorAll('.swal-icon--success__line');
+			
+			elements.forEach(element => {
+			    element.style.backgroundColor = '#F7863B';
+			});
+			
+			document.querySelector('.swal-icon--success').style.borderColor ='#F7863B';
+			
+			
+			//
+		};
 		
 		
-
+		
 		function initializeStarRatings() {
    			 $(".test-score1").score();
   		}
@@ -40,31 +57,87 @@ console.log('연결 확인 ===================================================')
 		// 상단 img
 		// ======================================================================
 		
-		function viewFileList(map){
-			
-			// 잘 들어왔는지 확인
-			// console.log('map 출력 :', map);
-			let content = '';
-			
-			if(map.list.length > 0) {
-				
-				map.list.forEach(function(item, index){
-					
-					let savePath = encodeURIComponent( item.savePath);
-					// console.log('savePath : ', savePath);
-					
-					content +=
-						
-						'<a><img style="max-width:500px; max-height:500px;" src="/display?fileName=' + savePath +'"></a>';
-				})
-				
-				
-			}else { 
-				content = '등록된 파일이 없습니다.';
-			}
-			
-			headImgDiv.innerHTML = content;
-			
+		// 최근 본 페이지로 이동하기 위해 Controller 에 b_no 값 전달
+		function redirectToView(b_no) {
+		    window.location.href = './view?b_no=' + b_no;
+		}
+		
+		
+		/**
+		 * 최근 본 페이지를 로컬스토리지에서 꺼내 올 수 있는 함수입니다.
+		 * @returns
+		 */
+		function recentPage() {
+		    const recentlyViewed = document.getElementById('recentlyViewed');
+		    const recentArray = JSON.parse(localStorage.getItem('recentArray')) || [];
+
+		    
+		    
+		    
+		    const uniqueItems = Array.from(new Set(recentArray.map(item => JSON.stringify(item))))
+		        .map(itemString => JSON.parse(itemString));
+		    let imgTag =''; 
+		    uniqueItems.forEach((item, index) => {
+		      
+		    	
+		    	let savePath = item.savePath;
+		    	let b_no = item.b_no;
+		    	let title = item.title;
+		    	
+		    	console.log('item.b_no : ', item.b_no);
+		        console.log('item.savePath : ', item.savePath);
+		        console.log('item.title : ', item.title);
+		        
+		        imgTag += 
+		        	  '<div class="recentPageDiv" onclick="redirectToView(' + b_no + ')">'		        		
+		        	+   '<img style="max-width:180px; max-height:180px;" src="/display?fileName=' + savePath +'">'
+		        	+   '<div>'+title+'</div>'
+		        	+ '</div>';
+		        
+		    });
+		    
+		    recentlyViewed.innerHTML = imgTag;
+		}
+		
+		
+		function viewFileList(map) {
+		    let bno = document.querySelector('#b_no').value;
+		    let title= document.querySelector('#title').value;
+		    console.log('map 출력:', map.list);
+		    let content = '';
+
+		    if (map.list.length > 0) {
+		        const recentArray = JSON.parse(localStorage.getItem('recentArray')) || [];
+
+		        map.list.forEach(function (item, index) {
+		            let savePath = encodeURIComponent(item.savePath);
+
+		            content +=
+		                '<a><img style="max-width:500px; max-height:500px;" src="/display?fileName=' + savePath + '"></a>';
+
+		            // 데이터가 이미 recentArray에 존재하는지 확인
+		            const isDuplicate = recentArray.some(existingItem =>
+		                existingItem.b_no === bno && existingItem.savePath === savePath
+		            );
+
+		            if (!isDuplicate) {
+		                const recent = {
+		                    b_no: bno,
+		                    savePath: savePath,
+		                    title: title
+		                };
+
+		                recentArray.push(recent);
+		            }
+		        });
+
+		        // 업데이트된 recentArray를 localStorage에 저장
+		        localStorage.setItem('recentArray', JSON.stringify(recentArray));
+		    } else {
+		        content = '등록된 파일이 없습니다.';
+		    }
+
+		    headImgDiv.innerHTML = content;
 		}
 			
 		// 요리완성 사진 불러오는 함수 // 
@@ -483,7 +556,7 @@ console.log('연결 확인 ===================================================')
 		   		// 정보를 가져와서 함수에 파라메터로 넣는다.
 		   		fetch('/replyList/' + bno)
 		   			.then(response => response.json())
-		   			.then(map => viewReplyList_Test2(map));
+		   			.then(map => viewReplyList_Test3(map));
 				
 		   		$(".test-score1").score();
 		}
@@ -604,7 +677,9 @@ console.log('연결 확인 ===================================================')
 			  }
 			
 			function viewReplyList_Test2(map) {
-				  // console.log('comments list map output: ', map);
+				
+				// viewReplyList_Test2 출력
+				console.log('viewReplyList_Test2 map ========================: ', map);
 				
 				photoReviewCnt.innerHTML = map.photoReviewCnt +'건';	
 				replyCnt.innerHTML = map.replyCnt + '건';
@@ -739,6 +814,173 @@ console.log('연결 확인 ===================================================')
 				  }
 				
 			}
+			
+// ======================================================================================================================
+			
+				function viewReplyList_Test3(map) {
+						
+						// viewReplyList_Test2 출력
+						console.log('viewReplyList_Test2 map ========================: ', map);
+						
+						photoReviewCnt.innerHTML = map.photoReviewCnt +'건';	
+						replyCnt.innerHTML = map.replyCnt + '건';
+						
+						  let content = '';
+						  let showAll = false;
+		
+						  // 댓글 반복 출력 문단 생성
+						  function generateItemHtml(item, photoReview) {
+						    let r_no = item.r_no; // comment number
+						    let replydate = item.replydate; // Date Created
+						    let reply = item.reply; // detail
+						    let writer = item.writer; // Writer
+						    let star = item.star;
+						    
+
+						    let matchedImg = photoReview.find(item => item.r_no == r_no);
+						    
+						    if(matchedImg){
+						    
+						    	let savePath = encodeURIComponent(matchedImg.savePath);
+							    
+							    console.log('matchedImg ===============================: ', matchedImg);
+							    // Let's take it to the input hidden and make it available when
+								// clicking on it.
+							    // We need to get the picture associated with the comment later.
+							    return (
+							    		
+							      '<div class="media-body" style="position: relative;padding-bottom: 25px;">' 
+							     + '<h4 class="media-heading">'
+							     + '<b class="info_name_f">' + writer + '</b>'
+							     +'<span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' 
+							     + '<p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyDelete('+r_no+')">삭제</p><p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
+							     + '<p class="reply_list_cont cont'+r_no+'" style="position: absolute; top: 20px;">' + reply + '</p><form name="editForm" onSubmit="return false;" style="display:flex;"><input type="hidden" value="'+r_no+'"><input style="width:400px;" type="hidden" id="reply'+r_no+'" class="replyUpdate'+r_no+'" name="replyUpdate" value="'+reply+'"><button class="editBtn'+r_no+'" style="display:none;"onclick="goReplyUpdate('+r_no+')">수정</button></form>'
+							     + '<div class="replyIMGDiV" style="position: absolute; right: 0; top: 0;"><img style="width:80px; height:80px;" src="/display?fileName=' + savePath + '"></div></div>' 
+							     
+							    );
+						    	
+						    }else {
+						    	
+						    	
+						    	 return (
+								    		
+									      '<div class="media-body">' 
+									     + '<h4 class="media-heading">'
+									     + '<b class="info_name_f">' + writer + '</b>'
+									     +'<span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' 
+									     + '<p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyDelete('+r_no+')">삭제</p><p style="cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
+									     + '<p class="reply_list_cont cont'+r_no+'">' + reply + '</p><form name="editForm" onSubmit="return false;" style="display:flex;"><input type="hidden" value="'+r_no+'"><input style="width:400px;" type="hidden" id="reply'+r_no+'" class="replyUpdate'+r_no+'" name="replyUpdate" value="'+reply+'"><button class="editBtn'+r_no+'" style="display:none;"onclick="goReplyUpdate('+r_no+')">수정</button></form></div>'  
+									     
+									    );
+						    }
+						    
+						    
+						  }
+						  
+						 
+						  // Function to display all items in map.replyList
+						  function displayAllItems() {
+						    showAll = true;
+						    content = '';
+						    map.replyList.forEach(function (item) {
+						      content += generateItemHtml(item, map.photoReview);
+						    });
+						    generalCommentDiv.innerHTML = content;
+						    $(".test-score1").score();
+						  }
+		
+						 
+						  
+						  // If there is a value specified when putting it to the map in
+							// the controller...
+						  if (map.replyList.length > 0) {
+						    
+							 // Show the first five items initially
+						    for (let index = 0; index < Math.min(5, map.replyList.length); index++) {
+						      const item = map.replyList[index];
+						      content += generateItemHtml(item, map.photoReview);
+						      
+						      console.log('작성자 반복 출력', item.writer);
+						    }
+						    generalCommentDiv.innerHTML = content;
+						    $(".test-score1").score();
+		
+						    // Add event listener to the '더보기' button
+						    const moreButton = document.getElementById('moreButton');
+						    moreButton.addEventListener('click', displayAllItems);
+						  } else {
+						    content = '댓글이 없습니다.. 첫번째 후기를 남길 기회에요!';
+						    generalCommentDiv.innerHTML = content;
+						  }
+		
+		 
+						  // 포토리뷰 출력 부 ---------------------------------------------------- 
+						  
+						  let photoReply = '';
+		
+						// console.log(map.photoReview);
+						 // console.log(map.replyList);
+		
+						  if (map.photoReview.length > 0) {
+						    map.photoReview.forEach(function (item, index) {
+						    	
+						    	//console.log('map.photoReview : ', map.photoReview);
+						      let savePath = encodeURIComponent(item.savePath);
+						      let r_no = item.r_no;
+						     // console.log('savePath : ', savePath);
+		
+						      // Use encodeURIComponent for the entire JSON string to
+								// handle quotes correctly
+						      let photoReviewJson = encodeURIComponent(JSON.stringify(map.photoReview));
+						      let replyListJson = encodeURIComponent(JSON.stringify(map.replyList));
+		
+						    // console.log('================================');
+						    // console.log(map.replyList[index]);
+						    // console.log(map.replyList);
+		
+						      let reply = map.replyList[index];
+						      let replyJson = JSON.stringify(reply);
+						   // console.log(replyJson);
+						      
+		
+						      if (!showAll && index >= 10) {
+						        
+						    	  photoReply +=
+						       
+						        '<div class="w20p" style="display: none;"><p class="pclass"><a onclick="photoModal_TEST(\'' + savePath + '\', \'' + encodeURIComponent(replyJson) + '\' , \'' + replyListJson + '\' , \'' + photoReviewJson + '\', \'' + r_no + '\', \'' + index + '\')">' +
+						          '<img  src="/display?fileName=' + savePath + '"></a></p></div>';
+						       
+						        
+						      } else {
+						    	  
+						    	  	photoReply +=
+							          '<div style="cursor: pointer;" ><p class="pclass"><a onclick="photoModal_TEST(\'' + savePath + '\', \'' + encodeURIComponent(replyJson) + '\' , \'' + replyListJson + '\' , \'' + photoReviewJson + '\', \'' + r_no + '\', \'' + index + '\')">' +
+							          '<img class="w136" src="/display?fileName=' + savePath + '"></a></p></div>';
+						    	 
+						    	  if(index == 9){
+						    	
+						    		  photoReply +=
+								          '<p class="moreP" style="width:100px; height:100px;" onclick="photoModal_TEST(\'' + savePath + '\', \'' + encodeURIComponent(replyJson) + '\' , \'' + replyListJson + '\' , \'' + photoReviewJson + '\', \'' + r_no + '\', \'' + index + '\')"" >더보기</p>'
+						    	  }
+						        
+						      }
+						      
+						    });
+						    
+						    photoReviewDiv.innerHTML = photoReply;
+						  
+						  }else{
+							  
+							  photoReply +=
+								  '포토리뷰가 없습니다. 첫 사진 후기를 남겨주세요 !';
+								  
+								  photoReviewDiv.innerHTML = photoReply;
+						  }
+						
+					}
+			
+			
+			
 
 //-----------------------------------------------------------------------------------
 

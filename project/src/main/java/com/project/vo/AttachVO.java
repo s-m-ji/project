@@ -11,4 +11,6 @@ public class AttachVO {
 	private int B_NO; // 게시글 번호
 	private String savePath; // 저장된 파일 경로
 	private String t_savePath; // 저장된 썸네일 경로
+	
+	private int com_bno; // 커뮤니티 게시판 테스트용  
 }
