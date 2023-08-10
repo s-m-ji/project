@@ -33,7 +33,7 @@
 
                 <!-- Feature -->
                     <section>
-                        <a href="/recipe/admin" class="image featured"><img src="../resources/images/member.jpg" alt="" style="width: 100%; height: 100%;"/></a>
+                        <a href="/recipe/admin" class="image featured"><img src="../resources/images/member.jpg" alt=""style="width: 100%; height: 278px;"/></a>
                         <header>
                             <h1>회원 관리👨🏻‍👩🏻‍👧🏻‍👦🏼</h1>
                         </header>

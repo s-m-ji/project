@@ -98,7 +98,6 @@ function getFileList(){
 				content += 
 				 	 '<img src="/recipe/displayAdmin?filename='+savePath+'"alt="회원 사진"'+item.mno+'" style="width: 100px;">'
 				 	 + '<i class="fa-solid fa-square-xmark" data-mno="'+item.mno+'"data-uuid="'+item.uuid+'" onclick="attachFileDelete(this)"></i>' 
-					+ 	'<i class="fa-solid fa-pencil" data-mno="'+item.mno+'"data-uuid="'+item.uuid+'" onclick="attachFileUpdate(this)"></i>'
 					+ '<br>' ;
 				 
 				})
@@ -106,7 +105,7 @@ function getFileList(){
 		 			 '	</div> '
 		 			+ '</div>  ';
 			}else{
-				content = '등록된 파일이 없습니다.';
+				content ='';
 			}
 			divFileupload.innerHTML = content;
 		}	
@@ -128,22 +127,14 @@ function getFileList(){
 		function delRes(map){
 			if(map.result == 'success'){
 				alert('삭제');
+				let divFileUpload = document.querySelector('#divFileupload');
+				divFileUpload.style.display='none';
 				getFileList();
 			}else{
 				alert('삭제 실패');
 			}
 		}
 		
-		function attachFileUpdate(e){
-			(e.dataset.aaa)?'true':'false';
-			let mno = e.dataset.mno;
-			let uuid = e.dataset.uuid;
-			
-			console.log(mno);
-			console.log(uuid);
-			
-			
-		}
 </script>
   <style>
     body {
@@ -205,15 +196,15 @@ function getFileList(){
         <h4 class="mb-3 inputTitle">회원수정👨🏻‍👩🏻‍👧🏻‍👦🏼</h4>
         
        <c:set value="${memList}" var="member"></c:set>
-       <input type="text" class="form-control" id="mno" name ="mno" placeholder="회원번호" value="${member.mno }">
+       <input type="text" class="form-control" id="mno" name ="mno" placeholder="회원번호" value="${member.mno }" hidden>
        
         <form action="/recipe/adminUpdateAction?mno=${member.mno}" method="post" accept-charset="UTF-8"  name="editForm" enctype="multipart/form-data" novalidate>
             
 	    <!--  파라메터 🌈 --> 
-	   	<input type ="text" name= "pageNo" value="${param.pageNo}" id = "pageNo" >
-		<input type ="text" name= "sField" value="${param.sField }" >
-		<input type ="text" name= "sWord" value="${param.sWord}" >
-   		<input type="text" name="mno" value="${member.mno}" id = "mno" >
+	   	<input type ="text" name= "pageNo" value="${param.pageNo}" id = "pageNo" hidden>
+		<input type ="text" name= "sField" value="${param.sField }" hidden>
+		<input type ="text" name= "sWord" value="${param.sWord}" hidden>
+   		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
    		
             <div class="mb-4">
               </div>
@@ -258,13 +249,13 @@ function getFileList(){
             </div>
           </div>
 
- <!--    <div class="mb-3">
+    <div class="mb-3">
             <label for="files">회원 사진</label>
             <input type="file" class="form-control" id="files" name ="files" required style="border: 1px solid white;">
             <div class="invalid-feedback">
              파일을 등록해주세요.
             </div>
-          </div> -->
+          </div> 
           
           <!--  파일 목록을 뿌려주는 공간 -->
 	 <div class="mb-3" id="divFileupload">

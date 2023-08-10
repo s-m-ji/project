@@ -69,7 +69,7 @@ public class MemberController {
 
 	// 회원 체크박스 삭제 
 	@PostMapping("delMem")
-	public String delMem(@RequestParam("delMno") String[] delMno, Model model)  {
+	public String delMem(@RequestParam String[] delMno, Model model)  {
 		
 		for(String mno : delMno) {
 			
@@ -85,7 +85,7 @@ public class MemberController {
 			}else{
 				// 삭제건수가 있는 경우 탈퇴(신청) 
 				System.out.println(delCnt);
-				message = "회원 탈퇴 신청이 정상적으로 처리되었습니다.";
+				message = delCnt + "건 회원 탈퇴 신청이 처리되었습니다.";
 				model.addAttribute("message",message);
 				model.addAttribute("url", "/recipe/admin");
 				return  "/common/message";
@@ -202,7 +202,7 @@ public class MemberController {
 	public @ResponseBody Map<String, Object> fileList(@PathVariable("mno") int mno){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("FileList", adminfileservice.fileSelect(mno));
-		System.out.println("파일 한건 조회 : "+ adminfileservice.fileSelect(mno));
+		System.out.println("파일 한건 조회 : "+ map);
 		return map;
 	}
 	
@@ -317,9 +317,11 @@ public class MemberController {
 	}
 	  
 	@GetMapping("reward")
-	public void rewardList() {
-		
+	public void rewardList(Model model) {
+		memberservice.rewardListReal(model);
 	}
+
+	
 	// 리워드 페이지 (
 	@GetMapping("reward/list/{startDate}/{endDate}")
 	@ResponseBody

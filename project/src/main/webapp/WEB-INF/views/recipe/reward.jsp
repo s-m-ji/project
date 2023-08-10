@@ -42,8 +42,7 @@ function rewardView(map){
 		rewardDiv.innerHTML = '검색결과가 없습니다.';
 	}else{
 		let rewardDivStr = 
-			'리워드목록'
-		+ '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
+		 '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
 		+ '<thead>'
 		+'<tr>'
 		+'<th>회원 번호</th>'
@@ -184,7 +183,7 @@ function fetchPost(url, obj, callback){
 </head>
 <body>
 
-<!--  검색 조건 ()  -->
+<!--  검색 조건   -->
 <div class="duration">
 
 <input type="date" id="startDate" name="startDate"/>
@@ -194,6 +193,52 @@ function fetchPost(url, obj, callback){
 
 <div id = "rewardDiv">
 </div>
+
+<div class="list-group w-auto">
+	        <div class="panel-body">
+<table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">
+		<thead>
+		<tr>
+		<th>회원 번호</th>
+		<th>이름</th>
+        <th>닉네임</th>
+        <th>누적 조회수</th>
+        <th>게시글 등록일</th>
+        <th>탈퇴 신청 여부</th>
+        <th>회원 등급</th>
+        <th>등급 변경</th>
+        <th>혜택</th>
+		<tr>
+		</thead>
+		
+	   <c:forEach items="${rewardListReal}" var = "real" step="1">
+	   <c:if test="${not empty rewardListReal}">
+	   <tbody>
+		
+				<tr class="odd gradeX">
+				<td>${real.mno}</td>
+				<td>${real.name}</td>
+				<td>${real.nickname}</td>
+				<td>${real.viewcnt}</td>
+				<td>${real.regdate}</td>
+				<td>${real.delYNStr}</td>
+				<td>${real.grade}</td>
+				
+				<td>
+				<select class="form-select">
+				<option selected>선택입력</option>
+				<option value="1" >cook Helper</option>
+				<option value="2">cook Manager</option>
+				<option value="3">sous chef</option>
+				<option value="4">head chef</option>
+				</select>
+				</td>
+				<td>${real.benefit}</td>
+				</tr>
+				</tbody>
+				</c:if>
+			</c:forEach>
+			</table>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
 		

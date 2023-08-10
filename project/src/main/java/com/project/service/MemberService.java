@@ -58,5 +58,7 @@ public interface MemberService {
 	// 리워드 수정 
 	public int gradeUpdate(MemberVo membervo);
 
+	// 리워드 조회 
+	public List<MemberVo> rewardListReal(Model model);
 
 }

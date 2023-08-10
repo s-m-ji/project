@@ -7,74 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <title> 회원 관리</title>
+		
+	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
+	
+	<!-- 부트스트랩  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+	<!-- admin.css (지수) -->
+ 	<link rel="stylesheet" type="text/css" href="/resources/recipe_css/admin.css">
+    
+	<!-- pageNavi css -->	
+	<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
+	
     <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
 
-<!--  admin (지수) css -->
-  <style>
-  .memImgDiv{
-    padding: 10px;
-  }
-  .memImg{
-    border: 1px solid rgb(255, 255, 255);
-    border-radius: 50%;
-  }
-  .memInfo{
-    padding-top: 0px;
-    padding-left: 10px;
-  }
-  #memInputBtn{
-  	display: flex;
-  	align-items: center;
-  }
-  #memInputBtn input[type='button'], #memInputBtn input[type='submit']{
-    border: none;
-    background-color: #f7863b3f;
-    border-radius: 3px ;
-    padding: 7px;
-    font-size: small;
-  }
-  #memInputBtn input[type='button']:hover, #memInputBtn input[type='submit']:hover{
-    border: none;
-    background-color: #f79e62;
-    border-radius: 3px ;
-    padding: 7px;
-    font-size: small;
-  }
-  .memName{
-    padding: 10px;
-    font-size: 1.2em;
-  }
-  .memName .d-block{
-    padding-top: 5px;
-  }
-  .checkboxLine{
-    padding-top: 10px;
-  }
-  .searchBox{
-  	display: flex;
-  	padding-left: 370px;
-  	margin-top: 50px;
-  }
-  .searchField{
-  	width: 200px;
-  	margin-right: 10px;
-  }
-  .searchText{
-  	color: white;
-  }
-  .aName{
-  	text-decoration: none;
-  	color: #F7863B;
-  }
-  .aName:hover{
-  	text-decoration: none;
-  	color: #F7863B;
-  	border: 1px solid white;
-  }
-</style>
-<script src="/resources/assets/js/jquery-3.7.0.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 window.addEventListener("load", function(){
@@ -129,6 +77,8 @@ function toggleCheckboxes() {
     for (var i = 0; i < chkBox.length; i++) {
        chkBox[i].checked = isChecked;
     }
+    console.log(chkBox);
+    console.log(adminChkBox);
   }
   
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
@@ -138,6 +88,20 @@ function toggleCheckboxes() {
 	}
 	function inputBtnOnclick() {
 		location.href = "/recipe/adminInput";
+	}
+	
+	function delBtnOnclick(){
+		 var selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+		    
+		    if (selectedCheckboxes.length === 0) {
+		    alert('삭제할 회원을 선택해주세요.');
+		     /*    swal('삭제할 회원을 선택해주세요.'); */
+		    var delForm = document.getElementById('delForm');
+		    delForm.submit();
+				location.href = "/recipe/admin";
+		        return;
+		    }
+
 	}
 	
 	function adminUpdateAction(url,mno){
@@ -154,16 +118,17 @@ function toggleCheckboxes() {
 <!-- Main -->
 <section id="main">
 	<div class="container">
+<div class="container">
 	
 <!--  검색폼 (회원명, 회원등급명, 탈퇴신청여부)  -->
 <form name ="searchForm" method ="get" action="/recipe/admin" >
 
 	<!-- 파라메터 -->
-	<input type="text" name ="pageNo" value ="${pageDtoA.cri.pageNo}"></input>
-	<input type="text" name ="mno" value= "${member.mno}">
+	<input type="text" name ="pageNo" value ="${pageDtoA.cri.pageNo}" hidden></input>
+	<input type="text" name ="mno" value= "${member.mno}" hidden>
 	
 	<table border ='1' width ="100%" class = "formtable">
-		<tr>
+		<tr style="border: 1px solid white;">
 		<td align = "center" class = "formtd searchBox">
 			<select name ="sField" class="searchField">
 				<option value="">전체</option>
@@ -180,19 +145,21 @@ function toggleCheckboxes() {
 </form> 	
 
 <!-- 회원 목록 조회 및 삭제 기능 --> 
-<div style="padding-left: 1111px;">
-<p> with💕<b>${totalCnt}</b>명의 회원💕</p>
+<div style="display: flex;justify-content: flex-end;">
+<p style="margin: 0px;"> 오늘의 회원 <b style="font-size: 1.8em">${totalCnt}</b>명💕</p>
 </div>
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-0">
     </h6>
     <h6 class="border-bottom pb-2 mb-0 checkboxLine">
-      <form action = "/recipe/delMem" method="post" name="updateForm">
+      <form action = "/recipe/delMem" method="post" name="updateForm" name="updateForm" id="delForm">
         <div id='memInputBtn'>
             <input type="checkbox" class="form-check-input" id="adminChkBox" onclick='toggleCheckboxes()' style="margin-right: 10px;">
             <label class="form-check-label" for="same-address"></label>
+            	<div class= "btnDiv">
           <input type='button' id='deleteBtn' value='회원등록'onclick='inputBtnOnclick()' style="margin-right: 6px;" >
-          <input type='submit' id='inputBtn' value='회원탈퇴'  >
+          <input type='submit' id='inputBtn' value='회원탈퇴' onclick="delBtnOnclick()" >
+          		</div>
         </div>
       </h6>
 
@@ -230,7 +197,6 @@ function toggleCheckboxes() {
         <i class="fa-solid fa-award"> ${member.grade}</i>
         　<i class="fa-solid fa-user-xmark"> ${member.delYNStr}</i>
       </div>
-
       </div>
     </div>
   </c:if>
@@ -238,10 +204,39 @@ function toggleCheckboxes() {
   </div>
 </form>
 
-
+<!-- 페이지 블럭  -->
+<c:set var="pageDtoA" value="${pageDtoA}"/>
+<div class="text-center pageNavi" style="padding: 10px;">
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item ${pageDtoA.prev? '' : 'disabled'}">
+	      <a class="page-link" onclick="goAdmin(1)" href="#"><i class="bi bi-chevron-double-left"></i></a>
+	    </li>
+	    <li class="page-item ${pageDtoA.prev? '' : 'disabled'}" >
+	      <a class="page-link" <c:if test="${pageDtoA.prev}"> onclick="goAdmin(${pageDtoA.startNo - 1})"</c:if>  href="#"><i class="bi bi-chevron-left"></i></a>
+	    </li>
+	     <c:forEach begin="${pageDtoA.startNo}" end="${pageDtoA.endNo}" step="1" var="i">
+   		 <li class="page-item ${i eq pageDtoA.cri.pageNo ? 'active' : ''}">
+   		 	<a class="page-link ${i eq pageDtoA.cri.pageNo ? 'active' : ''}" onclick="goAdmin(${i})" href="#"><c:out value="${i}"></c:out></a>
+   		 </li>
+	    </c:forEach>
+	    <li class="page-item ${pageDtoA.next? '' : 'disabled'}">
+	      <a class="page-link" <c:if test="${pageDtoA.next}"> onclick="goAdmin(${pageDtoA.endNo + 1})"</c:if> href="#"><i class="bi bi-chevron-right"></i></a>
+	    </li>
+	    <li class="page-item ${pageDtoA.next? '' : 'disabled'}">
+	      <a class="page-link" onclick="goAdmin(${pageDtoA.realEndNo})" href="#"><i class="bi bi-chevron-double-right"></i></a>
+	    </li>
+	  </ul>
+	</nav>
+	</div>
+		</div>
+	</div>
+</section>
+<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>
 <!--  페이지 블럭 생성 -->
+	<%-- 	 <c:set var="pageDtoA" value="${pageDtoA}"/>
             <div class ="div d-md-flex justify-content-md-center">
-		<c:set var="pageDtoA" value="${pageDtoA}"/>
 		
 		<!-- 이전버튼 -->
 		<c:if test="${pageDtoA.prev}">
@@ -259,6 +254,7 @@ function toggleCheckboxes() {
 		</c:if>
 		</div>
 	</div>
+	</div>
 </section>
 <!-- Footer -->
-	<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>  --%>

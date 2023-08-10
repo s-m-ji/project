@@ -32,6 +32,10 @@ public class MemberServiceImpl implements MemberService {
 	 // 회원 목록 조회 (검색조건 + 페이징)
 	@Override
 	public List<MemberVo> memberList(Criteria cri, Model model) {
+			/* 페이지 게시물 개수 처리 */
+		cri.setAmount(5);
+		cri.setPageNo(cri.getPageNo());
+		
 		List<MemberVo> list = membermapper.memberList(cri);
 		int totalCnt = membermapper.getTotalCnt(cri);
 		PageDto pageDtoA = new PageDto(cri, totalCnt);
@@ -77,6 +81,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional(rollbackFor = Exception.class)
 	public int memberUpdate(MemberVo membervo, ArrayList<MultipartFile> files) throws Exception {
 		int res = membermapper.memberUpdate(membervo);
+		adminfileservice.fileupload(files, membervo.getMno());
 		return res;
 	}
 
@@ -84,6 +89,10 @@ public class MemberServiceImpl implements MemberService {
 	// 공지 목록 조회
 	@Override
 	public List<NoticeVo> noticeList(Criteria cri,Model model) {
+		/* 페이지 게시물 개수 처리 */
+		cri.setAmount(6);
+		cri.setPageNo(cri.getPageNo());
+		
 		List<NoticeVo> notList = membermapper.noticeList(cri);
 		int totalNcnt = membermapper.getTotalNcnt(cri);
 		PageDto pageDtoN = new PageDto(cri, totalNcnt);
@@ -135,6 +144,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int gradeUpdate(MemberVo membervo) {
 		return membermapper.gradeUpdate(membervo);
+	}
+
+	@Override
+	public List<MemberVo> rewardListReal(Model model) {
+		List<MemberVo> rewardListReal = membermapper.rewardListReal();
+		model.addAttribute("rewardListReal", rewardListReal);
+		return null;
 	}
 
 	

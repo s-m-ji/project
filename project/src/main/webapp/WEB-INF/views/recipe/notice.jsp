@@ -9,20 +9,25 @@
 	
 	<script src="/resources/assets/js/jquery-3.7.0.js"></script>
 	
+	<!-- 부트스트랩  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ 	
+ 	<!-- notice.css (지수) -->
+ 	<link rel="stylesheet" type="text/css" href="/resources/recipe_css/notice.css">
+    
+    <!-- pageNavi css -->	
+ 	<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
+	
+    <!--  fontawesome -->    
+    <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
+   
+   <!--  Header -->
+ 	<%@ include file="../common/header.jsp" %> 
+ 
+	
 	<!--  모달 창 js -->
 	<script type="text/javascript" src="/resources/recipe_js/modal.js"></script>
 	
-	<!-- 부트스트랩을 사용하기 위해서 css, js를 추가 합니다. -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
- 	
- 	<!--  notice의 css   ** recipe_css 로 -->
- 	<link rel="stylesheet" type="text/css" href="/resources/recipe_css/notice.css">
-    
-    <!--  fontawesome -->    
-    <script src="https://kit.fontawesome.com/59843f4445.js" crossorigin="anonymous"></script>
-    
- <%@ include file="../common/header.jsp" %> 
- 
 
 <script type="text/javascript">
 window.addEventListener('load', function(){
@@ -46,17 +51,7 @@ window.addEventListener('load', function(){
 	
 	
 });
-/* // 공지 클릭 > 상세 
-function dis(element){
- 
-    var $item = $(element).closest('li');
-    if($item.find('.show').is(':hidden')){
-      $item.find('.show').show();
-    }else{
-      $item.find('.show').hide();
-    }
-  }
-   */
+
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
 	document.noticeForm.pageNo.value=page;
@@ -70,7 +65,7 @@ function dis(element){
 <section id="main">
 	<div class="container">
 
-
+	<div class="container">
 
 <!--검색 폼 -->
 <div class="list-group w-auto searchDiv">
@@ -89,12 +84,12 @@ function dis(element){
 </form> 	
 </div>
 
-<!--공지 등록   -->
-
-<div style="padding-left: 910px;" > 
-<p style="margin-bottom: 0px;"> 오늘의 공지<b> ${totalNcnt}</b> 개🪐</p>
+<!--공지 총 개수   -->
+<div style="display: flex;justify-content: flex-end;" > 
+<p style="margin: 0px;"> 오늘의 공지<b style="font-size: 1.8em">${totalNcnt}</b>개📜</p>
 </div>
 <c:set  value="${notList}" var="notice"></c:set>  
+<!-- 공지 등록 -->
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
       공지 등록
@@ -136,7 +131,7 @@ function dis(element){
 
   </div> 
   
-<!-- 공지 사항 목록  -->
+<!-- 공지 목록  -->
 <form method="get" name="viewForm" accept-charset="UTF-8" >
  	
                 <section class="NoticeContentstyle__Container-sc-12y37o4-0 ihesfa">
@@ -186,7 +181,10 @@ function dis(element){
                         <td>
                        	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                        	              <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
-                       <%--  <c:if test="${sessionScope.admin == 'y'}"> --%>
+                       <%--  <c:if test="${sessionScope.admin == 'y'}">
+                       
+                       <c:if test = ${member.getRole() != null && member.getRole().contains("ADMIN_ROLE")}
+                        --%>
                         	<button type="button" class="btn btn-outline-primary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
                         	<button type='button' class="btn btn-outline-primary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
                        <%--  </c:if> --%>
@@ -200,13 +198,13 @@ function dis(element){
                 </c:forEach>     
                 </section>
               </form>
-<!-- 수정 -Modal -->
+<!-- 공지 수정 (modal.js) -->
 <div id="myModal2" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  role="dialog" style="background: transparent;">
   <div class="modal-dialog" style="padding: 0; background: transparent;">
     <div class="modal-content">
       <div class="modal-header">
        <!--  <h1 class="modal-title fs-5" id="exampleModalLabel"></h1> -->
-    	  <h4 id="modal-title" class="modal-title" style='padding-left: 183px;'></h4>
+    	  <h4 id="modal-title" class="modal-title" style="padding-left: 150px;"></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -245,30 +243,36 @@ function dis(element){
   </div>
 </div>
 
-<!-- 페이지 블럭 생성 -->
-            <div class ="div d-md-flex justify-content-md-center">
-		<c:set var="pageDto" value="${pageDtoN}"/>
-		
-		<!-- 이전버튼 -->
-		<c:if test="${pageDtoN.prev}">
-			<input type='button' value='이전' onclick='goNotice(${pageDtoN.startNo-1})' class="btn">
-		</c:if>
-		
-		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDtoN.startNo }" end="${pageDtoN.endNo }" var="i">
-			<input type='button' value='${i}' onclick='goNotice(${i})' class="btn" >
-		</c:forEach>
-		
-		<!-- 다음버튼 -->
-		<c:if test="${pageDtoN.next }">
-			<input type='button' value='다음' onclick='goNotice(${pageDtoN.endNo+1})' class="btn">		
-		</c:if>
+
+<!-- 페이지 블럭  -->
+<c:set var="pageDto" value="${pageDtoN}"/>
+<div class="text-center pageNavi" style="padding: 10px;">
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item ${pageDtoN.prev? '' : 'disabled'}">
+	      <a class="page-link" onclick="goNotice(1)" href="#"><i class="bi bi-chevron-double-left"></i></a>
+	    </li>
+	    <li class="page-item ${pageDtoN.prev? '' : 'disabled'}" >
+	      <a class="page-link" <c:if test="${pageDtoN.prev}"> onclick="goNotice(${pageDtoN.startNo - 1})"</c:if>  href="#"><i class="bi bi-chevron-left"></i></a>
+	    </li>
+	     <c:forEach begin="${pageDtoN.startNo}" end="${pageDtoN.endNo}" step="1" var="i">
+   		 <li class="page-item ${i eq pageDtoN.cri.pageNo ? 'active' : ''}">
+   		 	<a class="page-link ${i eq pageDtoN.cri.pageNo ? 'active' : ''}" onclick="goNotice(${i})" href="#"><c:out value="${i}"></c:out></a>
+   		 </li>
+	    </c:forEach>
+	    <li class="page-item ${pageDtoN.next? '' : 'disabled'}">
+	      <a class="page-link" <c:if test="${pageDtoN.next}"> onclick="goNotice(${pageDtoN.endNo + 1})"</c:if> href="#"><i class="bi bi-chevron-right"></i></a>
+	    </li>
+	    <li class="page-item ${pageDtoN.next? '' : 'disabled'}">
+	      <a class="page-link" onclick="goNotice(${pageDtoN.realEndNo})" href="#"><i class="bi bi-chevron-double-right"></i></a>
+	    </li>
+	  </ul>
+	</nav>
+	</div>
 		</div>
-
-    </div>
+	</div>
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>
             
-</body>
-</html>

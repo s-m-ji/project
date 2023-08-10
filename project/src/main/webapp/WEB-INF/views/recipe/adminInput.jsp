@@ -56,8 +56,8 @@
 
       padding-top: 100px;
 
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  /* 원본 */
-      background: linear-gradient(to top right, #ebd9a8 0%, #ff9658 100%);
+     /*  background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  */ /* 원본 */
+      background: linear-gradient(to top right, #ebd9a8 0%, #ffdae6  100%);
     }
 
     .input-form {
@@ -161,7 +161,7 @@
 
           <hr class="mb-4">
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">등록</button>
+          <button class="btn btn-primary btn-lg btn-block"  type="submit">등록</button>
         </form>
       </div>
     </div>

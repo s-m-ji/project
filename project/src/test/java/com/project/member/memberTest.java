@@ -100,5 +100,15 @@ public class memberTest {
 		int res = memberMapper.noticeUpdate(noticevo);
 		log.info(res);
 	}
+	
+	@Test
+	public void rewardList() {
+		List<MemberVo> list = memberMapper.rewardListReal();
+		
+		list.forEach(reward ->{
+			log.info("memberVo ==== ");
+			log.info(reward.getMno());
+		});
+	}
 
 }
