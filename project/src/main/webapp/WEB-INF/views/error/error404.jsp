@@ -4,8 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>404</title>
 <!-- 404 페이지입니다. -->
+
+<!-- 파비콘 설정 -->
+	<link rel="icon" href="/resources/images/favicon.ico">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>

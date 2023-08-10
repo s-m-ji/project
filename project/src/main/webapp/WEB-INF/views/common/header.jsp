@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -6,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
+
+	<!-- 파비콘 설정 -->
+	<link rel="icon" href="/resources/images/favicon.ico">
 
 	<!-- 부트스트랩 아이콘 (MI, 2023/07/26)-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
