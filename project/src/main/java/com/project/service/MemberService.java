@@ -61,4 +61,21 @@ public interface MemberService {
 	// 리워드 조회 
 	public List<MemberVo> rewardListReal(Model model);
 
+	
+
+	
+	// 광민
+	MemberVo login(MemberVo member);
+	
+	int insert(MemberVo member);
+	
+	int emailCheck(MemberVo member);
+
+	int nicknameCheck(MemberVo member);
+
+	String findEmailBy(MemberVo member);
+	
+	String sendPwBy(MemberVo member, Model model);
+
+	boolean emailExists(String email);
 }

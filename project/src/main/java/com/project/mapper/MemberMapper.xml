@@ -4,9 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.MemberMapper">
 
-
-
-<!-- 회원 목록 조회-->
+<!-- 회원 목록 조회 -->
 <select id="memberList" resultType="com.project.vo.MemberVo"> 
       
    <![CDATA[select * from (
@@ -158,7 +156,6 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	UPDATE REC_MEMBER SET gno = #{gno} where mno = #{mno}
 </update>
 
-
 <!-- 리워드 목록 조회 (2) -->
 <select id="rewardListReal" resultType="com.project.vo.MemberVo">
     
@@ -184,5 +181,53 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 </select>
 
 
+
+
+
+	<!-- 광민 -->
+	<select id="login" resultType="com.project.vo.MemberVo">
+		select * from rec_member where email=#{email}
+	</select>
+	
+	<insert id="insert">
+	insert into rec_member(mno, email, pw, name, nickname, pnum) 
+		values (seq_member.nextval, #{email}, #{pw}, #{name}, #{nickname}, #{pnum})
+	</insert>
+	
+	<select id="emailCheck" resultType="int">
+	select count(*) 
+	  from rec_member 
+	 where email=#{email}
+	</select>
+	
+	<select id="nicknameCheck" resultType="int">
+	select count(*) 
+	  from rec_member 
+	 where nickname=#{nickname}
+	</select>
+	
+	<select id="findEmailBy" resultType="String">
+	select email 
+	  from rec_member 
+	 where name=#{name} and pNum=#{pnum}
+	</select>
+	
+	<select id="sendPwBy" resultType="String">
+	select pw 
+	  from rec_member 
+	 where email=#{email} and name=#{name}
+	</select>
+	
+	<update id="updatePassword" parameterType="map">
+	    UPDATE rec_member
+	    SET pw = #{encodedPassword}
+	    WHERE email = #{email}
+	</update>
+	
+	<select id="emailExists" resultType="Boolean">
+	select count(*) 
+	  from rec_member 
+	 where email=#{email}
+	</select>
 
 </mapper>
