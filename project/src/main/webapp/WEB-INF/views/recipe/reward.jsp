@@ -102,9 +102,7 @@ function gradeUpdate(mno){
 	let gno =  document.querySelector('#reward' + mno).value;
 	let obj = {
 			mno : mno
-			, gno : gno
-	}
-	
+			, gno : gno}
 	fetchPost('reward/gradeUpdateAction', obj, updateView);
 	console.log("obj", obj);
 	console.log("gno", gno);
@@ -179,7 +177,7 @@ function fetchPost(url, obj, callback){
           opacity: 0;
           cursor: pointer;
         }
-        .duration input[type='button']{
+/*         .duration input[type='button']{
           margin: 10px;
           padding: 10px;
           border-radius: 10px;
@@ -188,14 +186,76 @@ function fetchPost(url, obj, callback){
           box-shadow: 0px 0px 5px #fc85379f;
 
         }
-        
+        .membership{
+        background-color:  #ffdbc352;
+        box-shadow: 1px 1px 20px 1px rgb(218, 218, 218);
+        padding: 50px;
+        width: 1150px;
+        height: 475px;
+        border-radius: 50px;
+        }
+        .col-lg p{
+         margin-bottom: 0px;
+        }
+        .col-lg h2{
+        margin-bottom: 0px;
+        }
+        .col-lg{
+       
+	    padding-top: 0px;
+	    padding-left: 0px;
+	    width: 200px;
+	    height: 100px;
+
+        } */
     </style>
 </head>
 <body>
+<!-- Main -->
+<section id="main">
+	<div class="container">
+<div class="container">
+	
+<!--  Reward 소개 -->
+  <!-- <div class=" membership">
+      <h1 class="fst-italic">MEMBERSHIP</h1>
+      <p class="">오늘뭐먹조? 회원등급 및 혜택</p>
+ 
+    <div class="row">
+      <div class="col-lg">
+        <img src="../resources/images/주황chef.png" width="100px" height="100px" style="background-color: rgba(255, 227, 214, 0.596); border-radius: 50%;" >
+        <h2 class="fw-normal">Cook Helper</h2>
+        <p>게시물 개수 1~3개</p>
+        <p><a class="btn btn-secondary" href="#">1,000<i class="fa-brands fa-product-hunt"></i></a></p>
+      </div>
+      <div class="col-lg">
+        <img src="../resources/images/초록chef.png" width="100px" height="100px" style="background-color: rgba(255, 227, 214, 0.596); border-radius: 50%;" >
 
+        <h2 class="fw-normal">Cook Manager</h2>
+         <p>게시물 개수 4~10개</p>
+         <p><a class="btn btn-secondary" href="#">3,000<i class="fa-brands fa-product-hunt"></i></a></p>
+      </div>
+      
+      <div class="col-lg">
+        <img src="../resources/images/분홍chef.png" width="100px" height="100px" style=""background-color: rgba(255, 227, 214, 0.596); border-radius: 50%;" >
+        <h2 class="fw-normal">Sous Chef</h2>
+        <p>게시물 개수 11~20개</p>
+        <p><a class="btn btn-secondary" href="#">5,000<i class="fa-brands fa-product-hunt"></i></a></p>
+      </div>
+
+      <div class="col-lg">
+        <img src="../resources/images/보라chef.png" width="100px" height="100px" style="background-color: rgba(255, 227, 214, 0.596); border-radius: 50%;" >
+        <h2 class="fw-normal">Head Chef</h2>
+        <p>게시물 개수 20개 이상</p>
+        <p><a class="btn btn-secondary" href="#">10,000<i class="fa-brands fa-product-hunt"></i></a></p>
+      </div>
+    </div>
+
+</div>
+ -->
+  
 <!--  검색 조건   -->
 <div class="duration">
-
 <input type="date" id="startDate" name="startDate"/>
 <input type="date" id="endDate" name="endDate" />
 <input type="button" id="btnDate" value="기간조회">
@@ -242,6 +302,9 @@ function fetchPost(url, obj, callback){
 			</table>
 			</div>
 			</div>
+			  </div>
+  </div>
+  </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
 		

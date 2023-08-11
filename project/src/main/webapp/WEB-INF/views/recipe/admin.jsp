@@ -243,27 +243,3 @@ function toggleCheckboxes() {
 <!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>
 	
-<!--  페이지 블럭 생성 -->
-	<%-- 	 <c:set var="pageDtoA" value="${pageDtoA}"/>
-            <div class ="div d-md-flex justify-content-md-center">
-		
-		<!-- 이전버튼 -->
-		<c:if test="${pageDtoA.prev}">
-			<input type='button' value='이전' onclick='goAdmin(${pageDtoA.startNo-1})' class="btn">
-		</c:if>
-		
-		<!-- 페이지번호 출력 -->
-		<c:forEach begin="${pageDtoA.startNo }" end="${pageDtoA.endNo }" var="i">
-			<input type='button' value='${i}' onclick='goAdmin(${i})' class="btn" >
-		</c:forEach>
-		
-		<!-- 다음버튼 -->
-		<c:if test="${pageDtoA.next}">
-			<input type='button' value='다음' onclick='goAdmin(${pageDtoA.endNo+1})' class="btn">		
-		</c:if>
-		</div>
-	</div>
-	</div>
-</section>
-<!-- Footer -->
-	<%@ include file="../common/footer.jsp" %>  --%>
