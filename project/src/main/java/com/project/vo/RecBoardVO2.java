@@ -17,9 +17,11 @@ public class RecBoardVO2 {
 	private String cookTip; 
 	private int viewCnt;
 	private int star;
-	private int C_NO;
 	private int mno;
-	 private String videoUrl;
+	private int c_no1;
+	private int c_no2;
+	private String videolink;
+	private int replycnt;
 }
 
 

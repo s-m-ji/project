@@ -13,8 +13,8 @@
 </select>
 
 <insert id="insert" parameterType="com.project.vo.RecBoardVO2">
-        INSERT INTO rec_board (B_NO, title,  intro,   videoUrl ,cookTip)
-        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videoUrl},#{cookTip})
+        INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip)
+        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip})
     </insert>
 
 
@@ -23,10 +23,8 @@
 		select seq_recboard.nextval from dual
 		</selectKey>
 	
-		insert into rec_board (B_NO, title
-						, intro,   videoUrl , cookTip)
-        	   values (#{B_NO}, #{title}, 
-        				 #{intro},   #{videoUrl},#{cookTip})
+		INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip)
+        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip})
 	</insert>	
 
 <delete id="delete">
@@ -51,9 +49,10 @@ update rec_board
 		   		, cookTip = #{cookTip}
 		   		, viewCnt = #{viewCnt}
 		   		, star = #{star}
-		   		, C_NO = #{C_NO}
 		   		, mno = #{mno}
-		   		, videoUrl = #{videoUrl}
+		   		, C_NO1 = #{C_NO1}
+		   		, C_NO2 = #{C_NO2}
+		   		, videolink = #{videolink}
 		 where B_NO = #{B_NO}  
 
 </update>

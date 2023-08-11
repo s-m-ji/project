@@ -91,7 +91,7 @@ public class ComBoardController {
 	            System.err.println("성공=================");
 	            rttr.addFlashAttribute("msg", "게시물이 성공적으로 등록되었습니다.");
 	            // 게시물 등록 후 해당 게시물의 번호를 파라미터로 전달하여 com_list로 리다이렉트
-	            return "redirect:/comboard/list";
+	            return "redirect:/recipe/com_list";
 	        } else {
 	            // 등록 실패 시 처리
 	            System.err.println("실패==================");

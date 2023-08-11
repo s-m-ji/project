@@ -14,6 +14,7 @@
 	
 <!-- Bootstrap JavaScript 로드 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
 	
@@ -62,11 +63,72 @@ function addCookStep() {
 	function redirectToRecipeWrite() {
 	    window.location.href = "http://localhost:8080/recipe1/rec_write"; // 새로운 페이지로 이동할 URL을 입력하세요.
 	  }
+	
+	
+	
+	// 카테고리
+	$(function() {
+		type = $('#c1').val();
+		select = $('#c2').val();
+
+		chnQnaType(type, select);
+	});
+
+	function chnQnaType(type, select) {
+
+		$('#c2').empty();
+		$('#c2').append('<option value="" >카테고리2 선택</option>');
+
+		if (type == '1') {
+			$('#c2').append("<option value='11'  ${ param.c2 eq '11' ? 'selected' : '' } >국/탕/찌개</option>'");
+			$('#c2').append("<option value='12'  ${ param.c2 eq '12' ? 'selected' : '' } >면/국수/파스타</option>'");
+			$('#c2').append("<option value='13'  ${ param.c2 eq '13' ? 'selected' : '' } >밥/죽</option>'");
+			$('#c2').append("<option value='14'  ${ param.c2 eq '14' ? 'selected' : '' } >빵/떡</option>'");
+			$('#c2').append("<option value='15'  ${ param.c2 eq '15' ? 'selected' : '' } >반찬</option>'");
+			$('#c2').append("<option value='16'  ${ param.c2 eq '16' ? 'selected' : '' } >샐러드</option>'");
+			$('#c2').append("<option value='17'  ${ param.c2 eq '17' ? 'selected' : '' } >소스</option>'");
+			$('#c2').append("<option value='18'  ${ param.c2 eq '18' ? 'selected' : '' } >차/음료/술</option>'");
+		} else if (type == '2') {
+			$('#c2').append("<option value='21'  ${ param.c2 eq '21' ? 'selected' : '' } >육류</option>'");
+			$('#c2').append("<option value='22'  ${ param.c2 eq '22' ? 'selected' : '' } >해물류</option>'");
+			$('#c2').append("<option value='23'  ${ param.c2 eq '23' ? 'selected' : '' } >과일류</option>'");
+			$('#c2').append("<option value='24'  ${ param.c2 eq '24' ? 'selected' : '' } >달걀/유제품</option>'");
+			$('#c2').append("<option value='25'  ${ param.c2 eq '25' ? 'selected' : '' } >채소류</option>'");
+			$('#c2').append("<option value='26'  ${ param.c2 eq '26' ? 'selected' : '' } >견과류</option>'");
+			$('#c2').append("<option value='27'  ${ param.c2 eq '27' ? 'selected' : '' } >쌀/밀가루</option>'");
+		} else if (type == '3') {
+			$('#c2').append("<option value='31'  ${ param.c2 eq '31' ? 'selected' : '' } >간식</option>'");
+			$('#c2').append("<option value='32'  ${ param.c2 eq '32' ? 'selected' : '' } >안주</option>'");
+			$('#c2').append("<option value='33'  ${ param.c2 eq '33' ? 'selected' : '' } >파티</option>'");
+			$('#c2').append("<option value='34'  ${ param.c2 eq '34' ? 'selected' : '' } >캠핑</option>'");
+			$('#c2').append("<option value='35'  ${ param.c2 eq '35' ? 'selected' : '' } >도시락</option>'");
+			$('#c2').append("<option value='36'  ${ param.c2 eq '36' ? 'selected' : '' } >이유식</option>'");
+			$('#c2').append("<option value='37'  ${ param.c2 eq '37' ? 'selected' : '' } >초스피드</option>'");
+		} else if (type == '4') {
+			$('#c2').append("<option value='41'  ${ param.c2 eq '41' ? 'selected' : '' } >볶음</option>'");
+			$('#c2').append("<option value='42'  ${ param.c2 eq '42' ? 'selected' : '' } >조림</option>'");
+			$('#c2').append("<option value='43'  ${ param.c2 eq '43' ? 'selected' : '' } >비빔</option>'");
+			$('#c2').append("<option value='44'  ${ param.c2 eq '44' ? 'selected' : '' } >절임</option>'");
+			$('#c2').append("<option value='45'  ${ param.c2 eq '45' ? 'selected' : '' } >튀김</option>'");
+			$('#c2').append("<option value='46'  ${ param.c2 eq '46' ? 'selected' : '' } >삶기</option>'");
+			$('#c2').append("<option value='47'  ${ param.c2 eq '47' ? 'selected' : '' } >굽기</option>'");
+			$('#c2').append("<option value='48'  ${ param.c2 eq '48' ? 'selected' : '' } >끓이기</option>'");
+		}
+		document.getElementById("c2").style.display = "";
+
+		if ($.trim(select) != "") {
+			$('#c1').val(type);
+			$('#c2').val(select);
+		}
+		
+	}
     
 	
  
    
-    
+	
+		
+	
   </script>
 </head>
 <body>
@@ -87,7 +149,7 @@ function addCookStep() {
   
 		<!-- 제목 입력란  -->
 			<div class="rec_title">
-				<label>레시피 제목ㅇㄹㅇㄹㅇㄹㅇ </label> 
+				<label>레시피 제목 </label> 
 				<input type="text" name="title" placeholder="예) 학교앞 분식집 떡볶이 만들기" value="${board.title}">
 			</div>
 			
@@ -124,8 +186,24 @@ function addCookStep() {
 				<i class="bi bi-camera-reels" style="display: inline; color: pink;"></i>
 			</div>
 			<textarea
-				placeholder="동영상이 있으면 주소를 입력하세요. 예)http://youtu.be/lA0Bxo3IZmM" name="videoUrl"
-				style="height: 100px; width: 380px; resize: none;">${board.videoUrl }</textarea>
+				placeholder="동영상이 있으면 주소를 입력하세요. 예)http://youtu.be/lA0Bxo3IZmM" name="videolink"
+				style="height: 100px; width: 380px; resize: none;">${board.videolink }</textarea>
+				
+				
+				
+			
+			<%-- //	<div class="rec_title">
+				//	<label>카테고리 </label> 
+				/	<input type="text" name="title" placeholder="카테고리1" value="${board.c_no1}">
+				
+					<input type="text" name="title" placeholder="카테고리2" value="${board.c_no2}">
+				</div> --%>
+				
+				
+				
+				
+				
+				
 				
 				
 				
@@ -133,58 +211,31 @@ function addCookStep() {
 				
 			<br><br>
 			
-		<!-- 카테고리 / 대,중,소 분류  -->
+		
+		<div>
+			<label style="display: inline;">카테고리</label>
+			<i class="bi bi-tags" style="display: inline; color: pink;"></i><br>
+		</div>
+		<div class="text-center">
+			<div class="d-flex justify-content-between">
+				<div class="p-2 flex-fill" >
+					<select name="c_no1" id="c1" class="form-control"
+						onChange="chnQnaType(this.value)">
+						<option value="">카테고리1 선택</option>
+						<option value="1" ${ param.c1 eq '1' ? "selected" : "" }>종류별</option>
+						<option value="2" ${ param.c1 eq '2' ? "selected" : "" }>재료별</option>
+						<option value="3" ${ param.c1 eq '3' ? "selected" : "" }>상황별</option>
+						<option value="4" ${ param.c1 eq '4' ? "selected" : "" }>방법별</option>
+					</select>
+				</div>
+				<div class="p-2 flex-fill">
+					<select id="c2" name="c_no2" class="form-control"></select>
+				</div>
 				
-			<div class="cont_line">
-				<label style="display: inline;">카테고리</label>
-				<i class="bi bi-tags" style="display: inline; color: pink;"></i><br>
-				
-				<input type="text" name="C_NO" value="${vo.C_NO}"><br><br>
-				
-				
-				<select name="bigcate" id="bigcate" style="width:200px; height:50px; display: inline;">
-					<option value="대분류">대분류</option>
-					<option value="한식">한식</option>
-					<option value="중식">중식</option>
-					<option value="양식">양식</option>
-					<option value="일식">일식</option>
-					<option value="다이어트식">다이어트식</option>
-					<option value="기타음식">기타음식</option>
-				</select> 
-				
-				
-				<select name="midcate" id="midcate" style="width:200px; height:50px; display: inline;">
-					<option value="중분류">중분류</option>
-					<option value="밥요리">밥요리</option>
-					<option value=국,찌개>국,찌개</option>
-					<option value="면요리">면요리</option>
-					<option value="샐러드">샐러드</option>
-					<option value="고기고기">고기고기</option>
-					<option value="기타">기타</option>
-				</select> 
-				
-				<select name="smcate" id="smcate" style="width:200px; height:50px; display: inline;">
-					<option value="소분류">소분류</option>
-					<option value="재료별">재료별</option>
-					<option value="소고기">소고기</option>
-					<option value="돼지고기">돼지고기</option>
-					<option value="닭고기">닭고기</option>
-					<option value="육류">육류</option>
-					<option value="채소류">채소류</option>
-					<option value="해물류">해물류</option>
-					<option value="달걀/유제품">달걀/유제품</option>
-					<option value="가공식품류">가공식품류</option>
-					<option value="쌀">쌀</option>
-					<option value="밀가루">밀가루</option>
-					<option value="건어물류">건어물류</option>
-					<option value="버섯류">버섯류</option>
-					<option value="과일류">과일류</option>
-					<option value="콩/견과류">콩/견과류</option>
-					<option value="곡류">곡류</option>
-					<option value="기타">기타</option>
-				</select>
 			</div>
-
+		</div>
+		
+		
 
 			<br><br>
 			
@@ -221,7 +272,7 @@ function addCookStep() {
 				    </button>
 				</div>
 
-
+		   
 
 			<!-- 요리순서 -->
 			
@@ -276,8 +327,8 @@ function addCookStep() {
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<!-- 미리보기 내용 -->
-							<iframe src="http://localhost:8080/recipe1/rec_write" width="100%" height="600"></iframe>
+						    <!-- 미리보기 내용 -->
+						    <iframe src="http://localhost:8080/recipe/view?b_no=${board.b_no}" width="100%" height="600"></iframe>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
