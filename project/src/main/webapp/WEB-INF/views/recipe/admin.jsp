@@ -52,7 +52,8 @@ window.addEventListener("load", function(){
 		                //console.log("이것은 imageTag : " , imageTag);
 		                fileDiv.innerHTML = imageTag; // 해당 fileDiv 태그에 이미지 추가
 		            } else {
-		                fileDiv.innerHTML = '<mark>회원사진 미등록</mark>';
+		                fileDiv.innerHTML =/*  '<mark>회원사진 미등록</mark>'; */
+		              						'<img src="../resources/images/회원사진미등록.png" style="width: 100px; height: 100px;" >'
 		            }
 		        } else {
 		            console.log("input[name='mno']가 없는 fileDiv가 있습니다.");
@@ -152,7 +153,15 @@ function toggleCheckboxes() {
     <h6 class="border-bottom pb-2 mb-0">
     </h6>
     <h6 class="border-bottom pb-2 mb-0 checkboxLine">
+      <c:set value="${memList}" var="member"></c:set>
       <form action = "/recipe/delMem" method="post" name="updateForm" name="updateForm" id="delForm">
+       
+           <!--  파라메터 🌈 --> 
+	   	<input type ="text" name= "pageNo" value="${param.pageNo}" id = "pageNo" hidden>
+		<input type ="text" name= "sField" value="${param.sField }" hidden>
+		<input type ="text" name= "sWord" value="${param.sWord}" hidden>
+   		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
+   		
         <div id='memInputBtn'>
             <input type="checkbox" class="form-check-input" id="adminChkBox" onclick='toggleCheckboxes()' style="margin-right: 10px;">
             <label class="form-check-label" for="same-address"></label>

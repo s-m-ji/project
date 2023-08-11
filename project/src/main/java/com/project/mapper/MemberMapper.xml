@@ -135,6 +135,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	m.mno
 	, m.name
 	, m.nickname
+	, COUNT(b.b_no) AS b_no
 	, SUM(b.viewcnt) AS viewcnt
 	, MAX(b.regdate) AS regdate
 	, DECODE(m.delyn, 'Y', '신청', '미신청') delYNStr
@@ -148,7 +149,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	WHERE b.regdate BETWEEN #{startDate} AND #{endDate}
 	and m.delyn = 'N'
 	GROUP BY m.mno,  m.delyn, m.name, m.nickname, g.grade, g.benefit) E
-	WHERE ROWNUM  <= 5]]>
+	WHERE ROWNUM  <= 4]]>
 </select>
 
 <!-- 리워드 수정  -->
@@ -159,13 +160,13 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 <!-- 리워드 목록 조회 (2) -->
 <select id="rewardListReal" resultType="com.project.vo.MemberVo">
     
-    
 <![CDATA[select E.*
 	FROM (
 	SELECT 
 	m.mno
 	, m.name
 	, m.nickname
+	, COUNT(b.b_no) AS b_no
 	, SUM(b.viewcnt) AS viewcnt
 	, MAX(b.regdate) AS regdate
 	, DECODE(m.delyn, 'Y', '신청', '미신청') delYNStr

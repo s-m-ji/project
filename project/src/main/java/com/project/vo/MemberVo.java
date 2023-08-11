@@ -33,6 +33,7 @@ public class MemberVo {
 	private String regdate; // 게시글 등록
 	private String startDate; // 시작일
 	private String endDate; // 마감일
+	private String b_no; // 게시글 번호
 	
 // (지수) 파일 테이블
 	private String uuid       ;
@@ -44,5 +45,6 @@ public class MemberVo {
 	private String savePath; // 저장된 파일 경로
 	private String s_savePath; // 저장된 썸네일 경로
 	
+
 
 }
