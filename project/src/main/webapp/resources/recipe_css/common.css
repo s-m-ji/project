@@ -203,7 +203,7 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
 .search-wrapper.active .input-holder .search-icon {
     width: 50px;
     height:50px;
-    margin: 10px;
+    margin: 12.5px 10px;
     border-radius: 30px;
 }
 
@@ -277,6 +277,7 @@ section#main {
 .gototop {
   position: fixed;
   bottom: 20px;
+/*   bottom: 150px; */
   right: 20px;
   z-index: 999;
   opacity: 0;
@@ -312,8 +313,8 @@ section#main {
 }
 
 .gototop a.js-gotop {
-	width: 70px;
-    	height: 70px;
+	width: 50px;
+    	height: 50px;
 	background: #F7863B;
 	border-radius: 50%;
 	box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
@@ -322,7 +323,7 @@ section#main {
 	background: rgb(247 134 59 / 70%);
 }
 .gototop a.js-gotop i {
-	font-size: 2em;
+	font-size: 1.75em;
 }
 
 a.icon {

@@ -46,8 +46,9 @@
 				<nav id="nav">
 					<ul>
 						<li><a class="icon solid fa-home" href="main"><span>홈페이지</span></a></li>
+						<li><a class="icon solid bi bi-chat-dots-fill" href="list"><span>레시피</span></a></li>
 						<li><a class="icon solid bi bi-chat-dots-fill" href="com_list"><span>커뮤니티</span></a></li>
-						<li><a class="icon solid bi-gear-fill" href="admin"><span>관리자페이지</span></a></li>
+						<li><a class="icon solid bi-gear-fill" href="adminHome"><span>관리자</span></a></li>
 						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
 						<li><a class="icon solid bi-person-plus-fill" href="register"><span>회원가입</span></a></li>
 						<!-- <li>
