@@ -71,31 +71,40 @@ public class MemberController {
 	};
 
 	// 회원 체크박스 삭제 
-	@PostMapping("delMem")
-	public String delMem(@RequestParam String[] delMno, Model model)  {
-		
-		for(String mno : delMno) {
+		@PostMapping("delMem")
+		public String delMem(@RequestParam String[] delMno, Model model, Criteria cri)  {
 			
-			int delCnt = memberservice.delMem(mno, "Y");
-			
-			String message = "";
-			if(delCnt <= 0) {
-				// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기 
-				System.out.println(delCnt);
-				model.addAttribute("message", "탈퇴 미신청 회원이므로 삭제할 수 없습니다.");
-				model.addAttribute("url", "/recipe/admin");
-				return  "/common/message";
-			}else{
-				// 삭제건수가 있는 경우 탈퇴(신청) 
-				System.out.println(delCnt);
-				message = delCnt + "건 회원 탈퇴 신청이 처리되었습니다.";
-				model.addAttribute("message",message);
-				model.addAttribute("url", "/recipe/admin");
-				return  "/common/message";
+			for(String mno : delMno) {
+				
+				int delCnt = memberservice.delMem(mno, "Y");
+				
+				String message = "";
+				if(delCnt <= 0) {
+					// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기 
+					System.out.println(delCnt);
+					model.addAttribute("message", "탈퇴 미신청 회원이므로 삭제할 수 없습니다.");
+					
+					model.addAttribute("url", "/recipe/admin");
+					return  "/common/message";
+				}else{
+					// 삭제건수가 있는 경우 탈퇴(신청) 
+					System.out.println(delCnt);
+					message = delCnt + "건 회원 탈퇴 신청이 처리되었습니다.";
+					model.addAttribute("message",message);
+
+					model.addAttribute("pageNo", cri.getPageNo());
+					model.addAttribute("sField", cri.getSField());
+					model.addAttribute("sWord", cri.getSWord());
+					model.addAttribute("message", message);
+					
+					model.addAttribute("url", "/recipe/admin?pageNo="+cri.getPageNo()+"&mno=" + mno+"&sField="+cri.getSField()+"&sWord="+cri.getSWord());
+					 	/* model.addAttribute("url", "/recipe/admin"); */
+					return  "/common/message";
+				}
 			}
-		}
-		return  "/recipe/message";
-	};
+			return  "/recipe/message";
+		};
+		
 	
 	
 	// 회원 등록 페이지
@@ -105,36 +114,36 @@ public class MemberController {
 	}
 	
 	// 회원 등록 처리
-	@PostMapping("adminInputAction")
-	public String adminInput(MemberVo membervo, Model model, ArrayList<MultipartFile> files) {
-		int res;
-		
-		try {
-			res = memberservice.adminInput(membervo, files);
-			String message;
+		@PostMapping("adminInputAction")
+		public String adminInput(MemberVo membervo, Model model, ArrayList<MultipartFile> files) {
+			int res;
 			
-			if(res > 0) {
-				System.out.println("회원 등록 res = "+ res);
-				message = membervo.getMno() + "번 회원"+membervo.getName()+"님이  등록되었습니다.";
-				log.info("회원 등록 : 👨🏻‍👩🏻‍👧🏻‍👦🏼" + membervo.toString());
+			try {
+				res = memberservice.adminInput(membervo, files);
+				String message;
+				
+				if(res > 0) {
+					System.out.println("회원 등록 res = "+ res);
+					message = membervo.getMno() + "번 회원"+membervo.getName()+"님이  등록되었습니다.";
+					log.info("회원 등록 : " + membervo.toString());
 
-				model.addAttribute("message", message);
-				model.addAttribute("url", "/recipe/admin");
-				return "/common/message";
-			}else {
-				model.addAttribute("mesage", "회원 등록에 실패하였습니다.");
-				model.addAttribute("url", "/recipe/admin");
-				return "/common/message";
+					model.addAttribute("message", message);
+					model.addAttribute("url", "/recipe/admin");
+					return "/common/message";
+				}else {
+					model.addAttribute("mesage", "회원 등록에 실패하였습니다.");
+					model.addAttribute("url", "/recipe/admin");
+					return "/common/message";
+				}
+			} catch (Exception e) {
+				if(e.getMessage().indexOf("첨부파일")>-1) {
+					model.addAttribute("message", e.getMessage());
+				}else {
+					model.addAttribute("message", "회원 등록 중 예외 사항 발생-adminInputAction");
+				}
+				return "/recipe/admin";
 			}
-		} catch (Exception e) {
-			if(e.getMessage().indexOf("첨부파일")>-1) {
-				model.addAttribute("message", e.getMessage());
-			}else {
-				model.addAttribute("message", "회원 등록 중 예외 사항 발생-adminInputAction");
-			}
-			return "/recipe/admin";
 		}
-	}
 	
 	
 	// 회원 수정 페이지 
@@ -146,50 +155,52 @@ public class MemberController {
 	
 	
 	// 회원 수정 하기 
-	@PostMapping("adminUpdateAction")
-	public String memberUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files) throws Exception{
-		MemberVo mv = memberservice.getMemOne(membervo.getMno());
-		// 이메일, 비밀번호, 이름, 닉네임, 전화번호, 회원사진 
-		mv.setEmail(mv.getEmail());
-		System.out.println(mv.getEmail());
-		mv.setPw(mv.getPw());
-		mv.setName(mv.getName());
-		mv.setNickname(mv.getNickname());
-		mv.setPnum(mv.getPnum());
+		@PostMapping("adminUpdateAction")
+		public String memberUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files) throws Exception{
+			MemberVo mv = memberservice.getMemOne(membervo.getMno());
+			// 이메일, 비밀번호, 이름, 닉네임, 전화번호, 회원사진 
+			mv.setEmail(mv.getEmail());
+			System.out.println(mv.getEmail());
+			mv.setPw(mv.getPw());
+			mv.setName(mv.getName());
+			mv.setNickname(mv.getNickname());
+			mv.setPnum(mv.getPnum());
 
-		memberservice.memberList(cri, model);
-		
-		int res;
-		
-		try {
-			res =  memberservice.memberUpdate(membervo, files);
-			String message;
-		
-			System.out.println("수정 건 수 : " + res);
-			System.out.println("수정된 멤버 : " + membervo + files);
-			if( res > 0) {
-				message = res + "건 수정되었습니다.";
-				
-				model.addAttribute("pageNo", cri.getPageNo());
-				model.addAttribute("sField", cri.getSField());
-				model.addAttribute("sWord", cri.getSWord());
-				model.addAttribute("message", message);
-				model.addAttribute("url", "/recipe/admin?mno=" + mv.getMno());
-			}else {
-				message = "수정 중 오류가 발생하였습니다.";
-				model.addAttribute("message",message);
-				return "/common/message";
+			memberservice.memberList(cri, model);
+			
+			int res;
+			
+			try {
+				res =  memberservice.memberUpdate(membervo, files);
+				String message;
+			
+				System.out.println("수정 건 수 : " + res);
+				System.out.println("수정된 멤버 : " + membervo + files);
+				if( res > 0) {
+					message = res + "건 수정되었습니다.";
+					
+					model.addAttribute("pageNo", cri.getPageNo());
+					model.addAttribute("sField", cri.getSField());
+					model.addAttribute("sWord", cri.getSWord());
+					model.addAttribute("message", message);
+					model.addAttribute("url", "/recipe/admin?pageNo="+cri.getPageNo()+"&mno=" + mv.getMno()+"&sField="+cri.getSField()+"&sWord="+cri.getSWord());
+				}else {
+					message = "수정 중 오류가 발생하였습니다.";
+					model.addAttribute("message",message);
+					return "/common/message";
+				}
+			} catch (Exception e) {
+				if(e.getMessage().indexOf("첨부파일")>-1) {
+					model.addAttribute("message", e.getMessage());
+				}else {
+					model.addAttribute("message","수정 중 예외 발생!!");
+				}
 			}
-		} catch (Exception e) {
-			if(e.getMessage().indexOf("첨부파일")>-1) {
-				model.addAttribute("message", e.getMessage());
-			}else {
-				model.addAttribute("message","수정 중 예외 발생!!");
-			}
+			return "/common/message";
+			
 		}
-		return "/common/message";
 		
-	}
+		
 /* 파일(업로드) 관련 */
 	// 파일 목록 조회
 	@GetMapping("adminList") // rest 방식으로 호출 할 예정

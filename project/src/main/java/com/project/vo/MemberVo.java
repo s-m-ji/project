@@ -33,6 +33,7 @@ public class MemberVo {
 	private String regdate; // 게시글 등록
 	private String startDate; // 시작일
 	private String endDate; // 마감일
+	private String b_no;    // 게시물 번호
 	
 // (지수) 파일 테이블
 	private String uuid       ;

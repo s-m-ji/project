@@ -126,7 +126,7 @@ function getFileList(){
 		
 		function delRes(map){
 			if(map.result == 'success'){
-				alert('삭제');
+				/* alert('삭제'); */
 				let divFileUpload = document.querySelector('#divFileupload');
 				divFileUpload.style.display='none';
 				getFileList();
