@@ -117,8 +117,8 @@
 							</figure>
 							<div class="fh5co-text position-relative">
 					            <p class="mb-0">✅ ${list.b_NO}</p>
-					            <p class="mb-0 title">🍴 ${list.title}</p>
-					            <p class="mb-0 intro">📝  ${list.intro}</p>
+					            <p class="mb-0 title" title="${list.title}">🍴 ${list.title}</p>
+					            <p class="mb-0 intro" title="${list.intro}">📝  ${list.intro}</p>
 					            <p class="mb-0">🙋‍♀️‍ ${list.nickName}</p>
 					            <p class="mb-0">👍 ${list.boomup} &nbsp; 👀 ${list.viewcnt}</p> 
 				           		<p class="mb-0">🛒 ${list.cateName1}, ${list.cateName2}</p>

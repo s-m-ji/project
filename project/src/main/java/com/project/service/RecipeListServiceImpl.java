@@ -26,8 +26,12 @@ public class RecipeListServiceImpl implements RecipeListService {
 	@Override
 	public void getRecList(Model model, Criteria cri) {
 		System.out.println("[RecipeListServiceImpl] getRecList 실행");
-		cri.setAmount(12);
-		cri.setPageNo(cri.getPageNo());
+			if(cri.getAmount() == 10) {
+				cri.setAmount(12);
+			} else {
+				cri.setAmount(cri.getAmount());
+			}
+			cri.setPageNo(cri.getPageNo());
 		
 		List<BoardVO> list = rMapper.getRecList(cri);
 		// System.out.println("*** list : " + list);

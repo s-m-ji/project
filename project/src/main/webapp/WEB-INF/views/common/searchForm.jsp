@@ -139,7 +139,7 @@
 				</div>
 				<div class="p-2">
 					<button type="button" id="orderByRG" class="btn btn-success" onclick="changeOrderBy(true)">최신순</button>
-				    <button type="button" id="orderByBU" class="btn btn-success" onclick="changeOrderBy(false)">댓글순</button>
+				    <button type="button" id="orderByBU" class="btn btn-success" onclick="changeOrderBy(false)">추천순</button>
 				    <input type="hidden" id="orderByInput" name="orderBy" value="false">
 				</div>
 				</div>

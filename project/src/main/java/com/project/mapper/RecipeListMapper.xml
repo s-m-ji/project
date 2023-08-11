@@ -15,8 +15,14 @@
 				          		CASE WHEN rt.regdate >= TRUNC(SYSDATE) - 1 
 							          THEN CASE <![CDATA[ WHEN (SYSDATE - rt.regdate) * 24 * 60 < 60 THEN ]]>
 							              FLOOR((SYSDATE - rt.regdate) * 24 * 60) || '분 전'
-							            	ELSE FLOOR((SYSDATE - rt.regdate) * 24) || '시간 전'
-							          	END WHEN rt.regdate >= TRUNC(SYSDATE) - 7 THEN
+							            	ELSE
+							                    CASE
+							                        <![CDATA[ WHEN (SYSDATE - rt.regdate) * 24 < 24 THEN ]]>
+							                            FLOOR((SYSDATE - rt.regdate) * 24) || '시간 전'
+							                        ELSE
+							                            TRUNC(SYSDATE - rt.regdate) || '일 전'
+							                    END
+							            END WHEN rt.regdate >= TRUNC(SYSDATE) - 7 THEN
 								          TRUNC(ROUND(SYSDATE - rt.regdate)) || '일 전'
 								        ELSE TO_CHAR(rt.regdate, 'YYYY/MM/DD') END AS regdate,
 				          				rc.C_NO1, rc.C_NO2, rc.catename1, rc.catename2 
@@ -66,8 +72,14 @@
 				          		CASE WHEN ct.regdate >= TRUNC(SYSDATE) - 1 
 							          THEN CASE <![CDATA[ WHEN (SYSDATE - ct.regdate) * 24 * 60 < 60 THEN ]]>
 							              FLOOR((SYSDATE - ct.regdate) * 24 * 60) || '분 전'
-							            	ELSE FLOOR((SYSDATE - ct.regdate) * 24) || '시간 전'
-							          	END WHEN ct.regdate >= TRUNC(SYSDATE) - 7 THEN
+							            	ELSE
+							                    CASE
+							                        <![CDATA[ WHEN (SYSDATE - ct.regdate) * 24 < 24 THEN ]]>
+							                            FLOOR((SYSDATE - ct.regdate) * 24) || '시간 전'
+							                        ELSE
+							                            TRUNC(SYSDATE - ct.regdate) || '일 전'
+							                    END
+							            END WHEN ct.regdate >= TRUNC(SYSDATE) - 7 THEN
 								          TRUNC(ROUND(SYSDATE - ct.regdate)) || '일 전'
 								        ELSE TO_CHAR(ct.regdate, 'YYYY/MM/DD') END AS regdate
 				          	FROM com_board ct

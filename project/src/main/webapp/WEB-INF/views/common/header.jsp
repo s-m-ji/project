@@ -46,7 +46,7 @@
 				<nav id="nav">
 					<ul>
 						<li><a class="icon solid fa-home" href="main"><span>홈페이지</span></a></li>
-						<li><a class="icon solid bi bi-chat-dots-fill" href="list"><span>레시피</span></a></li>
+						<li><a class="icon solid bi bi-cup-fill" href="list"><span>레시피</span></a></li>
 						<li><a class="icon solid bi bi-chat-dots-fill" href="com_list"><span>커뮤니티</span></a></li>
 						<li><a class="icon solid bi-gear-fill" href="adminHome"><span>관리자</span></a></li>
 						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
@@ -76,7 +76,7 @@
 			<div class="search-wrapper active">
 			    <div class="input-holder">
 			    <form action="./list" name="searchFormHeader">
-			        <input type="text" name="sWord" class="search-input" placeholder="레시피를 검색하세요." />
+			        <input type="text" name="sWord" value="${pDto.cri.SWord}" class="search-input" placeholder="레시피를 검색하세요." />
 			        <button class="search-icon" onclick="searchToggle(this, event);"><span><i class="bi bi-search"></i></span></button>
 			      </form>
 			    </div>
