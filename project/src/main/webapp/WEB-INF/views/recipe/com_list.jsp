@@ -96,7 +96,7 @@
 	<!-- Main -->
 	<section id="main" >
 		<div class="container">
-	      <div class="bg-light p-5 rounded text-center"> <h1 id="test">🤪 망한요리 🤪  </h1><sup>※ 제목 추후 삭제</sup></div>
+	      <div class="bg-light p-5 rounded text-center"> <h1 id="test">🤪 망한요리자랑🤪  </h1><sup>※ 제목 추후 삭제</sup></div>
 			<%@ include file="../common/com_searchForm.jsp" %>
 	      <div class="gtco-section">
 			<div class=""> <!-- <div class="gtco-container"> -->

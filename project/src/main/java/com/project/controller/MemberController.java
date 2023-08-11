@@ -72,7 +72,7 @@ public class MemberController {
 
 	// 회원 체크박스 삭제 
 	@PostMapping("delMem")
-	public String delMem(@RequestParam String[] delMno, Model model, Criteria cri)  {
+	public String delMem(@RequestParam String[] delMno, Model model)  {
 		
 		for(String mno : delMno) {
 			
@@ -83,7 +83,6 @@ public class MemberController {
 				// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기 
 				System.out.println(delCnt);
 				model.addAttribute("message", "탈퇴 미신청 회원이므로 삭제할 수 없습니다.");
-				
 				model.addAttribute("url", "/recipe/admin");
 				return  "/common/message";
 			}else{
@@ -91,14 +90,7 @@ public class MemberController {
 				System.out.println(delCnt);
 				message = delCnt + "건 회원 탈퇴 신청이 처리되었습니다.";
 				model.addAttribute("message",message);
-
-				model.addAttribute("pageNo", cri.getPageNo());
-				model.addAttribute("sField", cri.getSField());
-				model.addAttribute("sWord", cri.getSWord());
-				model.addAttribute("message", message);
-				
-				model.addAttribute("url", "/recipe/admin?pageNo="+cri.getPageNo()+"&mno=" + mno+"&sField="+cri.getSField()+"&sWord="+cri.getSWord());
-				 	/* model.addAttribute("url", "/recipe/admin"); */
+				model.addAttribute("url", "/recipe/admin");
 				return  "/common/message";
 			}
 		}
@@ -124,7 +116,7 @@ public class MemberController {
 			if(res > 0) {
 				System.out.println("회원 등록 res = "+ res);
 				message = membervo.getMno() + "번 회원"+membervo.getName()+"님이  등록되었습니다.";
-				log.info("회원 등록 : " + membervo.toString());
+				log.info("회원 등록 : 👨🏻‍👩🏻‍👧🏻‍👦🏼" + membervo.toString());
 
 				model.addAttribute("message", message);
 				model.addAttribute("url", "/recipe/admin");
@@ -182,7 +174,7 @@ public class MemberController {
 				model.addAttribute("sField", cri.getSField());
 				model.addAttribute("sWord", cri.getSWord());
 				model.addAttribute("message", message);
-				model.addAttribute("url", "/recipe/admin?pageNo="+cri.getPageNo()+"&mno=" + mv.getMno()+"&sField="+cri.getSField()+"&sWord="+cri.getSWord());
+				model.addAttribute("url", "/recipe/admin?mno=" + mv.getMno());
 			}else {
 				message = "수정 중 오류가 발생하였습니다.";
 				model.addAttribute("message",message);
@@ -383,10 +375,10 @@ public class MemberController {
 			return "login";
 		}
 		
-		@GetMapping("/main")
-		public String main() {
-			return "recipe/main";
-		}
+//		@GetMapping("/main")
+//		public String main() {
+//			return "recipe/main";
+//		}
 		
 		@GetMapping("/register")
 		public String registerPage() {

@@ -28,9 +28,6 @@ function getRewardList(){
 	let startDate = document.querySelector("#startDate").value;
 	let endDate = document.querySelector("#endDate").value;
 
-	let rewardFirst = document.querySelector('#rewardFirst');
-	rewardFirst.style.display='none';
-	
 	fetchGet('/recipe/reward/list/' + startDate + '/' + endDate, rewardView);
 	console.log("startDate : ", startDate, "endDate", endDate);
 
@@ -42,9 +39,7 @@ function rewardView(map){
 	console.log("rewardView 함수  : ",rewardList);
 	
 	if(rewardList.length == 0){
-		rewardDiv.innerHTML = '	<div class="d-flex gap-2 w-100 emptyList" style="justify-content: center;">'
-			+'<p style="padding-top: 66px;padding-bottom: 83px;">😿해당 기간에 일치하는 결과가 없습니다.😿</p>'
-		    +'</div>';
+		rewardDiv.innerHTML = '검색결과가 없습니다.';
 	}else{
 		let rewardDivStr = 
 		 '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
@@ -53,7 +48,6 @@ function rewardView(map){
 		+'<th>회원 번호</th>'
 		+'<th>이름</th>'
         +'<th>닉네임</th>'
-        +'<th>게시물 수</th>'
         +'<th>누적 조회수</th>'
         +'<th>게시글 등록일</th>'
         +'<th>탈퇴 신청 여부</th>'
@@ -70,7 +64,6 @@ function rewardView(map){
 				+'<td>'+reward.mno+'</td>'
 				+'<td>'+reward.name+'</td>'
 				+'<td>'+reward.nickname+'</td>'
-				+'<td>'+reward.b_no+'</td>'
 				+'<td>'+reward.viewcnt+'</td>'
 				+'<td>'+reward.regdate+'</td>'
 				+'<td>'+reward.delYNStr+'</td>'
@@ -201,19 +194,19 @@ function fetchPost(url, obj, callback){
 <div id = "rewardDiv">
 </div>
 
-<div class="list-group w-auto" id="rewardFirst">
-<div class="panel-body">
+<div class="list-group w-auto">
+	        <div class="panel-body">
 <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">
 		<thead>
 		<tr>
 		<th>회원 번호</th>
 		<th>이름</th>
         <th>닉네임</th>
-        <th>게시글 수</th>
         <th>누적 조회수</th>
         <th>게시글 등록일</th>
         <th>탈퇴 신청 여부</th>
         <th>회원 등급</th>
+        <th>등급 변경</th>
         <th>혜택</th>
 		<tr>
 		</thead>
@@ -226,19 +219,26 @@ function fetchPost(url, obj, callback){
 				<td>${real.mno}</td>
 				<td>${real.name}</td>
 				<td>${real.nickname}</td>
-				<td>${real.b_no}</td>
 				<td>${real.viewcnt}</td>
 				<td>${real.regdate}</td>
 				<td>${real.delYNStr}</td>
 				<td>${real.grade}</td>
+				
+				<td>
+				<select class="form-select">
+				<option selected>선택입력</option>
+				<option value="1" >cook Helper</option>
+				<option value="2">cook Manager</option>
+				<option value="3">sous chef</option>
+				<option value="4">head chef</option>
+				</select>
+				</td>
 				<td>${real.benefit}</td>
 				</tr>
 				</tbody>
 				</c:if>
 			</c:forEach>
 			</table>
-			</div>
-			</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
 		
