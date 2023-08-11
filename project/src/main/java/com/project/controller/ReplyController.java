@@ -45,11 +45,14 @@ public class ReplyController {
 		//====================================================================
 ////		session.setAttribute("나는작성자", "나는작성자");
 ////		
-////		MemberVo member = session.getAttribute("member") == null ?  null : (MemberVo)session.getAttribute("member");
+		System.out.println("나는 한다 출력 멤버를 =================================================" + session.getAttribute("member"));
+		MemberVo member = session.getAttribute("member") == null ?  null : (MemberVo)session.getAttribute("member");
 ////		
-////		String nickName = (String)session.getAttribute("나는작성자");
+		map.put("member",member);
+		
+		//System.out.println(nickName + "=============================================================== 닉네임 출력");
 ////		
-////		map.put("nickName",nickName);
+		//map.put("nickName",nickName);
 //		
 //		// select << 게시물에 nickName << 으로 댓글이 달린 적이 있는지 total, or YN 으로 조회
 //		member.getNickname();
@@ -217,4 +220,27 @@ public class ReplyController {
 
 		return map;
 	}
+	
+	
+	@GetMapping("/reply/edelete/{b_no}/{nickname}")
+	public Map<String, Object> edelete(@PathVariable("b_no") int b_no, 
+								@PathVariable("nickname") String nickname){
+		
+		System.out.println("edelete 실행 ===============================================================");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int rno = service.getRno(b_no, nickname);
+		
+		map.put("r_no", rno);
+		
+		return map;
+		
+	}
+	
+	
+	
+	
+	
+	
 }

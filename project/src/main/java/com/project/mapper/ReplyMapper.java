@@ -27,4 +27,6 @@ public interface ReplyMapper {
 	public int replyDelete(int r_no);
 
 	public int replyEdit(RecipeReplyVo vo);
+
+	public int getRno(@Param("b_no")int b_no, @Param("nickname")String nickname);
 }

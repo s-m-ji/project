@@ -64,4 +64,11 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyMapper.replyEdit(vo);
 	}
 
+
+	@Override
+	public int getRno(int b_no, String nickname) {
+		// TODO Auto-generated method stub
+		return replyMapper.getRno(b_no, nickname);
+	}
+
 }

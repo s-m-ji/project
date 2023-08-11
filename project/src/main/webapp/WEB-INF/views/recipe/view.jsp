@@ -523,6 +523,17 @@
 		
 		//console.log("ReviewDuplicateRes(map) 실행 ===========================================================")
 		
+		console.log('map.member : ', map.member);
+		
+		// 수정 삭제 처리까지 
+		let b_no = document.querySelector('#b_no').value;
+		let nickname = document.querySelector('#loginNickname').value;
+		
+		fetchGet('/reply/edelete/' + b_no + "/" + nickname, edeleteRes);
+		
+		console.log("===============================")
+		console.log('b_no : ', b_no);
+		console.log('nickName : ', nickname);
 		
 		if(map.result == "duplicate"){
 			
@@ -532,6 +543,18 @@
 			
 			return;
 		}
+		
+	}
+	
+	
+	// 수정 삭제 버튼 처리
+	function edeleteRes(map){
+		
+		console.log("edeleteRes ============================ ", map);
+		
+		document.querySelector('#replyDelete'+map.r_no+'').style.display = "block";
+		document.querySelector('#replyEdit'+map.r_no+'').style.display = "block";
+		
 		
 	}
 	
@@ -577,7 +600,12 @@
 		crossorigin="anonymous"></script>
 
 	<!-- <div class="viewContainer bor"> -->
-
+	
+	
+	
+	<c:set var="nickname" value="${member.nickname}"></c:set>
+	
+	<input id="loginNickname" type="text" value="${nickname}">
 	<input id="m_no" type="hidden" value="${board.mno }">
 	<input id="title" type="hidden" value="${board.title}">
 	
@@ -670,7 +698,7 @@
 				
 					<input style="display:none;" type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
-					<input type="hidden" id="writer" name="writer" value="이거이거지금작성된댓글이에요지금지금!"> 
+					<input type="text" id="writer" name="writer" value="${nickname}"> 
 				
 					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px; border: 2px solid #ddd;">
 					<textarea id="reply" name="reply" class="form-control"
@@ -696,10 +724,10 @@
 				<form id="grForm">
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
 					<div id="generalReplyWriteDiv">
-					<input style="width:30%;" type="text" id="replyer" name="replyer" placeholder="작성자 입력"><span style="position: absolute;bottom: 485px;margin-left: 560px;color: crimson;"> <b>! 주의 !</b> 아무리 익명이라도 비난 & 욕설 댓글 작성 시 신고 대상이 될 수 있습니다. </span>
-					<textarea style=" resize: none; " id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!"></textarea>
+					<div style="display: flex;"><input style="width:30%;" type="text" id="replyer" name="replyer" placeholder="작성자 입력"><span style="margin-left: 300px; color: crimson; margin-top: 10px;"> <b>! 주의 !</b> 아무리 익명이라도 비난 & 욕설 댓글 작성 시 신고 대상이 될 수 있습니다. </span></div>
+					<div style="display: flex;"><textarea style=" resize: none; " id="content" class="form-control margin-T12" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!"></textarea>
+					<button id="grBtn" onclick="grWrite()">댓글작성</button></div>
 					</div>
-					<button id="grBtn" onclick="grWrite()">댓글작성</button>
 				</form>
 			</div>
 		</div>

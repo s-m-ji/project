@@ -68,5 +68,13 @@
 		where r_no = #{r_no}
 		
 	</update>
+	
+	<select id="getRno" resultType="int">
+		
+		select r_no 
+		from rec_reply
+		where b_no = #{b_no} and writer = #{nickname}
+	
+	</select>
 
 </mapper>

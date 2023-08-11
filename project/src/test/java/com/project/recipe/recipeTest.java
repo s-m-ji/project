@@ -95,9 +95,11 @@ public class recipeTest {
 	@Test
 	public void dupl() {
 		
-		int res = replySerive.selectPhotoReview(2, "나는작성자");
+		int res = replySerive.getRno(3, "관리자");
 		
-		assertNotEquals(1, res);
+		assertNotNull(replySerive.getRno(3, "관리자"));
+		
+		log.info(res);
 	}
 	
 	
