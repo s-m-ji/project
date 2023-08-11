@@ -149,25 +149,7 @@
 			
 			// 작성자 이미지 출력 
 			getMemberImg();
-			
-			
-			/*
-			reduceBtn.addEventListener('click', function(){
 				
-				getRecipeReply();
-			});*/
-			
-			
-			
-			// 댓글 작성 클릭시 실행되는 함수
-			/*replyWriteBtn.addEventListener('click',function(){
-				
-				// 댓글 작성 함수
-				replyWrite();
-				
-			});*/
-			
-			
 			
 			//파일업로드
 			replyPhotoupload_Test.addEventListener('click', function(){
@@ -182,13 +164,13 @@
 				
 				let formData = new FormData(replyPhotoForm_Test);
 				
-				console.log("b_no : ", b_no);
+				//console.log("b_no : ", b_no);
 				
-				console.log("formData : ", formData);
+				//console.log("formData : ", formData);
 				
-				console.log("writer : ", writer);
+				//console.log("writer : ", writer);
 				
-				console.log("reply : ", reply);
+				//console.log("reply : ", reply);
 				
 				document.query
 				
@@ -198,8 +180,8 @@
 						let fileName = pair[1].name;
 						let fileSize = pair[1].fileSize;
 						
-						console.log('fileName', fileName);
-						console.log('fileSize', fileSize);
+						//console.log('fileName', fileName);
+						//console.log('fileSize', fileSize);
 						
 					}
 					
@@ -230,15 +212,7 @@
 			    },
 			  });
 
-			  // .starDiv 클릭 이벤트 리스너
-			 /* $(".starDiv").on("click", function () {
-			    // Get the selected star rating value
-			    const starRating = $(this).data("score");
-
-			    // Update the hidden input field with the selected rating value
-			    $("#star").val(starRating);
-			  }); */
-			//*/
+		
 			
 	        });
 			
@@ -292,7 +266,7 @@
 		function fileuploadRes_Test(map){
 			// 댓글 출력 
 			getRecipeReply();
-			console.log(map.result);
+			//console.log(map.result);
 			if(map.result == 'success'){
 				 swal({
 		                title: "요리 후기 작성완료!",
@@ -323,9 +297,9 @@
 					, reply : reply
 					, writer : writer}
 			
-			console.log("bno", bno);
-			console.log("reply", reply);
-			console.log("writer", writer);
+			//console.log("bno", bno);
+			//console.log("reply", reply);
+			//console.log("writer", writer);
 			
 			// url : /reply/insert : 요청경로
 			// obj : json 형식으로 전달할 데이터
@@ -340,7 +314,7 @@
 			
 		function fileuploadRes(map){
 	   
-	   			console.log(map.result);
+	   			//console.log(map.result);
 	   			
 	   
    		}
@@ -361,7 +335,7 @@
 			.then(map => callback(map));
 			
 		} catch (e) {
-			console.log(e);
+			//console.log(e);
 		}	
 	}
    
@@ -369,7 +343,7 @@
 	   function replyRes(map){
 		      // 성공 : 리스트 조회 및 출력
 		      // 실패 : 메세지 출력
-		      console.log('map', map);
+		      //console.log('map', map);
 		      
 		      if (map.result == "success"){
 		    	  
@@ -395,8 +369,8 @@
 		let obj = {m_no : m_no
 				, b_no : b_no }
 		
-		console.log("m_no :" , m_no); // 확인 완료
-		console.log("b_no :" , b_no);
+		//console.log("m_no :" , m_no); // 확인 완료
+		//console.log("b_no :" , b_no);
 		
 		
 		fetchPost('/recipe/likeRecipe', obj, LikeRecipeRes);
@@ -406,7 +380,15 @@
 	   function LikeRecipeRes(map){
 	   	
 			
-		   swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
+		   //swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
+		  	
+		   swal({
+		                title: "레시피 찜하기 성공 !",
+		                text: "",
+		                icon: "success",
+		                button: "완료",
+		                });
+		   
 		   alertCustomizing();
 	   		
 	   }
@@ -428,7 +410,7 @@
 	
 	function viewGeneralReply(map){
 		
-		console.log('map.generalReply', map.generalReply)
+		//console.log('map.generalReply', map.generalReply)
 	
 		let content = '';
 		
@@ -489,21 +471,7 @@
 		    generalReplyDiv.innerHTML = content;
 		  }
 		
-		
-		
-		/*map.generalReply.forEach(function(item, index){
-							
-				 content +=
-					
-				'<div class="generalHead margin-B30" style="border-bottom: 1px solid; border-color: #a52a2a52">' 
-	            + '<b style="font-size:17px font-size: 14px; margin-bottom: 5px; ">'+item.replyer+'</b> | <span style="font-size:14px; color: #0000007a;">'+item.regdate+'</span>'
-	            
-	            + '<div style="font-size:14px; margin-bottom:5px; margin-top: 10px; margin-left: 5px;" class="generalContent">'+item.content+'</div>'
-	          	+'</div>'
-		  
-	});
-		
-		 generalReplyDiv.innerHTML = content;*/
+
 		}
 	
 	
@@ -534,11 +502,11 @@
 	
 	function ReviewDuplicate(){
 		
-		console.log('ReviewDuplicate() 실행 !!!!!!!!!!!!!!!!!!!!!!!!!');
+		//console.log('ReviewDuplicate() 실행 !!!!!!!!!!!!!!!!!!!!!!!!!');
 		let writer = document.querySelector('#writer').value;
 		let b_no = document.querySelector('#b_no').value;
 		
-		console.log("작성자이름 : ", writer)
+		//console.log("작성자이름 : ", writer)
 		
 		let writerString = String(writer);
 		
@@ -553,7 +521,7 @@
 		
 		const writerDiv = document.querySelector('#writerDiv');
 		
-		console.log("ReviewDuplicateRes(map) 실행 ===========================================================")
+		//console.log("ReviewDuplicateRes(map) 실행 ===========================================================")
 		
 		
 		if(map.result == "duplicate"){
@@ -580,13 +548,13 @@
 		
 		const MemberImg = document.querySelector('#MemberImg');
 		
-		console.log("나 여기있어요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ : ", map.result);
+		//console.log("나 여기있어요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ : ", map.result);
 		
 		
 		if(map.result = "success"){
 			
 			let savePath = encodeURIComponent(map.memberImg.savePath);
-			console.log("멤버이미지 출력 대작전 : ", savePath);
+			//console.log("멤버이미지 출력 대작전 : ", savePath);
 			
 			let imgTag = '<img style="width: 100px; height: 100px; border-radius: 50%;" src="/display?fileName='+ savePath + '">'
 		
@@ -594,7 +562,7 @@
 			
 		}else{
 			
-			console.log("멤버이미지 출력 대작전");	
+			//console.log("멤버이미지 출력 대작전");	
 		}
 			
 		
@@ -610,7 +578,7 @@
 
 	<!-- <div class="viewContainer bor"> -->
 
-	<input id="m_no" type="text" value="${board.mno }">
+	<input id="m_no" type="hidden" value="${board.mno }">
 	<input id="title" type="hidden" value="${board.title}">
 	
 	
@@ -662,11 +630,12 @@
 	</div>
 
 	<!-- 작성자 정보 -->
-	<div class="writerInfoDiv margin-T12">
+	<div style="border-bottom: 5px solid;" class="writerInfoDiv margin-T12">
 		<div class="sectionTitle MB40T20"><h3 class="h3FW800">레시피 작성자 <span class="italicTitle">Writer</span></h3></div>
 		<div id="MemberInfoDiv"><div id="MemberImg"></div> <span style="margin-left: 20px; padding-top: 20px; font-weight: 900;"> ${board.nickname}</span></div>
 	</div>
 
+	<div id="replyContainer" style="margin-top: 100px;">
 	<!-- 요리후기  -->
 	<div id="cookingReviewSection" class="cooking-review margin-T12">
 		
@@ -701,7 +670,7 @@
 				
 					<input style="display:none;" type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
-					<input type="hidden" id="writer" name="writer" value="삐용삐용"> 
+					<input type="hidden" id="writer" name="writer" value="이거이거지금작성된댓글이에요지금지금!"> 
 				
 					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px; border: 2px solid #ddd;">
 					<textarea id="reply" name="reply" class="form-control"
@@ -734,6 +703,13 @@
 				</form>
 			</div>
 		</div>
+		
+	</div>
+	
+	
+	
+	
+		
 	
 	<!-- 모달창 -->
 	<div id="ingredientModal" class="modal">
@@ -801,9 +777,7 @@
 		
 		<div id="recentlyViewed" class="recently-viewed">
 			<!-- Display recently viewed recipes as clickable images -->
-			<a href="link-to-recipe1"><img src="path/to/recipe1.jpg"
-				alt="Recipe 1"></a> <a href="link-to-recipe2"><img
-				src="path/to/recipe2.jpg" alt="Recipe 2"></a>
+		
 			<!-- Add more recently viewed recipes if needed -->
 		</div>
 	</div>
