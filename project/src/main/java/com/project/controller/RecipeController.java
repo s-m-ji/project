@@ -242,25 +242,27 @@ public class RecipeController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		try {
-	
-			int res = service.like_Recipe(vo);
-			
-			
-				
+		System.out.println("likeRecipe 성공 ========================================");
+		
+		System.out.println("b_no : " +vo.getB_no());
+		System.out.println("mno : " + vo.getMno());
+		
+		
+		
+			try {
+
+				int res = service.like_Recipe(vo);
 				map.put("message", "레시피 저장 성공  ! ");
+				map.put("res",res);
+				log.info(res);
+		
+			} catch (Exception e) {
 			
-			
-			
-			log.info(res);
-		
-		} catch (Exception e) {
-			map.put("message","이미 저장 되어 있는 레시피 입니다 . ^^");
-		}
-	
-		
-		
-		
+				map.put("message","이미 저장 되어 있는 레시피 입니다 . ^^");
+				map.put("res", 0);// TODO: handle exception
+				
+			}
+				
 		
 		return map;
 	}

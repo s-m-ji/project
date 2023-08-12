@@ -156,6 +156,8 @@
 				
 				event.preventDefault();
 				
+				
+				
 				const writerDiv = document.querySelector('#writerDiv').style.display = "none";
 				
 				let b_no = document.querySelector('#b_no').value;
@@ -363,33 +365,47 @@
    // 레시피 저장 함수
    function LikeRecipe(){
 	   
-	   	let m_no = document.querySelector('#m_no').value; // 세션 정보에서 m_no 를 받아온다면 저장
+	   	let mno = document.querySelector('#mno').value; // 세션 정보에서 m_no 를 받아온다면 저장
 		let b_no = document.querySelector('#b_no').value; // 화면에서 게시글의  b_no 를 읽어와서 저장
 	   
-		let obj = {m_no : m_no
+		let obj = {mno : mno
 				, b_no : b_no }
+		
+	
+		console.log('obj ================================== : ', obj);
 		
 		//console.log("m_no :" , m_no); // 확인 완료
 		//console.log("b_no :" , b_no);
 		
-		
+
 		fetchPost('/recipe/likeRecipe', obj, LikeRecipeRes);
+		
    }
    
 	// 레시피 저장을 알려주는 함수
 	   function LikeRecipeRes(map){
 	   	
+		if(map.res > 0){
 			
-		   //swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
-		  	
-		   swal({
-		                title: "레시피 찜하기 성공 !",
-		                text: "",
-		                icon: "success",
-		                button: "완료",
-		                });
-		   
-		   alertCustomizing();
+			console.log('LikeRecipeRes : ', map);
+			   //swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
+			  	
+			   swal({
+			                title: "레시피 찜하기 성공 !",
+			                text: "",
+			                icon: "success",
+			                button: "완료",
+			                });
+			   
+			   alertCustomizing();
+		}else{
+			
+			swal ( "앗 ! " ,  "이미 저장된 레시피 입니다." ,  "error" );
+			
+			alertCustomizing();
+		}
+			
+	
 	   		
 	   }
 			
@@ -526,6 +542,8 @@
 		console.log('map.member : ', map.member);
 		
 		// 수정 삭제 처리까지 
+		let mno = document.querySelector('#mno').value;
+		console.log('mno 로그인확인 처리  ===================================== =', mno);
 		let b_no = document.querySelector('#b_no').value;
 		let nickname = document.querySelector('#loginNickname').value;
 		
@@ -535,13 +553,15 @@
 		console.log('b_no : ', b_no);
 		console.log('nickName : ', nickname);
 		
-		if(map.result == "duplicate"){
+		console.log('댓글 중복검사 map.reuslt ===============================', map.result)
+		
+		if(map.result != "duplicate" && mno != null){
 			
-			writerDiv.style.display = "none";
+			document.querySelector('.comment-writing').style.display = "block";
 			
 		}else{
 			
-			return;
+			console.log("else 로 오는데용 ~~~~~~~~~~~~~~~~~~~~~~~~")
 		}
 		
 	}
@@ -557,7 +577,7 @@
 		
 		if(map != null){
 			
-			document.querySelector('.comment-writing').style.display = "block";
+			//document.querySelector('#writerDiv').style.display = "block";
 			
 		}
 		
@@ -610,8 +630,10 @@
 	
 	
 	<c:set var="nickname" value="${member.nickname}"></c:set>
+	<c:set var="mno" value="${member.mno }"/>
 	
 	<input id="loginNickname" type="text" value="${nickname}">
+	<input id="mno" type="text" value="${mno }"/>
 	<input id="m_no" type="hidden" value="${board.mno }">
 	<input id="title" type="hidden" value="${board.title}">
 	

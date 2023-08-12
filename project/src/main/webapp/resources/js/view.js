@@ -628,10 +628,23 @@
 					
 					//console.log("댓글삭제 성공");
 					
+					swal({
+		                title: "댓글 삭제 완료",
+		                text: "",
+		                icon: "success",
+		                button: "완료",
+		                });
+				
+				//
+				
+				alertCustomizing();
+					
 					getRecipeReply();
 					
 				} else{
 					
+					swal ( "앗 ! " ,  "댓글 삭제중 오류 발생 !" ,  "error" );
+					 alertCustomizing();
 					//console.log("댓글삭제 실패");
 				}
 					
@@ -662,7 +675,30 @@
 			function replyEditRes(map){
 				
 				//console.log("댓글이 수정되었습니다.");
-				getRecipeReply();
+				
+					if(map.result =='success'){
+							
+							//console.log("댓글삭제 성공");
+							
+							swal({
+				                title: "댓글 수정 완료",
+				                text: "",
+				                icon: "success",
+				                button: "완료",
+				                });
+						
+						//
+						
+						alertCustomizing();
+							
+							getRecipeReply();
+							
+						} else{
+							
+							swal ( "앗 ! " ,  "댓글 수정중 오류 발생 !" ,  "error" );
+							 alertCustomizing();
+							//console.log("댓글삭제 실패");
+						}
 				
 			}
 			

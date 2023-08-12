@@ -80,7 +80,7 @@
 	<!-- 레시피저장 -->
 	<insert id="like_Recipe">
 		
-		insert into like_recipe (l_no, m_no, b_no) values (seq_l_no.nextval, #{m_no}, #{b_no})
+		insert into like_recipe (l_no, m_no, b_no) values (seq_l_no.nextval, #{mno}, #{b_no})
 		
 	</insert>
 	

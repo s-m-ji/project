@@ -6,6 +6,6 @@ import lombok.Data;
 public class LikeVo {
 
 	private int l_no;
-	private int m_no;
+	private int mno;
 	private int b_no;
 }
