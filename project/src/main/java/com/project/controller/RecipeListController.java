@@ -21,7 +21,13 @@ public class RecipeListController {
 	
 	@Autowired
 	RecipeListService rService;
-
+	
+	@GetMapping("mimiTest")
+	public void mimiTest() {
+		
+	}
+	
+	
 	/**
 	 * ▶ list.jsp로 이동
 	 * @param model

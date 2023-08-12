@@ -619,6 +619,78 @@
 		<!-- Insert representative photo here -->
 		<div id="headImgDiv"></div>
 		<span><button id="likeBtn">♡<br>찜하기</button></span>
+		
+		<!-- 소셜 공유 버튼 API  // 시작  (MI, 2023/08/12)-->
+		<br><br>
+		<!-- 네이버 -->
+			<script>
+		    function share() {
+		      var url = encodeURI(encodeURIComponent(myform.url.value));
+		      var title = encodeURI(myform.title.value);
+		      var shareURL = "https://share.naver.com/web/shareView?url=" + url + "&title=" + title;
+		      document.location = shareURL;
+		    }
+		  </script>
+		  
+		  <span>
+			<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+			<script type="text/javascript">
+			new ShareNaver.makeButton({"type": "e" , "title":""});
+			</script>
+		</span>
+		
+		<!-- 카카오 -->	
+		<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js"
+		  integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
+		<script>
+		  Kakao.init('9774013a3e7198ad3f1d769c73eba967'); // 사용하려는 앱의 JavaScript 키 입력
+		</script>
+		
+		<a id="kakaotalk-sharing-btn" href="javascript:;">
+		  <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png"
+		    alt="카카오톡 공유 보내기 버튼" />
+		</a>
+		
+		<script>
+		  Kakao.Share.createDefaultButton({
+		    container: '#kakaotalk-sharing-btn',
+		    objectType: 'feed',
+		    content: {
+		      title: '딸기 치즈 케익',
+		      description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+		      imageUrl:
+		        'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+		      link: {
+		        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+		        mobileWebUrl: 'https://developers.kakao.com',
+		        webUrl: 'https://developers.kakao.com',
+		      },
+		    },
+		    social: {
+		      likeCount: 286,
+		      commentCount: 45,
+		      sharedCount: 845,
+		    },
+		    buttons: [
+		      {
+		        title: '웹으로 보기',
+		        link: {
+		          mobileWebUrl: 'https://developers.kakao.com',
+		          webUrl: 'https://developers.kakao.com',
+		        },
+		      },
+		      {
+		        title: '앱으로 보기',
+		        link: {
+		          mobileWebUrl: 'https://developers.kakao.com',
+		          webUrl: 'https://developers.kakao.com',
+		        },
+		      },
+		    ],
+		  });
+		</script>
+		<!-- 소셜 공유 버튼 API  // 끝 (MI, 2023/08/12) -->
+		
 		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1></div>
 		
 		<div id="headIntroDiv">

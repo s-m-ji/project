@@ -1,3 +1,8 @@
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.DataOutputStream"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -150,48 +155,49 @@
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>
 
-	
+	<script type="text/javascript">
+
+</script>
 	<!-- Search Trend API -->
-	<script type="commonjs">
+	<%
+	
+	 String clientId = "029baf0kwq";//애플리케이션 클라이언트 아이디값";
+    String clientSecret = "3Ea7ZHASn2UVTaqgGYWfZWkv2cyzQEnW4EtftFu3";//애플리케이션 클라이언트 시크릿값";
 
-	var request = require('request');
+    try {
+        String apiURL = "https://naveropenapi.apigw.ntruss.com/datalab/v1/search";
+        String body = "{\"startDate\":\"2017-01-01\",\"endDate\":\"2017-04-30\",\"timeUnit\":\"month\",\"keywordGroups\":[{\"groupName\":\"한글\",\"keywords\":[\"한글\",\"korean\"]},{\"groupName\":\"영어\",\"keywords\":[\"영어\",\"english\"]}],\"device\":\"pc\",\"ages\":[\"1\",\"2\"],\"gender\":\"f\"}";
+        URL url = new URL(apiURL);
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
+        con.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
+        con.setRequestProperty("Content-Type", "application/json");
 
-	var client_id = '029baf0kwq';
-	var client_secret = '3Ea7ZHASn2UVTaqgGYWfZWkv2cyzQEnW4EtftFu3';
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.write(body.getBytes());
+        wr.flush();
+        wr.close();
 
-	var api_url = 'https://naveropenapi.apigw.ntruss.com/datalab/v1/search';
-	var request_body = {
-	  startDate: '2017-01-01',
-	  endDate: '2017-04-30',
-	  timeUnit: 'month',
-	  keywordGroups: [
-	    {
-	      groupName: '한글',
-	      keywords: ['한글', 'korean'],
-	    },
-	    {
-	      groupName: '영어',
-	      keywords: ['영어', 'english'],
-	    },
-	  ],
-	  device: 'pc',
-	  ages: ['1', '2'],
-	  gender: 'f',
-	};
+        int responseCode = con.getResponseCode();
+        BufferedReader br;
+        if(responseCode==200) { // 정상 호출
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } else {  // 오류 발생
+            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+        }
 
-	request.post(
-	  {
-	    url: api_url,
-	    body: JSON.stringify(request_body),
-	    headers: {
-	      'X-NCP-APIGW-API-KEY-ID': client_id,
-	      'X-NCP-APIGW-API-KEY': client_secret,
-	      'Content-Type': 'application/json',
-	    },
-	  },
-	  function(error, response, body) {
-	    console.log(response.statusCode);
-	    console.log(body);
-	  },
-	);
-	</script>
+        String inputLine;
+        StringBuffer response2 = new StringBuffer();
+        while ((inputLine = br.readLine()) != null) {
+            response2.append(inputLine);
+        }
+        br.close();
+        System.out.println("response 출력");
+        System.out.println(response.toString());
+
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+	%>
