@@ -142,7 +142,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	, g.grade
 	, g.benefit
 	,
-	       RANK() OVER (ORDER BY SUM(b.viewcnt) DESC , MAX(b.regdate) asc) AS 순위
+	       RANK() OVER (ORDER BY SUM(b.viewcnt) DESC , MAX(b.regdate) asc) AS reward
 	FROM rec_member m 
 	JOIN rec_grade g ON m.gno = g.gno 
 	JOIN rec_board b ON b.mno = m.mno

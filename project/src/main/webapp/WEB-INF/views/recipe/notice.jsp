@@ -89,6 +89,8 @@ window.addEventListener('load', function(){
 <p style="margin: 0px;"> 오늘의 공지<b style="font-size: 1.8em">${totalNcnt}</b>개📜</p>
 </div>
 <c:set  value="${notList}" var="notice"></c:set>  
+
+<!--  관리자 adminRole 이 포함되어있으면 보여주고 아니면 x  -->
 <!-- 공지 등록 -->
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">

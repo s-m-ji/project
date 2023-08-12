@@ -23,6 +23,8 @@ public class MemberVo {
 	private String grade;
 	private String benefit;
 	
+	private String reward; // 순위
+	
 //  우편 번호 , 주소, 상세주소 
 	private String addrZipnum;
 	private String addrBasic;

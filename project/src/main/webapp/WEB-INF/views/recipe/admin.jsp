@@ -49,7 +49,7 @@ window.addEventListener("load", function(){
 		            if (matchingFile) {
 		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
 		                let imageTag = "<img src='/recipe/displayAdmin?filename=" + savePath + "' alt='회원 사진 " + matchingFile.mno + "'  style='width: 100px; height: 100px;'class='memImg'>";
-		                //console.log("이것은 imageTag : " , imageTag);
+		                
 		                fileDiv.innerHTML = imageTag; // 해당 fileDiv 태그에 이미지 추가
 		            } else {
 
@@ -63,24 +63,18 @@ window.addEventListener("load", function(){
 	});
 
 // 선택박스 전체 선택
-function toggleCheckboxes() {
+ function toggleCheckboxes() {
     var adminChkBox = document.getElementById('adminChkBox');
     var isChecked = adminChkBox.checked;
-
-    var chkBox = document.getElementsByClassName('chkBox');
-    
-    var delNmnos = document.getElementsByClassName('delNmno');
-	var delYmnos = document.getElementsByClassName('delYmno');
+	console.log("전체 선택 o : " , isChecked);
 	
-	console.log(delNmnos);
-	console.log(delYmnos);
+    var chkBox = document.getElementsByClassName('chkBox');
 	
     for (var i = 0; i < chkBox.length; i++) {
        chkBox[i].checked = isChecked;
     }
-    console.log(chkBox);
-    console.log(adminChkBox);
-  }
+    console.log("선택 행 : " , chkBox);
+  } 
   
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	function goAdmin(page){
@@ -91,28 +85,73 @@ function toggleCheckboxes() {
 		location.href = "/recipe/adminInput";
 	}
 	
-	function delBtnOnclick(){
-		 var selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-		    
-		    if (selectedCheckboxes.length === 0) {
-		    alert('삭제할 회원을 선택해주세요.');
-		     /*    swal('삭제할 회원을 선택해주세요.'); */
-		    var delForm = document.getElementById('delForm');
-		    delForm.submit();
-				location.href = "/recipe/admin";
-		        return;
-		    }
-
-	}
-	
 	function adminUpdateAction(url,mno){
-		/* console.log(mno);
-		location.href ="/recipe/adminUpdate?mno="+ mno; */
 		searchForm.action=url;
  		searchForm.mno.value=mno;
  		searchForm.submit();
 	}
 </script>  
+<script type="text/javascript">
+function delBtnOnclick(){
+	let checkBoxArr = [];
+	$("input:checkbox[name='delMno']:checked").each(function(){
+		checkBoxArr.push($(this).val());
+		console.log(checkBoxArr);
+	});
+	let obj = {
+		checkBoxArr : checkBoxArr
+		/* , delyn : "Y" */
+	};
+	console.log("obj" , obj);
+	
+    fetchPost('deleMemAction', obj, delRes);
+}
+
+function fetchPost(url, obj, callback) {
+	try{
+		
+		fetch(url, {
+			method:'post'
+			, headers : {'Content-Type' : 'application/json'}
+			, body : JSON.stringify(obj)
+		})
+		.then(response => response.json())
+		.then(map => callback(map));
+	}catch (e) {
+		console.log("fatchPost "+ e);
+	}
+}
+
+
+function delRes(map) {
+	if(map.result == 'success'){
+		swal(map.message).then(okay=> {
+			if(okay){
+			 	let pageNo = document.querySelector('#pageNo').value;
+				let sField = document.querySelector('#sField').value;
+				let sWord = document.querySelector('#sWord').value;
+				let mno = document.querySelector('#mno').value;
+				console.log(pageNo, sField, sWord, mno);
+				
+				window.location.href= "/recipe/admin?pageNo="+pageNo+ "&mno="+mno+"&sField="+sField+"&sWord="+sWord;
+			}
+		});
+
+	}else{
+		swal(map.message).then(okay=> {
+			if(okay){
+			 	let pageNo = document.querySelector('#pageNo').value;
+				let sField = document.querySelector('#sField').value;
+				let sWord = document.querySelector('#sWord').value;
+				let mno = document.querySelector('#mno').value;
+				
+				window.location.href= "/recipe/admin?pageNo=" + pageNo + "&mno=" + mno + "&sField=" + sField + "&sWord=" + sWord;
+			}
+		});
+	}
+}
+
+</script>
 
 </head>
 <body>
@@ -149,24 +188,27 @@ function toggleCheckboxes() {
 <div style="display: flex;justify-content: flex-end;">
 <p style="margin: 0px;"> 오늘의 회원 <b style="font-size: 1.8em">${totalCnt}</b>명💕</p>
 </div>
+
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-0">
     </h6>
     <h6 class="border-bottom pb-2 mb-0 checkboxLine">
-      <form action = "/recipe/delMem" method="post" name="updateForm" name="updateForm" id="delForm">
+      <form action = "/recipe/deleMemAction" method="post" name="updateForm" name="updateForm" >
+  
          <!--  파라메터 🌈 --> 
 	   	<input type ="text" name= "pageNo" value="${param.pageNo}" id = "pageNo" hidden>
-		<input type ="text" name= "sField" value="${param.sField }" hidden>
-		<input type ="text" name= "sWord" value="${param.sWord}" hidden>
+		<input type ="text" name= "sField" value="${param.sField }" id= "sField" hidden>
+		<input type ="text" name= "sWord" value="${param.sWord}" id= "sWord"  hidden>
    		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
    		
         
         <div id='memInputBtn'>
+        			<!--  전체 체크박스 -->
             <input type="checkbox" class="form-check-input" id="adminChkBox" onclick='toggleCheckboxes()' style="margin-right: 10px;">
             <label class="form-check-label" for="same-address"></label>
             	<div class= "btnDiv">
           <input type='button' id='deleteBtn' value='회원등록'onclick='inputBtnOnclick()' style="margin-right: 6px;" >
-          <input type='submit' id='inputBtn' value='회원탈퇴' onclick="delBtnOnclick()" >
+          <input type='button' id='inputBtn' value='회원탈퇴' onclick="delBtnOnclick()" >
           		</div>
         </div>
       </h6>
@@ -181,6 +223,7 @@ function toggleCheckboxes() {
         <c:if test="${not empty list}">
     <div class="d-flex text-muted pt-3">
       <div class="form-check">
+      
         <!-- 삭제용 체크 박스 -->
         <input type="checkbox" name='delMno' class="form-check-input chkBox" value='${member.mno}'>
         <label class="form-check-label" for="same-address"></label>
@@ -197,13 +240,13 @@ function toggleCheckboxes() {
         <span class="d-block">${member.name}</span>
       </div>
 
-   <div class='memInfo'>
-        <i class="fa-solid fa-envelope"> ${member.email}</i>
-       　<i class="fa-solid fa-phone"> ${member.pnum}</i>
-       　<i class="fa-solid fa-calendar"> ${member.reg_dateStr}</i>
+   		<div class='memInfo'>
+       	 <i class="fa-solid fa-envelope"> ${member.email}</i>
+       	　<i class="fa-solid fa-phone"> ${member.pnum}</i>
+       　		  <i class="fa-solid fa-calendar"> ${member.reg_dateStr}</i>
         <br>
-        <i class="fa-solid fa-award"> ${member.grade}</i>
-        　<i class="fa-solid fa-user-xmark"> ${member.delYNStr}</i>
+        	<i class="fa-solid fa-award"> ${member.grade}</i>
+        　		<i class="fa-solid fa-user-xmark"> ${member.delYNStr}</i>
       </div>
       </div>
     </div>

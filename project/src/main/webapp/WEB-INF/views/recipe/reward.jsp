@@ -53,6 +53,7 @@ function rewardView(map){
 		 '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
 		+ '<thead>'
 		+'<tr>'
+		 +'<th>순위</th>'
 		+'<th>회원 번호</th>'
 		+'<th>이름</th>'
         +'<th>닉네임</th>'
@@ -70,6 +71,7 @@ function rewardView(map){
 		rewardList.forEach(reward => {
 			rewardDivStr += 
 				'<tr>'
+				+'<td>'+reward.reward+'</td>'
 				+'<td>'+reward.mno+'</td>'
 				+'<td>'+reward.name+'</td>'
 				+'<td>'+reward.nickname+'</td>'
@@ -177,7 +179,7 @@ function fetchPost(url, obj, callback){
           opacity: 0;
           cursor: pointer;
         }
-/*         .duration input[type='button']{
+       .duration input[type='button']{
           margin: 10px;
           padding: 10px;
           border-radius: 10px;
@@ -186,6 +188,7 @@ function fetchPost(url, obj, callback){
           box-shadow: 0px 0px 5px #fc85379f;
 
         }
+        
         .membership{
         background-color:  #ffdbc352;
         box-shadow: 1px 1px 20px 1px rgb(218, 218, 218);
@@ -207,7 +210,7 @@ function fetchPost(url, obj, callback){
 	    width: 200px;
 	    height: 100px;
 
-        } */
+        }
     </style>
 </head>
 <body>
@@ -217,7 +220,7 @@ function fetchPost(url, obj, callback){
 <div class="container">
 	
 <!--  Reward 소개 -->
-  <!-- <div class=" membership">
+<!--    <div class=" membership">
       <h1 class="fst-italic">MEMBERSHIP</h1>
       <p class="">오늘뭐먹조? 회원등급 및 혜택</p>
  
@@ -250,7 +253,6 @@ function fetchPost(url, obj, callback){
         <p><a class="btn btn-secondary" href="#">10,000<i class="fa-brands fa-product-hunt"></i></a></p>
       </div>
     </div>
-
 </div>
  -->
   
