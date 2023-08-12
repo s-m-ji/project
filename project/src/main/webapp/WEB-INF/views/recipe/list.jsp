@@ -12,6 +12,7 @@
    <link rel="stylesheet" href="/resources/css/style.css">
    <link rel="stylesheet" href="/resources/css/animate.css">
    <link rel="stylesheet" href="/resources/recipe_css/mimi.css">
+   
     
     <!-- js -->
     <script src="/resources/js/jquery.min.js"></script>
@@ -50,7 +51,7 @@
     		        if (inputElement !== null) {
     		            let bnoValue = inputElement.value;
     		            let matchingFile = fileList.find(item => item.b_NO === parseInt(bnoValue));
-    		            console.log("matchingFile 출력 ", matchingFile);
+    		            // console.log("matchingFile 출력 ", matchingFile);
     		            
     		            if (matchingFile) {
     		                let savePath = encodeURIComponent(matchingFile.savePath); // 원본 파일
@@ -148,3 +149,49 @@
 		
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>
+
+	
+	<!-- Search Trend API -->
+	<script type="commonjs">
+
+	var request = require('request');
+
+	var client_id = '029baf0kwq';
+	var client_secret = '3Ea7ZHASn2UVTaqgGYWfZWkv2cyzQEnW4EtftFu3';
+
+	var api_url = 'https://naveropenapi.apigw.ntruss.com/datalab/v1/search';
+	var request_body = {
+	  startDate: '2017-01-01',
+	  endDate: '2017-04-30',
+	  timeUnit: 'month',
+	  keywordGroups: [
+	    {
+	      groupName: '한글',
+	      keywords: ['한글', 'korean'],
+	    },
+	    {
+	      groupName: '영어',
+	      keywords: ['영어', 'english'],
+	    },
+	  ],
+	  device: 'pc',
+	  ages: ['1', '2'],
+	  gender: 'f',
+	};
+
+	request.post(
+	  {
+	    url: api_url,
+	    body: JSON.stringify(request_body),
+	    headers: {
+	      'X-NCP-APIGW-API-KEY-ID': client_id,
+	      'X-NCP-APIGW-API-KEY': client_secret,
+	      'Content-Type': 'application/json',
+	    },
+	  },
+	  function(error, response, body) {
+	    console.log(response.statusCode);
+	    console.log(body);
+	  },
+	);
+	</script>
