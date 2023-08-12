@@ -46,14 +46,41 @@
     min-width: 68px;
     font-family: Regular,sans-serif;
     font-size: 18px;
-    -webkit-letter-spacing: -0.45px;
+/*     -webkit-letter-spacing: -0.45px;
     -moz-letter-spacing: -0.45px;
-    -ms-letter-spacing: -0.45px;
+    -ms-letter-spacing: -0.45px; */
     letter-spacing: -0.45px;
     color: hsl(230,20%,46%,1);
     margin-right: 59px;
     white-space: nowrap;
     text-align: left;
+}
+
+/* gubun 모양  */
+.hziaxr > p:first-child{
+border-radius: 10px;
+text-align: center;
+color: white;
+padding: 4px;
+font-size: medium;
+font-weight: 100;
+}
+/* 여기 색깔 변경 ! ! ! !   #F7A4A4 #C0DBEA #B6E2A1  */
+.hziaxr #first{
+	background-color: #F7A4A4;
+}
+
+.hziaxr #second{
+	background-color: #C0DBEA;
+}
+
+.hziaxr #third{
+	background-color: #B6E2A1;
+}
+
+.hziaxr:hover {
+	background: #ffdcc54d;
+	background: #f7863b36;
 }
 
 /*!sc*/
@@ -81,8 +108,9 @@ data-styled.g295[id="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0"] {
 /*!sc*/
 .iUcEVv {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    /* width: 100%; */
+    width: 790px;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -114,6 +142,7 @@ data-styled.g295[id="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0"] {
 .laHiqv {
     position: relative;
     border-bottom: 1px solid hsl(210,20%,86%,1);
+    
 }
 
 /* 공지사항 선 색깔*/

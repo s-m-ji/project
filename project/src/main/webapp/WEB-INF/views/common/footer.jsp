@@ -34,7 +34,7 @@
 			<li>&copy; 오늘뭐먹조. All rights reserved.</li>
 			<li>중앙정보처리학원 <a href="https://goo.gl/maps/ysKYAbwRFrz3LdhT8"
 				target="_blank">301호</a></li>
-			<li>공지사항<a href="notice"></a></li>
+			<li><a href="notice">공지사항</a></li>
 		</ul>
 	</div>
 </section>

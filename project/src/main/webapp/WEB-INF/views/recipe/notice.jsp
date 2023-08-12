@@ -93,7 +93,7 @@ window.addEventListener('load', function(){
 <!--  관리자 adminRole 이 포함되어있으면 보여주고 아니면 x  -->
 <!-- 공지 등록 -->
   <div class="dropdown d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
       공지 등록
     </button>
 
@@ -156,21 +156,26 @@ window.addEventListener('load', function(){
              
                 <ul id="nList">
                         <li>
-                    <button type="button" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'btn' onclick='dis(this)'>
-                        
-                        <p>${notice.gubun }</p>
-                        <p>${notice.nno}</p>
+                    <button type="button" name="disBtn" class="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0 hziaxr" id = 'btn' onclick='dis(this)'>
+                       <c:if test="${notice.gubun eq '일반'}">
+                        <p id="first">${notice.gubun}</p> 
+                       </c:if>
+                       <c:if test="${notice.gubun eq '이벤트'}">
+                        <p id="second">${notice.gubun}</p> 
+                       </c:if>
+                      <c:if test="${notice.gubun eq '자주 묻는 질문'}">
+                        <p id="third">${notice.gubun}</p> 
+                       </c:if>
+                       
+                       
+                      <%--   <p>${notice.nno}</p> --%>
+                      <p>${notice.ntitle }</p>
                        
                         <div class="ServiceItemstyle__CenterBox-sc-1omzxdj-1 iUcEVv">
-                            <p>${notice.ntitle }</p>
+                           <%--  <p>${notice.ntitle }</p> --%>
+							<p style="margin-right: 55px;">${notice.nwriter }</p>
                             <p>${notice.nregdate }</p>
-
                         </div>
-                    <!--     <span style="box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%">
-                            <span>
-                                <i class="fa-solid fa-plus " style="color: #4f6996; box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:10;position:relative;max-width:100%; transform: translateY(-3px);"></i>
-                            </span>
-                        </span> -->
                     </button>
                     
                     <div class="ServiceItemstyle__ContentsBox-sc-1omzxdj-2 fEPIbI show" >
@@ -187,8 +192,8 @@ window.addEventListener('load', function(){
                        
                        <c:if test = ${member.getRole() != null && member.getRole().contains("ADMIN_ROLE")}
                         --%>
-                        	<button type="button" class="btn btn-outline-primary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
-                        	<button type='button' class="btn btn-outline-primary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
+                        	<button type="button" class="btn btn-outline-secondary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
+                        	<button type='button' class="btn btn-outline-secondary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
                        <%--  </c:if> --%>
                         </div>
                         </td>

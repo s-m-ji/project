@@ -45,7 +45,7 @@ function rewardView(map){
 	if(rewardList.length == 0){
 		rewardDiv.innerHTML = 
 			
-		'<div class="d-flex gap-2 w-100 emptyList" style="padding-top: 114px;padding-bottom: 142px;padding-left: 868px;font-size: 1.2em;">'
+		'<div class="d-flex gap-2 w-100 emptyList" style="padding-top: 114px;padding-bottom: 142px;padding-left: 470px;font-size: 1.2em;">'
 		+'😿해당 기간에 일치하는 검색 결과가 없습니다.😿'
     	+'</div>';
 	}else{

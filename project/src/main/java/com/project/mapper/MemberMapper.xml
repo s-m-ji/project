@@ -59,7 +59,7 @@ SELECT * FROM REC_MEMBER WHERE MNO= #{mno}
 <select id="noticeList" resultType="com.project.vo.NoticeVo">
 	<![CDATA[SELECT * FROM (
 	SELECT ROWNUM RN, T.* FROM (
-	SELECT REC_NOTICE.* FROM REC_NOTICE WHERE NNO >0 ]]>
+	SELECT nno, ntitle, ncontent, nwriter, to_char(nregdate, 'YY/MM/DD')as nregdate, gubun FROM REC_NOTICE WHERE NNO >0 ]]>
 	<include refid="nCriteria"></include>
 	ORDER BY NNO DESC
 	) T 
