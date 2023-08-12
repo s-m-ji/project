@@ -772,7 +772,7 @@
             /* Styles for the comment writing part */
             background-color: #fff;
             padding: 20px;
-            
+            display: none;
             /*border-top: 5px solid #ddd;*/ 
             marign-top: 40px; padding-top:20px;
             
