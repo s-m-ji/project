@@ -715,7 +715,7 @@
 							     + '<h4 class="media-heading">'
 							     + '<b class="info_name_f">' + writer + '</b>'
 							     +'<span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' 
-							     + '<p data-rno="'+r_no+'" id="replyDelete'+r_no+'" style=" display:none; cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyDelete('+r_no+')">삭제</p><p data-rno="'+r_no+'" id="replyEdit'+r_no+'" style="display:none; cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
+							     + '<p data-rno="'+r_no+'" id="replyDelete'+r_no+'" style="visibility:hidden; cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyDelete('+r_no+')">삭제</p><p data-rno="'+r_no+'" id="replyEdit'+r_no+'" style="visibility: hidden; cursor: pointer; margin-left: 10px; margin-top: 2px;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
 							     + '<p class="reply_list_cont cont'+r_no+'" style="position: absolute; top: 20px; ">' + reply + '</p><form name="editForm" onSubmit="return false;" style="display:flex;"><input type="hidden" value="'+r_no+'"><input style="width:400px;" type="hidden" id="reply'+r_no+'" class="replyUpdate'+r_no+'" name="replyUpdate" value="'+reply+'"><button class="editBtn'+r_no+'" style="display:none;"onclick="goReplyUpdate('+r_no+')">수정</button></form>'
 							     + '<div class="replyIMGDiV" style="position: absolute; right: 0; top: 0;"><a><img onclick=stepModal(\"'+savePath+'\") style="width:80px; height:80px;" src="/display?fileName=' + savePath + '"></a></div></div>' 
 							     
@@ -730,7 +730,7 @@
 									     + '<h4 class="media-heading">'
 									     + '<b class="info_name_f">' + writer + '</b>'
 									     +'<span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' 
-									     + '<p data-rno="'+r_no+'" id="replyDelete'+r_no+'" style="cursor: pointer; margin-left: 10px; margin-top: 2px; display:none;" onclick="replyDelete('+r_no+')">삭제</p><p id="replyEdit'+r_no+'" data-rno="'+r_no+'" style="cursor: pointer; margin-left: 10px; margin-top: 2px; display:none;" onclick="replyUpdate('+r_no+')">수정</p></h4>' 
+									     + '<p data-rno="'+r_no+'" id="replyDelete'+r_no+'" style="visibility: hidden; cursor: pointer; margin-left: 10px; margin-top: 2px; " onclick="replyDelete('+r_no+')">삭제</p><p id="replyEdit'+r_no+'" data-rno="'+r_no+'" style="visibility: hidden; cursor: pointer; margin-left: 10px; margin-top: 2px; " onclick="replyUpdate('+r_no+')">수정</p></h4>' 
 									     + '<p class="reply_list_cont cont'+r_no+'">' + reply + '</p><form name="editForm" onSubmit="return false;" style="display:flex;"><input type="hidden" value="'+r_no+'"><input style="width:400px;" type="hidden" id="reply'+r_no+'" class="replyUpdate'+r_no+'" name="replyUpdate" value="'+reply+'"><button class="editBtn'+r_no+'" style="display:none;"onclick="goReplyUpdate('+r_no+')">수정</button></form></div>'  
 									     
 									    );

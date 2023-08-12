@@ -552,8 +552,14 @@
 		
 		console.log("edeleteRes ============================ ", map);
 		
-		document.querySelector('#replyDelete'+map.r_no+'').style.display = "block";
-		document.querySelector('#replyEdit'+map.r_no+'').style.display = "block";
+		document.querySelector('#replyDelete'+map.r_no+'').style.visibility = "visible";
+		document.querySelector('#replyEdit'+map.r_no+'').style.visibility = "visible";
+		
+		if(map != null){
+			
+			document.querySelector('.comment-writing').style.display = "block";
+			
+		}
 		
 		
 	}
@@ -698,7 +704,7 @@
 				
 					<input style="display:none;" type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
-					<input type="text" id="writer" name="writer" value="${nickname}"> 
+					<input type="hidden" id="writer" name="writer" value="${nickname}"> 
 				
 					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px; border: 2px solid #ddd;">
 					<textarea id="reply" name="reply" class="form-control"
