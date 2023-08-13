@@ -85,6 +85,15 @@
 	</insert>
 	
 	
+	<update id="plusViewcnt">
+		
+			update rec_board
+				set viewcnt = viewcnt + 1
+			where b_no = #{b_no}
+		
+	</update>
+
+	
 </mapper>
 
 

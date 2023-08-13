@@ -68,6 +68,12 @@ public class RecipeServiceImpl implements RecipeService{
 		return mapper.photoTotalCnt(b_no);
 	}
 
+	@Override
+	public int plusViewcnt(int b_no) {
+		// TODO Auto-generated method stub
+		return mapper.plusViewcnt(b_no);
+	}
+
 	
 
 	

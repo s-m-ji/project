@@ -267,5 +267,27 @@ public class RecipeController {
 		return map;
 	}
 	
+	@GetMapping("plusView/{b_no}")
+	public @ResponseBody Map<String, Object> plusViewCnt(@PathVariable("b_no") int b_no){
+		
+		System.out.println("plusView 실행 ==============================================");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int res = service.plusViewcnt(b_no);
+		
+		if(res > 0) {
+		
+			map.put("res", res);
+			
+		}else {
+			
+			map.put("res", res);
+		}
+		
+		
+		return map;
+	
+	}
 	
 }

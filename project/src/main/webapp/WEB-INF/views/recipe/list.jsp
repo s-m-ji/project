@@ -74,8 +74,29 @@
     		        }
     		    });
     		}
-
+    		
     	});
+  	
+    /* 클릭시 viewcnt 증가 함수   =====================================================*/
+    
+    function plusViewCnt(b_no){
+		
+		fetchGet("/recipe/plusView/" + b_no, plusViewRes);
+		
+	}
+    
+    function plusViewRes(map){
+    	
+    	console.log("plusView cnt 실행 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", map.res);
+    	if(map.res > 0){
+    		console.log("view 카운트 증가 성공");
+    	}else{
+    		console.log("view 카운트 증가 실패");
+    	}
+    	
+    }
+    
+    /* 클릭시 viewcnt 증가 함수   =====================================================*/
 
     </script>
     
@@ -111,7 +132,8 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${list}" var="list">
-					<div class="col-lg-4 col-md-4 col-sm-6">
+					<!-- ViewCnt ++ 8-14  시작 함수 생성 mimi.js 에 추가 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					<div class="col-lg-4 col-md-4 col-sm-6" onclick="plusViewCnt(${list.b_NO})">
 <!-- 					<div class="col-lg-3 col-md-3 col-sm-5"> -->
 						<a href="./view?b_no=${list.b_NO}" class="fh5co-card-item">
 						<%-- <a href="#" class="fh5co-card-item" onclick="requestAction('./view', ${list.b_NO})"> --%>

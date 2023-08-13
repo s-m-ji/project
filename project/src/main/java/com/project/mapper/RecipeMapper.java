@@ -30,5 +30,7 @@ public interface RecipeMapper {
 
 	public int photoTotalCnt(int b_no);
 	
+	public int plusViewcnt(int b_no);
+	
 	
 }

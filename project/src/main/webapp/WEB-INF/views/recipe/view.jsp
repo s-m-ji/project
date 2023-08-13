@@ -66,6 +66,7 @@
 		width:50%;
 		text-align: center;
 		padding-left: 50px;
+		padding-right: 30px;
 	}
 	
 		#MemberInfoDiv{
