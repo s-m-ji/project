@@ -35,6 +35,9 @@
         	width: 100%;
         	height: 100%;
         } */
+    
+   
+        
 	#kakaotalk-sharing-btn{
 		margin-left: 5px;
 	}
@@ -46,18 +49,21 @@
 	#socialTab{
 		border-bottom: 1px solid;
 		padding-bottom: 5px;
+		padding-right: 30px;
 		display: flex;
     	justify-content: flex-end;
 	}
 	
 	#header_right{
-		margin-left: 100px;  
+		
+		width:50%;  
 		padding-left: 50px;
 		border-left: 2px solid;
     	border-color: crimson;
 	}
 	
 	#header_left{
+		width:50%;
 		text-align: center;
 		padding-left: 50px;
 	}
@@ -715,7 +721,7 @@
 		<div id="socialTab">
 		<div style="margin-top: 10px;">
 		<span id="viewCntSpan"><i class="fa-solid fa-eye" style="color: #6d737e;"></i>&nbsp; ${board.viewcnt}</span>&nbsp;
-		<span id="boomupSpan"><i class="fa-solid fa-thumbs-up" style="color: #8c929b;"></i>&nbsp; ${board.boomup}</span>
+		<span id="boomupSpan" style="margin-left: 10px;"><i class="fa-solid fa-thumbs-up" style="color: #8c929b;"></i>&nbsp; ${board.boomup}</span>
 		</div>
 		<!-- 네이버 -->
 			<script>

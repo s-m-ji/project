@@ -114,7 +114,7 @@
 		            let savePath = encodeURIComponent(item.savePath);
 
 		            content +=
-		                '<a><img style="max-width:500px; max-height:500px; border-radius: 10px;" src="/display?fileName=' + savePath + '"></a>';
+		                '<a><img style="border-radius:10px; max-width:500px; max-height:500px;" src="/display?fileName=' + savePath + '"></a>';
 
 		            // 데이터가 이미 recentArray에 존재하는지 확인
 		            const isDuplicate = recentArray.some(existingItem =>
