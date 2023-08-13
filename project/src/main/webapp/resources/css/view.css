@@ -305,25 +305,10 @@
 		}
 		
 		
-		#headIntroDiv {
-			margin-top : 30px;
-			width : 100%;
-		}
 		
-		#headTitle {
-		  display: flex;
-		  align-items: center; /* Align items vertically at the center */
-		  justify-content: center;
-		}
-		
-		#h1-title {
-		  max-width: 800px;
-		  margin: 0; /* Remove default margin for <h1> */
-		  font-family: 'IBM Plex Sans KR', sans-serif;
-		}
 		
 		#likeBtn {
-		  margin-top : 7px;
+		  margin-top: 20px;
 		  border: 1px solid;
 		  border-color: #d79587;
 		  font-weight: 600;
@@ -660,17 +645,19 @@
 		}
 		
 		.margin-B30{
-			margin-bottom: 30px
+			margin-bottom: 30px;
 		}
 
         .header {
-            /* Styles for the upper part */
+
             background-color: #fff;
             padding: 20px 40px;
-            text-align: center;
-            /* border: 1px solid; */
-             font-family: 'IBM Plex Sans KR';
+            font-family: 'IBM Plex Sans KR';
+        
         }
+        
+      
+        
 
         .material {
             /* Styles for the material part */

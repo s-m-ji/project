@@ -20,6 +20,47 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
+
+	    
+        /* .videoLinkDiv{
+        	
+        	position: relative;
+        	width: 100%;
+        	padding-bottom: 42.85714285714286%;
+        }
+        
+        
+        #video{
+        	position: absolute;
+        	width: 100%;
+        	height: 100%;
+        } */
+	#kakaotalk-sharing-btn{
+		margin-left: 5px;
+	}
+	
+	#socialTab span{
+		margin-left: auto;
+	}
+	
+	#socialTab{
+		border-bottom: 1px solid;
+		padding-bottom: 5px;
+		display: flex;
+    	justify-content: flex-end;
+	}
+	
+	#header_right{
+		margin-left: 100px;  
+		padding-left: 50px;
+		border-left: 2px solid;
+    	border-color: crimson;
+	}
+	
+	#header_left{
+		text-align: center;
+		padding-left: 50px;
+	}
 	
 		#MemberInfoDiv{
 		display: flex;
@@ -57,6 +98,24 @@
 	#generalReplyWriteDiv{
 		width: 100%;
 	}
+	
+	#headIntroDiv {
+			margin-top : 30px;
+			width : 100%;
+			max-width: 500px;
+		}
+		
+	#headTitle {
+		  margin-top: 30px;
+		  display: flex;
+		  align-items: center; 
+		}
+		
+	#h1-title {
+		  max-width: 500px;
+		  margin: 0; 
+		  font-family: 'IBM Plex Sans KR', sans-serif;
+		}
 	
 	
 	
@@ -629,12 +688,13 @@
 	
 	
 	
+	
 	<c:set var="nickname" value="${member.nickname}"></c:set>
 	<c:set var="mno" value="${member.mno }"/>
 	
-	<input id="loginNickname" type="text" value="${nickname}">
-	<input id="mno" type="text" value="${mno }"/>
-	<input id="m_no" type="hidden" value="${board.mno }">
+	<input id="loginNickname" type="hidden" value="${nickname}">
+	<input id="mno" type="hidden" value="${mno}"/>
+	<input id="m_no" type="hidden" value="${board.mno}">
 	<input id="title" type="hidden" value="${board.title}">
 	
 	
@@ -643,13 +703,20 @@
 		<div class="container">
 			<div class="container">
 	<!-- 상단 -->
-	<div class="header" >
+	<div class="header" style="display: flex;">
 		<!-- Insert representative photo here -->
+		<div id="header_left">
 		<div id="headImgDiv"></div>
 		<span><button id="likeBtn">♡<br>찜하기</button></span>
-		
+		</div>
 		<!-- 소셜 공유 버튼 API  // 시작  (MI, 2023/08/12)-->
 		<br><br>
+		<div id="header_right">
+		<div id="socialTab">
+		<div style="margin-top: 10px;">
+		<span id="viewCntSpan"><i class="fa-solid fa-eye" style="color: #6d737e;"></i>&nbsp; ${board.viewcnt}</span>&nbsp;
+		<span id="boomupSpan"><i class="fa-solid fa-thumbs-up" style="color: #8c929b;"></i>&nbsp; ${board.boomup}</span>
+		</div>
 		<!-- 네이버 -->
 			<script>
 		    function share() {
@@ -718,8 +785,10 @@
 		  });
 		</script>
 		<!-- 소셜 공유 버튼 API  // 끝 (MI, 2023/08/12) -->
+		</div>
 		
-		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1></div>
+		
+		<div id="headTitle"><h5 id="h1-title">${board.title}</h5></div>
 		
 		<div id="headIntroDiv">
 
@@ -731,10 +800,13 @@
 		</div>
 		
 		<div class="videoLinkDiv">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/${board.videoCode}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			<iframe id="video" width="420" height="243" src="https://www.youtube.com/embed/${board.videoCode}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		</div>
 		</div>
 	</div>
 
+
+  
 
 	<!-- 재료 -->
 	<div class="material margin-T12">
