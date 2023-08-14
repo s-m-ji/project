@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import com.project.vo.FileuploadVo;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
+import com.project.vo.MemberVo;
 import com.project.vo.RecBoardVO2;
 import com.project.vo.RecMatVO2;
 import com.project.vo.RecStepVO2;
@@ -288,6 +291,41 @@ public class RecipeController {
 		
 		return map;
 	
+	}
+	
+	@GetMapping("myPage2")
+	public String myPage(Model model, HttpSession session) {
+		
+		try {
+
+			MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+			int m_no = member.getMno();
+			
+			FileuploadVo FileVo = fileService.getMemberImg(m_no);
+			
+			String savePath = FileVo.getSavePath();
+			savePath = savePath.replace("\\", "/");
+			/*
+			if(member == null) {
+				System.out.println("로그인이 필요합니다.");
+				return "/recipe/login";
+						
+			}else {
+				System.out.println("로그인 되어 있습니다. 저장 정보를 jsp 에 출력할 수 있습니다. =================================================");
+				model.addAttribute("member", member);
+				return "/recipe/myPage";
+			}
+			*/
+			
+			// 회원정보 model 저장
+			model.addAttribute("savePath", savePath);
+			model.addAttribute("member", member);
+
+		} catch (Exception e) {
+			System.out.println("로그인 정보가 없거나 혹은 이미지가 없습니다.");
+		}
+		
+				return "/recipe/myPage2";
 	}
 	
 }
