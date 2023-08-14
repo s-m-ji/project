@@ -137,7 +137,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	, m.nickname
 	, COUNT(b.b_no) AS b_no
 	, SUM(b.viewcnt) AS viewcnt
-	, MAX(b.regdate) AS regdate
+	, to_char(MAX(b.regdate),'yyyy-mm-dd') AS regdate
 	, DECODE(m.delyn, 'Y', '신청', '미신청') delYNStr
 	, g.grade
 	, g.benefit
@@ -167,7 +167,7 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	, m.nickname
 	, COUNT(b.b_no) AS b_no
 	, SUM(b.viewcnt) AS viewcnt
-	, MAX(b.regdate) AS regdate
+	, to_char(MAX(b.regdate),'yyyy-mm-dd') AS regdate
 	, DECODE(m.delyn, 'Y', '신청', '미신청') delYNStr
 	, g.grade
 	, g.benefit
@@ -183,6 +183,10 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 
 
 
+<!--  권한 조회  -->
+<select id="getMemberRole" resultType="String">
+	select role_email from rec_memberRole where email = #{email}
+</select>
 
 	<!-- 광민 -->
 	<select id="login" resultType="com.project.vo.MemberVo">

@@ -59,7 +59,9 @@ public interface MemberMapper {
 	public List<MemberVo> rewardListReal();
 
 	
-	
+	// 권한 조회 
+	public List<String> getMemberRole(String email);
+
 	
 	// 광민
 	

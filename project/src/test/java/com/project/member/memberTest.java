@@ -110,5 +110,13 @@ public class memberTest {
 			log.info(reward.getMno());
 		});
 	}
+	@Test
+	public void getMemberRole() {
+		List<String> list = memberMapper.getMemberRole("admin@naver.com");
+										// list 안에 ADMIN_ROLE 이 있는지 확인 true/false 반환
+		System.out.println(" 관리자 권한 조회 : " + list.contains("admin_role"));
+	
+	}
+	
 
 }

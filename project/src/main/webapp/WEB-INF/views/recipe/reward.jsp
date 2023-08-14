@@ -16,6 +16,11 @@
  	
  	    <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
+	
+	
+	<!-- swal -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 window.addEventListener('load', function(){
 	
@@ -50,10 +55,12 @@ function rewardView(map){
     	+'</div>';
 	}else{
 		let rewardDivStr = 
-		 '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
+		'	<div class="list-group w-auto" id="rewardFirst">'
+        +'<div class="panel-body">'
+		+ '  <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">'
 		+ '<thead>'
-		+'<tr>'
-		 +'<th>순위</th>'
+		+'<tr class="tableTr">'
+		 +'<th style="font-size: 1.3em;">🏆순위</th>'
 		+'<th>회원 번호</th>'
 		+'<th>이름</th>'
         +'<th>닉네임</th>'
@@ -70,8 +77,8 @@ function rewardView(map){
 		
 		rewardList.forEach(reward => {
 			rewardDivStr += 
-				'<tr>'
-				+'<td>'+reward.reward+'</td>'
+				'<tr class="tableTd">'
+				+'<td>'+reward.reward+'</td>'  
 				+'<td>'+reward.mno+'</td>'
 				+'<td>'+reward.name+'</td>'
 				+'<td>'+reward.nickname+'</td>'
@@ -80,7 +87,7 @@ function rewardView(map){
 				+'<td>'+reward.regdate+'</td>'
 				+'<td>'+reward.delYNStr+'</td>'
 				+'<td>'+reward.grade+'</td>'
-				+'<td>'
+				+'<td style="width:190px;">'
 				+'<select class="form-select" id="reward'+reward.mno+'" onchange="gradeUpdate(' + reward.mno +')">'
 				+'<option selected>선택입력</option>'
 				+'<option value="1" >cook Helper</option>'
@@ -93,7 +100,9 @@ function rewardView(map){
 				+'</tr>';
 		});
 		rewardDivStr += '</tbody>'
-			+'</table>';
+			+'</table>'
+			+	'</div>'
+			+'</div>';
 		rewardDiv.innerHTML = rewardDivStr;
 		
 	}
@@ -111,8 +120,9 @@ function gradeUpdate(mno){
 }
 
 function updateView(){
+	swal("회원등급이 변경되었습니다.");
 	getRewardList();
-	alert('회원 등급이 변경되었습니다.');
+	/* alert('회원 등급이 변경되었습니다.'); */
 }
 
 //get방식 요청
@@ -151,6 +161,7 @@ function fetchPost(url, obj, callback){
 
 </script>
     <style type="text/css">
+   
         .duration {
 
           display: flex;
@@ -211,6 +222,26 @@ function fetchPost(url, obj, callback){
 	    height: 100px;
 
         }
+        table {
+	 	border-collapse: collapse;
+	  	border-spacing: 0;
+		}
+	
+		table, th, td {
+		 border: none;
+		 text-align: center;
+		}
+		.tableTr th{
+		background-color : #97b3c3;
+		text-align: center;
+		font-weight: 100;
+		}
+		.tableTd > td:first-child {
+		font-size: 1.3em;
+		font-weight: 600;
+		font-style: italic;
+
+		}
     </style>
 </head>
 <body>
@@ -270,7 +301,7 @@ function fetchPost(url, obj, callback){
 	        <div class="panel-body">
 <table width = "100%"  class="table table-striped table-bordered table-hover" id="dataTables-example" border="1">
 		<thead>
-		<tr>
+		<tr class='tableTr'>
 		<th>회원 번호</th>
 		<th>이름</th>
         <th>닉네임</th>

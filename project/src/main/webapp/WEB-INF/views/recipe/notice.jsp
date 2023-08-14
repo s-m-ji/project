@@ -92,6 +92,7 @@ window.addEventListener('load', function(){
 
 <!--  관리자 adminRole 이 포함되어있으면 보여주고 아니면 x  -->
 <!-- 공지 등록 -->
+<%-- <c:if test="${sessionScope.member != null && sessionScope.member.role != null && sessionScope.member.role.contains('admin_role')}"> --%>
   <div class="dropdown d-md-flex justify-content-md-end">
     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
       공지 등록
@@ -132,7 +133,7 @@ window.addEventListener('load', function(){
     </form>
 
   </div> 
-  
+<%-- </c:if> --%>
 <!-- 공지 목록  -->
 <form method="get" name="viewForm" accept-charset="UTF-8" >
  	
@@ -187,14 +188,12 @@ window.addEventListener('load', function(){
 						<td class="gubunTD"  style="display: none;">${notice.gubun}</td>
                         <td>
                        	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                       	              <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
-                       <%--  <c:if test="${sessionScope.admin == 'y'}">
-                       
-                       <c:if test = ${member.getRole() != null && member.getRole().contains("ADMIN_ROLE")}
-                        --%>
-                        	<button type="button" class="btn btn-outline-secondary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
+                 <%--       	              <!-- 관리자일 경우 수정, 삭제 버튼 보여지도록 함  -->
+                    <c:if test="${sessionScope.member != null && sessionScope.member.role != null && sessionScope.member.role.contains('admin_role')}">
+                  --%>       	
+                  			<button type="button" class="btn btn-outline-secondary" name="modify" value="${notice.nno }" data-bs-toggle="modal" data-bs-target="#myModal2"> 수정 </button>
                         	<button type='button' class="btn btn-outline-secondary btnDelN" data-nno = "${notice.nno}"> 삭제 </button>
-                       <%--  </c:if> --%>
+                 <%--     </c:if> --%>
                         </div>
                         </td>
                         </tr>

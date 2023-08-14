@@ -21,7 +21,8 @@
 	
     <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
-
+	
+	<!-- swal -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">

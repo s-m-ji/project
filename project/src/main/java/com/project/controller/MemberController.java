@@ -56,6 +56,15 @@ public class MemberController {
 	public void message(Model model) {
 
 	}
+	
+	@GetMapping("myPage")
+	public String myPage() {
+		return "/recipe/myPage";
+	}
+	@GetMapping("myPageUpdate")
+	public String myPageUpdate() {
+		return "/recipe/myPageUpdate";
+	}
 
 	@GetMapping("adminHome")
 	public String adminHOME() {
@@ -397,7 +406,9 @@ public class MemberController {
 		System.out.println("reward 변경 건수 : " + res);
 		return map;
 	}
-
+	
+	
+	
 	// 광민
 
 	@Autowired
