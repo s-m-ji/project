@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.vo.BoardVO;
 import com.project.service.RecipeListService;
+import com.project.service.RecipeService;
 import com.project.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
@@ -20,7 +21,9 @@ import lombok.extern.log4j.Log4j;
 public class RecipeListController {
 	
 	@Autowired
-	RecipeListService rService;
+	RecipeListService rLService;
+	
+	RecipeService rSercive;
 	
 	@GetMapping("mimiTest")
 	public void mimiTest() {
@@ -37,18 +40,20 @@ public class RecipeListController {
 	@GetMapping("/recipe/list")
 	public void getRecList(Model model, Criteria cri) {
 		System.out.println("[RecipeListController] getRecList 실행");
-		rService.getRecList(model, cri);
+		rLService.getRecList(model, cri);
 	}
 	
 	@GetMapping("/recipe/com_list")
 	public void getComList(Model model, Criteria cri) {
 		System.out.println("[RecipeListController] getComList 실행");
-		rService.getComList(model, cri);
+		rLService.getComList(model, cri);
 	}
 
-	@GetMapping("/error/load") // 로딩페이지 
-	public void load() {
-		
+	
+	@GetMapping("/recipe/view_test") // 뷰 테스트 페이지 
+	public void viewTest() {
+		//System.out.println("view_test 페이지 getOne(2)");
+		// rSercive.getOne(1);
 	}
 	
 }
