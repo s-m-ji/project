@@ -102,6 +102,26 @@ public class recipeTest {
 		log.info(res);
 	}
 	
+	@Test
+	public void getLikeRecipe() {
+		
+		assertNotNull(vMapper.getLikeRecipeList(1));
+		List<RecipeBoardVo> list = vMapper.getLikeRecipeList(1);
+		
+		log.info(list);
+		
+	}
+	
+	@Test
+	public void Mylist() {
+		
+		assertNotNull(vMapper.myRecipe(1));
+		List<RecipeBoardVo> list = vMapper.myRecipe(1);
+		
+		log.info(list);
+		
+	}
+	
 	
 }
 

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -293,6 +294,8 @@ public class RecipeController {
 	
 	}
 	
+	/* ========================================================================================== */
+	
 	@GetMapping("myPage2")
 	public String myPage(Model model, HttpSession session) {
 		
@@ -327,5 +330,62 @@ public class RecipeController {
 		
 				return "/recipe/myPage2";
 	}
+	
+	
+	
+	
+	@GetMapping("myPage_recipe")
+	public void myPage_Recipe() {
+	
+	}
+	
+	
+	@GetMapping("myPage_recipeList/{m_no}")
+	public @ResponseBody Map<String, Object> myPage_Recipe(@PathVariable("m_no") int m_no) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<RecipeBoardVo> list =  service.myRecipe(m_no);
+		
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	
+	@GetMapping("myList")
+	public String myPage_mode(HttpSession session, Model model, @RequestParam("mode") String mode){
+	    
+	    // 세션에서 받아오기
+	    
+	    System.out.println("mode 출력 ============================== "+ mode);
+	    
+	    try {
+	        
+	    	// 로그인 하지 않으면 오류가 발생하면서 안됨...
+	        /*MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+	        int m_no = member.getMno();*/
+	        
+	        if ("myRecipe".equals(mode)) { // 문자열 비교 수정
+	            System.out.println("마이 레시피 출력 ===================================");
+	            List<RecipeBoardVo> list =  service.myRecipe(1);
+	            System.out.println(list);
+	            model.addAttribute("myList", list);
+	            
+	        } else if ("myLike".equals(mode)) { // 문자열 비교 수정
+	            System.out.println("찜한 레시피 출력 ===================================");
+	            List<RecipeBoardVo> list =  service.getLikeRecipeList(1);
+	            System.out.println(list);
+	            model.addAttribute("myList", list);            
+	        }
+	    
+	    } catch (Exception e) {
+	        // TODO: handle exception
+	    }
+	    
+	    return "/recipe/myPage_recipe";
+	}
+	
+	
 	
 }

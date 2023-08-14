@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,11 +54,15 @@
 	
 	
 	/* 3개 탭 */
-	#myInfo{
+	#myRecipe{
 		background-color: #F7863B;
 	    font-weight: 900;
 	    color: aliceblue;
-	    margin-left: 5px;
+	    
+	}
+	
+	#myInfo{
+		margin-left: 5px;
 	}
 	
 	.hoverTab {
@@ -83,11 +88,56 @@
 
 <%@ include file="../common/header.jsp" %>
 
+
+<script type="text/javascript">
+
+		window.addEventListener('load',function(){
+			
+			
+			
+			
+		});
+		
+		
+		function getMyRecipe(){
+			
+			const m_no = document.querySelector("#m_no").value;
+			console.log(m_no);
+			
+			fetchGet("/recipe/myPage_recipeList/" + m_no, ListRes);
+			
+		};
+		
+		// 좋아요 한 레시피 ..
+		function ListRes(map){
+			
+			const ContentInfo = document.querySelector('#ContentInfo');
+			console.log(map.list);
+			
+			let list = '';
+			map.list.forEach(function(item, index){
+				
+					list +=
+						'<div>'+item.title+'</div>'
+				
+			});
+			
+			ContentInfo.innerHTML = list;
+		}
+		
+		
+	
+</script>
 </head>
 <body>
 
-
-	<h2>마이페이지 입니다.</h2>
+<input type="text" id="m_no" value="1">
+	
+	<script type="text/javascript">
+		
+	</script>
+	
+	<h2>마이레시피 페이지 입니다.</h2>
 	<section id="features">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
@@ -95,7 +145,7 @@
 			<div id="myPage_tab">
 				<ul>
 					<li class="hoverTab" id="myInfo">나의 정보</li>
-					<li class="hoverTab" id="myRecipe"><a href="/recipe/myList?mode=myRecipe">레시피</a></li>
+					<li class="hoverTab" id="myRecipe">레시피</li>
 					<li class="hoverTab" id="myReview">요리 후기</li>
 				</ul>
 			</div>
@@ -103,14 +153,22 @@
 			<!-- 마이페이지 컨텐츠 -->
 			<div id="myPage_Content">
 				<div id="myImg_nickname">
-					<img style="width: 100px; height: 100px; border-radius: 50%;" src="/display?fileName=${savePath}"> 
-				 	<span>별명 :${member.nickname} </span>
+					<!--  <img style="width: 100px; height: 100px; border-radius: 50%;" src="/display?fileName=${savePath}">--> 
+				 	<!--   <span>별명 :${member.nickname} </span>-->
 				 </div>
 				
+				<ul>
+					<li><a href="/recipe/myList?mode=myRecipe">나의 레시피</a></li>
+					<li><a href="/recipe/myList?mode=myLike">찜한 레시피</a></li>
+				</ul>
+				
 				<div id="ContentInfo">
-				 이메일 : ${member.email}
-				 이름 : ${member.name}
-				 저장경로 : ${savePath}
+					<ul>
+					<c:forEach items="${myList}" var="item">
+		            <li>${item.title}</li> <!-- Modify according to your data structure -->
+		        </c:forEach>
+					</ul>
+				 
 				 </div>
 			</div>
 		</div>

@@ -31,5 +31,9 @@ public interface RecipeService {
 	public int photoTotalCnt(int b_no);
 	
 	public int plusViewcnt(int b_no);
+	
+	public List<RecipeBoardVo> getLikeRecipeList(int m_no);
+	
+	public List<RecipeBoardVo> myRecipe(int m_no);
 
 }

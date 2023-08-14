@@ -74,10 +74,17 @@ public class RecipeServiceImpl implements RecipeService{
 		return mapper.plusViewcnt(b_no);
 	}
 
-	
+	@Override
+	public List<RecipeBoardVo> getLikeRecipeList(int m_no) {
+		// TODO Auto-generated method stub
+		return mapper.getLikeRecipeList(m_no);
+	}
 
-	
-	
-	
+	@Override
+	public List<RecipeBoardVo> myRecipe(int m_no) {
+		// TODO Auto-generated method stub
+		return mapper.myRecipe(m_no);
+	}
+
 	
 }
