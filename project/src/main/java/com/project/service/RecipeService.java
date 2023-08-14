@@ -35,5 +35,7 @@ public interface RecipeService {
 	public List<RecipeBoardVo> getLikeRecipeList(int m_no);
 	
 	public List<RecipeBoardVo> myRecipe(int m_no);
+	
+	public List<RecipeReplyVo> getMyReply(String writer);
 
 }

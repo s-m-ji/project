@@ -296,6 +296,7 @@ public class RecipeController {
 	
 	/* ========================================================================================== */
 	
+	// 나의 정보
 	@GetMapping("myPage2")
 	public String myPage(Model model, HttpSession session) {
 		
@@ -352,7 +353,7 @@ public class RecipeController {
 		return map;
 	}
 	
-	
+	// 레시피리스트 출력
 	@GetMapping("myList")
 	public String myPage_mode(HttpSession session, Model model, @RequestParam("mode") String mode){
 	    
@@ -384,6 +385,15 @@ public class RecipeController {
 	    }
 	    
 	    return "/recipe/myPage_recipe";
+	}
+	
+	@GetMapping("myPage_Review")
+	public void myReview(Model model, HttpSession session) {
+		
+		List<RecipeReplyVo> ReviewList =  service.getMyReply("그럴만두하지");
+		
+		model.addAttribute("ReviewList", ReviewList);
+		
 	}
 	
 	

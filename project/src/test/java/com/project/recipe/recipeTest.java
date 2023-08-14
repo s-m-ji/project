@@ -18,6 +18,7 @@ import com.project.service.ReplyService;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
 import com.project.vo.RecipeBoardVo;
+import com.project.vo.RecipeReplyVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -117,6 +118,17 @@ public class recipeTest {
 		
 		assertNotNull(vMapper.myRecipe(1));
 		List<RecipeBoardVo> list = vMapper.myRecipe(1);
+		
+		log.info(list);
+		
+	}
+	
+	
+	@Test
+	public void MyReview() {
+		
+		assertNotNull(vMapper.getMyReply("그럴만두하지"));
+		List<RecipeReplyVo> list = vMapper.getMyReply("그럴만두하지");
 		
 		log.info(list);
 		

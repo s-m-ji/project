@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,17 +19,22 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <link href="/resources/css/myPage.css" rel="stylesheet">
+
 <style>
 	
 	
 	
 	
 	/* 3개 탭 */
-	#myInfo{
+	#myReview{
 		background-color: #F7863B;
 	    font-weight: 900;
 	    color: aliceblue;
-	    margin-left: 5px;
+	    
+	}
+	
+	#myInfo{
+		margin-left: 5px;
 	}
 	
 	
@@ -39,58 +44,91 @@
 
 <%@ include file="../common/header.jsp" %>
 
+
+<script type="text/javascript">
+
+		window.addEventListener('load',function(){
+			
+			
+			
+			
+		});
+		
+		
+		function getMyRecipe(){
+			
+			const m_no = document.querySelector("#m_no").value;
+			console.log(m_no);
+			
+			fetchGet("/recipe/myPage_recipeList/" + m_no, ListRes);
+			
+		};
+		
+		// 좋아요 한 레시피 ..
+		function ListRes(map){
+			
+			const ContentInfo = document.querySelector('#ContentInfo');
+			console.log(map.list);
+			
+			let list = '';
+			map.list.forEach(function(item, index){
+				
+					list +=
+						'<div>'+item.title+'</div>'
+				
+			});
+			
+			ContentInfo.innerHTML = list;
+		}
+		
+		
+	
+</script>
 </head>
 <body>
 
-
-	<h2>마이페이지 입니다.</h2>
+<input type="text" id="m_no" value="1">
+	
+	
+	
+	<h2>요리후기 페이지 입니다.</h2>
 	<section id="features">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
 			<!-- 상단 탭 -->
 			<div id="myPage_tab">
 				<ul>
-					<li class="hoverTab" id="myInfo"><a style="color:white;" href="/recipe/myPage2">나의 정보</a></li>
+					<li class="hoverTab" id="myInfo" ><a href="/recipe/myPage2">나의 정보</a></li>
 					<li class="hoverTab" id="myRecipe"><a href="/recipe/myList?mode=myRecipe">레시피</a></li>
-					<li class="hoverTab" id="myReview"><a href="/recipe/myPage_Review">요리 후기</a></li>
+					<li class="hoverTab" id="myReview"><a style="color:white;" href="/recipe/myPage_Review">요리 후기</a></li>
 				</ul>
 			</div>
 			
+			<div>
+				<ul>
+					<li><a href="">내가 쓴 요리후기</a></li>
+					<li><a href="">받은 요리후기</a></li>
+				</ul>
+			</div>			
 			<!-- 마이페이지 컨텐츠 -->
-		<div id="myPage_Content">
-			<table>
-				<tbody>
+			<div id="myPage_Content">
+				<div id="ReviewCont">
+					<ul>
+					<c:forEach items="${ReviewList}" var="item">
+						
+						<li>${item.title}</li>
+						<li>${item.reply}</li>
+						
+					</c:forEach>
+					</ul>
+				 </div>
 				
-				<tr>
-					<th>프로필 사진 & 별명</th>
-					<td>	
-						<div id="myImg_nickname">
+				
+				
+				<div id="ContentInfo">
 					
-							<c:choose>
-								<c:when test="${not empty savePath}">
-									<img style="width: 100px; height: 100px; border-radius: 50%;" src="/display?fileName=${savePath}"> 
-								</c:when>
-								<c:otherwise>
-									<img style="width: 100px; height: 100px; border-radius: 50%;" src="/resources/img/기본이미지.jpg">
-								</c:otherwise>
-							</c:choose>
-							
-						 	<span>별명 :${member.nickname}</span>
-						</div>
-				 </td>
-				</tr>
-				
-				<tr>
-					<th>내 정보</th>
-					<td>
-						<div id="ContentInfo">
-						 이메일 : ${member.email}
-						 이름 : ${member.name}
-						 </div>
-					 </td>
-				  </tr>
-				 	</tbody>
-				 </table>
+				 
+				 </div>
 			</div>
 		</div>
 	</section>

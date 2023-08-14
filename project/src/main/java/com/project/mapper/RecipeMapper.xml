@@ -112,6 +112,17 @@
 		where mno = #{m_no}
 	
 	</select>
+	
+	<select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
+		
+		SELECT r.*, b.title
+		FROM rec_reply r
+		JOIN rec_board b ON r.b_no = b.b_no
+		WHERE r.writer = #{writer}			
+		
+	</select>
+	
+	
 
 	
 </mapper>

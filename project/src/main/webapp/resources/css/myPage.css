@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+
+.hoverTab {
+		background-color: #ddd;	
+		cursor: pointer;
+	}
+
+	/* 3개 탭 */
+	
+	
+	#myPage_Content{
+		border: 1px solid;
+		margin-top: 20px;
+	}
+	
+	.hoverTab:hover{
+		background-color: #d5cccc;
+	}
+	
+	#myPage_tab li a{
+		width:100%;
+	}
+	
+	#myPage_Con{
+		margin: 0 auto;
+		border: 1px solid;
+		width: 50%;
+	}
+	
+	#features {
+	    position: relative;
+	    overflow: hidden;
+	    background: #fff;
+	    text-align: center;
+	    padding: 6em 0;
+	}
+	
+	#myPage_tab ul{
+		display: flex;
+	    /* position: relative; */
+	    margin: 0;
+	}
+	
+	#myPage_tab ul li{
+		width: 33%;
+	    margin-right: 5px;
+	    display: flex;
+	    height: 100%;
+	    height: 50px;
+	    text-align: center;
+	    align-items: center;
+	    justify-content: space-around;
+	}
+	

@@ -18,39 +18,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
-
+<link href="/resources/css/myPage.css" rel="stylesheet">
 <style>
 	
-	#myPage_Con{
-		margin: 0 auto;
-		border: 1px solid;
-		width: 50%;
-	}
 	
-	#features {
-	    position: relative;
-	    overflow: hidden;
-	    background: #fff;
-	    text-align: center;
-	    padding: 6em 0;
-	}
-	
-	#myPage_tab ul{
-		display: flex;
-	    /* position: relative; */
-	    margin: 0;
-	}
-	
-	#myPage_tab ul li{
-		width: 33%;
-	    margin-right: 5px;
-	    display: flex;
-	    height: 100%;
-	    height: 50px;
-	    text-align: center;
-	    align-items: center;
-	    justify-content: space-around;
-	}
 	
 	
 	/* 3개 탭 */
@@ -65,22 +36,7 @@
 		margin-left: 5px;
 	}
 	
-	.hoverTab {
-		background-color: #ddd;	
-		cursor: pointer;
-	}
-
-	/* 3개 탭 */
 	
-	
-	#myPage_Content{
-		border: 1px solid;
-		margin-top: 20px;
-	}
-	
-	.hoverTab:hover{
-		background-color: aqua;
-	}
 	
 	
 	
@@ -137,16 +93,16 @@
 		
 	</script>
 	
-	<h2>마이레시피 페이지 입니다.</h2>
+	<h2>레시피리스트 페이지 입니다.</h2>
 	<section id="features">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
 			<!-- 상단 탭 -->
 			<div id="myPage_tab">
 				<ul>
-					<li class="hoverTab" id="myInfo">나의 정보</li>
-					<li class="hoverTab" id="myRecipe">레시피</li>
-					<li class="hoverTab" id="myReview">요리 후기</li>
+					<li class="hoverTab" id="myInfo"><a href="/recipe/myPage2">나의 정보</a></li>
+					<li class="hoverTab" id="myRecipe"><a style="color:white;" href="/recipe/myList?mode=myRecipe">레시피</a></li>
+					<li class="hoverTab" id="myReview"><a href="/recipe/myPage_Review">요리 후기</a></li>
 				</ul>
 			</div>
 			
@@ -157,11 +113,12 @@
 				 	<!--   <span>별명 :${member.nickname} </span>-->
 				 </div>
 				
-				<ul>
-					<li><a href="/recipe/myList?mode=myRecipe">나의 레시피</a></li>
-					<li><a href="/recipe/myList?mode=myLike">찜한 레시피</a></li>
-				</ul>
-				
+				<div>
+					<ul>
+						<li><a href="/recipe/myList?mode=myRecipe">나의 레시피</a></li>
+						<li><a href="/recipe/myList?mode=myLike">찜한 레시피</a></li>
+					</ul>
+				</div>
 				<div id="ContentInfo">
 					<ul>
 					<c:forEach items="${myList}" var="item">

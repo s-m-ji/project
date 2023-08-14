@@ -32,11 +32,12 @@ public interface RecipeMapper {
 	
 	public int plusViewcnt(int b_no);
 	
-	
+	// 내가 작성한 레시피 목록
 	public List<RecipeBoardVo> myRecipe(int m_no); 
-
-	///
+	
+	// 찜한 레시피 목록
 	public List<RecipeBoardVo> getLikeRecipeList(int m_no);
 	
+	public List<RecipeReplyVo> getMyReply(String writer);
 	
 }
