@@ -122,7 +122,14 @@
 		
 	</select>
 	
-	
+	<select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
+		
+		SELECT rr.*, rb.title AS title
+		FROM rec_reply rr
+		JOIN rec_board rb ON rr.b_no = rb.b_no
+		WHERE rb.mno = #{m_no}
+			
+	</select>
 
 	
 </mapper>

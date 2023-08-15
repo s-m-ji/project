@@ -388,11 +388,29 @@ public class RecipeController {
 	}
 	
 	@GetMapping("myPage_Review")
-	public void myReview(Model model, HttpSession session) {
+	public void myReview(Model model, HttpSession session,@RequestParam("mode") String mode) {
 		
-		List<RecipeReplyVo> ReviewList =  service.getMyReply("그럴만두하지");
+		try {
+			
+			// 로그인 하지 않으면 오류가 발생하면서 안됨...
+	        /*MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+	        int m_no = member.getMno();*/
+			
+			if("myWrite".equals(mode)) {
+				
+				List<RecipeReplyVo> ReviewList =  service.getMyReply("그럴만두하지");
+				model.addAttribute("ReviewList", ReviewList);
+				
+			}else if("myReceive".equals(mode)) {
+				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1);
+				model.addAttribute("ReviewList", ReviewList);
+			}
 		
-		model.addAttribute("ReviewList", ReviewList);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		
 	}
 	

@@ -39,5 +39,7 @@ public interface RecipeMapper {
 	public List<RecipeBoardVo> getLikeRecipeList(int m_no);
 	
 	public List<RecipeReplyVo> getMyReply(String writer);
+	 
+	public List<RecipeReplyVo> getReceiveReply(int m_no);
 	
 }

@@ -124,7 +124,7 @@
 	</script>
 	
 	<h2>레시피리스트 페이지 입니다.</h2>
-	<section id="features">
+	<section id="features" style="background-color: #f7863b36;">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
 			<!-- 상단 탭 -->
@@ -132,7 +132,7 @@
 				<ul >
 					<li class="hoverTab" id="myInfo"><a href="/recipe/myPage2">나의 정보</a></li>
 					<li class="hoverTab" id="myRecipe"><a style="color:white;" href="/recipe/myList?mode=myRecipe">레시피</a></li>
-					<li class="hoverTab" id="myReview"><a href="/recipe/myPage_Review">요리 후기</a></li>
+					<li class="hoverTab" id="myReview"><a href="/recipe/myPage_Review?mode=myWrite">요리 후기</a></li>
 				</ul>
 			</div>
 			

@@ -26,6 +26,7 @@
 		margin: 0 auto;
 		border: 1px solid;
 		width: 50%;
+		background-color: white;
 	}
 	
 	#features {
@@ -51,6 +52,13 @@
 	    text-align: center;
 	    align-items: center;
 	    justify-content: space-around;
+	}
+	
+	.Mactive {
+		  background-color: #fff; /* Set your desired background color */
+		  border: 1px solid;
+		  margin-left: 30px;
+		  border: 1px solid; border-bottom: 1px solid #fff; margin-bottom: -1px;
 	}
 	
 	

@@ -92,5 +92,11 @@ public class RecipeServiceImpl implements RecipeService{
 		return mapper.getMyReply(writer);
 	}
 
+	@Override
+	public List<RecipeReplyVo> getReceiveReply(int m_no) {
+		// TODO Auto-generated method stub
+		return mapper.getReceiveReply(m_no);
+	}
+
 	
 }

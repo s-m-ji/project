@@ -23,7 +23,12 @@
 <style>
 	
 	
-	
+	.Mactive {
+		  background-color: #fff; /* Set your desired background color */
+		  border: 1px solid;
+		  margin-left: 30px;
+		  border: 1px solid; border-bottom: 1px solid #fff; margin-bottom: -1px;
+	}
 	
 	/* 3개 탭 */
 	#myReview{
@@ -37,7 +42,9 @@
 		margin-left: 5px;
 	}
 	
-	
+	.recipeModeTab{
+		margin-left: 30px;
+	}
 	
 	
 </style>
@@ -50,7 +57,7 @@
 		window.addEventListener('load',function(){
 			
 			
-			
+			modeChange();
 			
 		});
 		
@@ -81,6 +88,27 @@
 			ContentInfo.innerHTML = list;
 		}
 		
+		function modeChange(){
+			
+			const mode = document.querySelector("#mode").value;
+			console.log(mode);
+			const writeReview = document.querySelector("#writeReview");
+			const receiveReview = document.querySelector("#receiveReview");
+			
+			
+			if(mode == "myWrite"){
+				
+				writeReview.classList.add("Mactive");
+				receiveReview.classList.remove("Mactive");
+				
+			}else{
+				
+				writeReview.classList.remove("Mactive");
+				receiveReview.classList.add("Mactive");
+			}
+			
+		}
+		
 		
 	
 </script>
@@ -88,11 +116,11 @@
 <body>
 
 <input type="text" id="m_no" value="1">
-	
+<input type="text" id="mode" value="${param.mode}">	
 	
 	
 	<h2>요리후기 페이지 입니다.</h2>
-	<section id="features">
+	<section id="features" style="background-color: #f7863b36;">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
 			<!-- 상단 탭 -->
@@ -100,14 +128,14 @@
 				<ul>
 					<li class="hoverTab" id="myInfo" ><a href="/recipe/myPage2">나의 정보</a></li>
 					<li class="hoverTab" id="myRecipe"><a href="/recipe/myList?mode=myRecipe">레시피</a></li>
-					<li class="hoverTab" id="myReview"><a style="color:white;" href="/recipe/myPage_Review">요리 후기</a></li>
+					<li class="hoverTab" id="myReview"><a style="color:white;" href="/recipe/myPage_Review?mode=myWrite">요리 후기</a></li>
 				</ul>
 			</div>
 			
 			<div>
-				<ul>
-					<li><a href="">내가 쓴 요리후기</a></li>
-					<li><a href="">받은 요리후기</a></li>
+				<ul style="display: flex; border-bottom: 1px solid;">
+					<li style="width: 15%;" id="writeReview" class="recipeModeTab"><a href="/recipe/myPage_Review?mode=myWrite">내가 쓴 요리후기</a></li>
+					<li style="width: 15%;" id="receiveReview" class="recipeModeTab"><a href="/recipe/myPage_Review?mode=myReceive">받은 요리후기</a></li>
 				</ul>
 			</div>			
 			<!-- 마이페이지 컨텐츠 -->
