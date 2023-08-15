@@ -155,7 +155,12 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-	
+	// 마이페이지 회원 탈퇴 
+	@Override
+	public int myPageDel(int mno) {
+		int res = membermapper.myPageDel(mno);
+		return res;
+	}
 
 	
 
@@ -245,5 +250,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean emailExists(String email) {
 		return membermapper.emailExists(email);
 	}
+
+
 
 }

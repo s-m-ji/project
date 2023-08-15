@@ -57,15 +57,6 @@ public class MemberController {
 
 	}
 	
-	@GetMapping("myPage")
-	public String myPage() {
-		return "/recipe/myPage";
-	}
-	@GetMapping("myPageUpdate")
-	public String myPageUpdate() {
-		return "/recipe/myPageUpdate";
-	}
-
 	@GetMapping("adminHome")
 	public String adminHOME() {
 		return "/recipe/adminHome";
@@ -407,6 +398,98 @@ public class MemberController {
 		return map;
 	}
 	
+	
+	//  마이페이지
+	@GetMapping("myPage")
+	public String myPage() {
+		return "/recipe/myPage";
+	}
+	// 마이페이지 수정 (상세 페이지)
+	@GetMapping("myPageUpdate")
+	public String myPageUpdate(int mno, Model model) {
+		model.addAttribute("myList", memberservice.getMemOne(mno));
+		return "/recipe/myPageUpdate";
+	}
+
+	// 마이페이지 수정 Action (처리)
+	@PostMapping("myPageUpdateAction")
+	public String myPageUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files)
+			throws Exception {
+		MemberVo mv = memberservice.getMemOne(membervo.getMno());
+		// 이메일, 비밀번호, 이름, 닉네임, 전화번호, 회원사진
+		mv.setEmail(mv.getEmail());
+		mv.setPw(mv.getPw());
+		mv.setName(mv.getName());
+		mv.setNickname(mv.getNickname());
+		mv.setPnum(mv.getPnum());
+
+		memberservice.memberList(cri, model);
+
+		int res;
+
+		try {
+			res = memberservice.memberUpdate(membervo, files);
+			String message;
+
+			System.out.println("마이페이지 수정 건 수 : " + res);
+			System.out.println("수정된 나의 목록 : " + membervo + files);
+			if (res > 0) {
+				message = res + "건 수정되었습니다.";
+				
+				/*
+				 * model.addAttribute("pageNo", cri.getPageNo());
+				 * 
+				 * model.addAttribute("sField", cri.getSField()); model.addAttribute("sWord",
+				 * cri.getSWord());
+				 */
+				model.addAttribute("message", message);
+				model.addAttribute("url", "/recipe/myPage2?mno=" + mv.getMno());
+			} else {
+				message = "수정 중 오류가 발생하였습니다.";
+				model.addAttribute("message", message);
+				return "/common/message";
+			}
+		} catch (Exception e) {
+			if (e.getMessage().indexOf("첨부파일") > -1) {
+				model.addAttribute("message", e.getMessage());
+			} else {
+				model.addAttribute("message", "수정 중 예외 발생!!");
+			}
+		}
+		return "/common/message";
+
+	}
+	
+	// 마이페이지 수정  ( 탈퇴 신청 ) 
+		@PostMapping("myPageDel")
+		public String myPageDel(MemberVo membervo, Model model) {
+			MemberVo mv = memberservice.getMemOne(membervo.getMno());
+			mv.setDelyn(mv.getDelyn());
+			int res;
+			try {
+				res = memberservice.myPageDel(mv.getMno());
+				String message;
+				System.out.println("마이페이지 탈퇴신청 건 수 : " + res);
+				if (res > 0) {
+					message =  " 탈퇴 신청이 완료되었습니다.";
+					model.addAttribute("message", message);
+					model.addAttribute("url", "/recipe/myPage2?mno=" + mv.getMno());
+				}else {
+					message = "탈퇴 신청 중 오류가 발생하였습니다.";
+					model.addAttribute("message", message);
+					return "/common/message";
+				}
+			} catch (Exception e) {
+				if (e.getMessage().indexOf("첨부파일") > -1) {
+					model.addAttribute("message", e.getMessage());
+				} else {
+					model.addAttribute("message", "수정 중 예외 발생!!");
+				}
+			}
+			return "/common/message";
+		}
+
+
 	
 	
 	// 광민

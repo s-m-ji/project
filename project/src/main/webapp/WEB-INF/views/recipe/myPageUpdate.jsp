@@ -62,12 +62,13 @@
 	window.addEventListener('load', function(){
 	var backAdmin = document.querySelector('#backAdmin');
 	backAdmin.addEventListener('click', function(){
-		editForm.action = '/recipe/admin';
-		editForm.method = "get";
+		editForm.action = '/recipe/myPage2';
+		editForm.method = "get"; 
 		editForm.submit();
 	});
 	
-	getFileList();
+	getFileList(); 
+	
 })
 
 function getFileList(){
@@ -134,8 +135,9 @@ function getFileList(){
 				alert('삭제 실패');
 			}
 		}
-		
+		 
 </script>
+
   <style>
     body {
       min-height: 100vh;
@@ -184,8 +186,22 @@ function getFileList(){
 	padding-left: 10px;
 	padding-right: 30px;z
 	}
+	.myUpdate1{
+	display: flex;
+    justify-content: flex-end;
+	}
+	.myUpdate2{
+	  padding: 5px;
+    border-radius: 5px;
+	}
+	.myUpdate3{
+	    text-decoration: none;
+    color: black;
+	}
+	.myUpdate2:hover {
+	background-color: white;
+	}
   </style>
-
 
 </head>
 
@@ -195,15 +211,27 @@ function getFileList(){
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3 inputTitle">내 정보 수정🧑🏻‍🍳</h4>
         
-       <c:set value="${memList}" var="member"></c:set>
+       <c:set value="${myList}" var="member"></c:set>
+        <div class="myUpdate1">
+        <div class="myUpdate2">
+		        <form id="myPageDelForm" method="post" action="/recipe/myPageDel">
+		    <input type="hidden" id="mno" name="mno" value="${member.mno}">
+		<input type="submit" value="탈퇴신청" id="myPageDelBtn"
+		style="
+    		background-color: ghostwhite;
+    		color: black;
+    		font-weight: 400;"
+		>
+		</form>
+		       
+    <!-- <a href="" id ="myPageDel"  class ="myUpdate3" role="button" onsubmit="myPageDel()">탈퇴신청</a> -->
+            </div> 
+        </div>
        <input type="text" class="form-control" id="mno" name ="mno" placeholder="회원번호" value="${member.mno }" hidden>
        
-        <form action="/recipe/adminUpdateAction?mno=${member.mno}" method="post" accept-charset="UTF-8"  name="editForm" enctype="multipart/form-data" novalidate>
+        <form action="/recipe/myPageUpdateAction" method="post" accept-charset="UTF-8"  name="editForm" enctype="multipart/form-data" novalidate>
             
 	    <!--  파라메터 🌈 --> 
-	   	<input type ="text" name= "pageNo" value="${param.pageNo}" id = "pageNo" hidden>
-		<input type ="text" name= "sField" value="${param.sField }" hidden>
-		<input type ="text" name= "sWord" value="${param.sWord}" hidden>
    		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
    		
             <div class="mb-4">
@@ -256,21 +284,23 @@ function getFileList(){
              파일을 등록해주세요.
             </div>
           </div> 
-          
-          <!--  파일 목록을 뿌려주는 공간 -->
-	 <div class="mb-3" id="divFileupload">
-	 </div>
 
+          <!--  파일 목록을 뿌려주는 공간 -->
+ 	 <div class="mb-3" id="divFileupload">
+	 </div>
+ 
           <hr class="mb-4">
 
                 <div class="row">
+                <div class="col-md-4 mb-1 backDiv" >
+              <a  class="btn btn-primary btn-lg btn-block" href="#" id ="backAdmin" role="button">뒤로가기</a>
+            </div>
+                
             <div class="col-md-4 mb-1">
-              <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="requestAction('/recipe/adminUpdateAction')">수정</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">수정</button>
             </div>
             
-            <div class="col-md-4 mb-1 backDiv" >
-              <a  class="btn btn-primary btn-lg btn-block" href="#" id ="backAdmin" role="button">탈퇴신청</a>
-            </div>
+            
           </div>
         </form>
       </div>

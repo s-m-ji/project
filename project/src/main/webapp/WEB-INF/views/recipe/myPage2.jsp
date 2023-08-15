@@ -19,6 +19,18 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <link href="/resources/css/myPage.css" rel="stylesheet">
+
+
+<script type="text/javascript">
+function myPageUpdateAction(url,mno){
+		searchForm.action=url;
+		searchForm.mno.value=mno;
+		searchForm.submit();
+	
+}
+
+</script>
+
 <style>
 	
 	
@@ -57,6 +69,12 @@
 			</div>
 			
 			<!-- 마이페이지 컨텐츠 -->
+			
+			<form action = "/recipe/myPage2" method="get" name="searchForm">
+         <!--  파라메터 🌈 --> 
+   		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
+   </form>
+			
 		<div id="myPage_Content">
 			<table >
 				<tbody>
@@ -100,6 +118,7 @@
 			  	
 			  	<td colspan="2">
 			  		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			  			 <a onclick= "myPageUpdateAction('/recipe/myPageUpdate', ${member.mno})" href ='#' class="aName">내 정보 수정하러가기</a>
 			  		<button class="btn btn-primary me-md-2" onclick="location.href='/recipe/myPageUpdate'">내정보 수정</button>
 			  		</div>
 			  	</td>

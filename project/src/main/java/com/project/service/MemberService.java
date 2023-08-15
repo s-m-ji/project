@@ -61,7 +61,9 @@ public interface MemberService {
 	// 리워드 조회 
 	public List<MemberVo> rewardListReal(Model model);
 
-	
+	// 마이페이지 -회원 탈퇴 
+	public int myPageDel(int mno);
+
 
 	
 	// 광민

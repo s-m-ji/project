@@ -181,7 +181,10 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 </select>
 
 
-
+<!--  마이페이지 회원 탈퇴  -->
+<update id="myPageDel">
+	update rec_member set delyn = 'Y' where mno = #{mno}
+</update>
 
 <!--  권한 조회  -->
 <select id="getMemberRole" resultType="String">

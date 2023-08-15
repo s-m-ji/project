@@ -58,6 +58,9 @@ public interface MemberMapper {
 	// 리워드 조회 
 	public List<MemberVo> rewardListReal();
 
+	// 마이페이지 -탈퇴신청
+	public int myPageDel(int mno);
+
 	
 	// 권한 조회 
 	public List<String> getMemberRole(String email);
