@@ -58,12 +58,12 @@
 			
 			<!-- 마이페이지 컨텐츠 -->
 		<div id="myPage_Content">
-			<table>
+			<table >
 				<tbody>
 				
-				<tr>
-					<th>프로필 사진 & 별명</th>
-					<td>	
+				<tr >
+					<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px;">프로필 사진 & 별명</th>
+					<td style="border:1px solid">	
 						<div id="myImg_nickname">
 					
 							<c:choose>
@@ -75,20 +75,35 @@
 								</c:otherwise>
 							</c:choose>
 							
-						 	<span>별명 :${member.nickname}</span>
+						 	<span id="nicknameS" style="margin-left: 20px;">${member.nickname}</span>
 						</div>
 				 </td>
 				</tr>
 				
 				<tr>
-					<th>내 정보</th>
-					<td>
-						<div id="ContentInfo">
-						 이메일 : ${member.email}
-						 이름 : ${member.name}
-						 </div>
+					<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px; height: 60px;" >이메일</th>
+					<td style="border:1px solid">
+						
+						 ${member.email}
+						 
 					 </td>
 				  </tr>
+				  
+			  <tr>
+			  	<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px; height: 60px;">이름</th>
+			  	<td>
+			  			${member.name}
+			  	</td>
+			  </tr>
+			  
+			  <tr >
+			  	
+			  	<td colspan="2">
+			  		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			  		<button class="btn btn-primary me-md-2" onclick="location.href='/recipe/myPageUpdate'">내정보 수정</button>
+			  		</div>
+			  	</td>
+			  </tr>
 				 	</tbody>
 				 </table>
 			</div>
