@@ -289,8 +289,8 @@ function getFileList(){
               </div>
 
               <div class=" mb-3">
-                <label for="pw">패스워드</label>
-                <input type="password" class="form-control"  id="pw" name ="pw" value="${member.pw }" required>
+                <label for="pw"> 새로운 패스워드</label>
+                <input type="password" class="form-control"  id="pw" name ="pw" value="${pw}" required>
                 <div class="invalid-feedback">
                   패스워드를 등록해주세요.
                 </div>

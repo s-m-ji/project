@@ -411,8 +411,14 @@ public class MemberController {
 
 	// 마이페이지 수정 (상세 페이지)
 	@GetMapping("myPageUpdate")
-	public String myPageUpdate(int mno, Model model) {
+	public String myPageUpdate(int mno, Model model, MemberVo membervo) {
+	
 		model.addAttribute("myList", memberservice.getMemOne(mno));
+		
+		String pw = membervo.getPw();
+		System.out.println("pw : " + pw);
+		model.addAttribute("pw", pw);
+		
 		return "/recipe/myPageUpdate";
 	}
 
