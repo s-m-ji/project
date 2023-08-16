@@ -56,25 +56,13 @@
 						<li><a class="icon solid fa-solid fa-user" href="myPage2"><span>마이페이지</span></a></li>
 					</c:when>
 				</c:choose>
+    				<c:when test="${empty member}">
 						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
+					</c:when>
+    				<c:when test="${not empty member}">
+						<li><a class="icon solid bi bi-key-fill" href="logout"><span>로그아웃</span></a></li>
+					</c:when>
 						<li><a class="icon solid bi-person-plus-fill" href="register"><span>회원가입</span></a></li>
-						<!-- <li>
-							<a href="#" class="icon fa-chart-bar"><span>Dropdown</span></a>
-							<ul>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li><a href="#">Magna phasellus</a></li>
-								<li><a href="#">Etiam dolore nisl</a></li>
-								<li>
-									<a href="#">Phasellus consequat</a>
-									<ul>
-										<li><a href="#">Magna phasellus</a></li>
-										<li><a href="#">Etiam dolore nisl</a></li>
-										<li><a href="#">Phasellus consequat</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Veroeros feugiat</a></li>
-							</ul>
-						</li> -->
 					</ul>
 				</nav>
 				
