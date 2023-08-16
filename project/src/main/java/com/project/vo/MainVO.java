@@ -16,4 +16,9 @@ public class MainVO {
 	private String star;
 
 	private String mno;
+	private String korean;
+	private String english;
+	
+	private String uploadpath;
+	private String savePath;
 }
