@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class MemberVo {
 	private int mno;
+	private int m_no;
 	private String email;
 	private String pw;
 	private String name;

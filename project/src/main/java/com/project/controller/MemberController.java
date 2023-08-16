@@ -398,12 +398,11 @@ public class MemberController {
 		return map;
 	}
 	
-	
-	//  마이페이지
 	@GetMapping("myPage")
 	public String myPage() {
 		return "/recipe/myPage";
 	}
+
 	// 마이페이지 수정 (상세 페이지)
 	@GetMapping("myPageUpdate")
 	public String myPageUpdate(int mno, Model model) {
@@ -490,7 +489,7 @@ public class MemberController {
 		}
 
 
-	
+
 	
 	// 광민
 

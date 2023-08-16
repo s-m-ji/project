@@ -305,6 +305,9 @@ public class RecipeController {
 			MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
 			int m_no = member.getMno();
 			
+			System.out.println("myPage member : " + member);
+			System.out.println("myPage mno : " + m_no);
+			
 			FileuploadVo FileVo = fileService.getMemberImg(m_no);
 			
 			String savePath = FileVo.getSavePath();
