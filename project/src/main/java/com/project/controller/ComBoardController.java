@@ -1,13 +1,25 @@
 	package com.project.controller;
 
+import java.awt.PageAttributes.MediaType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +45,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ComBoardController {
 
+	public static final String ATTACHES_DIR = "c:\\upload\\";
+	
+	
 	@Autowired
 	ComBoardService service;
 	
@@ -109,6 +124,52 @@ public class ComBoardController {
 	    }
 	}
 
+	
+	
+	
+		// 이미지 불러오기 (왜안되지);;
+	
+	
+	@GetMapping("/comFile")
+	public ResponseEntity<byte[]> display(String filename) {
+	    log.info("=====fileName : " + filename);
+
+	    try {
+	        // 파일 객체를 생성
+	        File file = new File(ATTACHES_DIR + filename);
+	        HttpHeaders headers = new HttpHeaders();
+
+	        // 이미지 파일이 존재하면 파일을 이미지를 다운로드
+	        if (file.exists()) {
+	            // Mime타입을 설정
+	            headers.add("Content-Type", Files.probeContentType(file.toPath()));
+	            return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+
+	    } catch (IOException e) {
+	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+	
+	
+	@RequestMapping("/comboard/view/{com_bno}")
+	public String view2(@PathVariable int com_bno, Model model) {
+	    // comFileVO 객체를 생성하고 값을 설정 (예시)
+	    ComFileVO comFileVO = new ComFileVO();
+	    comFileVO.setFilename("example.jpg");
+
+	    // board라는 이름으로 comFileVO 객체를 JSP 페이지로 전달
+	    model.addAttribute("comFile", comFileVO);
+
+	    return "com_view";
+	}
+	   
+
+	
+	
+	
 	
 	
 	

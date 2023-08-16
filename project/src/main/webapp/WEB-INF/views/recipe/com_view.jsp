@@ -136,16 +136,11 @@ function replyDelete(R_NO){
 	</div>
 	
 	
+	<!-- 이미지 출력 -->
+	<div>
+    <img src="/comboard/comFile?filename=${comFile.filename}" alt="Image">
+</div>
 	
-         <c:if test="${not empty vo}">
-		    <!-- 이미지 표시 -->
-		    <div>
-		        <label for="exampleFormControlInput1">사진</label><br>
-		        <img src="${vo.uploadpath}" alt="Image">
-		    </div>
-		</c:if>
-            
-            
 	
 		 <div style="text-align: center;">
 	        <button type="button" id="btnEdit">수정</button>
@@ -187,9 +182,9 @@ function replyDelete(R_NO){
         <table class="table text-break text-center">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">#</th>
-                    <th scope="col" class="col-9">댓글</th>
-                    <th scope="col" class="col-2">작성자</th>
+                    <th scope="col" class="col-1" style="text-align: center;">#</th>
+                    <th scope="col" class="col-9" style="text-align: center;">댓글</th>
+                    <th scope="col" class="col-2" style="text-align: center;">작성자</th>
                 </tr>
             </thead>
             <tbody>

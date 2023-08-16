@@ -1,9 +1,12 @@
 package com.project.service;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -80,4 +83,11 @@ public interface MemberService {
 	String sendPwBy(MemberVo member, Model model);
 
 	boolean emailExists(String email);
+	
+	void naverLogin(HttpServletRequest request, Model model);
+
+	public String getToken(String code) throws IOException;
+
+	public Map<String, Object> getUserInfo(String access_token) throws IOException;
+
 }

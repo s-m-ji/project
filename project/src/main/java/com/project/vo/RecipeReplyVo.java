@@ -16,4 +16,5 @@ public class RecipeReplyVo {
 	
 	// 나의 댓글 조회시 게시글 정보 조회까지 필요
 	private String title;
+	private String savePath;
 }
