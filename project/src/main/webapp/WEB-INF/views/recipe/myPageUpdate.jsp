@@ -69,6 +69,50 @@
 	
 	getFileList(); 
 	
+	
+	var nickname = document.querySelector('#nickname');
+	console.log(nickname);
+	
+	nickname.addEventListener('blur', function(){
+		
+		// 파라메터 세팅
+		let obj={ nickname : nickname.value };
+		console.log("닉네임 체크", obj);
+		
+		// 닉네임 체크
+		fetchPost('/recipe/nicknameCheck', obj, (map)=>{
+	    	  if(map.result == 'success'){
+	    		  nicknameCheckRes.value='1'; // 닉네임 사용 가능
+	    		  pnum.focus();
+	    	  } else {
+	    		  nicknameCheckRes.value='0'; // 닉네임 사용 불가능
+	    		  nickname.focus();
+	    		  nickname.value='';
+	    	  }
+	   		  signupMsg.innerHTML = map.msg; // 메세지 출력
+	    });
+		
+	})
+	
+	var updateBtn = document.querySelector('#updateBtn');
+	updateBtn.addEventListener('click', function(){
+		//e.preventDefault();
+		
+		let nickname = nickname.value;
+		
+		if(!nickname){
+    		signupMsg.innerHTML = '닉네임을 입력해주세요';
+    		return;
+    	}
+		
+		// 닉네임 중복체크 확인
+    	if(nicknameCheckRes.value != 1){
+    		signupMsg.innerHTML = '닉네임 중복체크를 해주세요';
+    		signUpNickname.focus();
+    		return;
+    	}
+	})
+	
 })
 
 function getFileList(){
@@ -255,14 +299,16 @@ function getFileList(){
           <div class="row">
             <div class="col-md-6 mb-3" style="padding-right: 36px; padding-left: 21px;">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name='name' placeholder="username" value="${member.name}" required>
+              <input type="text" class="form-control" id="name" name='name' placeholder="username" value="${member.name}" required readonly="readonly">
               <div class="invalid-feedback">
                 이름을 등록해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3" style="padding-right: 12px;">
-              <label for="nickname">닉네임</label>
+              <label for="nickname">닉네임 </label>
               <input type="text" class="form-control" id="nickname"  name ="nickname" placeholder="ex) 만종원" value="${member.nickname}" required>
+              	<!--  닉네임 중복 체크 -->
+              	<div id="signupMsg" style="=padding: 10px;color: orange;"></div>
               <div class="invalid-feedback">
                 닉네임을 등록해주세요.
               </div>
@@ -297,11 +343,14 @@ function getFileList(){
             </div>
                 
             <div class="col-md-4 mb-1">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">수정</button>
+              <button class="btn btn-primary btn-lg btn-block" id="updateBtn" type="submit">수정</button>
             </div>
             
             
           </div>
+          
+           <input type="hidden" value="0" id="nicknameCheckRes">
+           
         </form>
       </div>
     </div>
