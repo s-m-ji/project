@@ -91,4 +91,5 @@ public interface MemberMapper {
 	
 	// 회원가입시 이메일 인증
 	public boolean emailExists(String email);
+	
 }

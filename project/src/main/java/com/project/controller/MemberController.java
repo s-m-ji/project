@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -525,13 +526,13 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "login";
+		return "/recipe/login";
 	}
 
-//		@GetMapping("/main")
-//		public String main() {
-//			return "recipe/main";
-//		}
+	@GetMapping("/main")
+	public String main() {
+		return "recipe/main";
+	}
 
 	@GetMapping("/register")
 	public String registerPage() {
@@ -539,8 +540,10 @@ public class MemberController {
 	}
 
 	@PostMapping("/loginAction")
-	public @ResponseBody Map<String, Object> loginAction(@RequestBody MemberVo member, Model model,
-			HttpSession session) {
+	public @ResponseBody Map<String, Object> loginAction(
+			@RequestBody MemberVo member
+			, Model model
+			, HttpSession session) {
 		System.out.println("email : " + member.getEmail());
 		System.out.println("pw : " + member.getPw());
 
@@ -549,13 +552,16 @@ public class MemberController {
 		if (member != null) {
 			session.setAttribute("member", member);
 			session.setAttribute("userEmail", member.getEmail());
-			Map<String, Object> map = responseMap(REST_SUCCESS, "로그인 되었습니다.");
-			
-			if(member.getRole() != null && member.getRole().contains("admin_role")) {
-				model.addAttribute("member", member);
-				map.put("url", "/recipe/adminHome");
-			}else {
-				model.addAttribute("member",member);
+			Map<String, Object> map =
+					responseMap(REST_SUCCESS, "로그인 되었습니다.");
+			System.out.println("userEmail");
+			System.out.println(member.getRole());
+			if(member.getRole() != null 
+					&& member.getRole().contains("ADMIN_ROLE")) {
+				// 관리자 로그인 -> 관리자 페이지로 이동
+				map.put("url", "/recipe/admin");
+			} else {
+				System.out.println("여기?" + member.getRole());
 				map.put("url", "/recipe/main");
 			}
 			
@@ -593,6 +599,7 @@ public class MemberController {
 	}
 
 	public Map<String, Object> responseMap(String result, String msg) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("result", result);
@@ -602,7 +609,8 @@ public class MemberController {
 	}
 
 	@PostMapping("/emailCheck")
-	public @ResponseBody Map<String, Object> emailCheck(@RequestBody MemberVo member) {
+	public @ResponseBody Map<String, Object> 
+						emailCheck(@RequestBody MemberVo member) {
 
 		int res = memberservice.emailCheck(member);
 
@@ -707,4 +715,37 @@ public class MemberController {
 		// 아이디 찾기 로직을 구현
 		return memberservice.sendPwBy(member, model);
 	}
+	
+	@GetMapping("/login/naver")
+	public void naverLogin() {
+		
+	}
+	
+	@GetMapping("/login/naver_callback")
+	public String naverLogin_callback(HttpServletRequest request
+									, Model model) {
+		memberservice.naverLogin(request, model);
+		
+		return "/recipe/list";
+		
+	}
+	
+    @GetMapping("/do")
+    public String loginPage1()
+    {
+        return "kakaoCI/login";
+    }
+
+    @GetMapping("/kakao")
+    public String getCI(@RequestParam String code, Model model) throws IOException {
+        System.out.println("code = " + code);
+        String access_token = memberservice.getToken(code); 
+        Map<String, Object> userInfo = memberservice.getUserInfo(access_token);
+        model.addAttribute("code", code);
+        model.addAttribute("access_token", access_token);
+        model.addAttribute("userInfo", userInfo);
+
+        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
+        return "index";
+    }
 }

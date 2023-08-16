@@ -195,6 +195,12 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	select role_email from rec_memberRole where email = #{email}
 </select>
 
+	
+	
+	
+	
+	
+	
 	<!-- 광민 -->
 	<select id="login" resultType="com.project.vo.MemberVo">
 		select * from rec_member where email=#{email}
@@ -240,5 +246,5 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	  from rec_member 
 	 where email=#{email}
 	</select>
-
+	
 </mapper>

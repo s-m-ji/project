@@ -46,6 +46,9 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
+      #btnRegisterView {
+        margin-bottom: 20px;
+    }
 
     </style>
     
@@ -144,7 +147,30 @@
     
   </form>
 
+	<%@ page import="java.net.URLEncoder" %>
+	<%@ page import="java.security.SecureRandom" %>
+	<%@ page import="java.math.BigInteger" %>
+	  <%
+	    String clientId = "K4dBcaR2392POv2SFnSD";//애플리케이션 클라이언트 아이디값";
+	    String redirectURI = URLEncoder.encode("http://localhost:8080/login/naver_callback", "UTF-8");
+	    SecureRandom random = new SecureRandom();
+	    String state = new BigInteger(130, random).toString();
+	    
+	    // 요청URL -> 네이버로그인및 사용자정보제공 동의 -> 콜백으로 코드를 제공
+	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+	    apiURL += "&client_id=" + clientId;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&state=" + state;
+	    session.setAttribute("state", state);
+	 %>
+	 
   <button id='btnRegisterView' onclick="goToRegister()">회원가입 하러가기</button>
+  
+  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+	
+	<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a88f9343e17d11ccbc54e79106cac137&redirect_uri=http://localhost:8080/recipe/list&response_type=code">
+  <img src="/resources/images/kakao_login_large.png" style="height:50px"/></a>
+  
 </main>
 
 
