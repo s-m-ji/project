@@ -425,6 +425,14 @@ public class RecipeController {
 				model.addAttribute("ReviewList", ReviewList);
 				
 			}else if("myReceive".equals(mode)) {
+				
+				if(cri.getAmount() == 10) {
+					cri.setAmount(5);
+				} else {
+					cri.setAmount(cri.getAmount());
+				}
+				cri.setPageNo(cri.getPageNo());
+				
 				System.out.println("스타트 넘버 ==================="+ cri.getStartNo());
 				System.out.println("스타트 넘버 ==================="+ cri.getEndNo());
 				

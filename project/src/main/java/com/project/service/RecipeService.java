@@ -40,7 +40,7 @@ public interface RecipeService {
 	
 	public List<RecipeReplyVo> getMyReply(String writer);
 	
-	public List<RecipeReplyVo> getReceiveReply(@Param("mno") int mno, @Param("cri")Criteria cri);
+	public List<RecipeReplyVo> getReceiveReply(@Param("mno") int mno, @Param("cri") Criteria cri);
 
 	public int getTotalRecieveReply(int m_no);
 }

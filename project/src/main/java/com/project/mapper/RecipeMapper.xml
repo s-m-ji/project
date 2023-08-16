@@ -139,7 +139,7 @@
             JOIN rec_board rb ON rr.b_no = rb.b_no
             WHERE rb.mno = #{mno}) t
 				)
-				WHERE rn BETWEEN #{startNo} AND #{endNo}  
+				WHERE rn BETWEEN #{cri.startNo} AND #{cri.endNo}  
 			
 	</select>
 	

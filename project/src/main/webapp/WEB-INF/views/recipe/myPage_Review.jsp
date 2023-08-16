@@ -19,6 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <link href="/resources/css/myPage.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
 
 <style>
 	
@@ -58,6 +59,17 @@
 
 <%@ include file="../common/header.jsp" %>
 
+<script>
+	// ▶▶▶  게시글 페이지네이션
+	function go(page){
+		
+		const mode = document.querySelector("#mode").value;
+		document.searchForm.action = "./myPage_Review";
+		document.searchForm.mode.value= mode;
+		document.searchForm.pageNo.value= page;
+		document.searchForm.submit();
+	}
+	</script>
 
 <script type="text/javascript">
 
@@ -121,10 +133,11 @@
 </script>
 </head>
 <body>
-
-<input type="hidden" id="m_no" value="1">
-<input type="hidden" id="mode" value="${param.mode}">	
-	
+<form action="./myPage_Review"  name="searchForm">
+<input type="text" name="pageNo" value="${pDto.cri.pageNo}">
+<input type="text" id="m_no" value="1">
+<input type="text" id="mode" name="mode" value="${param.mode}">	
+</form>	
 	
 	<h2>요리후기 페이지 입니다.</h2>
 	<section id="features" style="background-color: #f7863b36;">
@@ -182,6 +195,8 @@
 				 </div>
 			</div>
 		</div>
+		
+		<%@ include file="../common/pageNavi.jsp" %>
 	</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
