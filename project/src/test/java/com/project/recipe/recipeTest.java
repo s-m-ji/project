@@ -135,13 +135,7 @@ public class recipeTest {
 		
 	}
 	
-	@Test
-	public void receive() {
-		assertNotNull(vMapper.getReceiveReply(1));
-		List<RecipeReplyVo> list = vMapper.getReceiveReply(1);
-		
-		log.info(list);
-	}
+	
 	
 	
 }

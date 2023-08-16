@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mapper.RecipeMapper;
+import com.project.vo.Criteria;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
@@ -93,9 +94,15 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List<RecipeReplyVo> getReceiveReply(int m_no) {
+	public List<RecipeReplyVo> getReceiveReply(int mno, Criteria cri) {
+		
+		return mapper.getReceiveReply(mno, cri);
+	}
+
+	@Override
+	public int getTotalRecieveReply(int m_no) {
 		// TODO Auto-generated method stub
-		return mapper.getReceiveReply(m_no);
+		return mapper.getTotalRecieveReply(m_no);
 	}
 
 	

@@ -27,11 +27,13 @@ import com.project.service.RecMatService2;
 import com.project.service.RecStepService2;
 import com.project.service.RecipeService;
 import com.project.vo.CategoryVO2;
+import com.project.vo.Criteria;
 import com.project.vo.FileuploadVo;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
 import com.project.vo.MemberVo;
+import com.project.vo.PageDto;
 import com.project.vo.RecBoardVO2;
 import com.project.vo.RecMatVO2;
 import com.project.vo.RecStepVO2;
@@ -408,7 +410,7 @@ public class RecipeController {
 	}
 	
 	@GetMapping("myPage_Review")
-	public void myReview(Model model, HttpSession session,@RequestParam("mode") String mode) {
+	public void myReview(Model model, HttpSession session,@RequestParam("mode") String mode, Criteria cri) {
 		
 		try {
 			
@@ -423,13 +425,29 @@ public class RecipeController {
 				model.addAttribute("ReviewList", ReviewList);
 				
 			}else if("myReceive".equals(mode)) {
-				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1);
+				System.out.println("스타트 넘버 ==================="+ cri.getStartNo());
+				System.out.println("스타트 넘버 ==================="+ cri.getEndNo());
+				
+				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1, cri);
 				System.out.println("내가 받은 후기  출력 ===========================" + ReviewList);
+
+				
+				int totalCnt = service.getTotalRecieveReply(1); 
+				System.out.println("totalCnt : "  + totalCnt);
+				
+				PageDto pageDto = new PageDto(cri, totalCnt);
+				System.out.println("pageDto : "  + pageDto);
+				
+				model.addAttribute("tCnt", totalCnt); 
+				model.addAttribute("pDto", pageDto);
+				
 				model.addAttribute("ReviewList", ReviewList);
 			}
 		
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getStackTrace());
+			System.out.println(e.getMessage());
+			System.out.println("오류나요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 		
 		

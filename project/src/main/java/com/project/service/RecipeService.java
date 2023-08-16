@@ -2,8 +2,10 @@ package com.project.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.project.vo.Criteria;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
@@ -38,6 +40,7 @@ public interface RecipeService {
 	
 	public List<RecipeReplyVo> getMyReply(String writer);
 	
-	public List<RecipeReplyVo> getReceiveReply(int m_no);
+	public List<RecipeReplyVo> getReceiveReply(@Param("mno") int mno, @Param("cri")Criteria cri);
 
+	public int getTotalRecieveReply(int m_no);
 }

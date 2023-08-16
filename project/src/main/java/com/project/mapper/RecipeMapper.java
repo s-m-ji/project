@@ -2,6 +2,9 @@ package com.project.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.project.vo.Criteria;
 import com.project.vo.IngredientsVo;
 import com.project.vo.LikeVo;
 import com.project.vo.MaterialVo;
@@ -40,6 +43,7 @@ public interface RecipeMapper {
 	
 	public List<RecipeReplyVo> getMyReply(String writer);
 	 
-	public List<RecipeReplyVo> getReceiveReply(int m_no);
+	public List<RecipeReplyVo> getReceiveReply(@Param("mno") int mno, @Param("cri")Criteria cri);
 	
+	public int getTotalRecieveReply(int m_no);
 }

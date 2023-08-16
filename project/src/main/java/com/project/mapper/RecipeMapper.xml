@@ -130,12 +130,28 @@
 	
 	<select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
 		
-		SELECT rr.*, rb.title AS title
-		FROM rec_reply rr
-		JOIN rec_board rb ON rr.b_no = rb.b_no
-		WHERE rb.mno = #{m_no}
+		SELECT *
+        FROM (
+				  SELECT t.*, ROWNUM rn
+				  FROM (  
+            SELECT rr.*, rb.title AS title
+            FROM rec_reply rr
+            JOIN rec_board rb ON rr.b_no = rb.b_no
+            WHERE rb.mno = #{mno}) t
+				)
+				WHERE rn BETWEEN #{startNo} AND #{endNo}  
 			
 	</select>
+	
+	
+	<select id="getTotalRecieveReply" resultType="int">
+		
+		SELECT count(*)
+            FROM rec_reply rr
+            JOIN rec_board rb ON rr.b_no = rb.b_no
+            WHERE rb.mno = #{mno}
+	</select>
+
 
 	
 </mapper>
