@@ -51,8 +51,12 @@ SELECT * FROM REC_MEMBER WHERE MNO= #{mno}
 
 <!-- 회원 수정 -->
 <update id="memberUpdate">
-	update rec_member set email =#{email}, pw= #{pw}, name=#{name}, nickname= #{nickname}, pnum= #{pnum}, reg_date = sysdate  where mno = #{mno}
+	update rec_member set email =#{email}, name=#{name}, nickname= #{nickname}, pnum= #{pnum}, reg_date = sysdate  where mno = #{mno}
 </update>
+
+
+
+
 
 
 <!--  공지 조회  -->

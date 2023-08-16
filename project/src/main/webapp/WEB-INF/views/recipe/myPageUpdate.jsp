@@ -282,7 +282,7 @@ function getFileList(){
               </div>
               <div class=" mb-3">
                 <label for="email">이메일</label>
-                <input type="email" class="form-control" id="email" name ="email" placeholder="usermail@naver.com" value="${member.email }" required>
+                <input type="email" class="form-control" id="email" name ="email" placeholder="usermail@naver.com" value="${member.email }" required readonly="readonly">
                 <div class="invalid-feedback">
                   이메일을 등록해주세요.
                 </div>
@@ -299,7 +299,7 @@ function getFileList(){
           <div class="row">
             <div class="col-md-6 mb-3" style="padding-right: 36px; padding-left: 21px;">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name='name' placeholder="username" value="${member.name}" required readonly="readonly">
+              <input type="text" class="form-control" id="name" name='name' placeholder="username" value="${member.name}" required >
               <div class="invalid-feedback">
                 이름을 등록해주세요.
               </div>
