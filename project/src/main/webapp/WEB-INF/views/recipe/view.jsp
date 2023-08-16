@@ -36,7 +36,16 @@
         	height: 100%;
         } */
     
-   
+   /*#bottom-border{
+	   	position: absolute;
+	    display: inline-block;
+	    content: "";
+	    background: #f7863b50;
+	    width: 100%;
+	    height: 10px;
+	    left: 0;
+	    bottom: 0;
+   }*/
         
 	#kakaotalk-sharing-btn{
 		margin-left: 5px;
@@ -59,7 +68,7 @@
 		width:50%;  
 		padding-left: 50px;
 		border-left: 2px solid;
-    	border-color: crimson;
+    	border-color: #cdcbcb;
 	}
 	
 	#header_left{
@@ -119,11 +128,32 @@
 		}
 		
 	#h1-title {
+		  font-weight:900;
 		  max-width: 500px;
 		  margin: 0; 
 		  font-family: 'IBM Plex Sans KR', sans-serif;
 		}
 	
+	
+	#bottom-border{
+		font-weight: 800;
+	    margin-top: 45px;
+	    position: relative;
+	    padding-bottom: 3px;
+	    display: inline-block;
+	}
+	
+	
+	#bottom-border:after {
+ 			position: absolute;
+ 			display: inline-block;
+ 			content: "";
+ 			background: #f7863b50;
+ 			width: 100%;
+ 			height: 10px;
+ 			left: 0;
+ 			bottom: 0;
+ 		}
 	
 	
 
@@ -807,7 +837,8 @@
 		</div>
 		
 		<div class="videoLinkDiv">
-			<iframe id="video" width="420" height="243" src="https://www.youtube.com/embed/${board.videoCode}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			<h6 id="bottom-border">동영상<span style="margin-left: 3px; font-size:13px;"class="italicTitle">Video</span></h6>
+			<iframe id="video" width="500" height="280" src="https://www.youtube.com/embed/${board.videoCode}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</div>
 		</div>
 	</div>

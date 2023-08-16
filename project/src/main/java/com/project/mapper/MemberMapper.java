@@ -61,7 +61,7 @@ public interface MemberMapper {
 	// 마이페이지 -탈퇴신청
 	public int myPageDel(int mno);
 
-	
+
 	// 권한 조회 
 	public List<String> getMemberRole(String email);
 
@@ -91,4 +91,5 @@ public interface MemberMapper {
 	
 	// 회원가입시 이메일 인증
 	public boolean emailExists(String email);
+	
 }

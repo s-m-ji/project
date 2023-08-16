@@ -17,21 +17,26 @@
 
 window.addEventListener('load',function(){
 	
+	
+	
+	
 	// 수정페이지로 이동
 	btnEdit.addEventListener('click',function(){
 		viewForm.action='/comboard/edit';
 		viewForm.submit();
 	});
 	
-
+	
+	// 글 삭제
 	btnDelete.addEventListener('click', function(){
 	    if (confirm("정말로 삭제하시겠습니까?")) {
-	        viewForm.action='/comboard/delete'; // 수정된 부분
+	        viewForm.action='/comboard/delete'; 
 	        viewForm.submit();
 	    }
 	    alert('정상적으로 삭제되었습니다.')
 	});
-
+	
+	// 리스트 페이지 이동
 	document.getElementById("btnList").addEventListener('click', function(){
 	    viewForm.action='/comboard/postList';
 	    viewForm.submit();
@@ -44,88 +49,48 @@ window.addEventListener('load',function(){
 	
 	
 
-
+// 댓글 목록
 document.getElementById("btnReplyWrite").addEventListener("click", function() {
     // 댓글 내용을 가져옵니다.
     var replyContent = document.getElementById("replyContent").value;
 
     // 댓글 데이터를 담을 객체를 생성합니다.
     var replyData = {
-        com_bno: "${board.com_bno}", // 게시물 번호를 여기에 입력합니다. 이 부분은 서버에서 게시물 번호를 받아오는 방법으로 수정해야 합니다.
+        com_bno: "${board.com_bno}",
         reply: replyContent
     };
 
-    // AJAX를 이용하여 서버로 댓글 데이터를 전송합니다.
     $.ajax({
         url: '/comboard/replyInsert',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(replyData),
         success: function(response) {
-            // 서버 응답을 처리합니다. 댓글이 성공적으로 추가되었음을 알리는 메시지를 띄웁니다.
             if (response.result === 'success') {
                 alert('댓글이 성공적으로 등록되었습니다.');
-                // 댓글 등록 후 페이지를 새로고침하여 새로운 댓글이 보이도록 합니다.
                 location.reload();
             } else {
-                // 댓글 추가에 실패한 경우에 대한 처리를 여기에 추가합니다.
                 alert('댓글 등록에 실패하였습니다.');
             }
         },
         error: function(xhr, status, error) {
-            // 에러 처리를 여기에 추가합니다.
             alert('댓글 등록 중 오류가 발생하였습니다.');
         }
     });
 });
 
 
-function editReply(replyNumber) {
-    // 댓글 수정 버튼이 클릭되었을 때 실행되는 함수입니다.
-    // replyNumber를 통해 수정할 댓글의 정보를 서버에서 가져오는 AJAX 요청을 보냅니다.
-    $.ajax({
-        url: '/comboard/getReply', // 서버에서 댓글 정보를 가져올 엔드포인트 URL로 수정해야 합니다.
-        type: 'POST',
-        data: { replyNumber: replyNumber },
-        success: function(response) {
-            if (response.result === 'success') {
-                // 서버로부터 받아온 댓글 정보를 이용하여 수정할 댓글을 표시하는 로직을 작성합니다.
-                // 예를 들어, 모달 창에 댓글 내용을 입력할 수 있는 폼을 표시하는 방식으로 구현할 수 있습니다.
-                // 이때, 댓글 내용을 수정하는 서버 요청을 보내는 로직도 포함되어야 합니다.
-            } else {
-                alert('댓글 정보를 가져오는데 실패하였습니다.');
-            }
-        },
-        error: function(xhr, status, error) {
-            alert('댓글 정보를 가져오는 중 오류가 발생하였습니다.');
-        }
-    });
+
+function replyDelete(R_NO){
+	console.log('R_NO', R_NO )
+	fetchPost('/comboard/replyDelete/' + R_NO, replyRes);
 }
 
 
 
 
-function deleteReply(replyNumber) {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-        $.ajax({
-            url: '/comboard/deleteReply',
-            type: 'POST',
-            data: { R_NO: replyNumber }, // 댓글 번호를 'R_NO'라는 이름으로 파라미터 전달
-            success: function(response) {
-                // 성공적으로 삭제된 경우
-                if (response.result === 'success') {
-                    alert('댓글이 정상적으로 삭제되었습니다.');
-                    location.reload();
-                } else {
-                    alert('댓글 삭제에 실패하였습니다.');
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('댓글 삭제 중 오류가 발생하였습니다.');
-            }
-        });
-    }
-}
+
+
 
 
 
@@ -148,39 +113,34 @@ function deleteReply(replyNumber) {
 
 
 	
-	<section id="main" style="border: 3px dashed #ed786a;">
+	
 
 <div style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: darkred;">
-        ♨♨♨ 망한요리게시판 상세보기 ♨♨♨
+        ♨ 망했어요 ♨
     </div>
 
-<input type="text" value="${board.com_bno}">
+<input type="hidden" value="${board.com_bno}">
 <form method="post" name="viewForm">
 
 	<div class="mb-3">
 	  <label for="title" class="form-label">제목</label>
 	  <input name="com_title" id="com_title" 
-	  type="text" readonly class="form-control" value='${board.com_title }'>
+	  type="text" readonly class="form-control" value='${board.com_title }' style="width:200px;">
 	</div>
 	
 	
 	<div class="mb-3">
-	  <label for="content" class="form-label">내용</label>
+	  <label for="content" class="form-label">망하게 된 사연...</label>
 	  <textarea class="form-control" id="com_content" readonly
-	  			 name="com_content" rows="3">${board.com_content }</textarea>
+	  			 name="com_content" rows="3" style="width:500px; height: 300px;">${board.com_content }</textarea>
 	</div>
 	
 	
+	<!-- 이미지 출력 -->
+	<div>
+    <img src="/comboard/comFile?filename=${comFile.filename}" alt="Image">
+</div>
 	
-         <c:if test="${not empty vo}">
-		    <!-- 이미지 표시 -->
-		    <div>
-		        <label for="exampleFormControlInput1">사진</label><br>
-		        <img src="${vo.uploadpath}" alt="Image">
-		    </div>
-		</c:if>
-            
-            
 	
 		 <div style="text-align: center;">
 	        <button type="button" id="btnEdit">수정</button>
@@ -222,9 +182,9 @@ function deleteReply(replyNumber) {
         <table class="table text-break text-center">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">#</th>
-                    <th scope="col" class="col-9">댓글</th>
-                    <th scope="col" class="col-2">작성자</th>
+                    <th scope="col" class="col-1" style="text-align: center;">#</th>
+                    <th scope="col" class="col-9" style="text-align: center;">댓글</th>
+                    <th scope="col" class="col-2" style="text-align: center;">작성자</th>
                 </tr>
             </thead>
             <tbody>
@@ -233,8 +193,9 @@ function deleteReply(replyNumber) {
 				        <td>${reply.getR_NO()}</td>
 				        <td>
 				            ${reply.getReply()}
-				            <button type="button" class="btn btn-primary" onclick="editReply(${reply.getR_NO()})">수정</button>
-				            <button type="button" class="btn btn-danger" onclick="deleteReply(${reply.getR_NO()})">삭제</button>
+				            
+				            <i class="fa-regular fa-pen-to-square" onclick="replyEdit(${reply.getR_NO()})"></i>
+							<i class="fa-regular fa-trash-can" onclick="replyDelete(${reply.getR_NO()})"></i>
 				        </td>
 				        <td>${reply.getMno()}</td>
 				    </tr>
@@ -243,7 +204,7 @@ function deleteReply(replyNumber) {
         </table>
     </c:otherwise>
 </c:choose>
-</section>
+
 
 <!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>

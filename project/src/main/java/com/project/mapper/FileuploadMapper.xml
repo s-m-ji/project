@@ -32,6 +32,9 @@
 
 </select>
 
+
+
+
 <select id="getPhotoReview" resultType="com.project.vo.FileuploadVo">
 
 		SELECT t.*, 
@@ -45,7 +48,7 @@
 		 
 
 </select>
-
+ 
 
 <select id="getIngredients" resultType="com.project.vo.FileuploadVo">
 

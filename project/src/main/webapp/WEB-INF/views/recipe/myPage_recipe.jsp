@@ -21,11 +21,20 @@
 <link href="/resources/css/myPage.css" rel="stylesheet">
 <style>
 	
+	.limit-lines {
+	  display: -webkit-box;
+	  -webkit-box-orient: vertical;
+	  -webkit-line-clamp: 2;
+	  overflow: hidden;
+	}
+	
 	.Mactive {
 		  background-color: #fff; /* Set your desired background color */
-		  border: 1px solid;
+		  border: 1px solid #c7c4c9;
 		  margin-left: 30px;
-		  border: 1px solid; border-bottom: 1px solid #fff; margin-bottom: -1px;
+		  border-bottom: 1px solid #fff;
+		  margin-bottom: -1px;
+	      font-weight: 900;
 	}
 	
 	
@@ -45,6 +54,45 @@
 		margin-left: 5px;
 	}
 	
+	.truncated {
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  display: -webkit-box;
+	  -webkit-box-orient: vertical;
+	  -webkit-line-clamp: 2;
+	}
+	
+		.mainTab {
+	    line-height: 20px;
+	    width: 100%;
+	    margin: 0 auto;
+	    margin-top: 10px;
+	    padding: 0 5px;
+	}
+
+	.mainTab > span {
+	    display: inline-block;
+	    width: 90%;
+	    font-size: 14px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    color: black;
+	    font-weight: 900;
+	}
+	
+	.mainTab > .author {
+	    font-size: 12px;
+	    font-weight: 600;
+	    color: #23080896;
+	}
+	
+	.mainTab > p {
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    margin: 5px 0;
+	}
 	
 	
 	
@@ -109,6 +157,16 @@
 			}
 			
 		}
+		
+		
+		$(document).ready(function() {
+			  $('.limit-lines').each(function() {
+			    var maxHeight = parseFloat($(this).css('line-height')) * 2;
+			    if ($(this).height() > maxHeight) {
+			      $(this).addClass('truncated');
+			    }
+			  });
+			});
 	
 
 </script>
@@ -116,17 +174,15 @@
 <body>
 
 
-
-<input type="text" id="m_no" value="1">
-<input type="text" id="mode" value="${param.mode}">
+<!-- 세션에서 받아오기 필요  -->
+<input type="hidden" id="m_no" value="1">
+<input type="hidden" id="mode" value="${param.mode}">
 	<script type="text/javascript">
 		
 	</script>
-	
-	<h2>레시피리스트 페이지 입니다.</h2>
 	<section id="features" style="background-color: #f7863b36;">
 		<!-- 전체 container -->
-		<div id="myPage_Con">
+		<div style="height: 500px;" id="myPage_Con">
 			<!-- 상단 탭 -->
 			<div id="myPage_tab">
 				<ul >
@@ -144,16 +200,25 @@
 				 </div>
 				
 				<div>
-					<ul style="display: flex; border-bottom: 1px solid;">
+					<ul style="display: flex; border-bottom: 1px solid #c7c4c9;">
 						<li id="myRec" style="width: 15%;  " class="recipeModeTab toggleable-tab"><a href="/recipe/myList?mode=myRecipe">나의 레시피</a></li>
 						<li id="likeRec" style="width: 15%;" class="recipeModeTab toggleable-tab"><a href="/recipe/myList?mode=myLike">찜한 레시피</a></li>
 					</ul>
 				</div>
 				<div id="ContentInfo">
-					<ul>
+					<ul style="display: flex">
+					
 					<c:forEach items="${myList}" var="item">
-		            <li>${item.title}</li> <!-- Modify according to your data structure -->
-		        </c:forEach>
+		           	 <li class="hoverOutLine" style="width: 17%; position: relative; height: 250px; border: 1px solid #d9c2c2; margin-left: 20px;"><a href="/recipe/view?b_no=${item.b_no}">
+		           	 	<div>
+		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=${item.savePath}">
+		           	 	</div>
+		           	 	<div class="mainTab"> 
+		           	 		<span style="color: black;  font-weight: 900;">${item.title}</span>
+		           	 		<p style="margin-top: 25px; font-size: 12px; font-weight: 600; color:#23080896;">by ${item.nickname}</p> 	
+		           	 	</div>
+		           	 	<div style="position: absolute; margin-top: 33px; bottom: 0; width: 100%; background-color: yellowgreen; height: 35px "> </div></a></li> <!-- Modify according to your data structure -->
+		        	</c:forEach>
 					</ul>
 				 
 				 </div>

@@ -51,8 +51,12 @@ SELECT * FROM REC_MEMBER WHERE MNO= #{mno}
 
 <!-- 회원 수정 -->
 <update id="memberUpdate">
-	update rec_member set email =#{email}, pw= #{pw}, name=#{name}, nickname= #{nickname}, pnum= #{pnum}, reg_date = sysdate  where mno = #{mno}
+	update rec_member set email =#{email}, name=#{name}, nickname= #{nickname}, pnum= #{pnum}, reg_date = sysdate  where mno = #{mno}
 </update>
+
+
+
+
 
 
 <!--  공지 조회  -->
@@ -191,6 +195,12 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	select role_email from rec_memberRole where email = #{email}
 </select>
 
+	
+	
+	
+	
+	
+	
 	<!-- 광민 -->
 	<select id="login" resultType="com.project.vo.MemberVo">
 		select * from rec_member where email=#{email}
@@ -236,5 +246,5 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 	  from rec_member 
 	 where email=#{email}
 	</select>
-
+	
 </mapper>

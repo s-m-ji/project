@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,27 +48,21 @@
 						<li><a class="icon solid fa-home" href="main"><span>홈페이지</span></a></li>
 						<li><a class="icon solid bi bi-cup-fill" href="list"><span>레시피</span></a></li>
 						<li><a class="icon solid bi bi-chat-dots-fill" href="com_list"><span>커뮤니티</span></a></li>
+				<c:choose>
+    				<c:when test="${not empty member.role}">
 						<li><a class="icon solid bi-gear-fill" href="adminHome"><span>관리자</span></a></li>
+					</c:when>
+					<c:when test="${empty member.role}">
 						<li><a class="icon solid fa-solid fa-user" href="myPage2"><span>마이페이지</span></a></li>
+					</c:when>
+				</c:choose>
+    				<c:if test="${empty member}">
 						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
+					</c:if>
+    				<c:if test="${not empty member}">
+						<li><a class="icon solid bi bi-key-fill" href="logout"><span>로그아웃</span></a></li>
+					</c:if>
 						<li><a class="icon solid bi-person-plus-fill" href="register"><span>회원가입</span></a></li>
-						<!-- <li>
-							<a href="#" class="icon fa-chart-bar"><span>Dropdown</span></a>
-							<ul>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li><a href="#">Magna phasellus</a></li>
-								<li><a href="#">Etiam dolore nisl</a></li>
-								<li>
-									<a href="#">Phasellus consequat</a>
-									<ul>
-										<li><a href="#">Magna phasellus</a></li>
-										<li><a href="#">Etiam dolore nisl</a></li>
-										<li><a href="#">Phasellus consequat</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Veroeros feugiat</a></li>
-							</ul>
-						</li> -->
 					</ul>
 				</nav>
 				

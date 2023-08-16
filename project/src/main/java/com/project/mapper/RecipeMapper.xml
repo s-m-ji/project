@@ -95,41 +95,97 @@
 	
 	<select id="getLikeRecipeList" resultType="com.project.vo.RecipeBoardVo">
 		
-		SELECT *
-		FROM rec_board
-		WHERE b_no IN (
+		SELECT rb.*,
+		       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+		       CASE WHEN rf.filetype = 'B' THEN 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename ELSE '' END AS s_savePath
+		FROM rec_board rb
+		JOIN rec_file rf ON rb.b_no = rf.b_no
+		WHERE rb.b_no IN (
 		    SELECT b_no
 		    FROM like_recipe
-		    WHERE m_no = #{m_no}
-		)
+		    WHERE m_no = #{mno}
+		) AND rf.filetype = 'B'
 		
 	</select>
 	
 	<select id="myRecipe" resultType="com.project.vo.RecipeBoardVo">
 		
-		select * 
-		from rec_board
-		where mno = #{m_no}
+		SELECT rb.*,
+	       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+	       CASE WHEN rf.filetype = 'B' THEN 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename ELSE '' END AS s_savePath
+		FROM rec_board rb
+		JOIN rec_file rf ON rb.b_no = rf.b_no
+		WHERE rb.mno = #{mno} AND rf.filetype = 'B'
 	
 	</select>
 	
-	<select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
+	<!--  <select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
 		
 		SELECT r.*, b.title
 		FROM rec_reply r
 		JOIN rec_board b ON r.b_no = b.b_no
 		WHERE r.writer = #{writer}			
 		
+	</select>-->
+	
+	
+	  <select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
+		
+		SELECT r.*, b.title,  f.uploadpath || f.uuid || '_' || f.filename AS savePath
+		FROM rec_reply r
+		JOIN rec_board b ON r.b_no = b.b_no
+		LEFT JOIN rec_file f ON r.r_no = f.r_no AND f.filetype = 'R'
+		WHERE r.writer = #{writer}			
+		
 	</select>
 	
 	<select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
-		
-		SELECT rr.*, rb.title AS title
-		FROM rec_reply rr
-		JOIN rec_board rb ON rr.b_no = rb.b_no
-		WHERE rb.mno = #{m_no}
 			
+			SELECT cr.*,
+			       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+			       DECODE(rf.filetype, 'I', 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename, '') AS s_savePath
+			FROM (
+			    SELECT rr.*, rb.title AS title,
+			           ROWNUM rn
+			    FROM rec_reply rr
+			    JOIN rec_board rb ON rr.b_no = rb.b_no
+			    WHERE rb.mno = #{mno}
+			) cr
+			LEFT JOIN (
+			    SELECT rf.*
+			    FROM rec_file rf
+			    WHERE rf.filetype = 'R'
+			) rf ON cr.r_no = rf.r_no
+			WHERE (rf.filetype = 'R' OR rf.filetype IS NULL)
+			AND cr.rn BETWEEN #{cri.startNo} AND #{cri.endNo}
+				
 	</select>
+	
+	 
+	<!-- <select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
+		
+		SELECT *
+        FROM (
+				  SELECT t.*, ROWNUM rn
+				  FROM (  
+            SELECT rr.*, rb.title AS title
+            FROM rec_reply rr
+            JOIN rec_board rb ON rr.b_no = rb.b_no
+            WHERE rb.mno = #{mno}) t
+				)
+				WHERE rn BETWEEN #{cri.startNo} AND #{cri.endNo}  
+			
+	</select> -->
+	
+	
+	<select id="getTotalRecieveReply" resultType="int">
+		
+		SELECT count(*)
+            FROM rec_reply rr
+            JOIN rec_board rb ON rr.b_no = rb.b_no
+            WHERE rb.mno = #{mno}
+	</select>
+
 
 	
 </mapper>

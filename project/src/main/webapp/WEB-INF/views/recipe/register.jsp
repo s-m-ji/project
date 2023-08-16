@@ -16,7 +16,7 @@
 
     <style>
       .form-signin {
-        max-width: 330px;
+        max-width: 500px;
         padding: 15px;
       }
 
@@ -43,6 +43,16 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
+      .form-floating {
+	        position: relative;
+	    }
+	
+	    .form-floating button {
+	        position: absolute;
+	        top: 50%;
+	        right: 10px;
+	        transform: translateY(-50%);
+	    }
 
     </style>
     <script type="text/javascript" src="/resources/recipe_js/common.js"></script>
@@ -304,6 +314,19 @@
     	function isValidPhoneNumber(phoneNumber) {
     	    return phoneNumber.replace(/-/g, '').length === 11;
     	}
+    	
+    	document.getElementById('signUpPNum').addEventListener('input', function (e) {
+    	    var input = e.target;
+    	    var value = input.value.replace(/\D/g, '');
+
+    	    if (value.length > 3 && value.length <= 7) {
+    	        value = value.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+    	    } else if (value.length > 7) {
+    	        value = value.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+    	    }
+
+    	    input.value = value;
+    	});
     	
     	function goToLogin() {
             location.href = '/login';

@@ -21,6 +21,7 @@ import com.project.vo.RecipeBoardVo;
 import com.project.vo.RecipeReplyVo;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 //스프링 실행
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -127,20 +128,23 @@ public class recipeTest {
 	@Test
 	public void MyReview() {
 		
-		assertNotNull(vMapper.getMyReply("그럴만두하지"));
-		List<RecipeReplyVo> list = vMapper.getMyReply("그럴만두하지");
+		assertNotNull(vMapper.getMyReply("침착맨"));
+		List<RecipeReplyVo> list = vMapper.getMyReply("침착맨");
 		
 		log.info(list);
 		
 	}
 	
 	@Test
-	public void receive() {
-		assertNotNull(vMapper.getReceiveReply(1));
-		List<RecipeReplyVo> list = vMapper.getReceiveReply(1);
+	public void My() {
+		
+		Criteria cri = new Criteria();
+		List<RecipeReplyVo> list = vMapper.getReceiveReply(1, cri);
 		
 		log.info(list);
 	}
+	
+	
 	
 	
 }

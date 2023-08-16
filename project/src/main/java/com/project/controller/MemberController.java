@@ -9,12 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.mapper.MemberMapper;
 import com.project.service.AdminFileService;
 import com.project.service.MailService;
 import com.project.service.MemberService;
@@ -51,6 +55,9 @@ public class MemberController {
 
 	@Autowired
 	AdminFileService adminfileservice;
+	
+	@Autowired
+	MemberMapper membermapper;
 
 	@GetMapping("message")
 	public void message(Model model) {
@@ -132,15 +139,15 @@ public class MemberController {
 
 	            if (deletedCount > 0) {
 	                map.put("result", "success");
-	                map.put("message", deletedCount + "명의 회원을 삭제했습니다.");
+	                map.put("message", deletedCount + "건의 탈퇴 신청을 승인하였습니다.");
 	            } else {
 	                map.put("result", "fail");
-	                map.put("message", "삭제 실패");
+	                map.put("message", "탈퇴 미신청 회원입니다.");
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            map.put("result", "fail");
-	            map.put("message", "삭제 실패");
+	            map.put("message", "탈퇴 미신청 회원입니다.");
 	        }
 	        return map;
 	      }
@@ -410,68 +417,64 @@ public class MemberController {
 		return "/recipe/myPageUpdate";
 	}
 
+	
 	// 마이페이지 수정 Action (처리)
-		@PostMapping("myPageUpdateAction")
-		public String myPageUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files, HttpSession session)
-				throws Exception {
-			
-			System.out.println("회원수정 처리~~~~~~~~~~~~~~~~");
-			
-			
-			MemberVo mv = memberservice.getMemOne(membervo.getMno());
-			
-			
-			
-			// 이메일, 비밀번호, 이름, 닉네임, 전화번호, 회원사진
-			mv.setEmail(mv.getEmail()); 
-			mv.setPw(mv.getPw());
-			mv.setName(mv.getName());
-			mv.setNickname(mv.getNickname());
-			mv.setPnum(mv.getPnum());
+			@PostMapping("myPageUpdateAction")
+			public String myPageUpdate(MemberVo membervo, Model model, Criteria cri, ArrayList<MultipartFile> files, HttpSession session)
+					throws Exception {
+				
+				System.out.println("회원수정 처리~~~~~~~~~~~~~~~~");
+				
+				MemberVo mv = memberservice.getMemOne(membervo.getMno());
 
-			memberservice.memberList(cri, model);
-
-			int res;
-
-			try {
-				res = memberservice.memberUpdate(membervo, files);
-				String message;
-
-				System.out.println("마이페이지 수정 건 수 : " + res);
-				System.out.println("수정된 나의 목록 : " + membervo + files);
-				if (res > 0) {
-					message = res + "건 수정되었습니다.";
+				System.out.println("============비밀번호 ========");
+				String pw = membervo.getPw();
+				System.out.println("pw : " + pw);
+				// 비밀번호 
+				
+				PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				if( !passwordEncoder.matches(membervo.getPw(), mv.getPw())) {
 					
-					/*
-					 * model.addAttribute("pageNo", cri.getPageNo());
-					 * 
-					 * model.addAttribute("sField", cri.getSField()); model.addAttribute("sWord",
-					 * cri.getSWord());
-					 */
-					
-					mv = memberservice.getMemOne(membervo.getMno());
-					System.out.println("수정된 mv 출력 ================================ : " + mv);
-					MemberVo member = (MemberVo)session.getAttribute("member");
-					member = mv;
-					session.setAttribute("member", member);
-					
-					model.addAttribute("message", message);
-					model.addAttribute("url", "/recipe/myPage2?mno=" + mv.getMno());
-				} else {
-					message = "수정 중 오류가 발생하였습니다.";
-					model.addAttribute("message", message);
-					return "/common/message";
+					String encodedPassword = passwordEncoder.encode(pw);
+					mv.setPw(encodedPassword);
+					membermapper.updatePassword(mv.getEmail(), encodedPassword);
 				}
-			} catch (Exception e) {
-				if (e.getMessage().indexOf("첨부파일") > -1) {
-					model.addAttribute("message", e.getMessage());
-				} else {
-					model.addAttribute("message", "수정 중 예외 발생!!");
+				
+				int res;
+
+				try {
+					res = memberservice.memberUpdate(membervo, files);
+					String message;
+
+					System.out.println("마이페이지 수정 건 수 : " + res);
+					System.out.println("수정된 나의 목록 : " + membervo + files);
+					if (res > 0) {
+						message = res + "건 수정되었습니다.";
+						
+						mv = memberservice.getMemOne(membervo.getMno());
+						System.out.println("수정된 mv 출력 ================================ : " + mv);
+						MemberVo member = (MemberVo)session.getAttribute("member");
+						member = mv;
+						session.setAttribute("member", member);
+						
+						model.addAttribute("message", message);
+						model.addAttribute("url", "/recipe/myPage2?mno=" + mv.getMno());
+					} else {
+						message = "수정 중 오류가 발생하였습니다.";
+						model.addAttribute("message", message);
+						return "/common/message";
+					}
+				} catch (Exception e) {
+					if (e.getMessage().indexOf("첨부파일") > -1) {
+						model.addAttribute("message", e.getMessage());
+					} else {
+						model.addAttribute("message", "수정 중 예외 발생!!");
+					}
 				}
+				return "/common/message";
+
 			}
-			return "/common/message";
-
-		}
+		
 	
 	// 마이페이지 수정  ( 탈퇴 신청 ) 
 		@PostMapping("myPageDel")
@@ -523,13 +526,13 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "login";
+		return "/recipe/login";
 	}
 
-//		@GetMapping("/main")
-//		public String main() {
-//			return "recipe/main";
-//		}
+	@GetMapping("/main")
+	public String main() {
+		return "recipe/main";
+	}
 
 	@GetMapping("/register")
 	public String registerPage() {
@@ -537,8 +540,10 @@ public class MemberController {
 	}
 
 	@PostMapping("/loginAction")
-	public @ResponseBody Map<String, Object> loginAction(@RequestBody MemberVo member, Model model,
-			HttpSession session) {
+	public @ResponseBody Map<String, Object> loginAction(
+			@RequestBody MemberVo member
+			, Model model
+			, HttpSession session) {
 		System.out.println("email : " + member.getEmail());
 		System.out.println("pw : " + member.getPw());
 
@@ -547,8 +552,19 @@ public class MemberController {
 		if (member != null) {
 			session.setAttribute("member", member);
 			session.setAttribute("userEmail", member.getEmail());
-			Map<String, Object> map = responseMap(REST_SUCCESS, "로그인 되었습니다.");
-			map.put("url", "/recipe/main");
+			Map<String, Object> map =
+					responseMap(REST_SUCCESS, "로그인 되었습니다.");
+			System.out.println("userEmail");
+			System.out.println(member.getRole());
+			if(member.getRole() != null 
+					&& member.getRole().contains("ADMIN_ROLE")) {
+				// 관리자 로그인 -> 관리자 페이지로 이동
+				map.put("url", "/recipe/admin");
+			} else {
+				System.out.println("여기?" + member.getRole());
+				map.put("url", "/recipe/main");
+			}
+			
 
 			return map;
 		} else {
@@ -583,6 +599,7 @@ public class MemberController {
 	}
 
 	public Map<String, Object> responseMap(String result, String msg) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("result", result);
@@ -592,7 +609,8 @@ public class MemberController {
 	}
 
 	@PostMapping("/emailCheck")
-	public @ResponseBody Map<String, Object> emailCheck(@RequestBody MemberVo member) {
+	public @ResponseBody Map<String, Object> 
+						emailCheck(@RequestBody MemberVo member) {
 
 		int res = memberservice.emailCheck(member);
 
@@ -697,4 +715,37 @@ public class MemberController {
 		// 아이디 찾기 로직을 구현
 		return memberservice.sendPwBy(member, model);
 	}
+	
+	@GetMapping("/login/naver")
+	public void naverLogin() {
+		
+	}
+	
+	@GetMapping("/login/naver_callback")
+	public String naverLogin_callback(HttpServletRequest request
+									, Model model) {
+		memberservice.naverLogin(request, model);
+		
+		return "/recipe/list";
+		
+	}
+	
+    @GetMapping("/do")
+    public String loginPage1()
+    {
+        return "kakaoCI/login";
+    }
+
+    @GetMapping("/kakao")
+    public String getCI(@RequestParam String code, Model model) throws IOException {
+        System.out.println("code = " + code);
+        String access_token = memberservice.getToken(code); 
+        Map<String, Object> userInfo = memberservice.getUserInfo(access_token);
+        model.addAttribute("code", code);
+        model.addAttribute("access_token", access_token);
+        model.addAttribute("userInfo", userInfo);
+
+        //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
+        return "index";
+    }
 }

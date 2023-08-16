@@ -19,15 +19,17 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <link href="/resources/css/myPage.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
 
 <style>
 	
 	
 	.Mactive {
 		  background-color: #fff; /* Set your desired background color */
-		  border: 1px solid;
+		  border: 1px solid #c7c4c9;
 		  margin-left: 30px;
-		  border: 1px solid; border-bottom: 1px solid #fff; margin-bottom: -1px;
+		  border-bottom: 1px solid #fff; margin-bottom: -1px;
+		  font-weight: 900;
 	}
 	
 	/* 3개 탭 */
@@ -46,11 +48,54 @@
 		margin-left: 30px;
 	}
 	
+	.mainTab {
+    line-height: 20px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 0 5px;
+}
+
+	.mainTab > span {
+	    display: inline-block;
+	    width: 90%;
+	    font-size: 14px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    color: black;
+	    font-weight: 900;
+	}
+	
+	.mainTab > .author {
+	    font-size: 12px;
+	    font-weight: 600;
+	    color: #23080896;
+	}
+	
+	.mainTab > p {
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    margin: 5px 0;
+	}
+	
 	
 </style>
 
 <%@ include file="../common/header.jsp" %>
 
+<script>
+	// ▶▶▶  게시글 페이지네이션
+	function go(page){
+		
+		const mode = document.querySelector("#mode").value;
+		document.searchForm.action = "./myPage_Review";
+		document.searchForm.mode.value= mode;
+		document.searchForm.pageNo.value= page;
+		document.searchForm.submit();
+	}
+	</script>
 
 <script type="text/javascript">
 
@@ -114,26 +159,26 @@
 </script>
 </head>
 <body>
-
-<input type="text" id="m_no" value="1">
-<input type="text" id="mode" value="${param.mode}">	
+<form action="./myPage_Review"  name="searchForm">
+<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">
+<input type="hidden" id="m_no" value="1">
+<input type="hidden" id="mode" name="mode" value="${param.mode}">	
+</form>	
 	
-	
-	<h2>요리후기 페이지 입니다.</h2>
 	<section id="features" style="background-color: #f7863b36;">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
 			<!-- 상단 탭 -->
 			<div id="myPage_tab">
 				<ul>
-					<li class="hoverTab" id="myInfo" ><a href="/recipe/myPage2">나의 정보</a></li>
+					<li class="hoverTab" id="myInfo"><a href="/recipe/myPage2">나의 정보</a></li>
 					<li class="hoverTab" id="myRecipe"><a href="/recipe/myList?mode=myRecipe">레시피</a></li>
 					<li class="hoverTab" id="myReview"><a style="color:white;" href="/recipe/myPage_Review?mode=myWrite">요리 후기</a></li>
 				</ul>
 			</div>
 			
 			<div>
-				<ul style="display: flex; border-bottom: 1px solid;">
+				<ul style="display: flex; border-bottom: 1px solid #c7c4c9;">
 					<li style="width: 15%;" id="writeReview" class="recipeModeTab"><a href="/recipe/myPage_Review?mode=myWrite">내가 쓴 요리후기</a></li>
 					<li style="width: 15%;" id="receiveReview" class="recipeModeTab"><a href="/recipe/myPage_Review?mode=myReceive">받은 요리후기</a></li>
 				</ul>
@@ -141,11 +186,38 @@
 			<!-- 마이페이지 컨텐츠 -->
 			<div id="myPage_Content">
 				<div id="ReviewCont">
-					<ul>
+					<ul style="display: flex;">
+					
+					<c:if test="${empty ReviewList}">
+							<li>조회된 결과가 없습니다.</li>
+						</c:if>
+					
 					<c:forEach items="${ReviewList}" var="item">
 						
-						<li>${item.title}</li>
-						<li>${item.reply}</li>
+						<!-- ------------------------------------ -->
+						 <li class="hoverOutLine" style="width: 17%; position: relative; height: 250px; border: 1px solid #d9c2c2; margin-left: 20px;"><a href="/recipe/view?b_no=${item.b_no}">
+		           	 	<c:choose>
+		           	 	<c:when test="${item.savePath eq '_' }">
+		           	 	<div>
+		           	 		<img style="width: 70%; height: 100px;" src="/resources/img/댓글없음.jpg">
+		           	 	</div>
+		           	 	</c:when>
+		           	 		
+		           	 	<c:when test="${not empty item.savePath }">
+		           	 		<div>
+		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=${item.savePath }">
+		           	 	<div>
+		           	 	</c:when>
+		           	 	</c:choose>
+		           	 	
+		           	 	<div class="mainTab"> 
+		           	 		<span style="color: black;  font-weight: 900;">${item.reply}</span>
+		           	 		<p class="author" style="margin-top: 5px; font-size: 12px; font-weight: 600; color:#23080896;">by ${item.writer}</p> 	
+		           	 		<p style="margin-top: 20px;  font-size: 13px;">${item.title}</p>
+		           	 	</div>
+		           	 	<div style="position: absolute; margin-top: 33px; bottom: 0; width: 100%; background-color: yellowgreen; height: 35px;"> </div></a></li>
+			
+						
 						
 					</c:forEach>
 					</ul>
@@ -159,6 +231,8 @@
 				 </div>
 			</div>
 		</div>
+		
+		<%@ include file="../common/pageNavi.jsp" %>
 	</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
