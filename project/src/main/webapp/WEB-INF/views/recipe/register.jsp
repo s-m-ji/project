@@ -310,8 +310,33 @@
         	}
       })
       
+      
+      // 비밀번호 텍스트 보기 (MI, 2023/08/16)
+      window.addEventListener('load', function(){
+	   		eye.addEventListener('click', function(e){
+	   			let eyeCk = document.querySelector('#eye').checked;
+	   			if (eyeCk){
+	   				signUpPw.type= "text";
+	   				pwCheck.type= "text";
+	   			} else {
+	   				signUpPw.type= "password";
+	   				pwCheck.type= "password";
+	   			}
+	   		});
+      });
     </script>
     
+    <style>
+    	.eyeWrap {
+    		margin-top: 20px;
+    	}
+    	.eyeWrap label {
+    		display: inline-block;
+    	}
+    	.eyeWrap input {
+    		margin-left: 10px;
+    	}
+    </style>
 </head>
 <body class="text-center">
 	<main class="form-signin w-100 m-auto">
@@ -330,6 +355,11 @@
       <input type="text" class="form-control middle" id="confirmCode" >
       <button id='confirmEmailCheck' type="button">인증번호 확인</button>
       <label for="comfirmemail">Confirm Email</label>
+    </div>
+    <!-- 비밀번호 텍스트 보기 (MI, 2023/08/16) -->
+    <div class="eyeWrap">
+      <label for="eye"><i class="bi bi-eye-fill" ></i> 비밀번호 보기</label>
+	   <input type="checkbox" id="eye">
     </div>
     <div class="form-floating">
       <input type="password" class="form-control middle" id="signUpPw">
