@@ -56,12 +56,12 @@
 						<li><a class="icon solid fa-solid fa-user" href="myPage2"><span>마이페이지</span></a></li>
 					</c:when>
 				</c:choose>
-    				<c:when test="${empty member}">
+    				<c:if test="${empty member}">
 						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
-					</c:when>
-    				<c:when test="${not empty member}">
+					</c:if>
+    				<c:if test="${not empty member}">
 						<li><a class="icon solid bi bi-key-fill" href="logout"><span>로그아웃</span></a></li>
-					</c:when>
+					</c:if>
 						<li><a class="icon solid bi-person-plus-fill" href="register"><span>회원가입</span></a></li>
 					</ul>
 				</nav>
