@@ -27,6 +27,6 @@ public class RecipeBoardVo {
 	private String videoCode;
 	
 	// 파일 vo list
-	// private Filelist file;
+	private String savePath;
 	// private List<ListStep> step;
 }

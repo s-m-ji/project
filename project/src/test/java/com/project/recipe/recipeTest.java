@@ -21,6 +21,7 @@ import com.project.vo.RecipeBoardVo;
 import com.project.vo.RecipeReplyVo;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 //스프링 실행
 @RunWith(SpringJUnit4ClassRunner.class)

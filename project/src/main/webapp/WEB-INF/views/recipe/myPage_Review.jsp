@@ -46,6 +46,13 @@
 		margin-left: 30px;
 	}
 	
+	.mainTab{
+		line-height: 20px; width: 80%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 70%; 
+		margin:0 auto;
+		margin-top: 10px;
+		padding: 0 5px;
+	}
+	
 	
 </style>
 
@@ -115,8 +122,8 @@
 </head>
 <body>
 
-<input type="text" id="m_no" value="1">
-<input type="text" id="mode" value="${param.mode}">	
+<input type="hidden" id="m_no" value="1">
+<input type="hidden" id="mode" value="${param.mode}">	
 	
 	
 	<h2>요리후기 페이지 입니다.</h2>
@@ -126,7 +133,7 @@
 			<!-- 상단 탭 -->
 			<div id="myPage_tab">
 				<ul>
-					<li class="hoverTab" id="myInfo" ><a href="/recipe/myPage2">나의 정보</a></li>
+					<li class="hoverTab" id="myInfo"><a href="/recipe/myPage2">나의 정보</a></li>
 					<li class="hoverTab" id="myRecipe"><a href="/recipe/myList?mode=myRecipe">레시피</a></li>
 					<li class="hoverTab" id="myReview"><a style="color:white;" href="/recipe/myPage_Review?mode=myWrite">요리 후기</a></li>
 				</ul>
@@ -141,11 +148,27 @@
 			<!-- 마이페이지 컨텐츠 -->
 			<div id="myPage_Content">
 				<div id="ReviewCont">
-					<ul>
+					<ul style="display: flex;">
+					
+					<c:if test="${empty ReviewList}">
+							<li>조회된 결과가 없습니다.</li>
+						</c:if>
+					
 					<c:forEach items="${ReviewList}" var="item">
 						
-						<li>${item.title}</li>
-						<li>${item.reply}</li>
+						<!-- ------------------------------------ -->
+						 <li style="width: 17%; position: relative; height: 250px; border: 1px solid; margin-left: 10px;"><a href="/recipe/view?b_no=${item.b_no}">
+		           	 	<div>
+		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=">
+		           	 	</div>
+		           	 	<div class="mainTab"> 
+		           	 		<span style="color: black;  font-weight: 900;">${item.reply}</span>
+		           	 		<p style="margin-top: 5px; font-size: 12px; font-weight: 600; color:#23080896;">by ${item.writer}</p> 	
+		           	 		<p>${item.title}</p>
+		           	 	</div>
+		           	 	<div style="position: absolute; margin-top: 33px; bottom: 0; width: 100%; background-color: yellowgreen; height: 35px "> </div></a></li>
+			
+						
 						
 					</c:forEach>
 					</ul>

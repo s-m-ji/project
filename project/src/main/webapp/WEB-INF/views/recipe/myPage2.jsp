@@ -54,8 +54,6 @@ function myPageUpdateAction(url,mno){
 </head>
 <body>
 
-
-	<h2>마이페이지 입니다.</h2>
 	<section id="features" style="background-color: #f7863b36;">
 		<!-- 전체 container -->
 		<div id="myPage_Con">
@@ -118,8 +116,7 @@ function myPageUpdateAction(url,mno){
 			  	
 			  	<td colspan="2">
 			  		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			  			 <a onclick= "myPageUpdateAction('/recipe/myPageUpdate', ${member.mno})" href ='#' class="aName">내 정보 수정하러가기</a>
-			  		<button class="btn btn-primary me-md-2" onclick="location.href='/recipe/myPageUpdate'">내정보 수정</button>
+			  			 <button class="btn btn-primary me-md-2" onclick= "myPageUpdateAction('/recipe/myPageUpdate', ${member.mno})" href ='#' class="aName">내 정보 수정하러가기</button>
 			  		</div>
 			  	</td>
 			  </tr>

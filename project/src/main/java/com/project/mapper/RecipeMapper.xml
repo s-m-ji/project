@@ -95,21 +95,27 @@
 	
 	<select id="getLikeRecipeList" resultType="com.project.vo.RecipeBoardVo">
 		
-		SELECT *
-		FROM rec_board
-		WHERE b_no IN (
+		SELECT rb.*,
+		       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+		       CASE WHEN rf.filetype = 'B' THEN 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename ELSE '' END AS s_savePath
+		FROM rec_board rb
+		JOIN rec_file rf ON rb.b_no = rf.b_no
+		WHERE rb.b_no IN (
 		    SELECT b_no
 		    FROM like_recipe
-		    WHERE m_no = #{m_no}
-		)
+		    WHERE m_no = #{mno}
+		) AND rf.filetype = 'B'
 		
 	</select>
 	
 	<select id="myRecipe" resultType="com.project.vo.RecipeBoardVo">
 		
-		select * 
-		from rec_board
-		where mno = #{m_no}
+		SELECT rb.*,
+	       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+	       CASE WHEN rf.filetype = 'B' THEN 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename ELSE '' END AS s_savePath
+		FROM rec_board rb
+		JOIN rec_file rf ON rb.b_no = rf.b_no
+		WHERE rb.mno = #{mno} AND rf.filetype = 'B'
 	
 	</select>
 	

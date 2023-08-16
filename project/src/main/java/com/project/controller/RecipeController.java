@@ -374,12 +374,29 @@ public class RecipeController {
 	            System.out.println("마이 레시피 출력 ===================================");
 	            List<RecipeBoardVo> list =  service.myRecipe(1);
 	            System.out.println(list);
+	            
+	            for(RecipeBoardVo myR : list) {
+	            	System.out.println("경로 출력 =============" + myR.getSavePath());
+	            	String sP = myR.getSavePath().replace("\\", "/");
+	            	myR.setSavePath(sP);
+	            	System.out.println("변경 출력 =============" + myR.getSavePath());
+	            }
+	            
 	            model.addAttribute("myList", list);
+	            
 	            
 	        } else if ("myLike".equals(mode)) { // 문자열 비교 수정
 	            System.out.println("찜한 레시피 출력 ===================================");
 	            List<RecipeBoardVo> list =  service.getLikeRecipeList(1);
 	            System.out.println(list);
+	            
+	            for(RecipeBoardVo myR : list) {
+	            	System.out.println("경로 출력 =============" + myR.getSavePath());
+	            	String sP = myR.getSavePath().replace("\\", "/");
+	            	myR.setSavePath(sP);
+	            	System.out.println("변경 출력 =============" + myR.getSavePath());
+	            }
+	            
 	            model.addAttribute("myList", list);            
 	        }
 	    
@@ -402,10 +419,12 @@ public class RecipeController {
 			if("myWrite".equals(mode)) {
 				
 				List<RecipeReplyVo> ReviewList =  service.getMyReply("그럴만두하지");
+				System.out.println("내가 쓴 후기  출력 ===========================" + ReviewList);
 				model.addAttribute("ReviewList", ReviewList);
 				
 			}else if("myReceive".equals(mode)) {
 				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1);
+				System.out.println("내가 받은 후기  출력 ===========================" + ReviewList);
 				model.addAttribute("ReviewList", ReviewList);
 			}
 		
