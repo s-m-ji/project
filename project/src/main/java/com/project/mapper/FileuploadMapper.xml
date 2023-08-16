@@ -85,7 +85,7 @@
                 			,'s_'||uploadpath||uuid||'_'||filename
                 			,'') s_savePath 
 		  from rec_file t
-		 where m_no= #{m_no} and filetype = 'P'
+		 where mno= #{mno} and filetype = 'I'
 
 </select>	
 
