@@ -183,14 +183,17 @@ public class MemberServiceImpl implements MemberService {
 			boolean res = 
 					encoder.matches(paramMember.getPw()
 									, member.getPw());
-			
+			 List<String> role = membermapper.getMemberRole(member.getEmail());
 			// 비밀번호 인증이 성공하면 member객체를 반환
 			if(res) {
+				member.setRole(role);
 			return member;
+			}else {
+				
+				return null;
 			}
 		}
-		
-		return null;
+		return membermapper.login(member);
 	}
 	
 	@Override

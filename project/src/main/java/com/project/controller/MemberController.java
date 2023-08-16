@@ -548,7 +548,15 @@ public class MemberController {
 			session.setAttribute("member", member);
 			session.setAttribute("userEmail", member.getEmail());
 			Map<String, Object> map = responseMap(REST_SUCCESS, "로그인 되었습니다.");
-			map.put("url", "/recipe/main");
+			
+			if(member.getRole() != null && member.getRole().contains("admin_role")) {
+				model.addAttribute("member", member);
+				map.put("url", "/recipe/adminHome");
+			}else {
+				model.addAttribute("member",member);
+				map.put("url", "/recipe/main");
+			}
+			
 
 			return map;
 		} else {
