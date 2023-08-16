@@ -19,4 +19,6 @@ public interface ComFileService {
 	
 	
 	public int fileupload(List<MultipartFile> files, int bno) throws Exception;
+	
+	
 }
