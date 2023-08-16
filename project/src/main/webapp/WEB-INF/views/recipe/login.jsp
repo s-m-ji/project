@@ -87,17 +87,35 @@
     		console.log(map);
     	}
     	
+        pleaseLogin();
+    	
       })
       
       function goToRegister() {
         location.href = '/recipe/register';
     	}
       
+      // 로그인 후 이용 가능 alert
+      function pleaseLogin(){
+    	  
+    	  let message = document.querySelector("#message").value;
+    	  
+    	  if(message == 'false'){
+    			 
+    		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
+    	  		message = ",";
+    	  }
+    	  
+    	 
+      }
+      
+      
     </script> 
   </head>
 	<body class="text-center">
 	<main class="form-signin w-100 m-auto">
 	
+	<input type="hidden" id="message" value="${message}">
 	<!-- 로그인 폼 -->
   <form name='signinForm'>
     <h1 class="h3 mb-3 fw-normal">로그인</h1>
@@ -131,6 +149,7 @@
 
 
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>
 

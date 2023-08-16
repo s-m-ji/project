@@ -1,7 +1,17 @@
 @charset "UTF-8";
+	
+	.hoverOutLine{
+			cursor: pointer;
+		    outline: 2px solid transparent;
+		    transition: outline-color 0.3s ease;
+	}
+	
+	.hoverOutLine:hover {
+		    /* Change outline color on hover */
+		    outline-color: #F7863B;
+		}
 
-
-.hoverTab {
+	.hoverTab {
 		background-color: #ddd;	
 		cursor: pointer;
 	}
@@ -10,8 +20,8 @@
 	
 	
 	#myPage_Content{
-		border: 1px solid;
-		margin-top: 20px;
+		margin-top: 50px;
+		padding: 8px;
 	}
 	
 	.hoverTab:hover{
@@ -24,7 +34,7 @@
 	
 	#myPage_Con{
 		margin: 0 auto;
-		border: 1px solid;
+		border: 1px solid #c7c4c9;
 		width: 50%;
 		background-color: white;
 	}
@@ -59,6 +69,10 @@
 		  border: 1px solid;
 		  margin-left: 30px;
 		  border: 1px solid; border-bottom: 1px solid #fff; margin-bottom: -1px;
+	}
+	
+	#myPage_tab{
+		 margin-top: 5px;
 	}
 	
 	

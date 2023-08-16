@@ -78,8 +78,8 @@ function myPageUpdateAction(url,mno){
 				<tbody>
 				
 				<tr >
-					<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px;">프로필 사진 & 별명</th>
-					<td style="border:1px solid">	
+					<th style="background: #e6e6e6; border: 1px solid #c7c4c9; width: 30%; padding-left: 40px;">프로필 사진 & 별명</th>
+					<td style="border:1px solid #c7c4c9">	
 						<div id="myImg_nickname">
 					
 							<c:choose>
@@ -97,8 +97,8 @@ function myPageUpdateAction(url,mno){
 				</tr>
 				
 				<tr>
-					<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px; height: 60px;" >이메일</th>
-					<td style="border:1px solid">
+					<th style="background: #e6e6e6; border: 1px solid #c7c4c9; width: 30%; padding-left: 40px; height: 60px;" >이메일</th>
+					<td style="border:1px solid #c7c4c9">
 						
 						 ${member.email}
 						 
@@ -106,8 +106,8 @@ function myPageUpdateAction(url,mno){
 				  </tr>
 				  
 			  <tr>
-			  	<th style="background: #e6e6e6; border: 1px solid; width: 30%; padding-left: 40px; height: 60px;">이름</th>
-			  	<td>
+			  	<th style="background: #e6e6e6; border: 1px solid #c7c4c9; width: 30%; padding-left: 40px; height: 60px;">이름</th>
+			  	<td style="border: 1px solid #c7c4c9;">
 			  			${member.name}
 			  	</td>
 			  </tr>
@@ -116,7 +116,7 @@ function myPageUpdateAction(url,mno){
 			  	
 			  	<td colspan="2">
 			  		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			  			 <button class="btn btn-primary me-md-2" onclick= "myPageUpdateAction('/recipe/myPageUpdate', ${member.mno})" href ='#' class="aName">내 정보 수정하러가기</button>
+			  			 <button class="btn btn-primary me-md-2" onclick= "myPageUpdateAction('/recipe/myPageUpdate', ${member.mno})" href ='#' class="aName">프로필 수정</button>
 			  		</div>
 			  	</td>
 			  </tr>

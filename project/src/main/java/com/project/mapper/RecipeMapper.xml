@@ -119,11 +119,22 @@
 	
 	</select>
 	
-	<select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
+	<!--  <select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
 		
 		SELECT r.*, b.title
 		FROM rec_reply r
 		JOIN rec_board b ON r.b_no = b.b_no
+		WHERE r.writer = #{writer}			
+		
+	</select>-->
+	
+	
+	  <select id="getMyReply" resultType="com.project.vo.RecipeReplyVo">
+		
+		SELECT r.*, b.title,  f.uploadpath || f.uuid || '_' || f.filename AS savePath
+		FROM rec_reply r
+		JOIN rec_board b ON r.b_no = b.b_no
+		LEFT JOIN rec_file f ON r.r_no = f.r_no AND f.filetype = 'R'
 		WHERE r.writer = #{writer}			
 		
 	</select>

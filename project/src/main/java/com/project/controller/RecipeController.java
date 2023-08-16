@@ -303,8 +303,15 @@ public class RecipeController {
 	public String myPage(Model model, HttpSession session) {
 		
 		try {
-
+			
+			
 			MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+			
+			if(member == null) {
+				model.addAttribute("message","false");
+				return "/recipe/login";
+			}
+			
 			int m_no = member.getMno();
 			
 			System.out.println("myPage member : " + member);
@@ -369,12 +376,12 @@ public class RecipeController {
 	    try {
 	        
 	    	// 로그인 하지 않으면 오류가 발생하면서 안됨...
-	        /*MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
-	        int m_no = member.getMno();*/
+	        MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+	        int m_no = member.getMno();
 	        
 	        if ("myRecipe".equals(mode)) { // 문자열 비교 수정
 	            System.out.println("마이 레시피 출력 ===================================");
-	            List<RecipeBoardVo> list =  service.myRecipe(1);
+	            List<RecipeBoardVo> list =  service.myRecipe(m_no);
 	            System.out.println(list);
 	            
 	            for(RecipeBoardVo myR : list) {
@@ -389,7 +396,7 @@ public class RecipeController {
 	            
 	        } else if ("myLike".equals(mode)) { // 문자열 비교 수정
 	            System.out.println("찜한 레시피 출력 ===================================");
-	            List<RecipeBoardVo> list =  service.getLikeRecipeList(1);
+	            List<RecipeBoardVo> list =  service.getLikeRecipeList(m_no);
 	            System.out.println(list);
 	            
 	            for(RecipeBoardVo myR : list) {
@@ -415,13 +422,22 @@ public class RecipeController {
 		try {
 			
 			// 로그인 하지 않으면 오류가 발생하면서 안됨...
-	        /*MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
-	        int m_no = member.getMno();*/
+	        MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+	        int m_no = member.getMno();
+	        String nickName = member.getNickname();
 			
 			if("myWrite".equals(mode)) {
 				
-				List<RecipeReplyVo> ReviewList =  service.getMyReply("그럴만두하지");
+				List<RecipeReplyVo> ReviewList =  service.getMyReply(nickName);
 				System.out.println("내가 쓴 후기  출력 ===========================" + ReviewList);
+				 
+				for(RecipeReplyVo myR : ReviewList) {
+					  System.out.println("경로 출력 =============" + myR.getSavePath()); 
+					  String sP = myR.getSavePath().replace("\\", "/"); 
+					  myR.setSavePath(sP);
+					  System.out.println("변경 출력 =============" + myR.getSavePath()); 
+					  }
+				
 				model.addAttribute("ReviewList", ReviewList);
 				
 			}else if("myReceive".equals(mode)) {
@@ -437,7 +453,7 @@ public class RecipeController {
 				System.out.println("스타트 넘버 ==================="+ cri.getStartNo());
 				System.out.println("스타트 넘버 ==================="+ cri.getEndNo());
 				
-				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1, cri);
+				List<RecipeReplyVo> ReviewList = service.getReceiveReply(m_no, cri);
 				System.out.println("내가 받은 후기  출력 ===========================" + ReviewList);
 
 				

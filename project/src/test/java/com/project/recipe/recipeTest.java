@@ -128,8 +128,8 @@ public class recipeTest {
 	@Test
 	public void MyReview() {
 		
-		assertNotNull(vMapper.getMyReply("그럴만두하지"));
-		List<RecipeReplyVo> list = vMapper.getMyReply("그럴만두하지");
+		assertNotNull(vMapper.getMyReply("침착맨"));
+		List<RecipeReplyVo> list = vMapper.getMyReply("침착맨");
 		
 		log.info(list);
 		
