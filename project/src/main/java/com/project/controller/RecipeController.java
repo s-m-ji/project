@@ -431,6 +431,7 @@ public class RecipeController {
 				} else {
 					cri.setAmount(cri.getAmount());
 				}
+				
 				cri.setPageNo(cri.getPageNo());
 				
 				System.out.println("스타트 넘버 ==================="+ cri.getStartNo());
@@ -439,6 +440,15 @@ public class RecipeController {
 				List<RecipeReplyVo> ReviewList = service.getReceiveReply(1, cri);
 				System.out.println("내가 받은 후기  출력 ===========================" + ReviewList);
 
+				
+				
+				  for(RecipeReplyVo myR : ReviewList) {
+				  System.out.println("경로 출력 =============" + myR.getSavePath()); 
+				  String sP = myR.getSavePath().replace("\\", "/"); 
+				  myR.setSavePath(sP);
+				  System.out.println("변경 출력 =============" + myR.getSavePath()); 
+				  }
+				 
 				
 				int totalCnt = service.getTotalRecieveReply(1); 
 				System.out.println("totalCnt : "  + totalCnt);

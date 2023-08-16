@@ -172,7 +172,8 @@
 						<!-- ------------------------------------ -->
 						 <li style="width: 17%; position: relative; height: 250px; border: 1px solid; margin-left: 10px;"><a href="/recipe/view?b_no=${item.b_no}">
 		           	 	<div>
-		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=">
+		           	 		
+		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=${item.savePath }">
 		           	 	</div>
 		           	 	<div class="mainTab"> 
 		           	 		<span style="color: black;  font-weight: 900;">${item.reply}</span>

@@ -129,6 +129,29 @@
 	</select>
 	
 	<select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
+			
+			SELECT cr.*,
+			       rf.uploadpath || rf.uuid || '_' || rf.filename AS savePath,
+			       DECODE(rf.filetype, 'I', 's_' || rf.uploadpath || rf.uuid || '_' || rf.filename, '') AS s_savePath
+			FROM (
+			    SELECT rr.*, rb.title AS title,
+			           ROWNUM rn
+			    FROM rec_reply rr
+			    JOIN rec_board rb ON rr.b_no = rb.b_no
+			    WHERE rb.mno = #{mno}
+			) cr
+			LEFT JOIN (
+			    SELECT rf.*
+			    FROM rec_file rf
+			    WHERE rf.filetype = 'R'
+			) rf ON cr.r_no = rf.r_no
+			WHERE (rf.filetype = 'R' OR rf.filetype IS NULL)
+			AND cr.rn BETWEEN #{cri.startNo} AND #{cri.endNo}
+				
+	</select>
+	
+	 
+	<!-- <select id="getReceiveReply" resultType="com.project.vo.RecipeReplyVo">
 		
 		SELECT *
         FROM (
@@ -141,7 +164,7 @@
 				)
 				WHERE rn BETWEEN #{cri.startNo} AND #{cri.endNo}  
 			
-	</select>
+	</select> -->
 	
 	
 	<select id="getTotalRecieveReply" resultType="int">

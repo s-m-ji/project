@@ -135,6 +135,15 @@ public class recipeTest {
 		
 	}
 	
+	@Test
+	public void My() {
+		
+		Criteria cri = new Criteria();
+		List<RecipeReplyVo> list = vMapper.getReceiveReply(1, cri);
+		
+		log.info(list);
+	}
+	
 	
 	
 	
