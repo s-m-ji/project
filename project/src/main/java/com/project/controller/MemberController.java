@@ -565,7 +565,7 @@ public class MemberController {
 			if(member.getRole() != null 
 					&& member.getRole().contains("ADMIN_ROLE")) {
 				// 관리자 로그인 -> 관리자 페이지로 이동
-				map.put("url", "/recipe/admin");
+				map.put("url", "/recipe/adminHome");
 			} else {
 				System.out.println("여기?" + member.getRole());
 				map.put("url", "/recipe/main");
