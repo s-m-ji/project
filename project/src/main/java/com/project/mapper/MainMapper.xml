@@ -12,12 +12,13 @@
 	JOIN
 	(
         SELECT
-            uploadpath || filename AS savePath,
-            B_NO
+           uploadpath||uuid||'_'||filename savePath,
+            B_NO, filetype
         FROM
             rec_file
     )f 
     ON b.b_no = f.b_no
+    where f.filetype = 'B'
     order by BOOMUP desc
 	
 	</select>
@@ -32,18 +33,21 @@
 	JOIN
 	(
         SELECT
-            uploadpath || filename AS savePath,
-            b_no
+           uploadpath||uuid||'_'||filename savePath,
+            B_NO, filetype
         FROM
             rec_file
     )f 
     ON b.b_no = f.b_no
+    where f.filetype = 'B'
     order by viewCnt desc
 	
+
 	</select>
 	
   	<!-- //3. 최다 댓글 레시피 리스트 불러오기 -->
 	<select id="getReplyCntList" resultType="com.project.vo.MainVO">
+
 
 	SELECT DISTINCT
     	b.b_no, b.title, b.nickName, b.replyCnt, f.savePath
@@ -52,17 +56,20 @@
 	JOIN
 	(
         SELECT
-            uploadpath || filename AS savePath,
-            b_no
+           uploadpath||uuid||'_'||filename savePath,
+            B_NO, filetype
         FROM
             rec_file
     )f 
     ON b.b_no = f.b_no
+    where f.filetype = 'B'
     order by replyCnt desc
+
 	</select>
   	
   	<!-- //4. 최근 등록 레시피 리스트 불러오기 -->
   	<select id="getRecentList" resultType="com.project.vo.MainVO">
+  	
   	SELECT DISTINCT
     	b.b_no, b.title, b.nickName, b.regdate, f.savePath
     FROM
@@ -70,14 +77,15 @@
 	JOIN
 	(
         SELECT
-            uploadpath || filename AS savePath,
-            b_no
+           uploadpath||uuid||'_'||filename savePath,
+            B_NO, filetype
         FROM
             rec_file
     )f 
     ON b.b_no = f.b_no
+    where f.filetype = 'B'
     order by regdate desc
-  	
+ 	
   	</select>
   	
   	
