@@ -5,54 +5,80 @@
   	
   	<!-- //1. 최다 추천 레시피 리스트 불러오기 -->
   	<select id="getBoomUpList" resultType="com.project.vo.MainVO">
-  	<!-- <![CDATA[
-  		select * from rec_board order by boomup desc
-  	]]> -->
-  	
-  	
-	select distinct b.B_NO, b.title, b.nickName, b.boomup, f.uploadpath
-	from rec_board b 
-	inner join rec_file f
-	on b.B_NO = f.B_NO
-	order by boomup desc
+    SELECT DISTINCT
+    	b.b_no, b.title, b.nickName, b.boomup, f.savePath
+    FROM
+    	rec_board b
+	JOIN
+	(
+        SELECT
+            uploadpath || filename AS savePath,
+            B_NO
+        FROM
+            rec_file
+    )f 
+    ON b.b_no = f.b_no
+    order by BOOMUP desc
 	
 	</select>
 	
 	<!-- //2. 최다 조회 레시피 리스트 불러오기 -->
 	<select id="getViewCntList" resultType="com.project.vo.MainVO">
 	
-	select distinct b.B_NO, b.title, b.nickName, b.viewCnt, f.uploadpath
-	from rec_board b 
-	inner join rec_file f
-	on b.B_NO = f.B_NO
-	order by viewCnt desc
+	SELECT DISTINCT
+    	b.b_no, b.title, b.nickName, b.viewCnt, f.savePath
+    FROM
+    	rec_board b
+	JOIN
+	(
+        SELECT
+            uploadpath || filename AS savePath,
+            b_no
+        FROM
+            rec_file
+    )f 
+    ON b.b_no = f.b_no
+    order by viewCnt desc
 	
 	</select>
 	
   	<!-- //3. 최다 댓글 레시피 리스트 불러오기 -->
 	<select id="getReplyCntList" resultType="com.project.vo.MainVO">
-	
-	select distinct b.B_NO, b.title, b.nickName, b.replyCnt, f.uploadpath
-	from rec_board b 
-	inner join rec_file f
-	on b.B_NO = f.B_NO
-	order by REPLYCNT desc
-	
+
+	SELECT DISTINCT
+    	b.b_no, b.title, b.nickName, b.replyCnt, f.savePath
+    FROM
+    	rec_board b
+	JOIN
+	(
+        SELECT
+            uploadpath || filename AS savePath,
+            b_no
+        FROM
+            rec_file
+    )f 
+    ON b.b_no = f.b_no
+    order by replyCnt desc
 	</select>
   	
   	<!-- //4. 최근 등록 레시피 리스트 불러오기 -->
   	<select id="getRecentList" resultType="com.project.vo.MainVO">
-  	
-  	select distinct b.B_NO, b.title, b.nickName, b.replyCnt, b.regdate, f.uploadpath
-	from rec_board b 
-	inner join rec_file f
-	on b.B_NO = f.B_NO
-	order by regdate desc
+  	SELECT DISTINCT
+    	b.b_no, b.title, b.nickName, b.regdate, f.savePath
+    FROM
+    	rec_board b
+	JOIN
+	(
+        SELECT
+            uploadpath || filename AS savePath,
+            b_no
+        FROM
+            rec_file
+    )f 
+    ON b.b_no = f.b_no
+    order by regdate desc
   	
   	</select>
-  	
-  	
-  	
   	
   	
   	

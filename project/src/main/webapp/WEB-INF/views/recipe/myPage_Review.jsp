@@ -23,6 +23,12 @@
 
 <style>
 	
+	#notResult{
+		    position: relative;
+		    display: grid;
+		    margin: 0 auto;
+		    font-weight: 900;
+	}
 	
 	.Mactive {
 		  background-color: #fff; /* Set your desired background color */
@@ -189,7 +195,7 @@
 					<ul style="display: flex;">
 					
 					<c:if test="${empty ReviewList}">
-							<li>조회된 결과가 없습니다.</li>
+							<li id="notResult"><img style="width: 50%; margin: 0 auto;" src="/resources/img/조회결과 없음.jpg">조회된 결과가 없습니다</li>
 						</c:if>
 					
 					<c:forEach items="${ReviewList}" var="item">

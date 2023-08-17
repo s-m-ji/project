@@ -102,8 +102,6 @@ public class FileuploadController {
 //	}
 	
 	
-	
-	
 	@PostMapping("/file/photoReview_Test")
 	public @ResponseBody Map<String, Object> uploadTest(List<MultipartFile> files
 												,RecipeReplyVo vo
@@ -181,6 +179,7 @@ public class FileuploadController {
 	// 이미지를 화면에 보여줍니다
 	public ResponseEntity<byte[]> display(String fileName) {
 		log.info("=====fileName : " + fileName);
+		//fileName="2023\\08\\03\\오징어동그랑땡.jpg";
 		
 		try {
 			// 파일 객체를 생성
