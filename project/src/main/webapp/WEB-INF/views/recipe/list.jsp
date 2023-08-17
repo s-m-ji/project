@@ -17,7 +17,6 @@
    <link rel="stylesheet" href="/resources/css/style.css">
    <link rel="stylesheet" href="/resources/css/animate.css">
    <link rel="stylesheet" href="/resources/recipe_css/mimi.css">
-   
     
     <!-- js -->
     <script src="/resources/js/jquery.min.js"></script>
@@ -115,7 +114,7 @@
 	<!-- Main -->
 	<section id="main">
 		<div class="container text-center">
-	      <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1> <sup>※ 제목 추후 삭제</sup></div>
+	     <!--  <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1> <sup>※ 제목 추후 삭제</sup></div> -->
 	      
 			<!-- 검색폼 -->	
 			<%@ include file="../common/searchForm.jsp" %>
@@ -144,18 +143,22 @@
 								</div>
 							</figure>
 							<div class="fh5co-text position-relative">
-					            <p class="mb-0">✅ ${list.b_NO}</p>
-					            <p class="mb-0 title" title="${list.title}">🍴 ${list.title}</p>
-					            <p class="mb-0 intro" title="${list.intro}">📝  ${list.intro}</p>
-					            <p class="mb-0">🙋‍♀️‍ ${list.nickName}</p>
-					            <p class="mb-0">👍 ${list.boomup} &nbsp; 👀 ${list.viewcnt}</p> 
-				           		<p class="mb-0">🛒 ${list.cateName1}, ${list.cateName2}</p>
+							<div class="fh5co-text-top">
+					            <p class="mb-0 bno">No. ${list.b_NO}</p>
+					            <p class="mb-0 boom"><i class="fa-solid fa-eye" style="color: #6d737e;"></i> ${list.boomup} &nbsp; <i class="fa-solid fa-thumbs-up" style="color: #8c929b;"></i> ${list.viewcnt}</p> 
+							</div>
+					            <p class="mb-0 title" title="${list.title}">${list.title}</p>
+					            <p class="mb-0 intro" title="${list.intro}">${list.intro}</p>
+					            <p class="mb-0 name">‍<i class="fa-solid fa-user"style="color: #aaa;"></i> ${list.nickName}</p>
+				            <div class="fh5co-text-btm">
+					            <p class="mb-0 cate">${list.cateName1} > ${list.cateName2}</p>
 				           		<!-- 
 				           			오늘 등록 : 몇분 전, 몇시간 전
 				           			일주일 내로 등록 : 며칠 전
 				           			그 외 : 2023/00/00
 				           		 -->
-					            <p class="mb-0">📌 ${list.regdate}</p>
+					            <p class="mb-0"> ${list.regdate}</p>
+							</div>
 					            <!-- 3일 내로 등록한 글이면 new 표시 -->
 								<c:if test="${ not empty list.newpost}">
 									<span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger"> ${list.newpost} </span>

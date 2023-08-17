@@ -96,8 +96,8 @@
 	<!-- Main -->
 	<section id="main" >
 		<div class="container">
-	      <div class="bg-light p-5 rounded text-center"> <h1 id="test">🤪 망한요리자랑🤪  </h1><sup>※ 제목 추후 삭제</sup></div>
-			<%@ include file="../common/com_searchForm.jsp" %>
+	      <!-- <div class="bg-light p-5 rounded text-center"> <h1 id="test">🤪 망한요리자랑🤪  </h1><sup>※ 제목 추후 삭제</sup></div>
+ -->			<%@ include file="../common/com_searchForm.jsp" %>
 	      <div class="gtco-section">
 			<div class=""> <!-- <div class="gtco-container"> -->
 			<div class="container text-center">
@@ -120,17 +120,19 @@
 								</div>
 							</figure>
 							<div class="fh5co-text position-relative">
-					            <p class="mb-0">✅ ${list.com_bno}</p>
-					            <p class="mb-0 title" title="${list.com_title}">🍴 ${list.com_title}</p>
-					            <p class="mb-0 intro" title="${list.com_content}">📝  ${list.com_content}</p>
-					            <p class="mb-0">🙋‍♀️‍ ${list.nickName}</p>
-					            <p class="mb-0">⌨ ${list.replycnt}</p> 
+							<div class="fh5co-text-top">
+					            <p class="mb-0 bno" >No. ${list.com_bno}</p>
+					            <p class="mb-0"> <i class="fa-solid fa-comment-dots" style="color: #6d737e;"></i> ${list.replycnt}</p> 
+					        </div>
+					            <p class="mb-0 title" title="${list.com_title}">${list.com_title}</p>
+					            <p class="mb-0 intro" title="${list.com_content}">${list.com_content}</p>
+					            <p class="mb-0 name"><i class="fa-solid fa-user"style="color: #aaa;"></i> ‍${list.nickName}</p>
 				           		<!-- 
 				           			오늘 등록 : 몇시간 전
 				           			일주일 내로 등록 : 며칠 전
 				           			그 외 : 2023/00/00
 				           		 -->
-					            <p class="mb-0">📌 ${list.regdate}</p>
+					            <p class="mb-0 date">${list.regdate}</p>
 					            <!-- 3일 내로 등록한 글이면 new 표시 -->
 								<c:if test="${ not empty list.newpost}">
 									<span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger"> ${list.newpost} </span>
