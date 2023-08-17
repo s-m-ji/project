@@ -527,10 +527,10 @@ public class MemberController {
 		return "/recipe/login";
 	}
 
-//	@GetMapping("/main")
-//	public String main() {
-//		return "recipe/main";
-//	}
+	@GetMapping("/main")
+	public String main() {
+		return "recipe/main";
+	}
 
 	@GetMapping("/register")
 	public String registerPage() {
@@ -552,14 +552,12 @@ public class MemberController {
 			session.setAttribute("userEmail", member.getEmail());
 			Map<String, Object> map =
 					responseMap(REST_SUCCESS, "로그인 되었습니다.");
-			System.out.println("userEmail");
 			System.out.println(member.getRole());
 			if(member.getRole() != null 
 					&& member.getRole().contains("ADMIN_ROLE")) {
 				// 관리자 로그인 -> 관리자 페이지로 이동
 				map.put("url", "/recipe/adminHome");
 			} else {
-				System.out.println("여기?" + member.getRole());
 				map.put("url", "/recipe/main");
 			}
 			
@@ -714,20 +712,17 @@ public class MemberController {
 		return memberservice.sendPwBy(member, model);
 	}
 	
-	//★★★★★★★★★★★★★★★★★★★★★★
 	@GetMapping("/login/naver")
 	public void naverLogin() {
-		System.out.println("하이!!");
 		
 	}
 	
 	@GetMapping("/login/naver_callback")
 	public String naverLogin_callback(HttpServletRequest request
 									, Model model) {
-		System.out.println("하이!!!!");
 		memberservice.naverLogin(request, model);
 		
-		return "/login/naver";
+		return "/recipe/main";
 	}
 	
 	
