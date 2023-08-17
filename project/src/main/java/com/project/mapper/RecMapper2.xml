@@ -20,7 +20,7 @@
 
 <insert id="insertSelectKey">
 		<selectKey keyProperty="B_NO" order="BEFORE" resultType="int">
-			select seq_recboard.nextval from dual
+			select seq_bnonono.nextval from dual
 		</selectKey>
 	
 		INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip,VIEWCNT, STAR, REPLYCNT, boomup, mno, nickname)

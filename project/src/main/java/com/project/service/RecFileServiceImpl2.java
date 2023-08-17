@@ -51,7 +51,7 @@ public class RecFileServiceImpl2  implements RecFileService2{
 	public int Sfileupload(List<MultipartFile> files, int bno, Model model) throws Exception {
 		int insertRes = 0;
 		List<Integer> arr = new ArrayList<Integer>();
-		int index = 0;
+		int SNO = 98;
 		for(MultipartFile file : files) {
 			// 선택된 파일이 없는경우 다음파일로 이동
 			if(file.isEmpty()) {
@@ -107,11 +107,9 @@ public class RecFileServiceImpl2  implements RecFileService2{
 					vo.setFiletype("F");
 				}
 				
-				vo.setS_NO(stepS.selectStepSEQ());
-				
-				arr.set(index,vo.getS_NO());
-				index++;
-				
+				vo.setS_NO(SNO);
+				SNO++;
+
 				vo.setFiletype("S");
 				vo.setB_NO(bno);
 				vo.setFilename(file.getOriginalFilename());

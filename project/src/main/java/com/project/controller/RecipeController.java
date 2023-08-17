@@ -179,14 +179,14 @@ public class RecipeController {
 		}
 			System.out.println("밖 ==========================");
 		
-			ArrayList<Integer> arr = (ArrayList<Integer>)(model.asMap().get("arrSno"));
+			
+		
 		for(int i = 0; i < step_content.length; i++) {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ 실행전");
 			
 			System.out.println(step_content[i]);
 			
 			stepvo.setStep_content(step_content[i]);
-			stepvo.setS_NO((int)arr.get(i));
 			stepvo.setB_NO(B_NO);
 			
 			res4 = stepservice.insert(stepvo);

@@ -6,10 +6,10 @@
 <insert id="insert">
 	
 	<selectKey keyProperty="B_NO" order="BEFORE" resultType="int">
-		SELECT seq_recboard.CURRVAL FROM DUAL
+		SELECT seq_bnonono.CURRVAL FROM DUAL
 	</selectKey>
 	
-	insert into REC_STEP values(#{S_NO},#{step_content},#{B_NO})
+	insert into REC_STEP values(SEQ_W_REC_STEP.nextval,#{step_content},#{B_NO})
 
 </insert>
 	
