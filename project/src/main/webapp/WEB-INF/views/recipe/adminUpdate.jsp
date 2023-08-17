@@ -216,13 +216,13 @@ function getFileList(){
                 </div>
               </div>
 
-              <div class=" mb-3">
+<%--               <div class=" mb-3">
                 <label for="pw">패스워드</label>
                 <input type="password" class="form-control"  id="pw" name ="pw" value="${member.pw }" required>
                 <div class="invalid-feedback">
                   패스워드를 등록해주세요.
                 </div>
-            </div>
+            </div> --%>
             
           <div class="row">
             <div class="col-md-6 mb-3" style="padding-right: 36px; padding-left: 21px;">

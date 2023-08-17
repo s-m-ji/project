@@ -437,13 +437,14 @@ public class MemberController {
 				String pw = membervo.getPw();
 				System.out.println("pw : " + pw);
 				// 비밀번호 
-				
+				if (pw != null && !pw.isEmpty()) {
 				PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				if( !passwordEncoder.matches(membervo.getPw(), mv.getPw())) {
 					
 					String encodedPassword = passwordEncoder.encode(pw);
 					mv.setPw(encodedPassword);
 					membermapper.updatePassword(mv.getEmail(), encodedPassword);
+					}
 				}
 				
 				int res;
@@ -480,38 +481,27 @@ public class MemberController {
 				return "/common/message";
 
 			}
-		
-	
-	// 마이페이지 수정  ( 탈퇴 신청 ) 
-		@PostMapping("myPageDel")
-		public String myPageDel(MemberVo membervo, Model model) {
-			MemberVo mv = memberservice.getMemOne(membervo.getMno());
+			
+		// 마이페이지 회원 탈퇴 신청
+		@PostMapping("myPage/DelYn")
+		@ResponseBody
+		public Map<String, Object> myPageDel(@RequestBody MemberVo membervo) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			MemberVo mv= memberservice.getMemOne(membervo.getMno());
+			System.out.println("수정 객체 모였나? :" + mv);
+			
 			mv.setDelyn(mv.getDelyn());
+			
 			int res;
-			try {
-				res = memberservice.myPageDel(mv.getMno());
-				String message;
-				System.out.println("마이페이지 탈퇴신청 건 수 : " + res);
-				if (res > 0) {
-					message =  " 탈퇴 신청이 완료되었습니다.";
-					model.addAttribute("message", message);
-					model.addAttribute("url", "/recipe/myPage2?mno=" + mv.getMno());
-				}else {
-					message = "탈퇴 신청 중 오류가 발생하였습니다.";
-					model.addAttribute("message", message);
-					return "/common/message";
-				}
-			} catch (Exception e) {
-				if (e.getMessage().indexOf("첨부파일") > -1) {
-					model.addAttribute("message", e.getMessage());
-				} else {
-					model.addAttribute("message", "수정 중 예외 발생!!");
-				}
+			res = memberservice.myPageDel(membervo.getMno());
+			if(res > 0) {
+				map.put("result", "success");
+			}else {
+				map.put("result","fail");
 			}
-			return "/common/message";
+			return map;
 		}
-
-
+		
 
 	
 	// 광민
