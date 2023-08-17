@@ -21,6 +21,13 @@
 <link href="/resources/css/myPage.css" rel="stylesheet">
 <style>
 	
+	#notResult{
+		    position: relative;
+		    display: grid;
+		    margin: 0 auto;
+		    font-weight: 900;
+	}
+	
 	.limit-lines {
 	  display: -webkit-box;
 	  -webkit-box-orient: vertical;
@@ -208,16 +215,27 @@
 				<div id="ContentInfo">
 					<ul style="display: flex">
 					
+					<c:if test="${empty myList}">
+							
+		           	 		<li id="notResult"><img style="width: 50%; margin: 0 auto;" src="/resources/img/조회결과 없음.jpg">조회된 결과가 없습니다</li>
+					</c:if>
+					
 					<c:forEach items="${myList}" var="item">
-		           	 <li class="hoverOutLine" style="width: 17%; position: relative; height: 250px; border: 1px solid #d9c2c2; margin-left: 20px;"><a href="/recipe/view?b_no=${item.b_no}">
-		           	 	<div>
-		           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=${item.savePath}">
-		           	 	</div>
-		           	 	<div class="mainTab"> 
-		           	 		<span style="color: black;  font-weight: 900;">${item.title}</span>
-		           	 		<p style="margin-top: 25px; font-size: 12px; font-weight: 600; color:#23080896;">by ${item.nickname}</p> 	
-		           	 	</div>
-		           	 	<div style="position: absolute; margin-top: 33px; bottom: 0; width: 100%; background-color: yellowgreen; height: 35px "> </div></a></li> <!-- Modify according to your data structure -->
+		        	 	
+			           	 <li class="hoverOutLine" style="width: 17%; position: relative; height: 250px; border: 1px solid #d9c2c2; margin-left: 20px;"><a href="/recipe/view?b_no=${item.b_no}">
+			           	 	<div>
+			           	 		<img style="width: 70%; height: 100px;" src="/display?fileName=${item.savePath}">
+			           	 	</div>
+			           	 	<div class="mainTab"> 
+			           	 		<span style="color: black;  font-weight: 900;">${item.title}</span>
+			           	 		<p style="margin-top: 25px; font-size: 12px; font-weight: 600; color:#23080896;">by ${item.nickname}</p> 	
+			           	 	</div>
+			           	 	<div style="position: absolute; margin-top: 33px; bottom: 0; width: 100%; background-color: yellowgreen; height: 35px "> </div>
+			           	 	</a>
+			           	 </li> <!-- Modify according to your data structure -->
+		           	 	
+		           	 
+		           	 
 		        	</c:forEach>
 					</ul>
 				 
