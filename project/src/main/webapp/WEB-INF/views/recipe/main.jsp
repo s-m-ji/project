@@ -18,7 +18,7 @@ body {
 .totalBody{
 	margin : 0 auto;
 	width: fit-content;
-	padding-top: 50px;
+	padding: 50px 0;
 }
 
 .listHeader {
@@ -145,10 +145,10 @@ a {
 }
 
 .form-group {
-    position: absolute;
+    /* position: absolute;
     top: 100%;
-    left: 0;
-    width: 95%;
+    left: 0; */
+    width: 100%;
     background-color: white;
     padding: 10px;
     z-index: 999;
@@ -351,7 +351,7 @@ display: inline-block;
     	<div class="col-md-7">
            	<div class="form-group">
         	<form class="form-inline">
-                	<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 950px; display: inline-block;">
+                	<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 1000px; display: inline-block;">
                 	<button id="send" class="btn btn-default" disabled type="submit">전송</button>
         	</form>
            	</div>

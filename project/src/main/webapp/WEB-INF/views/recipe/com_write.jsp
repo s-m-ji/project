@@ -22,16 +22,18 @@
   }
 
 </script>
+</head>
 <body>
  <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
 	
 	<section id="main" style="border: 3px dashed #ed786a;">
-	
+	<div class="container">
+		<div class="container gtco-section">
 	<!-- 가운데로 "망한요리게시판" 크게 표시 -->
-    <div style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: darkred;">
+   <!--  <div style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: darkred;">
         ♨♨♨ 망한요리게시판 ♨♨♨
-    </div>
+    </div> -->
 <form action="/comboard/comWriteAction" method="post" enctype="multipart/form-data">	
  
          <div>
@@ -80,16 +82,16 @@
 		<!-- bno 값이 있으면 수정하기 -->
 				<c:if test="${not empty board.com_bno}" var="res">
 			    	<input type="hidden" name="com_bno" value="${board.com_bno}">
-					<button type="submit" onclick="requestAction('/comboard/editAction')">수정하기</button>
+					<button type="submit" style="color: #fff;"onclick="requestAction('/comboard/editAction')">수정하기</button>
 					
 				</c:if>
 				<!-- 없으면 등록하기 -->
 				<c:if test="${not res}">
-					<button type="submit" >등록하기</button>
+					<button type="submit" style="color: #fff;">등록하기</button>
 				</c:if>
 		
 		
-				<button type="reset" onclick="resetbtn()">취소</button>
+				<button type="reset" onclick="resetbtn()" style="color: #fff;">취소</button>
 		</div>
 		
 		
@@ -100,7 +102,8 @@
    
     
           
-          
+          </div>
+          </div>
     </form>
 	</section>
 <!-- Footer -->

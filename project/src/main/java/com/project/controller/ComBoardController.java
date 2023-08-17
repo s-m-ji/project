@@ -123,9 +123,6 @@ public class ComBoardController {
 	        return "/comboard/com_list2";
 	    }
 	}
-
-	
-	
 	
 		// 이미지 불러오기 (왜안되지);;
 	
@@ -162,6 +159,7 @@ public class ComBoardController {
 
 	    // board라는 이름으로 comFileVO 객체를 JSP 페이지로 전달
 	    model.addAttribute("comFile", comFileVO);
+	    System.out.println("-------------------- comFileVO : "  + comFileVO);
 
 	    return "com_view";
 	}
@@ -186,6 +184,15 @@ public class ComBoardController {
 	    // ComFileVO 객체들 가져오기 (여러 개의 사진을 가져올 수 있으므로 List로 저장)
 	    List<ComFileVO> fileList = fileservice.getList(com_bno);
 	    model.addAttribute("fileList", fileList);
+	    
+	    ComFileVO comFile = fileservice.getOne(com_bno);
+	    String fileName = comFile.getSavePath().replace("\\", "/");
+	    comFile.setSavePath(fileName);
+	    
+	    model.addAttribute("comFile", comFile);
+	    
+	    System.out.println(" -------------------- fileList : " + fileList);
+	    System.out.println(" -------------------- comFile : " + comFile);
 
 	    // 내가 작성한 댓글 목록 조회
 	    List<ComReplyVO> myReplies = replyService.getMyReplies(com_bno);

@@ -5,10 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>커뮤니티 상세</title>
 
 <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
+	
+	<!-- css 추가 설정 (MI, 2023/08/17) -->
+	<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
 	
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -21,26 +24,26 @@ window.addEventListener('load',function(){
 	
 	
 	// 수정페이지로 이동
-	btnEdit.addEventListener('click',function(){
+	/* btnEdit.addEventListener('click',function(){
 		viewForm.action='/comboard/edit';
 		viewForm.submit();
-	});
+	}); */
 	
 	
 	// 글 삭제
-	btnDelete.addEventListener('click', function(){
+	/* btnDelete.addEventListener('click', function(){
 	    if (confirm("정말로 삭제하시겠습니까?")) {
 	        viewForm.action='/comboard/delete'; 
 	        viewForm.submit();
 	    }
 	    alert('정상적으로 삭제되었습니다.')
-	});
+	}); */
 	
 	// 리스트 페이지 이동
-	document.getElementById("btnList").addEventListener('click', function(){
+	/* document.getElementById("btnList").addEventListener('click', function(){
 	    viewForm.action='/comboard/postList';
 	    viewForm.submit();
-	});
+	}); */
 	
 	
 	
@@ -105,6 +108,51 @@ function replyDelete(R_NO){
 	 
 
 </script>
+  <!-- css 추가 설정 (MI, 2023/08/17) -->
+  <style>
+  form.form-control	{
+  	    border: none;
+  }
+  .form-control label {
+	  font-weight: 800;
+	font-size: 1.75rem;
+	position: relative;
+	display: inline-block;
+	}
+  
+  .form-control label:after {
+  	position: absolute;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 10px;
+	background: #f7863b50;
+  }
+  
+  .mb-3 {
+  	text-align: center;
+  }
+  
+  .comViewImg {
+  	text-align: center; 
+  	margin: 50px 0;
+  }
+  
+  .input-group {
+   	margin-bottom: 30px;
+  }
+  
+  .replyWrap {
+  	width: 50%;
+  	margin: 0 auto;
+  }
+  
+  .comViewTop {
+  	display: flex;
+  	justify-content: betwwen;
+  }
+  </style>
 </head>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -113,40 +161,43 @@ function replyDelete(R_NO){
 
 
 	
-	
-
-<div style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: darkred;">
+<!-- Main -->
+<section id="main">
+<div class="container">
+		<div class="container gtco-section">
+<!-- <div style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: darkred;">
         ♨ 망했어요 ♨
-    </div>
+    </div> -->
 
 <input type="hidden" value="${board.com_bno}">
-<form method="post" name="viewForm">
+<form method="post" name="viewForm" class="form-control">
+
+<div class="comViewTop">
 
 	<div class="mb-3">
 	  <label for="title" class="form-label">제목</label>
-	  <input name="com_title" id="com_title" 
-	  type="text" readonly class="form-control" value='${board.com_title }' style="width:200px;">
+	  <h6>${board.com_title }</h6>
 	</div>
 	
 	
 	<div class="mb-3">
 	  <label for="content" class="form-label">망하게 된 사연...</label>
-	  <textarea class="form-control" id="com_content" readonly
-	  			 name="com_content" rows="3" style="width:500px; height: 300px;">${board.com_content }</textarea>
+	  <h6>${board.com_content }</h6>
+	</div>
+</div>
+	
+	<!-- 이미지 출력 -->
+	<div class="comViewImg" style="">
+	    <img src="/comboard/comFile?filename=${comFile.savePath}" alt="Image">
 	</div>
 	
 	
-	<!-- 이미지 출력 -->
-	<div>
-    <img src="/comboard/comFile?filename=${comFile.filename}" alt="Image">
-</div>
 	
-	
-		 <div style="text-align: center;">
-	        <button type="button" id="btnEdit">수정</button>
-			<button type="submit" id="btnDelete">삭제</button>
-			<button type="button" id="btnList">리스트</button>
-          </div>
+		 <!-- <div style="text-align: center;">
+	        <button type="button" id="btnEdit" style="color: #fff;">수정</button>
+			<button type="submit" id="btnDelete" style="color: #fff;">삭제</button>
+			<button type="button" id="btnList" style="color: #fff;">리스트</button>
+          </div> -->
 	
 	<input type="hidden" name="com_bno" value="${board.com_bno}">
 	
@@ -156,14 +207,15 @@ function replyDelete(R_NO){
 </form>
 
 
-<input type="text" id="replyer" value="" placeholder="닉네임표시" style="width: 100px;">
-<!-- 좋아요순 체크박스 -->
+<!-- <input type="text" id="replyer" value="" placeholder="닉네임표시" style="width: 100px;">
+좋아요순 체크박스
 좋아요순 <input type="checkbox" id="likeSortCheckbox">
 
-<!-- 최신순 체크박스 -->
+최신순 체크박스
 최신순 <input type="checkbox" id="latestSortCheckbox">
- 
+  -->
   
+  <div class="replyWrap">
   <div class="input-group">
   <span class="input-group-text">답글작성</span>
   	<input type="text" aria-label="First name" class="form-control" id="replyContent" placeholder="댓글을 입력하세요...">
@@ -204,8 +256,11 @@ function replyDelete(R_NO){
         </table>
     </c:otherwise>
 </c:choose>
+  </div>
 
-
+</div>
+</div>
+</section>
 <!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>
 	

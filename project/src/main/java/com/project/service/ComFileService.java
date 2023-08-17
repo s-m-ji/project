@@ -17,7 +17,6 @@ public interface ComFileService {
 	
 	public ComFileVO getOne(@Param("com_bno")int com_bno );
 	
-	
 	public int fileupload(List<MultipartFile> files, int bno) throws Exception;
 	
 	

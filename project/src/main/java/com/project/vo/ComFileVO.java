@@ -10,4 +10,5 @@ public class ComFileVO {
 	private String filetype;
 	private int com_bno;
 
+	private String savePath; // 저장된 파일 경로
 }

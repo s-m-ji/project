@@ -25,7 +25,8 @@
 	</delete>
 	
 	<select id="getOne" resultType="com.project.vo.ComFileVO">
-		select * from com_file where com_bno = #{com_bno}
+		<!-- select * from com_file where com_bno = #{com_bno} -->
+		SELECT uploadpath||uuid||'_'|| filename as savePath FROM com_file where com_bno = #{com_bno}
 	</select>
 </mapper>
 
