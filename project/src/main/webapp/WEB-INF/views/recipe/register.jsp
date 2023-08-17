@@ -399,6 +399,7 @@
     <div class="form-floating">
       <input type="text" class="form-control middle" id="signUpNickname">
       <label for="nickname">Nickname</label>
+      <button id="nicknameCheck" type="button">중복체크</button>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control end" id="signUpPNum">

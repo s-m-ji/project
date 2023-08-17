@@ -49,6 +49,11 @@
       #btnRegisterView {
         margin-bottom: 20px;
     }
+    .checkbox-inline {
+    display: inline-block;
+    margin-right: 10px; /* 조절 가능한 여백 값 */
+	}
+
 
     </style>
     
@@ -138,10 +143,12 @@
     </div>
 
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-email"> 이메일 저장 
-        <input type="checkbox" value="auto-login"> 자동로그인
-      </label>
+      <label class="checkbox-inline">
+	        <input type="checkbox" id="remember-email" value="remember-email"> 이메일 저장
+	    </label>
+	    <label class="checkbox-inline">
+	        <input type="checkbox" id="auto-login" value="auto-login"> 자동로그인
+	    </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit" id='btnSignin'>로그인</button>
     
@@ -161,8 +168,7 @@
 	    String state = new BigInteger(130, random).toString();
 	    
 	    // 요청URL -> 네이버로그인및 사용자정보제공 동의 -> 콜백으로 코드를 제공
-	    String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code";
-	    //https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&
+	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
 	    apiURL += "&client_id=" + clientId;
 	    apiURL += "&redirect_uri=" + redirectURI;
 	    apiURL += "&state=" + state;
@@ -182,5 +188,107 @@
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
+<script>
+	//쿠키 생성 함수
+	function setCookie(name, value, days) {
+	    var expires = "";
+	    if (days) {
+	        var date = new Date();
+	        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+	        expires = "; expires=" + date.toUTCString();
+	    }
+	    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+	}
+
+	// 쿠키 가져오기 함수
+	function getCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	    }
+	    return null;
+	}
+	
+	// 이메일 저장 체크박스 상태 확인 및 처리
+	var rememberEmailCheckbox = document.getElementById("remember-email");
+	var emailInput = document.getElementById("email");
+	if (rememberEmailCheckbox && emailInput) {
+	    // 페이지 로드 시 저장된 이메일과 체크박스 상태를 가져와 설정
+	    var savedEmail = localStorage.getItem("savedEmail");
+	    var isChecked = localStorage.getItem("rememberEmailChecked");
+
+	    if (savedEmail) {
+	        emailInput.value = savedEmail;
+	    }
+
+	    if (isChecked === "true") {
+	        rememberEmailCheckbox.checked = true;
+	    }
+
+	    rememberEmailCheckbox.addEventListener("change", function () {
+	        if (this.checked) {
+	            localStorage.setItem("savedEmail", emailInput.value);
+	            localStorage.setItem("rememberEmailChecked", "true");
+	        } else {
+	            localStorage.removeItem("savedEmail");
+	            localStorage.setItem("rememberEmailChecked", "false");
+	        }
+	    });
+	} else {
+	    console.error("Checkbox or email input element not found.");
+	}
+	
+	window.addEventListener("load", function () {
+	    var rememberEmailCheckbox = document.getElementById("remember-email");
+	    var emailInput = document.getElementById("email");
+
+	    if (rememberEmailCheckbox && emailInput) {
+	        var savedEmail = localStorage.getItem("savedEmail");
+	        var isChecked = localStorage.getItem("rememberEmailChecked");
+
+	        if (savedEmail) {
+	            emailInput.value = savedEmail;
+	        }
+
+	        if (isChecked === "true") {
+	            rememberEmailCheckbox.checked = true;
+	        }
+	    } else {
+	        console.error("Checkbox or email input element not found.");
+	    }
+	    
+	    // 자동로그인 체크 여부
+	    var autoLoginCheckbox = document.getElementById("auto-login");
+	    if (autoLoginCheckbox && autoLoginCheckbox.checked) {
+	    	setCookie("savedEmail", emailInput.value, 3); // 3일 동안 쿠키에 저장
+	        setCookie("savedPassword", pwInput.value, 3); 
+	    } else {
+	    	setCookie("savedEmail", "", -1); // 쿠키 삭제
+	        setCookie("savedPassword", "", -1); 
+	    }
+	});
+	
+	// 자동로그인 처리 함수
+	function autoLogin() {
+	    var autoLoginCheckbox = document.getElementById("auto-login");
+	    var emailInput = document.getElementById("email");
+	    var pwInput = document.getElementById("pw");
+	    var savedEmail = getCookie("savedEmail");
+	    var savedPassword = getCookie("savedPassword");
+
+	    if (autoLoginCheckbox && savedEmail) {
+	        autoLoginCheckbox.checked = true;
+	        emailInput.value = savedEmail;
+	        pwInput.value = savedPassword;
+	    }
+	}
+
+	// 페이지 로드 시 자동로그인 처리
+	window.addEventListener("load", autoLogin);
+
+</script>
 </html>
 
