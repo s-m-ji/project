@@ -8,49 +8,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원관리- 회원등록</title>
-
  	 <!-- Bootstrap CSS -->
  	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
-	
 	<!-- 부트스트랩 아이콘 (MI, 2023/07/26)-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<!-- 폰트어썸 아이콘 (MI, 2023/07/26) -->
 	<script src="https://kit.fontawesome.com/bc0f5040fb.js" crossorigin="anonymous"></script>
-
     <!-- 부트스트랩 css CDN (최신 버전) -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-	
 	<!-- 템플릿 css 모음  (MI, 2023/07/26) -->
 	<link rel="stylesheet" href="/resources/assets/css/main.css" />
 	<link rel="stylesheet" href="/resources/css/animate.css">
 	<link rel="stylesheet" href="/resources/css/style.css">
-	
 	<!-- ============ recipe 플젝 css 모음 (MI, 2023/07/26) ============ -->	
 	<!-- 지상미 css (MI, 2023/07/28) -->
 	<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
-	
-
-	<!-- 템플릿 js 모음  (MI, 2023/07/26) -->
-	<script src="/resources/js/jquery.min.js"></script>
-	<script src="/resources/js/jquery.easing.1.3.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.waypoints.min.js"></script>
-	<script src="/resources/js/jquery.countTo.js"></script>
-	<script src="/resources/js/main.js"></script>
-	
 	<!-- ============ recipe 플젝 js 모음 (MI, 2023/07/26) ============ -->	
 	<!-- 공통 적용 -->
     <script src='/resources/recipe_js/common.js'></script> 
-    
-    <!-- list 파일 적용 -->
-    <script src='/resources/recipe_js/listFile.js'></script>
-    
     <!-- 지상미 js -->
     <script src='/resources/recipe_js/mimi.js'></script>
+	<!-- swal -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-	<!--  adminInput.css -->
 
 <script>
 	function requestAction(url){
@@ -69,6 +50,11 @@
 	
 	getFileList(); 
 	
+	
+	// 비밀번호 11자만 보이도록 하기 
+	const pwRealInput = document.querySelector("#pwReal");
+	const originalPw = pwRealInput.value;
+	pwRealInput.value = originalPw.substring(0,11);
 	
 	var nickname = document.querySelector('#nickname');
 	console.log(nickname);
@@ -180,6 +166,71 @@ function getFileList(){
 			}
 		}
 		 
+		// 탈퇴 신청 관련 
+		function myPageDel(){
+			let mno = document.querySelector("#mno").value;
+			
+	 		swal({
+				title:'정말로 탈퇴하시겠습니까?',
+				text : "탈퇴 신청 후 복구시킬 수 없습니다.",
+				icon : 'warning',
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) =>{
+				if(willDelete){
+					let obj = {
+							mno:mno
+					};
+					fetchPost('myPage/DelYn', obj, myPageDelRes);
+					console.log(obj);
+				} else{
+					swal("신청 실패", "탈퇴 신청이 처리되지 않았습니다.", "error");
+				}
+			}); 
+		}		
+/* 	     Swal.fire({
+	            title: "신청 완료!",
+	            text: "탈퇴 신청이 정상적으로 처리되었습니다.",
+	            icon: "success",
+	            confirmButtonText: "확인"
+	        }).then(() => {
+	            // 이전 페이지로 이동
+	            window.history.back();
+	        }); */
+		function myPageDelRes(map){
+			if(map.result == 'success'){
+				swal("신청 완료!", "탈퇴 신청이 정상적으로 처리되었습니다", "success").then(okay =>{
+					if(okay){
+						/* location.href ="myPage2"; */
+						 window.history.back();
+					}
+				});
+				
+			}else{
+				swal("탈퇴 신청 중 오류가 발생하였습니다. 관리자에게 문의해주세요.");
+			}
+		}
+		// post방식 요청
+		function fetchPost(url, obj, callback){
+			try{
+				// url 요청
+				fetch(url
+						, {
+							method : 'post'
+							, headers : {'Content-Type' : 'application/json'}
+							, body : JSON.stringify(obj)
+						})
+					// 요청결과 json문자열을 javascript 객체로 반환
+					.then(response => response.json())
+					// 콜백함수 실행
+					.then(map => callback(map));			
+			}catch(e){
+				console.log('fetchPost', e);
+			}
+		}
+		
+		
+		 
 </script>
 
   <style>
@@ -258,23 +309,13 @@ function getFileList(){
        <c:set value="${myList}" var="member"></c:set>
         <div class="myUpdate1">
         <div class="myUpdate2">
-		        <form id="myPageDelForm" method="post" action="/recipe/myPageDel">
 		    <input type="hidden" id="mno" name="mno" value="${member.mno}">
-		<input type="submit" value="탈퇴신청" id="myPageDelBtn"
-		style="
-    		background-color: ghostwhite;
-    		color: black;
-    		font-weight: 400;"
-		>
-		</form>
-		       
-    <!-- <a href="" id ="myPageDel"  class ="myUpdate3" role="button" onsubmit="myPageDel()">탈퇴신청</a> -->
-            </div> 
+			<input type="button" onclick='myPageDel()' value="탈퇴신청" id="myPageDelBtn"
+				style="background-color: ghostwhite; color: black;font-weight: 400;">
+       </div> 
         </div>
        <input type="text" class="form-control" id="mno" name ="mno" placeholder="회원번호" value="${member.mno }" hidden>
-       
         <form action="/recipe/myPageUpdateAction" method="post" accept-charset="UTF-8"  name="editForm" enctype="multipart/form-data" novalidate>
-            
 	    <!--  파라메터 🌈 --> 
    		<input type="text" name="mno" value="${member.mno}" id = "mno" hidden>
    		
@@ -288,9 +329,17 @@ function getFileList(){
                 </div>
               </div>
 
+         <div class=" mb-3">
+                <label for="pwReal"> 현재 패스워드</label>
+                <input type="password" class="form-control"  id="pwReal" name ="pwReal" value="${member.pw}" required readonly="readonly">
+                <div class="invalid-feedback">
+                  패스워드를 등록해주세요.
+                </div>
+            </div>
+
               <div class=" mb-3">
                 <label for="pw"> 새로운 패스워드</label>
-                <input type="password" class="form-control"  id="pw" name ="pw" value="${pw}" required>
+                <input type="text" class="form-control"  id="pw" name ="pw" value="${pw}" required>
                 <div class="invalid-feedback">
                   패스워드를 등록해주세요.
                 </div>
