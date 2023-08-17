@@ -28,8 +28,8 @@ function addMaterial() {
     newInputsContainer.innerHTML =
         `
         <div>
-            <input type="text" name="I_NAME${counter + 1}" id="I_NAME${counter + 1}" style="display: inline-block; width: 280px;" placeholder="예) 돼지고기">
-            <input type="text" name="materialCnt${counter + 1}" id="materialCnt${counter + 1}" style="display: inline-block; width: 280px;" placeholder="예) 300g">
+            <input type="text" name="I_NAME" id="I_NAME" style="display: inline-block; width: 280px;" placeholder="예) 돼지고기">
+            <input type="text" name="materialCnt" id="materialCnt" style="display: inline-block; width: 280px;" placeholder="예) 300g">
         </div>
         <br>
         `;
@@ -51,8 +51,8 @@ function addCookStep() {
     newCookstep.innerHTML =
         `
         <p>step ${step + 1}</p>
-        <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content${step + 1}" style="display: inline-block; width: 450px; resize: none;">${stepvo.step_content}</textarea>
-        <input type="file" name="photos${step + 1}" multiple="multiple" style="display: inline-block;" ><br>
+        <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 450px; resize: none;">${stepvo.step_content}</textarea>
+        <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block;" ><br>
         `;
 
     cookStep.appendChild(newCookstep);
@@ -146,7 +146,9 @@ function addCookStep() {
 
 
 		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> >	
-  
+  		
+  		 <input type="hidden" name="mno" value="30">
+  		<input type="hidden" name="nickName" value="부붐">
 		<!-- 제목 입력란  -->
 			<div class="rec_title">
 				<label>레시피 제목 </label> 
@@ -281,7 +283,7 @@ function addCookStep() {
 			<div id="cookStep">
 			    <p>step 1</p>
 			    <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 450px; resize: none;">${stepvo.step_content}</textarea>
-			    <input type="file" name="photos" multiple="multiple" style="display: inline-block;"><br>
+			    <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block;"><br>
 			</div>
 			
 			<!-- 순서추가 버튼 -->
@@ -304,7 +306,7 @@ function addCookStep() {
 			
 			<div>
 				<label>요리 완성사진</label>
-				<input type="file" name="photos" id="photoInput" class="form-control" 
+				<input type="file" name="Fphotos" id="photoInput" class="form-control" 
 					multiple="multiple" >
 			</div>
 			

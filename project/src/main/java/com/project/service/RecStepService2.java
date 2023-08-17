@@ -8,4 +8,6 @@ import com.project.vo.RecStepVO2;
 public interface RecStepService2 {
 	
 	public int insert(RecStepVO2 vo);
+	
+	public int selectStepSEQ();
 }

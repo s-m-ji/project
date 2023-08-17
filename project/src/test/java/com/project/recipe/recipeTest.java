@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.project.mapper.RecMatMapper2;
 import com.project.mapper.RecipeListMapper;
 import com.project.mapper.RecipeMapper;
 import com.project.mapper.ReplyMapper;
 import com.project.service.ReplyService;
 import com.project.vo.BoardVO;
 import com.project.vo.Criteria;
+import com.project.vo.RecMatVO2;
 import com.project.vo.RecipeBoardVo;
 import com.project.vo.RecipeReplyVo;
 
@@ -40,6 +42,10 @@ public class recipeTest {
 	
 	@Autowired
 	ReplyService replySerive;
+	
+	@Autowired
+	RecMatMapper2 mats;
+	
 	
 	@Test public void getRecList() {
 		// assertNotNull(rMapper);
@@ -144,6 +150,19 @@ public class recipeTest {
 		log.info(list);
 	}
 	
+	@Test
+	public void testtt() {
+		
+		
+		
+		RecMatVO2 vo = new RecMatVO2();
+		vo.setMaterialCnt("30");
+		vo.setI_NAME("계란");
+		
+		
+		log.info(mats.insert(vo));
+		
+	}
 	
 	
 	
