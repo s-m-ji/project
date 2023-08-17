@@ -22,12 +22,4 @@ public interface MainService {
 	
 	//4. 최근 등록 레시피 리스트 불러오기
 	public List<MainVO> getRecentList();
-	
-	//5. 
-	public String getenglish(MainVO vo);
-
-	//public List<MainVO> getBoomUpListIMG();
-
-	//6. 
-
 }

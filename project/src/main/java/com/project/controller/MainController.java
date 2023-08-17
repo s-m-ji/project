@@ -48,36 +48,6 @@ public class MainController {
 	
 	public static final String ATTACHES_DIR = "c:\\upload\\";
 	
-//	@GetMapping("/file/list/{bno}")
-//	public @ResponseBody Map<String, Object> fileuploadList
-//							(@PathVariable("bno") int bno) {
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("list", service.getList(bno));
-//		
-//		return map;
-//	}
-	
-	/*
-	 * @GetMapping("/displayff") // 이미지를 화면에 보여줍니다 public ResponseEntity<byte[]>
-	 * display(String fileName) { //log.info("=====fileName : " + fileName);
-	 * //fileName="2023\\08\\03\\오징어동그랑땡.jpg";
-	 * 
-	 * try { // 파일 객체를 생성 File file = new File(ATTACHES_DIR + fileName);
-	 * System.out.println(ATTACHES_DIR + fileName); HttpHeaders headers = new
-	 * HttpHeaders();
-	 * 
-	 * // 이미지 파일이 존재하면 파일을 이미지를 다운로드 if(file.exists()) { // Mime타입을 설정
-	 * headers.add("Content-Type",Files.probeContentType(file.toPath())); return new
-	 * ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers,
-	 * HttpStatus.OK); }else { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
-	 * 
-	 * } catch (IOException e) { return new
-	 * ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); }
-	 * 
-	 * }
-	 */
-	
 	@GetMapping("main")
 	public String Main(Model model) { 
 		
@@ -219,63 +189,9 @@ public class MainController {
 
 		}
 
+			//String email = response.get("email");
+			//email.mainservice.checkemail();
+			
 		return "/recipe/main";
 	}
-	
-//	@GetMapping("chatbot")
-//	public String chatbot(Model model) {
-//		model.addAttribute("number", 1);
-//		return "/recipe/chatbot"; 
-//	}
-	
-//	JSONParser jsonParser = new JSONParser();
-//	JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
-//	JSONObject message = (JSONObject) jsonObject.get("message");
-//	//JSONObject result1 = (JSONObject) jsonObject.get("result");
-//	JSONArray jsonResult = (JSONArray) message.get("result");
-//	List<JSONObject> jsonResultList = new ArrayList<>();
-//	for (int i = 0; i < jsonResult.size(); i++) {
-//		JSONObject jsonResultData = (JSONObject) jsonResult.get(i);
-//		jsonResultList.add(jsonResultData);
-//		System.out.println(jsonResultList);
-//	}
-	
-	
-	//model.addAttribute("english", english);
-	//System.out.println("english : " + english);
-	//model.addAttribute("english" , english);
-
-//	@GetMapping("main")
-//	// 이미지를 화면에 보여줍니다
-//	public ResponseEntity<byte[]> display(String fileName) {
-//		
-//		try {
-//			// 파일 객체를 생성
-//			File file = new File(ATTACHES_DIR + fileName);
-//			HttpHeaders headers = new HttpHeaders();
-//			
-//			// 이미지 파일이 존재하면 파일을 이미지를 다운로드
-//			if(file.exists()) {
-//				// Mime타입을 설정
-//				headers.add("Content-Type",Files.probeContentType(file.toPath()));
-//				return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-//			}else {
-//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//			}
-//			
-//		} catch (IOException e) {
-//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
-	
-//	@RequestMapping("english")
-//	@ResponseBody
-//	public String english(@RequestParam(value = "korean", defaultValue = "-") String korean, Model model)
-//			throws Exception {
-//		MainVO vo = new MainVO();
-//		vo.setKorean(korean);
-//		String english = mainservice.getenglish(vo); // 서비스에서 일을 진행 할 예정
-//		System.out.println("english : " + english);
-//		return english;
-//	}
 }

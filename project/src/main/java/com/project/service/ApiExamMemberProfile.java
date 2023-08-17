@@ -22,12 +22,13 @@ public class ApiExamMemberProfile {
 
 
     public Map<String, Object> getMemberProfile(String access_token) {
+    	System.out.println("getMemberProfilegetMemberProfile");
         String token = access_token; // 네이버 로그인 접근 토큰;
         String header = "Bearer " + token; // Bearer 다음에 공백 추가
 
 
-        String apiURL = "https://openapi.naver.com/v1/nid/me";
-
+        String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+        
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("Authorization", header);
@@ -43,6 +44,7 @@ public class ApiExamMemberProfile {
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		try {
+			System.out.println("getMemberProfile.try");
 			map = objectMapper.readValue(responseBody, Map.class);
 			System.out.println("responseBody : " + responseBody);
 			System.out.println("resultcode : " + map.get("resultcode"));
@@ -54,7 +56,7 @@ public class ApiExamMemberProfile {
 			System.out.println(response.get("name"));
 			System.out.println(response.get("id"));
 			System.out.println(response.get("gender"));
-			
+			System.out.println("getMemberProfile.try2");
 			return map;
 			
 		} catch (JsonMappingException e) {

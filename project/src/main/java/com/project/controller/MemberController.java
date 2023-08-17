@@ -714,19 +714,25 @@ public class MemberController {
 		return memberservice.sendPwBy(member, model);
 	}
 	
+	//★★★★★★★★★★★★★★★★★★★★★★
 	@GetMapping("/login/naver")
 	public void naverLogin() {
+		System.out.println("하이!!");
 		
 	}
 	
 	@GetMapping("/login/naver_callback")
 	public String naverLogin_callback(HttpServletRequest request
 									, Model model) {
+		System.out.println("하이!!!!");
 		memberservice.naverLogin(request, model);
 		
-		return "/recipe/list";
-		
+		return "/login/naver";
 	}
+	
+	
+	
+	
 	
     @GetMapping("/do")
     public String loginPage1()

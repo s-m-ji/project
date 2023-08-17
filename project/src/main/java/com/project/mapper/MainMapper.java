@@ -20,7 +20,4 @@ public interface MainMapper {
 	//4. 최근 등록 레시피 리스트 불러오기
 	List<MainVO> getRecentList();
 
-	//List<MainVO> getBoomUpListIMG();
-
-
 }

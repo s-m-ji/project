@@ -272,6 +272,10 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	ApiExamMemberProfile apiExam;
 	
+	
+	
+	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
 	@Override
 	public void naverLogin(HttpServletRequest request, Model model) {
 		try {
@@ -305,19 +309,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	public Map<String, String> callback(HttpServletRequest request) throws Exception{
+		System.out.println("callbackcallbackcallback : ");
 	    String clientId = "K4dBcaR2392POv2SFnSD";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "npOaEFGzxk";//애플리케이션 클라이언트 시크릿값";
 	    String code = request.getParameter("code");
 	    String state = request.getParameter("state");
 	    try {
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/login/naver_callback", "UTF-8");
+	    String redirectURI = URLEncoder.encode("http://localhost:8080/recipe/login/naver_callback", "UTF-8");
 	    String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-	    apiURL += "client_id=" + clientId;
+	    apiURL += "&client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;
 	    apiURL += "&redirect_uri=" + redirectURI;
 	    apiURL += "&code=" + code;
 	    apiURL += "&state=" + state;
+	    
 	    String access_token = "";
 	    String refresh_token = "";
 	    System.out.println("apiURL="+apiURL);
@@ -328,6 +334,7 @@ public class MemberServiceImpl implements MemberService {
 	      BufferedReader br;
 	      System.out.print("responseCode="+responseCode);
 	      if(responseCode==200) { // 정상 호출
+	    	System.out.println("responseCoderesponseCoderesponseCode : " + responseCode);
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
 	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
@@ -353,6 +360,10 @@ public class MemberServiceImpl implements MemberService {
 	      throw new Exception("callback 처리중 예외사항이 발생 하였습니다. ");
 	    }
 	}
+	
+	
+	
+	
 	
 	public String getToken(String code) throws IOException {
         // 인가코드로 토큰받기

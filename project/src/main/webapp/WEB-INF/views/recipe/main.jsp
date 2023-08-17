@@ -6,25 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메인</title>
 <style type="text/css">
 html {
 	height: 100%;
 }
 
 body {
-	
 	min-height: 100%;
-	/* left : 100px; */
-	/* display: flex;
-    justify-content: center; /* 가로 가운데 정렬 */
-   /*  align-items: center; */ /* 세로 가운데 정렬 */
-    /* height: 100vh; */ /* 화면 전체 높이를 사용하여 세로 중앙 정렬 */
-    /* margin: 0; */
 }
 .totalBody{
-	/* transform: translateX(15%); */
 	margin : 0 auto;
+	width: fit-content;
 }
 
 .listHeader {
@@ -35,8 +28,8 @@ body {
   }
 
 .listHeader h3 {
-    border: 2px solid #000;
-    text-align: center;
+    /* border: 2px solid #000; */
+    /* text-align: center; */
     margin: 0;
     padding: 5px;
   }
@@ -60,7 +53,6 @@ body {
 .header h3 {
     margin: 0;
 }
-
 
 .div_BoomUpList {
 	width : 230px;
@@ -122,17 +114,6 @@ body {
 	position: relative; /* 슬라이드 위치를 조정하기 위해 필요 */
 }
 
-/* .div_recentRecipeList {
-	border: 2px solid;
-	display: inline-block
-} */
-/* div, ul, li {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0
-} */
 a {
 	text-decoration: none;
 }
@@ -142,46 +123,31 @@ a {
 	min-height: 1000px;
 }
 
-/* #main-content {
-	margin-top: 10px;
-	margin-right: 20px;
-	/* overflow:scroll; */
-	/* width: 300px; 
-	height: 400px; 
-	position: fixed; 
-	right:0; 
-	bottom:0;
-	 overflow: auto; */
-} */
 
-<!-- 챗봇 -->
-
-#chatBox {
+/* #chatBox {
  	display: none;
 	background-color: white;
 	border: 4px solid;
 	overflow:scroll;
-	/*right: 0;
-	bottom: 0; */
 	width: 300px;
 	height: 400px;
+	
 }
-
-
+ */
+#chatBox {
+	position: relative;
+	border: 2px solid;
+}
 .totalListSize{
 	width: 1200px;
 	display: inline-block;
-}
-
-#chatBox {
-    position: relative;
 }
 
 .form-group {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 95%;
     background-color: white;
     padding: 10px;
 }
@@ -201,8 +167,9 @@ a {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6j3xj4ny38&submodules=geocoder"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
 </head>
 <body>
 <div class="totalBody">
@@ -239,7 +206,9 @@ a {
 	<!-- [참고] 깃헙 토큰 : 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 -->
 
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px" >명예의 전당 <button id="BoomUpListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="font-size: 25px; font-weight: bold;"><span style="color: green;">명예의</span> 전당
+		</h3>
+		<button id="BoomUpListHide" style="">숨기기▼</button>
 	</div>
 	<br>
 	<div class="totalListSize">
@@ -255,16 +224,16 @@ a {
 	</div>
 	<br>
 	
-	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px">인기 레시피 <button id="ViewCntListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="font-size: 25px; font-weight: bold;"><span style="color: orange;">인기</span>레시피 </h3>
+		<button id="ViewCntListHide">숨기기▼</button>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="ViewCntList" items="${ViewCntList}" begin="0" end="4" step="1">
 		<div class="div_ViewCntList">
 			<a href="/recipe/view?b_no=${ViewCntList.b_no}"><img src="/display?fileName=${ViewCntList.savePath}" ></a>
-			<p id="imghref" onclick="" data-value="${ViewCntList.title }" class="imghref">🍴 ${ViewCntList.title }</p>
+			<p id="imghref" data-value="${ViewCntList.title }" style="overflow: hidden;" >🍴 ${ViewCntList.title }</p>
 			<p>🙋‍♀️‍${ViewCntList.nickName }</p>
 			<p>👀${ViewCntList.viewCnt }</p>
 		</div>
@@ -273,14 +242,15 @@ a {
 	</div>
 	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px" >활활 불타는 레시피<button id="ReplyCntListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="font-size: 25px; font-weight: bold;"><span style="color: red;">활활 불타는</span>  레시피</h3>
+		<button id="ReplyCntListHide">숨기기▼</button>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="ReplyCntList" items="${ReplyCntList}" begin="0" end="4" step="1">
 		<div class="div_ReplyCntList">
 			<a href="/recipe/view?b_no=${ReplyCntList.b_no}"><img src="/display?fileName=${ReplyCntList.savePath}" ></a>
-			<p id="imghref" onclick="" data-value="${ReplyCntList.title }" class="imghref">🍴 ${ReplyCntList.title }</p>
+			<p id="imghref" data-value="${ReplyCntList.title }" style="overflow: hidden;">🍴 ${ReplyCntList.title }</p>
 			<p>🙋‍♀️‍${ReplyCntList.nickName }</p>
 			<p>${ReplyCntList.replyCnt }</p>
 		</div>
@@ -289,14 +259,15 @@ a {
 	</div>
 	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px">따끈따끈 최신 레시피 <button id="RecentListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="font-size: 25px; font-weight: bold;"><span style="color: blue;">따끈따끈 최신</span> 레시피</h3>
+		<button id="RecentListHide">숨기기▼</button>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="RecentList" items="${RecentList}" begin="0" end="4" step="1">
 		<div class="div_RecentList">
 			<a href="/recipe/view?b_no=${RecentList.b_no}"><img src="/display?fileName=${RecentList.savePath}" ></a>
-			<p id="imghref" onclick="" data-value="${RecentList.title }" class="imghref">🍴 ${RecentList.title }</p>
+			<p id="imghref" onclick="" data-value="${RecentList.title }" style="overflow: hidden;">🍴 ${RecentList.title }</p>
 			<p>🙋‍♀️‍${RecentList.nickName }</p>
 			<p>${RecentList.regdate }</p>
 		</div>
@@ -309,12 +280,12 @@ a {
 	
 
 <!-- //7. 네이버 지도-->
-<h3 style="text-align: center">식품 의약 안전처가 인증한 모범 식당 찾아보기!</h3>
+<h3 style="text-align: center">식품 의약 안전처가 인증한 모범 식당 찾아볼까요?</h3>
 <div id="map" style="width: 1200px; height: 500px;">
 	<div style="position: relative; z-index: 100">
 		<input type="text" style="width:200px;height:35px;font-size:15px;" id="searchRestaurantAddress" placeholder="주소 입력" style="font-weight: border;">
 		<input type="text" style="width:150px;height:35px;font-size:15px;" id="searchRestaurantName" placeholder="상호명 입력" style="font-weight: border;">
-		<label style="font-weight: 1500; font-size: large;">
+		<label style="font-weight: bold; font-size: large;">
 			<input type="radio" value="한식" id="koreaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; " checked="checked">한식
 			<input type="radio" value="중식" id="chinaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">중식
 			<input type="radio" value="일식" id="japanFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">일식
@@ -325,61 +296,52 @@ a {
 </div>
 <br><br>
 
-	<!-- <div id="chatBox" class="col-md-row-chat" style="display: none; overflow:scroll; width: 1200px; height: 500px; ">  position: relative;
-		<div class="col-md-6">
-			<table>
-				<thead>
-					<tr>
-						<th>무엇이든 물어보세요!</th>
-					</tr>
-				</thead>
-			</table>
-			<table id="conversation" class="table table-striped" style="position: relative;">
-				<tbody id="showMessage" style="width: 100%; height: 80%"></tbody>	height: 300px;
-			</table>
-		</div>
-		<div class="col-md-7" >
-			<form class="form-inline">
-				<div class="form-group" style=" position: absolute;">
-					<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width : 900px; display: inline-block;" >
-					<button id="send" class="btn btn-default" disabled type="submit" >전송</button>
-				</div>
-			</form>
-		</div>
-	</div> -->
-	<div id="chatBox" class="col-md-row-chat" style="display: none; overflow: scroll; width: 1200px; height: 500px; ">
-    <div class="col-md-6">
-        <table>
-            <thead>
-                <tr>
-                    <th>무엇이든 물어보세요!</th>
-                </tr>
-            </thead>
-        </table>
-        <table id="conversation" class="table table-striped">
-            <tbody id="showMessage"></tbody>
-        </table>
-    </div>
-    <div class="col-md-7">
-        <form class="form-inline">
-            <div class="form-group">
-                <input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 900px; display: inline-block;">
-                <button id="send" class="btn btn-default" disabled type="submit">전송</button>
-            </div>
-        </form>
-    </div>
-</div>
-	<!-- <div class="form-group"> -->
-			<!-- <button id="connect" class="btn btn-default" type="submit"> </button>-->
-			<img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;">
-			<!-- <button id="disconnect" class="btn btn-default" type="submit"disabled="disabled" style="display: none">해제</button> -->
-		<!-- </div> -->
-	</div> <!-- totalBody -->
+	<div id="chatBox" class="col-md-row-chat" style="display: none; ">
+    	<div class="col-md-6" style="overflow-y: scroll; width: 1200px; height: 500px; ">
+        	<table>
+            	<thead>
+                	<tr>
+                   		<th>무엇이든 물어보세요!</th>
+                	</tr>
+            	</thead>
+        	</table>
+        	<table id="conversation" class="table table-striped" onDOMSubtreeModified="checkAndAddScroll()">
+            	<tbody id="showMessage"></tbody>
+        	</table>
+    	</div>
+    	<div class="col-md-7">
+        	<form class="form-inline">
+            	<div class="form-group">
+                	<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 950px; display: inline-block;">
+                	<button id="send" class="btn btn-default" disabled type="submit">전송</button>
+            	</div>
+        	</form>
+    	</div>
+	</div>
+<img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="z-index:999; width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;">
+</div> <!-- totalBody -->
 </body>
-<!-- <button onclick="openChatbot()">챗봇</button> -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
+var contentHeight = conversation.scrollHeight;
+var containerHeight = chatBox.clientHeight - 40;
+
+if (contentHeight > containerHeight) {
+    conversation.style.overflowY = 'scroll';
+    conversation.style.maxHeight = containerHeight + 'px';
+} else {
+    conversation.style.overflowY = 'auto';
+    conversation.style.maxHeight = 'none';
+}
+
+
+var mySwiper = new Swiper('.swiper-container', {
+    // 기타 옵션들
+    autoplay: {
+        delay: 3000, // 각 슬라이드 전환 간격 (밀리초 단위)
+        disableOnInteraction: false // 사용자와의 상호작용 시 자동 재생 중지 여부
+    }
+});
+
 
 $('#BoomUpListHide').click(function (element){
 	 var elements = document.querySelectorAll('.div_BoomUpList');
@@ -493,9 +455,11 @@ $(document).ready(function() {
 					$('#chatBox').show();
 					//$('.col-md-6').show();
 					//$('#connect').hide();
+			}else {
+				$('#chatBox').hide();
 			}
 			/* if($("#chatBox").css("display") != "none") {
-				$('#chatBox').hide();
+				
 			} */
 		});
 		$("#disconnect").click(function() {
@@ -509,25 +473,6 @@ $(document).ready(function() {
 			
 		}); */
 	});	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 //★		
 	//1. 네이버 지도
