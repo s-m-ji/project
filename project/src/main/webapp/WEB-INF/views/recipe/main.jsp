@@ -18,6 +18,7 @@ body {
 .totalBody{
 	margin : 0 auto;
 	width: fit-content;
+	padding-top: 50px;
 }
 
 .listHeader {
@@ -28,7 +29,7 @@ body {
   }
 
 .listHeader h3 {
-    /* border: 2px solid #000; */
+    /* border: 1px solid #ddd; #000; */
     /* text-align: center; */
     margin: 0;
     padding: 5px;
@@ -44,7 +45,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid #000;
+    border: 1px solid #ddd; #000;
     padding: 5px 10px;
     
     hegith : 50px;
@@ -58,7 +59,7 @@ body {
 	width : 230px;
 	height : 400px;
 	overflow: hidden;
-	border: 2px solid;
+	border: 1px solid #ddd;;
 	display: inline-block;
 }
 
@@ -71,7 +72,7 @@ body {
 	width : 230px;
 	height : 400px;
 	overflow: hidden;
-	border: 2px solid;
+	border: 1px solid #ddd;;
 	display: inline-block;
 }
 .div_ViewCntList img{
@@ -84,7 +85,7 @@ body {
 	width : 230px;
 	height : 400px;
 	overflow: hidden;
-	border: 2px solid;
+	border: 1px solid #ddd;;
 	display: inline-block;
 }
 
@@ -97,7 +98,7 @@ body {
 	width : 230px;
 	height : 400px;
 	overflow: hidden;
-	border: 2px solid;
+	border: 1px solid #ddd;;
 	display: inline-block;
 }
 
@@ -136,7 +137,7 @@ a {
  */
 #chatBox {
 	position: relative;
-	border: 2px solid;
+	border: 1px solid #ddd;;
 }
 .totalListSize{
 	width: 1200px;
@@ -145,11 +146,12 @@ a {
 
 .form-group {
     position: absolute;
-    bottom: 0;
+    top: 100%;
     left: 0;
     width: 95%;
     background-color: white;
     padding: 10px;
+    z-index: 999;
 }
 
 #conversation {
@@ -157,7 +159,39 @@ a {
     overflow-y: auto;
 }
 
+/* 추가 css ()MI, 2023/08/17) */
+div.swiper-button-next:after, div.swiper-rtl .swiper-button-prev:after,
+div.swiper-button-prev:after, div.swiper-rtl .swiper-button-next:after {
+    color: #F7863B;
+}
 
+.mapTitle {
+	margin-top: 50px;
+	text-align:center;
+}
+
+div.swiper-slide {
+	text-align: center;
+} 
+
+
+.mapTitle h3, .point h3 {
+	text-align: center; 
+font-weight: 800; 
+font-size: 1.75rem; 
+position: relative; 
+display: inline-block;
+}
+
+.mapTitle h3:after, .point h3:after {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 10px;
+    background: #f7863b50;
+}
 
 </style>
 <%@ include file="../common/header.jsp" %>
@@ -172,6 +206,9 @@ a {
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
+<!-- Main -->
+	<section id="main">
+		<div class="container text-center">
 <div class="totalBody">
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
@@ -180,15 +217,15 @@ a {
 					계속 되는 무더위!<br>손은 깨끗이 씻으셨나요?
 				</h3>
 			</div>
-			<div class="swiper-slide" style="position: relative;">
+			<div class="swiper-slide point" style="position: relative;">
 				<h3 style="text-align: center; font-weight: bolder; font-size: 25px;">2022년 한 해 월별 사고 건 수</h3>
 				<canvas id="MonthData_Chart"  width="1000" height="400" style="margin: auto;"></canvas>
 			</div>
-			<div class="swiper-slide" style="position: relative;">
+			<div class="swiper-slide point" style="position: relative;">
 				<h3 style="text-align: center; font-weight: bolder; font-size: 25px;">2022년 한 해 지역별 사고 건 수</h3>
 				<canvas id="RegionData_Chart" width="1000" height="400" style="margin: auto;"></canvas>
 			</div>
-			<div class="swiper-slide" style="position: relative;">
+			<div class="swiper-slide point" style="position: relative;">
 				<h3 style="text-align: center; font-weight: bolder; font-size: 25px;">2022년 한 해 장소별 사고 건 수</h3>
 				<canvas id="LocationData_Chart" width="1000" height="400" style="margin: auto;"></canvas>
 			</div>
@@ -280,18 +317,20 @@ a {
 	
 
 <!-- //7. 네이버 지도-->
-<h3 style="text-align: center">식품 의약 안전처가 인증한 모범 식당 찾아볼까요?</h3>
+<div class="mapTitle">
+<h3 style="">식품 의약 안전처가 인증한 모범 식당 찾아볼까요?</h3>
+</div>
 <div id="map" style="width: 1200px; height: 500px;">
 	<div style="position: relative; z-index: 100">
 		<input type="text" style="width:200px;height:35px;font-size:15px;" id="searchRestaurantAddress" placeholder="주소 입력" style="font-weight: border;">
 		<input type="text" style="width:150px;height:35px;font-size:15px;" id="searchRestaurantName" placeholder="상호명 입력" style="font-weight: border;">
-		<label style="font-weight: bold; font-size: large;">
+		<label style="font-weight: bold; font-size: large; background: #f7863b50; padding: 10px;">
 			<input type="radio" value="한식" id="koreaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; " checked="checked">한식
 			<input type="radio" value="중식" id="chinaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">중식
 			<input type="radio" value="일식" id="japanFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">일식
 		</label>
-		<button type="submit" id="searchRestaurant" class="searchRestaurant" style="left: 33%; top: 10%">검색</button>
-		<button id="resetRestaurant" class="resetRestaurant" style="left: 33%; top: 10%">초기화</button>
+		<button type="submit" id="searchRestaurant" class="searchRestaurant" style="left: 33%; top: 10%; color: #fff;">검색</button>
+		<button id="resetRestaurant" class="resetRestaurant" style="left: 33%; top: 10%; color: #fff;">초기화</button>
 	</div>
 </div>
 <br><br>
@@ -310,16 +349,21 @@ a {
         	</table>
     	</div>
     	<div class="col-md-7">
+           	<div class="form-group">
         	<form class="form-inline">
-            	<div class="form-group">
                 	<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 950px; display: inline-block;">
                 	<button id="send" class="btn btn-default" disabled type="submit">전송</button>
-            	</div>
         	</form>
+           	</div>
     	</div>
 	</div>
-<img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="z-index:999; width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;">
+<div style="background:#F7863B; width: 50px; height: 50px; margin: 12.5px 10px; border-radius: 30px; text-align:center; line-height:50px; z-index:999; position: fixed; right: 20px; bottom: 0;">
+	<i class="fa-solid fa-headset" id="chat-connect" style="color:#fff; font-size: 30px; line-height:50px;"></i>
+</div>
+<!-- <img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="z-index:999; width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;"> -->
 </div> <!-- totalBody -->
+</div>
+</section>
 </body>
 <script>
 var contentHeight = conversation.scrollHeight;
@@ -630,8 +674,8 @@ $(document).ready(function() {
 	});
 
 	function getInfoWindowContent(matchingIndex) {
-		var content = '<div>';
-		content += '<p>상호 명: ' + RELAX_Data_List[matchingIndex].RELAX_RSTRNT_NM + '</p>';
+		var content = '<div style="padding: 20px; box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.3);">';
+		content += '<p><b style="color: #f7863b;">상호 명: ' + RELAX_Data_List[matchingIndex].RELAX_RSTRNT_NM + '</b></p>';
 		content += '<p>위치: ' + RELAX_Data_List[matchingIndex].RELAX_ADD1 + '</p>';
 		content += '<p>세부 정보: ' + RELAX_Data_List[matchingIndex].RELAX_GUBUN_DETAIL + '</p>';
 		content += '<p>전화 번호: ' + RELAX_Data_List[matchingIndex].RELAX_RSTRNT_TEL + '</p>';
