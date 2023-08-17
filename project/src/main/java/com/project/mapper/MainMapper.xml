@@ -6,7 +6,7 @@
   	<!-- //1. 최다 추천 레시피 리스트 불러오기 -->
   	<select id="getBoomUpList" resultType="com.project.vo.MainVO">
     SELECT DISTINCT
-    	b.B_NO, b.title, b.nickName, b.boomup, f.savePath
+    	b.b_no, b.title, b.nickName, b.boomup, f.savePath
     FROM
     	rec_board b
 	JOIN
@@ -17,7 +17,7 @@
         FROM
             rec_file
     )f 
-    ON b.B_NO = f.B_NO
+    ON b.b_no = f.b_no
     order by BOOMUP desc
 	
 	</select>
@@ -26,18 +26,18 @@
 	<select id="getViewCntList" resultType="com.project.vo.MainVO">
 	
 	SELECT DISTINCT
-    	b.B_NO, b.title, b.nickName, b.viewCnt, f.savePath
+    	b.b_no, b.title, b.nickName, b.viewCnt, f.savePath
     FROM
     	rec_board b
 	JOIN
 	(
         SELECT
             uploadpath || filename AS savePath,
-            B_NO
+            b_no
         FROM
             rec_file
     )f 
-    ON b.B_NO = f.B_NO
+    ON b.b_no = f.b_no
     order by viewCnt desc
 	
 	</select>
@@ -46,36 +46,36 @@
 	<select id="getReplyCntList" resultType="com.project.vo.MainVO">
 
 	SELECT DISTINCT
-    	b.B_NO, b.title, b.nickName, b.replyCnt, f.savePath
+    	b.b_no, b.title, b.nickName, b.replyCnt, f.savePath
     FROM
     	rec_board b
 	JOIN
 	(
         SELECT
             uploadpath || filename AS savePath,
-            B_NO
+            b_no
         FROM
             rec_file
     )f 
-    ON b.B_NO = f.B_NO
+    ON b.b_no = f.b_no
     order by replyCnt desc
 	</select>
   	
   	<!-- //4. 최근 등록 레시피 리스트 불러오기 -->
   	<select id="getRecentList" resultType="com.project.vo.MainVO">
   	SELECT DISTINCT
-    	b.B_NO, b.title, b.nickName, b.regdate, f.savePath
+    	b.b_no, b.title, b.nickName, b.regdate, f.savePath
     FROM
     	rec_board b
 	JOIN
 	(
         SELECT
             uploadpath || filename AS savePath,
-            B_NO
+            b_no
         FROM
             rec_file
     )f 
-    ON b.B_NO = f.B_NO
+    ON b.b_no = f.b_no
     order by regdate desc
   	
   	</select>

@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class MainVO {
-	private String B_NO;
+	//private String B_NO;
 	private String title;
 	private String nickName;
 	private String filename;
-
+	private int b_no;
 	private String regdate;
 	private String boomup;
 	private String viewCnt;

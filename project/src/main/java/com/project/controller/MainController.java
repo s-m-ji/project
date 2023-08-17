@@ -222,6 +222,11 @@ public class MainController {
 		return "/recipe/main";
 	}
 	
+//	@GetMapping("chatbot")
+//	public String chatbot(Model model) {
+//		model.addAttribute("number", 1);
+//		return "/recipe/chatbot"; 
+//	}
 	
 //	JSONParser jsonParser = new JSONParser();
 //	JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
@@ -263,14 +268,14 @@ public class MainController {
 //		}
 //	}
 	
-	@RequestMapping("english")
-	@ResponseBody
-	public String english(@RequestParam(value = "korean", defaultValue = "-") String korean, Model model)
-			throws Exception {
-		MainVO vo = new MainVO();
-		vo.setKorean(korean);
-		String english = mainservice.getenglish(vo); // 서비스에서 일을 진행 할 예정
-		System.out.println("english : " + english);
-		return english;
-	}
+//	@RequestMapping("english")
+//	@ResponseBody
+//	public String english(@RequestParam(value = "korean", defaultValue = "-") String korean, Model model)
+//			throws Exception {
+//		MainVO vo = new MainVO();
+//		vo.setKorean(korean);
+//		String english = mainservice.getenglish(vo); // 서비스에서 일을 진행 할 예정
+//		System.out.println("english : " + english);
+//		return english;
+//	}
 }

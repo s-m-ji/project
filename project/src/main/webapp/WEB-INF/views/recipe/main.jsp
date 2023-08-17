@@ -24,6 +24,7 @@ body {
 }
 .totalBody{
 	/* transform: translateX(15%); */
+	margin : 0 auto;
 }
 
 .listHeader {
@@ -141,21 +142,25 @@ a {
 	min-height: 1000px;
 }
 
-#main-content {
+/* #main-content {
 	margin-top: 10px;
 	margin-right: 20px;
+	/* overflow:scroll; */
 	/* width: 300px; 
 	height: 400px; 
 	position: fixed; 
 	right:0; 
 	bottom:0;
 	 overflow: auto; */
-}
+} */
+
+<!-- 챗봇 -->
 
 #chatBox {
  	display: none;
 	background-color: white;
 	border: 4px solid;
+	overflow:scroll;
 	/*right: 0;
 	bottom: 0; */
 	width: 300px;
@@ -167,6 +172,27 @@ a {
 	width: 1200px;
 	display: inline-block;
 }
+
+#chatBox {
+    position: relative;
+}
+
+.form-group {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+#conversation {
+    max-height: calc(80% - 40px); /* 80%에서 form-group 높이 제외한 영역 */
+    overflow-y: auto;
+}
+
+
+
 </style>
 <%@ include file="../common/header.jsp" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
@@ -184,7 +210,7 @@ a {
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" style="position: relative;">
 				<h3 class="slide" style="top: 30%; left: 40%; font-size:x-large; font-weight:bolder; position: absolute; margin: auto; text-align: center" > <!-- /* top: 50%; left: 40%;" */  -->
-					요리하기 전에 잠깐!<br>손은 깨끗이 씻으셨나요?
+					계속 되는 무더위!<br>손은 깨끗이 씻으셨나요?
 				</h3>
 			</div>
 			<div class="swiper-slide" style="position: relative;">
@@ -197,7 +223,7 @@ a {
 			</div>
 			<div class="swiper-slide" style="position: relative;">
 				<h3 style="text-align: center; font-weight: bolder; font-size: 25px;">2022년 한 해 장소별 사고 건 수</h3>
-				<canvas id="LocationData_Chart" width="1000" height="50px" style="margin: auto;"></canvas>
+				<canvas id="LocationData_Chart" width="1000" height="400" style="margin: auto;"></canvas>
 			</div>
 			<div class="swiper-slide" style="position: relative;">
 				<h3 class="slide" style="top: 10%; left: 40%; font-size:x-large; font-weight:bolder; position: absolute; margin: auto; text-align: center" ><!--  /* top: 50%; left: 40%;" */ -->
@@ -213,16 +239,17 @@ a {
 	<!-- [참고] 깃헙 토큰 : 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 -->
 
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto;" >추천수 많은거 <button id="BoomUpListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px" >명예의 전당 <button id="BoomUpListHide" style="left:80%">숨기기▼</button></h3>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="BoomUpList" items="${BoomUpList}" begin="0" end="4" step="1">
 		<div class="div_BoomUpList">
-			<img src="/display?fileName=${BoomUpList.savePath}">
-			<a id="imghref" onclick="" data-value="${BoomUpList.title }" style="overflow: hidden;" >제목 : ${BoomUpList.title }</a>
-			<p>닉네임 : ${BoomUpList.nickName } </p>
-			<p>추천 수 : ${BoomUpList.boomup } </p>
+			<%-- <p>여기 : ${BoomUpList.b_no}</p> --%>
+			<a href="/recipe/view?b_no=${BoomUpList.b_no}"><img src="/display?fileName=${BoomUpList.savePath}"></a>
+			<p id="imghref" data-value="${BoomUpList.title }" style="overflow: hidden;" >🍴 ${BoomUpList.title }</p>
+			<p>🙋‍♀️‍${BoomUpList.nickName } </p>
+			<p>👍${BoomUpList.boomup } </p>
 		</div>
 	</c:forEach>
 	</div>
@@ -230,89 +257,52 @@ a {
 	
 	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto;">조회수 많은거 <button id="ViewCntListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px">인기 레시피 <button id="ViewCntListHide" style="left:80%">숨기기▼</button></h3>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="ViewCntList" items="${ViewCntList}" begin="0" end="4" step="1">
 		<div class="div_ViewCntList">
-			<img src="/display?fileName=${ViewCntList.savePath}">
-			<a id="imghref" onclick="" data-value="${ViewCntList.title }" class="imghref">제목 : ${ViewCntList.title }</a>
-			<p>닉네임 : ${ViewCntList.nickName }</p>
-			<p>조회 수 : ${ViewCntList.viewCnt }</p>
+			<a href="/recipe/view?b_no=${ViewCntList.b_no}"><img src="/display?fileName=${ViewCntList.savePath}" ></a>
+			<p id="imghref" onclick="" data-value="${ViewCntList.title }" class="imghref">🍴 ${ViewCntList.title }</p>
+			<p>🙋‍♀️‍${ViewCntList.nickName }</p>
+			<p>👀${ViewCntList.viewCnt }</p>
 		</div>
 	</c:forEach>
 	<br>
 	</div>
 	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto;" >댓글수 많은거 <button id="ReplyCntListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px" >활활 불타는 레시피<button id="ReplyCntListHide" style="left:80%">숨기기▼</button></h3>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="ReplyCntList" items="${ReplyCntList}" begin="0" end="4" step="1">
 		<div class="div_ReplyCntList">
-			<img src="/display?fileName=${ReplyCntList.savePath}">
-			<a id="imghref" onclick="" data-value="${ReplyCntList.title }" class="imghref">제목 : ${ReplyCntList.title }</a>
-			<p>닉네임 : ${ReplyCntList.nickName }</p>
-			<p>댓글 수 : ${ReplyCntList.replyCnt }</p>
+			<a href="/recipe/view?b_no=${ReplyCntList.b_no}"><img src="/display?fileName=${ReplyCntList.savePath}" ></a>
+			<p id="imghref" onclick="" data-value="${ReplyCntList.title }" class="imghref">🍴 ${ReplyCntList.title }</p>
+			<p>🙋‍♀️‍${ReplyCntList.nickName }</p>
+			<p>${ReplyCntList.replyCnt }</p>
 		</div>
 	</c:forEach>
 	<br>
 	</div>
 	
 	<div class="listHeader"> 
-		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto;">최근 등록 <button id="RecentListHide" style="left:80%">숨기기▼</button></h3>
+		<h3 style="border: 2px solid #000; text-align: center; margin: 0 auto; font-size: 20px">따끈따끈 최신 레시피 <button id="RecentListHide" style="left:80%">숨기기▼</button></h3>
 	</div>
 	<br>
 	<div class="totalListSize">
 	<c:forEach var="RecentList" items="${RecentList}" begin="0" end="4" step="1">
 		<div class="div_RecentList">
-			<img src="/display?fileName=${RecentList.savePath}">
-			<a id="imghref" onclick="" data-value="${RecentList.title }" class="imghref">제목 : ${RecentList.title }</a>
-			<p>닉네임 : ${RecentList.nickName }</p>
-			<p>등록일 : ${RecentList.regdate }</p>
+			<a href="/recipe/view?b_no=${RecentList.b_no}"><img src="/display?fileName=${RecentList.savePath}" ></a>
+			<p id="imghref" onclick="" data-value="${RecentList.title }" class="imghref">🍴 ${RecentList.title }</p>
+			<p>🙋‍♀️‍${RecentList.nickName }</p>
+			<p>${RecentList.regdate }</p>
 		</div>
 	</c:forEach>
 	</div>
 	<br><br>
-	
-	<!-- //6. 챗봇 -->
-	<!-- <h1>무엇이든 물어보세요!</h1> -->
-	<%-- <div id="main-content" class="container" style="">
-		<div class="row">
-			<div class="col-md-5">
-				<form class="form-inline">
-					<div class="form-group">
-						<!-- <button id="connect" class="btn btn-default" type="submit"> -->
-							<img id="connect" src="/resources/img/pingwing-bee_happy.png" style="width:150px; height:150px; position: fixed; right:0; bottom:0;">
-						<!-- </button> -->
-						<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled" style="display: none">해제</button>
-					</div>
-				</form>
-			</div>
-			<div id="chatBox"class="col-md-row" >
-				<div class="col-md-6">
-					<table id="conversation" class="table table-striped">
-						<thead>
-							<tr>
-								<th>메세지</th>
-							</tr>
-						</thead>
-						<tbody id="showMessage"></tbody>
-					</table>
-				</div>
-				<div class="col-md-7" > <!-- style="position: fixed; bottom: 0;" -->
-					<form class="form-inline">
-						<div class="form-group" >
-							<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요.">
-							<button id="send" class="btn btn-default" disabled type="submit" >전송</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div> --%>
 	
 	<!-- <img src="/resources/img/Ministry_of_Food_and_Drug_Safety(vertical).svg.png" style="width:130px; height:100px;"> -->
 	<!-- <input type="text" id="textext"> -->
@@ -322,24 +312,75 @@ a {
 <h3 style="text-align: center">식품 의약 안전처가 인증한 모범 식당 찾아보기!</h3>
 <div id="map" style="width: 1200px; height: 500px;">
 	<div style="position: relative; z-index: 100">
-		<input type="text" id="searchRestaurantAddress" placeholder="주소를 입력해 주세요" style="font-weight: border;">
-		<input type="text" id="searchRestaurantName" placeholder="상호명을 입력해 주세요" style="font-weight: border;">
+		<input type="text" style="width:200px;height:35px;font-size:15px;" id="searchRestaurantAddress" placeholder="주소 입력" style="font-weight: border;">
+		<input type="text" style="width:150px;height:35px;font-size:15px;" id="searchRestaurantName" placeholder="상호명 입력" style="font-weight: border;">
 		<label style="font-weight: 1500; font-size: large;">
-		<input type="radio" value="한식" id="koreaFood" name="foodCheckBox" style="font-weight: border; font-size: large; " checked="checked">한식
-		<input type="radio" value="중식" id="chinaFood" name="foodCheckBox" style="font-weight: border; font-size: large; ">중식
-		<input type="radio" value="일식" id="japanFood" name="foodCheckBox" style="font-weight: border; font-size: large; ">일식
+			<input type="radio" value="한식" id="koreaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; " checked="checked">한식
+			<input type="radio" value="중식" id="chinaFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">중식
+			<input type="radio" value="일식" id="japanFood" name="foodCheckBox" style="font-weight: bold; font-size: large; ">일식
 		</label>
-		<button type="submit" id="searchRestaurant" class="searchRestaurant" style="left: 35%; top: 10%">검색</button>
-		<button id="resetRestaurant" class="resetRestaurant" style="left: 35%; top: 10%">초기화</button>
+		<button type="submit" id="searchRestaurant" class="searchRestaurant" style="left: 33%; top: 10%">검색</button>
+		<button id="resetRestaurant" class="resetRestaurant" style="left: 33%; top: 10%">초기화</button>
 	</div>
 </div>
 <br><br>
 
-</div><!-- totalBody -->
+	<!-- <div id="chatBox" class="col-md-row-chat" style="display: none; overflow:scroll; width: 1200px; height: 500px; ">  position: relative;
+		<div class="col-md-6">
+			<table>
+				<thead>
+					<tr>
+						<th>무엇이든 물어보세요!</th>
+					</tr>
+				</thead>
+			</table>
+			<table id="conversation" class="table table-striped" style="position: relative;">
+				<tbody id="showMessage" style="width: 100%; height: 80%"></tbody>	height: 300px;
+			</table>
+		</div>
+		<div class="col-md-7" >
+			<form class="form-inline">
+				<div class="form-group" style=" position: absolute;">
+					<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width : 900px; display: inline-block;" >
+					<button id="send" class="btn btn-default" disabled type="submit" >전송</button>
+				</div>
+			</form>
+		</div>
+	</div> -->
+	<div id="chatBox" class="col-md-row-chat" style="display: none; overflow: scroll; width: 1200px; height: 500px; ">
+    <div class="col-md-6">
+        <table>
+            <thead>
+                <tr>
+                    <th>무엇이든 물어보세요!</th>
+                </tr>
+            </thead>
+        </table>
+        <table id="conversation" class="table table-striped">
+            <tbody id="showMessage"></tbody>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 900px; display: inline-block;">
+                <button id="send" class="btn btn-default" disabled type="submit">전송</button>
+            </div>
+        </form>
+    </div>
+</div>
+	<!-- <div class="form-group"> -->
+			<!-- <button id="connect" class="btn btn-default" type="submit"> </button>-->
+			<img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;">
+			<!-- <button id="disconnect" class="btn btn-default" type="submit"disabled="disabled" style="display: none">해제</button> -->
+		<!-- </div> -->
+	</div> <!-- totalBody -->
 </body>
+<!-- <button onclick="openChatbot()">챗봇</button> -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
+
 $('#BoomUpListHide').click(function (element){
 	 var elements = document.querySelectorAll('.div_BoomUpList');
 	 
@@ -390,6 +431,104 @@ $('#RecentListHide').click(function (element){
 });
 
 $(document).ready(function() {
+	//★	
+	//2. 네이버 챗봇
+	var stompClient = null;
+
+	function setConnected(connected) {
+		$("#connect").prop("disabled", connected);
+		$("#disconnect").prop("disabled", !connected);
+		$("#send").prop("disabled", !connected);
+		if (connected) {
+			$("#conversation").show();
+		} else {
+			$("#conversation").hide();
+		}
+		$("#msg").html("");
+	}
+
+	function connect() {
+		var socket = new SockJS('/ws');
+		stompClient = Stomp.over(socket);
+		stompClient.connect({}, function(frame) {
+			setConnected(true);
+			//console.log('Connected: ' + frame);
+			stompClient.subscribe('/topic/public', function(message) {
+				let receiveMessage = message.body;
+				showMessage2(receiveMessage); //서버에 메시지 전달 후 리턴받는 메시지
+			});
+		});
+	}
+
+	function disconnect() {
+		if (stompClient !== null) {
+			stompClient.disconnect();
+		}
+		setConnected(false);
+		console.log("Disconnected");
+	}
+
+	function sendMessage() {
+		let sendMessage = $("#msg").val()
+		showMessage1(sendMessage);	//내가 입력한 메세지에요!
+		stompClient.send("/app/sendMessage", {}, JSON.stringify(sendMessage)); //내가 입력한 메세지를 서버로 보내요!
+	}
+
+	function showMessage1(sendMessage) {
+		$("#showMessage").append("<tr><td style='text-align: right;'>" + sendMessage + "</td></tr>");
+	}
+
+	function showMessage2(receiveMessage) {
+		$("#showMessage").append("<tr><td style='text-align: left;'>" + receiveMessage + "</td></tr>");
+	}
+
+	$(function() {
+		$("form").on('submit', function(e) {
+			e.preventDefault();
+		});
+		$("#chat-connect").click(function() {
+			console.log('챗봇 클릭');
+			connect();
+			if ($("#chatBox").css("display") == "none") {
+					$('#chatBox').show();
+					//$('.col-md-6').show();
+					//$('#connect').hide();
+			}
+			/* if($("#chatBox").css("display") != "none") {
+				$('#chatBox').hide();
+			} */
+		});
+		$("#disconnect").click(function() {
+			disconnect();
+		});
+		$("#send").click(function() {
+			sendMessage();
+		});
+		
+		/* $('#connect').click(function() {
+			
+		}); */
+	});	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //★		
 	//1. 네이버 지도
 	var RestaurantData = JSON.parse(`${restaurantData1}`);
@@ -557,80 +696,7 @@ $(document).ready(function() {
 	}
 	
 	
-//★	
-	//2. 네이버 챗봇
-	var stompClient = null;
 
-	function setConnected(connected) {
-		$("#connect").prop("disabled", connected);
-		$("#disconnect").prop("disabled", !connected);
-		$("#send").prop("disabled", !connected);
-		if (connected) {
-			$("#conversation").show();
-		} else {
-			$("#conversation").hide();
-		}
-		$("#msg").html("");
-	}
-
-	function connect() {
-		var socket = new SockJS('/ws');
-		stompClient = Stomp.over(socket);
-		stompClient.connect({}, function(frame) {
-			setConnected(true);
-			//console.log('Connected: ' + frame);
-			stompClient.subscribe('/topic/public', function(message) {
-				let receiveMessage = message.body;
-				showMessage2(receiveMessage); //서버에 메시지 전달 후 리턴받는 메시지
-			});
-		});
-	}
-
-	function disconnect() {
-		if (stompClient !== null) {
-			stompClient.disconnect();
-		}
-		setConnected(false);
-		console.log("Disconnected");
-	}
-
-	function sendMessage() {
-		let sendMessage = $("#msg").val()
-		showMessage1(sendMessage);	//내가 입력한 메세지에요!
-		stompClient.send("/app/sendMessage", {}, JSON.stringify(sendMessage)); //내가 입력한 메세지를 서버로 보내요!
-	}
-
-	function showMessage1(sendMessage) {
-		$("#showMessage").append("<tr><td style='text-align: right;'>" + sendMessage + "</td></tr>");
-	}
-
-	function showMessage2(receiveMessage) {
-		$("#showMessage").append("<tr><td style='text-align: left;'>" + receiveMessage + "</td></tr>");
-	}
-
-	$(function() {
-		$("form").on('submit', function(e) {
-			e.preventDefault();
-		});
-		$("#connect").click(function() {
-			connect();
-		});
-		$("#disconnect").click(function() {
-			disconnect();
-		});
-		$("#send").click(function() {
-			sendMessage();
-		});
-		
-		$('#connect').click(function() {
-			if ($(".col-md-row").css("display") == "none") {
-				$('.col-md-row').show();
-				//$('.col-md-6').show();
-				$('#connect').hide();
-			}
-		});
-	});	
-	
 //★
 	//3. 네이버 번역
 	const translateButton = $("#translateButton");
@@ -907,7 +973,7 @@ for (var i = 0; i < ServerlocationData.length; i++) {
 		ctx2.fillText(chartText2, RegionData_Chart.width / 2, 30); */
 	  
 	  const LocationData_Chart = new Chart(ctx3, {
-		    type: 'pie',
+		    type: 'bar',
 		    data: {
 		        labels: ['불명', '음식점', '학교', '학교 외 집단급식', '가정집', '기타'],
 		        datasets: [{
@@ -932,6 +998,7 @@ for (var i = 0; i < ServerlocationData.length; i++) {
 		        }]
 		    },
 		    options: {
+		    	 indexAxis: 'y',
 		    	 responsive: true,
 		    	 plugins:{
 		                legend: {

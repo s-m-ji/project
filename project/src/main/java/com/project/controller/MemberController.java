@@ -529,10 +529,10 @@ public class MemberController {
 		return "/recipe/login";
 	}
 
-	@GetMapping("/main")
-	public String main() {
-		return "recipe/main";
-	}
+//	@GetMapping("/main")
+//	public String main() {
+//		return "recipe/main";
+//	}
 
 	@GetMapping("/register")
 	public String registerPage() {
