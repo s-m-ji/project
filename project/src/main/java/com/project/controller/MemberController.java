@@ -527,11 +527,6 @@ public class MemberController {
 		return "/recipe/login";
 	}
 
-	@GetMapping("/main")
-	public String main() {
-		return "recipe/main";
-	}
-
 	@GetMapping("/register")
 	public String registerPage() {
 		return "recipe/register";
@@ -717,7 +712,7 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/login/naver_callback")
+	@GetMapping("/naver_callback")
 	public String naverLogin_callback(HttpServletRequest request
 									, Model model) {
 		memberservice.naverLogin(request, model);
