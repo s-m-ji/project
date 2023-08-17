@@ -104,6 +104,11 @@ select count(*) from rec_notice  where 1=1 <include refid="nCriteria"></include>
 <!-- 공통 검색조건1) 회원  -->
 <sql id="criteria">
 	<choose>
+		<when test="sField == 'all'" >
+			and name like '%'||#{sWord}||'%'
+			or grade like '%'||#{sWord}||'%'
+			or delYN like '%'||#{sWord}||'%' 
+		</when>
 		<when test="sField  == 'name'">
 			and name like '%'||#{sWord}||'%'
 		</when>
