@@ -27,7 +27,19 @@ window.addEventListener('load', function(){
 	btnDate.addEventListener('click', function(){
 		getRewardList();
 	})
+	
+	pleaseLogin();
 });
+
+// 관리자 로그인 해야 화면으로 이동 
+	function pleaseLogin(){
+
+	  let message = document.querySelector("#message").value;
+	  if(message === 'false'){
+		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
+	  }
+	}
+
 //리스트 조회 
 function getRewardList(){
 	let startDate = document.querySelector("#startDate").value;
@@ -245,6 +257,7 @@ function fetchPost(url, obj, callback){
     </style>
 </head>
 <body>
+ <input type="hidden" id="message" value="${message}">
 <!-- Main -->
 <section id="main">
 	<div class="container">

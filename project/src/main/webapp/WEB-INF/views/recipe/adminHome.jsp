@@ -25,10 +25,22 @@
 		mainBtn.addEventListener('click', function(){
 			location.href = "/recipe/main";
 		})
+		
+		pleaseLogin();
 	});
+	
+	function pleaseLogin(){
+
+  	  let message = document.querySelector("#message").value;
+  	  if(message === 'false'){
+  		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
+  	  }
+	}
 	</script>
 </head>
 <body>
+<%-- <c:if test="${not empty member.role}"> --%>
+ <input type="text" id="message" value="${message}">
 <!-- 여기에서 관리자 페이지 만들어보고 다 붙이기 !!!! -->
  <!-- Main -->
 <section id="main">
@@ -36,8 +48,10 @@
 <!-- <!-- Features -->
     <div class="container">
  <section id="features"> 
+
         <header>
             <h3 style="padding-bottom: 30px;">이곳은 <strong>☘️관리자 페이지☘️</strong>입니다</h3>
+       
         </header>
         <div class="row aln-center">
             <div class="col-4 col-6-medium col-12-small">
@@ -77,6 +91,6 @@
     </div>
 	</div>
 </section>
-
+<%-- </c:if> --%>
 <!-- Footer -->
 	<%@ include file="../common/footer.jsp" %>

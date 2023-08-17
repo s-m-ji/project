@@ -65,57 +65,42 @@ public class MemberController {
 	}
 	
 	@GetMapping("adminHome")
-	public String adminHOME() {
-		return "/recipe/adminHome";
+	public String adminHOME(Model model, HttpSession session) {
+		
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		
+		if(member == null) {
+			model.addAttribute("message","false");
+			return "/recipe/login";
+		}else if(member.getRole() == null || !member.getRole().contains("ADMIN_ROLE")) {
+			model.addAttribute("messageAdmin", "falseAdmin");
+			return "/recipe/login";
+		}else {
+			return "/recipe/adminHome";
+		}
+		
 	}
 
 	// 회원 목록 조회
 	@GetMapping("admin")
-	public void memberList(Criteria cri, Model model) {
+	public String memberList(Criteria cri, Model model, HttpSession session) {
+		
 		memberservice.memberList(cri, model);
 		System.out.println("🐧회원 : " + cri);
-
-	};
-
-	// 회원 체크박스 삭제
-	/*
-	@ResponseBody
-	@PostMapping("deleMemAction")
-	public String deleMemAction(@RequestParam String[] checkBoxArr, Model model, Criteria cri) {
-
-		for (String mno : checkBoxArr) {
-
-			int delCnt = memberservice.delMem(mno, "Y");
-
-			String message = "";
-			if (delCnt <= 0) {
-				// 삭제건수가 없다는 건 탈퇴(미신청) - mno 값을 failDelMem에 넣기
-				System.out.println(delCnt);
-				model.addAttribute("message", "탈퇴 미신청 회원이므로 삭제할 수 없습니다.");
-
-				model.addAttribute("url", "/recipe/admin");
-				return "/common/message";
-			} else {
-				// 삭제건수가 있는 경우 탈퇴(신청)
-				System.out.println(delCnt);
-				message = delCnt + "건 회원 탈퇴 신청이 처리되었습니다.";
-				model.addAttribute("message", message);
-
-				model.addAttribute("pageNo", cri.getPageNo());
-				model.addAttribute("sField", cri.getSField());
-				model.addAttribute("sWord", cri.getSWord());
-				model.addAttribute("message", message);
-
-				model.addAttribute("url", "/recipe/admin?pageNo=" + cri.getPageNo() + "&mno=" + mno + "&sField="
-						+ cri.getSField() + "&sWord=" + cri.getSWord());
-				/* model.addAttribute("url", "/recipe/admin"); */
-	/*
-				return "/common/message";
-			}
+		
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		
+		if(member == null) {
+			model.addAttribute("message","false");
+			return "/recipe/login";
+		}else if(member.getRole() == null || !member.getRole().contains("ADMIN_ROLE")) {
+			model.addAttribute("messageAdmin", "falseAdmin");
+			return "/recipe/login";
+		}else {
+			return "/recipe/admin";
 		}
-		return "/recipe/message";
+
 	};
-	*/
 	
 	// 회원 삭제 
 	  @ResponseBody
@@ -307,12 +292,27 @@ public class MemberController {
 
 	// 공지 조회하기
 	@GetMapping("notice")
-	public void noticeList(Criteria cri, Model model) {
+	public String noticeList(Criteria cri, Model model, HttpSession session) {
 		memberservice.noticeList(cri, model);
 		System.out.println("🐥 공지 : " + cri);
+		
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		
+		if(member == null) {
+			model.addAttribute("message","false");
+			return "/recipe/login";
+		}else if(member.getRole() == null || !member.getRole().contains("ADMIN_ROLE")) {
+			model.addAttribute("messageAdmin", "falseAdmin");
+			return "/recipe/login";
+		}else {
+			return "/recipe/notice";
+		}
 
 	};
 
+	
+	
+	
 	// 공지 등록하기
 	@PostMapping("writeAction")
 	public String noticeWrite(NoticeVo noticevo, Model model) {
@@ -373,12 +373,27 @@ public class MemberController {
 			return "/common/message";
 		}
 	}
-
+	// 리워드 페이지 ( 화면 )
 	@GetMapping("reward")
-	public void rewardList(Model model) {
+	public String rewardList(Model model, HttpSession session) {
 		memberservice.rewardListReal(model);
+		
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		
+		if(member == null) {
+			model.addAttribute("message","false");
+			return "/recipe/login";
+		}else if(member.getRole() == null || !member.getRole().contains("ADMIN_ROLE")) {
+			model.addAttribute("messageAdmin", "falseAdmin");
+			return "/recipe/login";
+		}else {
+			return "/recipe/reward";
+		}
 	}
 
+
+	
+	
 	// 리워드 페이지 (
 	@GetMapping("reward/list/{startDate}/{endDate}")
 	@ResponseBody

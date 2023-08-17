@@ -102,12 +102,15 @@
       function pleaseLogin(){
     	  
     	  let message = document.querySelector("#message").value;
-    	  
+    		let messageAdmin = document.querySelector("#messageAdmin").value;
+      		
     	  if(message == 'false'){
     			 
     		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
     	  		message = ",";
-    	  }
+    	  }else if(messageAdmin === 'falseAdmin'){
+      		  swal ( "앗 ! " ,  "관리자 로그인 후 이용 가능합니다." ,  "error" );
+      	  }
     	  
     	 
       }
@@ -119,6 +122,7 @@
 	<main class="form-signin w-100 m-auto">
 	
 	<input type="hidden" id="message" value="${message}">
+	<input type="hidden" id="messageAdmin" value="${messageAdmin}">
 	<!-- 로그인 폼 -->
   <form name='signinForm'>
     <h1 class="h3 mb-3 fw-normal">로그인</h1>

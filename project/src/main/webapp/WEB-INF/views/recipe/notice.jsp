@@ -48,10 +48,17 @@ window.addEventListener('load', function(){
 		 console.log("del 실행 할 때  의 nno : " , nno);
 		 btnDel[i].addEventListener('click', btnDelClick(nno));
 	}
-	
+	pleaseLogin();
 	
 });
+	// 관리자 로그인 해야 화면으로 이동 
+function pleaseLogin(){
 
+	  let message = document.querySelector("#message").value;
+	  if(message === 'false'){
+		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
+	  }
+	}
 //페이지 번호를 받아서 페이지를 호출 해주는 함수 
 	 function goNotice(page){
 	document.noticeForm.pageNo.value=page;
@@ -61,6 +68,7 @@ window.addEventListener('load', function(){
 
 </head>
 <body>
+ <input type="hidden" id="message" value="${message}">
  <!-- Main -->
 <section id="main">
 	<div class="container">

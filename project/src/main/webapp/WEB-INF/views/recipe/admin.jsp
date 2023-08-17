@@ -61,8 +61,18 @@ window.addEventListener("load", function(){
 		        }
 		    });
 		}
+		
+		pleaseLogin();
+		
 	});
+// 관리자 로그인 해야 화면으로 이동
+	function pleaseLogin(){
 
+	  let message = document.querySelector("#message").value;
+	  if(message === 'false'){
+		  swal ( "앗 ! " ,  "로그인 후 이용 가능합니다." ,  "error" );
+	  }
+	}
 // 선택박스 전체 선택
  function toggleCheckboxes() {
     var adminChkBox = document.getElementById('adminChkBox');
@@ -156,6 +166,7 @@ function delRes(map) {
 
 </head>
 <body>
+ <input type="hidden" id="message" value="${message}">
 <!-- Main -->
 <section id="main">
 	<div class="container">
