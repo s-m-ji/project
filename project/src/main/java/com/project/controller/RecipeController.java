@@ -125,7 +125,7 @@ public class RecipeController {
 	@GetMapping("/rec_write")
 	public String recWrite(Model model, HttpSession session) {
 		
-	/*	MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
 		
 		if(member == null) {
 			model.addAttribute("message","false");
@@ -133,7 +133,7 @@ public class RecipeController {
 		}
 		
 		model.addAttribute("mno",member.getMno());
-		model.addAttribute("nickName",member.getNickname()); */
+		model.addAttribute("nickName",member.getNickname()); 
 		
 		return "/recipe/rec_write";
 	}

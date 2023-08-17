@@ -180,8 +180,8 @@ function addCookStep() {
 
 		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> 	
   		
-  		 <input type="hidden" name="mno" value="30">
-  		<input type="hidden" name="nickName" value="부붐">
+  		 <input type="hidden" name="mno" value="${mno}">
+  		<input type="hidden" name="nickName" value="${nickName}">
 		<!-- 제목 입력란  -->
 			<div class="rec_title">
 				<label>레시피 제목 </label> 

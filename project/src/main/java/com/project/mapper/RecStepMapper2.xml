@@ -21,8 +21,9 @@
 	
 	<update id="minusSno">
 			
-			update rec_step 
-			set s_no= s_no-3
+		update rec_step 
+			set s_no = s_no - (select count(*) 
+				from rec_step where b_no = #{B_NO})
 			where b_no = #{B_NO}
 			
 	</update>

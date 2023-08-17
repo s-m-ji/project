@@ -53,7 +53,9 @@ public class recipeTest {
 	
 	@Test
 	public void mi() {
-		sM.minusSno(9);
+		int res = sM.minusSno(105);
+		
+		log.info(res);
 	}
 	
 	@Test public void getRecList() {
