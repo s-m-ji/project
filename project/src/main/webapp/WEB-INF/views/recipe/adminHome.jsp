@@ -40,7 +40,7 @@
 </head>
 <body>
 <%-- <c:if test="${not empty member.role}"> --%>
- <input type="text" id="message" value="${message}">
+ <input type="hidden" id="message" value="${message}">
 <!-- 여기에서 관리자 페이지 만들어보고 다 붙이기 !!!! -->
  <!-- Main -->
 <section id="main">

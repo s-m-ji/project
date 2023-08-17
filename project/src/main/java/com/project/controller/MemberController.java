@@ -292,22 +292,9 @@ public class MemberController {
 
 	// 공지 조회하기
 	@GetMapping("notice")
-	public String noticeList(Criteria cri, Model model, HttpSession session) {
+	public void noticeList(Criteria cri, Model model) {
 		memberservice.noticeList(cri, model);
 		System.out.println("🐥 공지 : " + cri);
-		
-		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
-		
-		if(member == null) {
-			model.addAttribute("message","false");
-			return "/recipe/login";
-		}else if(member.getRole() == null || !member.getRole().contains("ADMIN_ROLE")) {
-			model.addAttribute("messageAdmin", "falseAdmin");
-			return "/recipe/login";
-		}else {
-			return "/recipe/notice";
-		}
-
 	};
 
 	
