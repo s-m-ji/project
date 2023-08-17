@@ -148,10 +148,10 @@ function replyDelete(R_NO){
   	margin: 0 auto;
   }
   
-  .comViewTop {
+  /* .comViewTop {
   	display: flex;
   	justify-content: betwwen;
-  }
+  } */
   </style>
 </head>
 

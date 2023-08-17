@@ -12,6 +12,12 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 	
+	<!-- css 추가 설정 (MI, 2023/08/17) -->
+	<link rel="stylesheet" href="/resources/recipe_css/mimi.css">
+	<!-- 파비콘 설정 -->
+	<link rel="icon" href="/resources/images/favicon.ico">
+	
+	
 <!-- Bootstrap JavaScript 로드 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -130,22 +136,49 @@ function addCookStep() {
 		
 	
   </script>
+  
+  <!-- css 추가 설정 (MI, 2023/08/17) -->
+  <style>
+  .form-control {
+  	padding: 30px;
+  }
+  
+  .form-control label {
+	  font-weight: 800;
+	font-size: 1.75rem;
+	position: relative;
+	display: inline-block;
+	}
+  
+  .form-control label:after {
+  	position: absolute;
+	bottom: 0;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 10px;
+	background: #f7863b50;
+  }
+  </style>
+  
 </head>
 <body>
 	<!-- Header -->
 	<%@ include file="../common/header.jsp"%>
 
-	<!-- Main -->
-	<section id="main" style="border: 3px dashed #ed786a;">
-
+<!-- Main -->
+	<section id="main">
+	<div class="container">
+		<div class="container gtco-section">
 		<!-- 타이틀 제목 -->
-		<div
+		<!-- <div
 			style="text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: pink;">
 			♡♡♡ 레시피 게시판 ♡♡♡
-		</div>
+		</div> -->
 
 
-		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> >	
+
+		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> 	
   		
   		 <input type="hidden" name="mno" value="30">
   		<input type="hidden" name="nickName" value="부붐">
@@ -175,7 +208,7 @@ function addCookStep() {
 			<div>
 			    <label style="display: inline;">대표사진설정하기</label>
 			    <i class="bi bi-image" style="display: inline; color: pink;"></i>
-			    <input type="file" name="photos" class="form-control" multiple="multiple">
+			    <input type="file" name="photos" class="" multiple="multiple">
 			</div>
 			
 		
@@ -189,7 +222,7 @@ function addCookStep() {
 			</div>
 			<textarea
 				placeholder="동영상이 있으면 주소를 입력하세요. 예)http://youtu.be/lA0Bxo3IZmM" name="videolink"
-				style="height: 100px; width: 380px; resize: none;">${board.videolink }</textarea>
+				style="height: 50px; width: 100%; resize: none;">${board.videolink }</textarea>
 				
 				
 				
@@ -221,7 +254,7 @@ function addCookStep() {
 		<div class="text-center">
 			<div class="d-flex justify-content-between">
 				<div class="p-2 flex-fill" >
-					<select name="c_no1" id="c1" class="form-control"
+					<select name="c_no1" id="c1" class=""
 						onChange="chnQnaType(this.value)">
 						<option value="">카테고리1 선택</option>
 						<option value="1" ${ param.c1 eq '1' ? "selected" : "" }>종류별</option>
@@ -231,7 +264,7 @@ function addCookStep() {
 					</select>
 				</div>
 				<div class="p-2 flex-fill">
-					<select id="c2" name="c_no2" class="form-control"></select>
+					<select id="c2" name="c_no2" class=""></select>
 				</div>
 				
 			</div>
@@ -248,47 +281,47 @@ function addCookStep() {
 				    <label for="exampleFormControlInput1" style="display: inline">재료 (재료이름과 정확한계량을 입력해주세요!!)</label>
 				    <i class="bi bi-egg-fried" style="display: inline; color:pink;"></i>
 				    <div>
-				        <input type="text" name="I_NAME"  id="I_NAME1" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="I_NAME"  id="I_NAME1" style="display: inline-block; width: 48.5%;" 
 				        placeholder="예) 돼지고기" value="${matvo1.I_NAME}">
-				        <input type="text" name="materialCnt" id="materialCnt1" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="materialCnt" id="materialCnt1" style="display: inline-block; width:  48.5%;" 
 				        placeholder="예) 300g" value="${matvo1.materialCnt}">
 				    </div>
 				    <br>
 				    <div>
-				        <input type="text" name="I_NAME"  id="I_NAME2" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="I_NAME"  id="I_NAME2" style="display: inline-block; width: 48.5%;" 
 				        placeholder="예) 양배추" value="${matvo2.I_NAME}">
-				        <input type="text" name="materialCnt" id="materialCnt2" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="materialCnt" id="materialCnt2" style="display: inline-block; width: 48.5%;" 
 				        placeholder="예) 1/2개" value="${matvo2.materialCnt}">
 				    </div>
 				    <br>
 				    <div>
-				        <input type="text" name="I_NAME"  id="I_NAME3" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="I_NAME"  id="I_NAME3" style="display: inline-block; width: 48.5%;" 
 				        placeholder="예) 참기름" value="${matvo3.I_NAME}">
-				        <input type="text" name="materialCnt" id="materialCnt3" style="display: inline-block; width: 280px;" 
+				        <input type="text" name="materialCnt" id="materialCnt3" style="display: inline-block; width: 48.5%;" 
 				        placeholder="예) 1T" value="${matvo3.materialCnt}">
 				    </div>
 				    <br>
 				    <!-- 재료추가 버튼을 누르면 박스2개 생성! -->
 				    <button type="button" onclick="addMaterial()">
-				        <span>재료추가</span>
+				        <span style="color: #fff;">재료추가</span>
 				    </button>
 				</div>
 
-		   
 
 			<!-- 요리순서 -->
 			
     	<!-- 요리순서 -->
+    	<br>
 			<label>요리순서</label>
 			<div id="cookStep">
 			    <p>step 1</p>
-			    <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 450px; resize: none;">${stepvo.step_content}</textarea>
-			    <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block;"><br>
+			    <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 100%; resize: none;">${stepvo.step_content}</textarea>
+			    <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block; margin-bottom: 50px;"><br>
 			</div>
 			
 			<!-- 순서추가 버튼 -->
 			<div>
-			    <button type="button" onclick="addCookStep()">순서추가</button>
+			    <button type="button" onclick="addCookStep()" style="color: #fff;">순서추가</button>
 			</div>
 				
 				<br><br>
@@ -306,7 +339,7 @@ function addCookStep() {
 			
 			<div>
 				<label>요리 완성사진</label>
-				<input type="file" name="Fphotos" id="photoInput" class="form-control" 
+				<input type="file" name="Fphotos" id="photoInput" class="" 
 					multiple="multiple" >
 			</div>
 			
@@ -317,7 +350,7 @@ function addCookStep() {
 			
 			
 			<!-- 등록, 미리보기 , 취소 버튼 -->			
-			<div style="text-align: center;">
+			<div style="text-align: center; margin: 50px 0;">
 				<button type="submit" class="btn btn-success">등록</button>
 				<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#previewModal">미리보기</button>
 				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">취소</button>
@@ -362,6 +395,8 @@ function addCookStep() {
 
 
 		</form>
+</div>
+	</div>
 
 
 	</section>
