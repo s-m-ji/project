@@ -10,4 +10,6 @@ public interface RecStepService2 {
 	public int insert(RecStepVO2 vo);
 	
 	public int selectStepSEQ();
+	
+	public int minusSno(int B_NO);
 }

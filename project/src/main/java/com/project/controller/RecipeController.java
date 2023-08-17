@@ -194,7 +194,7 @@ public class RecipeController {
 			
 		}
 		 
-            
+			stepservice.minusSno(B_NO);
             
             
             if (res > 0 && res3>0 && res4>0) {

@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.mapper.RecMatMapper2;
+import com.project.mapper.RecStepMapper2;
 import com.project.mapper.RecipeListMapper;
 import com.project.mapper.RecipeMapper;
 import com.project.mapper.ReplyMapper;
@@ -46,6 +47,14 @@ public class recipeTest {
 	@Autowired
 	RecMatMapper2 mats;
 	
+	@Autowired
+	RecStepMapper2 sM;
+	
+	
+	@Test
+	public void mi() {
+		sM.minusSno(9);
+	}
 	
 	@Test public void getRecList() {
 		// assertNotNull(rMapper);

@@ -23,4 +23,10 @@ public class RecStepServiceImpl2 implements RecStepService2{
 		// TODO Auto-generated method stub
 		return mapper.selectStepSEQ();
 	}
+
+	@Override
+	public int minusSno(int B_NO) {
+		// TODO Auto-generated method stub
+		return mapper.minusSno(B_NO);
+	}
 }

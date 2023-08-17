@@ -19,4 +19,12 @@
 		
 	</select>
 	
+	<update id="minusSno">
+			
+			update rec_step 
+			set s_no= s_no-3
+			where b_no = #{B_NO}
+			
+	</update>
+	
 </mapper>
