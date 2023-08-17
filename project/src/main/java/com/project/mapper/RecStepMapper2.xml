@@ -4,9 +4,19 @@
 <mapper namespace="com.project.mapper.RecStepMapper2">
 
 <insert id="insert">
-
-insert into REC_STEP values('',#{step_content},'')
+	
+	<selectKey keyProperty="B_NO" order="BEFORE" resultType="int">
+		SELECT seq_recboard.CURRVAL FROM DUAL
+	</selectKey>
+	
+	insert into REC_STEP values(#{S_NO},#{step_content},#{B_NO})
 
 </insert>
-
+	
+	<select id="selectStepSEQ" resultType="int">
+		
+		select SEQ_W_REC_STEP.nextval from dual
+		
+	</select>
+	
 </mapper>

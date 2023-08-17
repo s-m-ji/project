@@ -9,4 +9,6 @@ public interface RecFileMapper2 {
 	public List<RecFileVO2> getList(int bno);
 	
 	public int insert(RecFileVO2 vo);
+	
+	public int stepInsert(RecFileVO2 vo);
 }

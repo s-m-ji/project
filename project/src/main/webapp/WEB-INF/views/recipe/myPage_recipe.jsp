@@ -237,8 +237,10 @@
 		           	 
 		           	 
 		        	</c:forEach>
+		        		        		
 					</ul>
-				 
+					
+					<div style="float: right;"><button class="btn btn-primary me-md-2" onclick="location.href='/recipe/rec_write'" href ='#' class="aName">글쓰기</button></div> 
 				 </div>
 			</div>
 		</div>

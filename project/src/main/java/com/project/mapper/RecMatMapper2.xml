@@ -4,8 +4,14 @@
 <mapper namespace="com.project.mapper.RecMatMapper2">
 
 <insert id="insert">
+	
+	<selectKey   keyProperty="I_NO" order="BEFORE" resultType="int">
+		select i_no from REC_INGREDIENTS 
+		where i_name = #{I_NAME}
 
-insert into REC_MATERIAL values('','',#{materialCnt},'',#{I_NAME})
+	</selectKey>
+	
+	insert into REC_MATERIAL values('', #{I_NO}, #{materialCnt},#{B_NO},#{I_NAME})
 
 </insert>
 

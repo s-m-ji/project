@@ -13,18 +13,18 @@
 </select>
 
 <insert id="insert" parameterType="com.project.vo.RecBoardVO2">
-        INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip)
-        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip})
+        INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip,VIEWCNT, STAR, REPLYCNT)
+        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip},0,0,0)
     </insert>
 
 
 <insert id="insertSelectKey">
 		<selectKey keyProperty="B_NO" order="BEFORE" resultType="int">
-		select seq_recboard.nextval from dual
+			select seq_recboard.nextval from dual
 		</selectKey>
 	
-		INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip)
-        VALUES (SEQ_RECBOARD.nextval, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip})
+		INSERT INTO rec_board (B_NO, title,  intro,   videolink ,c_no1,c_no2,cookTip,VIEWCNT, STAR, REPLYCNT, boomup, mno, nickname)
+        VALUES (#{B_NO}, #{title},  #{intro},  #{videolink},#{c_no1} ,#{c_no2} ,#{cookTip},0,0,0,0, #{mno},#{nickName})
 	</insert>	
 
 <delete id="delete">

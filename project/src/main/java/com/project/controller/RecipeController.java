@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,26 +123,80 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/rec_write")
-	public String recWrite() {
+	public String recWrite(Model model, HttpSession session) {
 		
+	/*	MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
 		
+		if(member == null) {
+			model.addAttribute("message","false");
+			return "/recipe/login";
+		}
+		
+		model.addAttribute("mno",member.getMno());
+		model.addAttribute("nickName",member.getNickname()); */
 		
 		return "/recipe/rec_write";
 	}
 	
 	@PostMapping("/postWrite")
     public String postWrite(RecBoardVO2 recBoardVO
-    						, RecMatVO2 matvo, RecStepVO2 stepvo 
-    						,  @RequestParam("photos") List<MultipartFile> photos
+    						,RecMatVO2 matvo ,RecStepVO2 stepvo
+    						 ,String[] I_NAME, String [] materialCnt 
+    						 ,String[] step_content
+    						, @RequestParam("photos") List<MultipartFile> photos
+    						, @RequestParam("Fphotos") List<MultipartFile> Fphotos
+    						, @RequestParam("Sphotos") List<MultipartFile> Sphotos
     						, Model model) {
-        try {
-            // rec_board에 레시피 정보 등록
+		
+		
+		try {
+			// rec_board에 레시피 정보 등록
+			
         	System.out.println("c_no 1 : " + recBoardVO.getC_no1());
         	System.out.println("c_no 2 : " + recBoardVO.getC_no2());
-            int res = recservice.insertSelectKey(recBoardVO, photos);
-           
-            int res3 = matservice.insert(matvo);
-            int res4 = stepservice.insert(stepvo);
+            int res = recservice.insertSelectKey(recBoardVO, photos, Fphotos, Sphotos, model);
+            
+            
+            System.out.println(model.asMap().get("arrSno"));
+            int B_NO = recBoardVO.getB_NO();
+            
+            //int res2 =  recservice.FinishFiles(Fphotos);
+			 
+              int res3 = 0;
+			  int res4 = 0;
+			  
+		for(int i = 0; i < I_NAME.length; i++) {
+			
+			
+			matvo.setI_NAME(I_NAME[i]);
+			matvo.setMaterialCnt(materialCnt[i]);
+			matvo.setB_NO(B_NO);
+			
+			
+			res3 = matservice.insert(matvo);
+			
+			System.out.println("안 ==========================");
+		}
+			System.out.println("밖 ==========================");
+		
+			ArrayList<Integer> arr = (ArrayList<Integer>)(model.asMap().get("arrSno"));
+		for(int i = 0; i < step_content.length; i++) {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ 실행전");
+			
+			System.out.println(step_content[i]);
+			
+			stepvo.setStep_content(step_content[i]);
+			stepvo.setS_NO((int)arr.get(i));
+			stepvo.setB_NO(B_NO);
+			
+			res4 = stepservice.insert(stepvo);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ 실행후");
+			
+		}
+		 
+            
+            
+            
             if (res > 0 && res3>0 && res4>0) {
                 
                 
@@ -153,8 +208,10 @@ public class RecipeController {
                 model.addAttribute("msg", msg);
                 return "/recipe/message";
             }
-        } catch (Exception e) {
+        
+		} catch (Exception e) {
             String msg = "등록 중 예외사항이 발생하였습니다.22";
+            System.out.println(e.getMessage());
             model.addAttribute("msg", msg);
             return "/recipe/message";
         }

@@ -1,10 +1,13 @@
 package com.project.service;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mapper.RecMapper2;
@@ -56,17 +59,24 @@ public class RecBoardServiceImpl2 implements RecBoardService2 {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int insertSelectKey(RecBoardVO2 board
-								, List<MultipartFile> files) throws Exception {
+								, List<MultipartFile> files
+								, List<MultipartFile> Fphotos
+								, List<MultipartFile> Sphotos, Model model) throws Exception {
 		
 		// 게시물 등록
 		int res = recMapper.insertSelectKey(board);
 		
 		// 파일 첨부
 		fileservice.fileupload(files, board.getB_NO());
+		fileservice.Ffileupload(Fphotos, board.getB_NO());
+		fileservice.Sfileupload(Sphotos, board.getB_NO(), model);
+		
 		
 		
 		return res;
 	}
+
+	
 	
 	
 }

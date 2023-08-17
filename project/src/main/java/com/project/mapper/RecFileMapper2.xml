@@ -14,4 +14,10 @@
     values (#{uuid}, #{uploadpath}, #{filetype}, #{filename}, #{B_NO})
 </insert>
 
+	<insert id="stepInsert" parameterType="com.project.vo.RecFileVO2">
+		
+		insert into rec_file (uuid, uploadpath, filetype, filename, B_NO, S_NO)
+   		 values (#{uuid}, #{uploadpath}, #{filetype}, #{filename}, #{B_NO}, #{S_NO})
+	</insert>
+
 </mapper>
