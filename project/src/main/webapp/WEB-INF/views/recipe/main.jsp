@@ -193,6 +193,20 @@ display: inline-block;
     background: #f7863b50;
 }
 
+
+#chatBox .col-md-6::-webkit-scrollbar {
+	    width: 10px;  
+	}
+			
+#chatBox .col-md-6::-webkit-scrollbar-thumb {
+    background: #F7863B; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+#chatBox .col-md-6::-webkit-scrollbar-track {
+    background: #ffd5b9;  /*스크롤바 뒷 배경 색상*/
+}
+
 </style>
 <%@ include file="../common/header.jsp" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
@@ -352,7 +366,7 @@ display: inline-block;
            	<div class="form-group">
         	<form class="form-inline">
                 	<input type="text" id="msg" class="form-control" placeholder="궁금한 내용을 알려주세요." style="width: 1000px; display: inline-block;">
-                	<button id="send" class="btn btn-default" disabled type="submit">전송</button>
+                	<button id="send" class="btn btn-default" disabled type="submit" style="color: #fff;">전송</button>
         	</form>
            	</div>
     	</div>
