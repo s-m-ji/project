@@ -208,7 +208,7 @@ function delRes(map) {
             <input type="checkbox" class="form-check-input" id="adminChkBox" onclick='toggleCheckboxes()' style="margin-right: 10px;">
             <label class="form-check-label" for="same-address"></label>
             	<div class= "btnDiv">
-          <input type='button' id='deleteBtn' value='회원등록'onclick='inputBtnOnclick()' style="margin-right: 6px;" >
+       <!--    <input type='button' id='deleteBtn' value='회원등록'onclick='inputBtnOnclick()' style="margin-right: 6px;" > -->
           <input type='button' id='inputBtn' value='회원탈퇴' onclick="delBtnOnclick()" >
           		</div>
         </div>

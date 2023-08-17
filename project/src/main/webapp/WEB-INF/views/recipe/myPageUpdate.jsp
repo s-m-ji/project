@@ -366,7 +366,7 @@ function getFileList(){
 
           <div class="mb-3">
             <label for="pnum">전화번호</label>
-            <input type="text" class="form-control" id="pnum" name ="pnum" value="${member.pnum }" required>
+            <input type="text" class="form-control" id="pnum" name ="pnum" value="${member.pnum }" required placeholder="ex) 010-1234-5678">
             <div class="invalid-feedback">
               전화번호를 등록해주세요.
             </div>
