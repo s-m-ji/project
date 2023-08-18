@@ -44,25 +44,25 @@
 
 			<!-- Nav -->
 				<nav id="nav">
-					<ul>
-						<li><a class="icon solid fa-home" href="main"><span>홈페이지</span></a></li>
-						<li><a class="icon solid bi bi-cup-fill" href="list"><span>레시피</span></a></li>
-						<li><a class="icon solid bi bi-chat-dots-fill" href="com_list"><span>커뮤니티</span></a></li>
+					<ul><!-- 원래 이렇게 절대경로로 쓰면 안되지만.. 임시 처방입니다. (MI,2023/08/17) -->
+						<li><a class="icon solid fa-home" href="http://localhost:8080/recipe/main"><span>홈페이지</span></a></li>
+						<li><a class="icon solid bi bi-cup-fill" href="http://localhost:8080/recipe/list"><span>레시피</span></a></li>
+						<li><a class="icon solid bi bi-chat-dots-fill" href="http://localhost:8080/recipe/com_list"><span>커뮤니티</span></a></li>
 				<c:choose>
     				<c:when test="${not empty member.role}">
-						<li><a class="icon solid bi-gear-fill" href="adminHome"><span>관리자</span></a></li>
+						<li><a class="icon solid bi-gear-fill" href="http://localhost:8080/recipe/adminHome"><span>관리자</span></a></li>
 					</c:when>
 					<c:when test="${empty member.role}">
-						<li><a class="icon solid fa-solid fa-user" href="myPage2"><span>마이페이지</span></a></li>
+						<li><a class="icon solid fa-solid fa-user" href="http://localhost:8080/recipe/myPage2"><span>마이페이지</span></a></li>
 					</c:when>
 				</c:choose>
     				<c:if test="${empty member}">
-						<li><a class="icon solid bi bi-key-fill" href="login"><span>로그인</span></a></li>
+						<li><a class="icon solid bi bi-key-fill" href="http://localhost:8080/recipe/login"><span>로그인</span></a></li>
 					</c:if>
     				<c:if test="${not empty member}">
-						<li><a class="icon solid bi bi-key-fill" href="logout"><span>로그아웃</span></a></li>
+						<li><a class="icon solid bi bi-key-fill" href="http://localhost:8080/recipe/logout"><span>로그아웃</span></a></li>
 					</c:if>
-						<li><a class="icon solid bi-person-plus-fill" href="register"><span>회원가입</span></a></li>
+						<li><a class="icon solid bi-person-plus-fill" href="http://localhost:8080/recipe/register"><span>회원가입</span></a></li>
 					</ul>
 				</nav>
 				

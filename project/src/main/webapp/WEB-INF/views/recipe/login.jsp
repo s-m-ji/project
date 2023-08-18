@@ -54,7 +54,29 @@
     margin-right: 10px; /* 조절 가능한 여백 값 */
 	}
 
-
+	/* css 추가 (MI, 2023/08/17) */
+	.btn.btn-primary:hover {
+		    background: #f9a974;
+	}
+	
+	.container.text-center {
+		padding: 50px 0;
+	}
+	
+	#btnSignin {
+		margin-bottom: 20px;
+	}
+	
+	#btnRegisterView {
+		margin-top: 20px;
+	}
+	
+	#msg {
+	    display: inline-block;
+    	background: #f7863b50;
+	    padding: 0 5px;
+   	 	margin: 5px;
+	}
     </style>
     
     <script>
@@ -124,6 +146,9 @@
     </script> 
   </head>
 	<body class="text-center">
+	<section id="main">
+	<div class="container text-center">
+	
 	<main class="form-signin w-100 m-auto">
 	
 	<input type="hidden" id="message" value="${message}">
@@ -175,7 +200,7 @@
 	    session.setAttribute("state", state);
 	 %>
 	 
-  <button id='btnRegisterView' onclick="goToRegister()">회원가입 하러가기</button>
+  <button id='btnRegisterView' onclick="goToRegister()" style="color: #fff;" class="w-100 btn btn-lg btn-primary">회원가입 하러가기</button>
   
   <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 	
@@ -183,6 +208,10 @@
   <img src="/resources/images/kakao_login_large.png" style="height:50px"/></a>
   
 </main>
+</div>
+	</section>
+<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>
 
 
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

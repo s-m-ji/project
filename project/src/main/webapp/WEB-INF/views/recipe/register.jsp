@@ -54,6 +54,32 @@
 	        transform: translateY(-50%);
 	    }
 
+
+
+	/* css 추가 (MI, 2023/08/17) */
+		.btn.btn-primary:hover {
+			    background: #f9a974;
+		}
+		
+		.container.text-center {
+			padding: 50px 0;
+		}
+		
+		#btnSignin {
+			margin-bottom: 20px;
+		}
+		
+		#btnRegisterView {
+			margin-top: 20px;
+		}
+		
+		#signupMsg {
+			display: inline-block;
+    	background: #f7863b50;
+	    padding: 0 5px;
+   	 	margin: 5px;
+		}
+		
     </style>
     <script type="text/javascript" src="/resources/recipe_js/common.js"></script>
     <script>
@@ -362,7 +388,10 @@
     </style>
 </head>
 <body class="text-center">
+<section id="main">
+	<div class="container text-center">
 	<main class="form-signin w-100 m-auto">
+	
 	
   <!-- 회원가입 폼 -->
   <form name='signupForm'>
@@ -371,12 +400,12 @@
 	<div id="signupMsg"></div>
     <div class="form-floating">
       <input type="email" class="form-control start" id="signUpEmail" >
-      <button id="confirmEmailBtn" type="button">인증번호 전송</button>
+      <button id="confirmEmailBtn" type="button" style="color: #fff;">인증번호 전송</button>
       <label for="email">Email</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control middle" id="confirmCode" >
-      <button id='confirmEmailCheck' type="button">인증번호 확인</button>
+      <button id='confirmEmailCheck' type="button" style="color: #fff;">인증번호 확인</button>
       <label for="comfirmemail">Confirm Email</label>
     </div>
     <!-- 비밀번호 텍스트 보기 (MI, 2023/08/16) -->
@@ -399,13 +428,13 @@
     <div class="form-floating">
       <input type="text" class="form-control middle" id="signUpNickname">
       <label for="nickname">Nickname</label>
-      <button id="nicknameCheck" type="button">중복체크</button>
+      <button id="nicknameCheck" type="button" style="color: #fff;">중복체크</button>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control end" id="signUpPNum">
       <label for="pNum">Phone without ' - '</label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" id='btnSignup' type="submit">회원가입</button>
+    <button class="w-100 btn btn-lg btn-primary" id='btnSignup' type="submit" >회원가입</button>
     
     <input type="hidden" value="0" id="nicknameCheckRes">
     <input type="hidden" value="0" id="pwCheckRes">
@@ -413,9 +442,12 @@
     
   </form>
 
-  <br><button id='btnSigninView' onclick="goToLogin()">로그인 하러가기</button>
+  <br><button id='btnSigninView' onclick="goToLogin()" style="color: #fff;" class="w-100 btn btn-lg btn-primary">로그인 하러가기</button>
 </main>
-
+</div>
+	</section>
+<!-- Footer -->
+	<%@ include file="../common/footer.jsp" %>
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
