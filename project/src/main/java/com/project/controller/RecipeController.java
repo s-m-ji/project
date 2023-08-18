@@ -125,7 +125,7 @@ public class RecipeController {
 	@GetMapping("/rec_write")
 	public String recWrite(Model model, HttpSession session) {
 		
-	/*	MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
+		MemberVo member = session.getAttribute("member") == null ? null : (MemberVo)session.getAttribute("member") ;
 		
 		if(member == null) {
 			model.addAttribute("message","false");
@@ -133,7 +133,7 @@ public class RecipeController {
 		}
 		
 		model.addAttribute("mno",member.getMno());
-		model.addAttribute("nickName",member.getNickname()); */
+		model.addAttribute("nickName",member.getNickname()); 
 		
 		return "/recipe/rec_write";
 	}
@@ -157,7 +157,7 @@ public class RecipeController {
             int res = recservice.insertSelectKey(recBoardVO, photos, Fphotos, Sphotos, model);
             
             
-            System.out.println(model.asMap().get("arrSno"));
+            
             int B_NO = recBoardVO.getB_NO();
             
             //int res2 =  recservice.FinishFiles(Fphotos);
@@ -179,21 +179,20 @@ public class RecipeController {
 		}
 			System.out.println("밖 ==========================");
 		
-			ArrayList<Integer> arr = (ArrayList<Integer>)(model.asMap().get("arrSno"));
+			
 		for(int i = 0; i < step_content.length; i++) {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ 실행전");
 			
 			System.out.println(step_content[i]);
 			
 			stepvo.setStep_content(step_content[i]);
-			stepvo.setS_NO((int)arr.get(i));
 			stepvo.setB_NO(B_NO);
 			
 			res4 = stepservice.insert(stepvo);
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ 실행후");
 			
 		}
-		 
+			stepservice.minusStep(B_NO);
             
             
             
