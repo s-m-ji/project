@@ -9,7 +9,7 @@
 		SELECT seq_recboard.CURRVAL FROM DUAL
 	</selectKey>
 	
-	insert into REC_STEP values(#{S_NO},#{step_content},#{B_NO})
+	insert into REC_STEP values(SEQ_W_REC_STEP.nextval,#{step_content},#{B_NO})
 
 </insert>
 	
@@ -18,5 +18,14 @@
 		select SEQ_W_REC_STEP.nextval from dual
 		
 	</select>
+	
+	<update id="minusStep">
+	
+		update rec_step 
+			set s_no = s_no - (select count(*) 
+				from rec_step where b_no = #{B_NO})
+			where b_no = #{B_NO}
+	
+	</update>
 	
 </mapper>

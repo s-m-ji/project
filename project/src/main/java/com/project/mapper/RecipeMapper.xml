@@ -55,9 +55,11 @@
 	
 	<select id="getRecipeStep" resultType="com.project.vo.RecipeStepVo">
 			
+	
 			select * 
 			from rec_step
 			where b_no = #{b_no}
+            order by s_no asc
 		
 	</select>
 	

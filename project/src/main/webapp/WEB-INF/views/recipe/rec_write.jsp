@@ -23,6 +23,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
+
+
 	
    
 	// 재료추가버튼 함수
@@ -48,23 +50,25 @@ function addMaterial() {
     
     
 	// 순서추가버튼 함수
-
-function addCookStep() {
-	let step = 1;
-    var cookStep = document.getElementById('cookStep');
-    var newCookstep = document.createElement('div');
-
-    newCookstep.innerHTML =
-        `
-        <p>step ${step + 1}</p>
-        <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 450px; resize: none;">${stepvo.step_content}</textarea>
-        <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block;" ><br>
-        `;
-
-    cookStep.appendChild(newCookstep);
-
-    step++;
-}
+	var step = 1;
+	
+	function addCookStep() {
+		
+	    var cookStep = document.getElementById('cookStep');
+	    var newCookstep = document.createElement('div');
+	    
+		step++;
+	    newCookstep.innerHTML =
+	        
+	    	`
+	        <p style="margin-bottom: 20px;font-size: 30px;color: #f7863b;font-weight: 900;">Step \${step}</p>
+	        <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 100%; resize: none;">${stepvo.step_content}</textarea>
+	        <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block;" ><br><br>
+	        `;
+	
+	    cookStep.appendChild(newCookstep);
+	
+	}
 	// 페이지 다시생성
 	function redirectToRecipeWrite() {
 	    window.location.href = "http://localhost:8080/recipe1/rec_write"; // 새로운 페이지로 이동할 URL을 입력하세요.
@@ -140,7 +144,9 @@ function addCookStep() {
   <!-- css 추가 설정 (MI, 2023/08/17) -->
   <style>
   .form-control {
-  	padding: 30px;
+  	padding: 100px;
+  	border: 2px solid;
+    border-color: #f7863b96;
   }
   
   .form-control label {
@@ -148,6 +154,7 @@ function addCookStep() {
 	font-size: 1.75rem;
 	position: relative;
 	display: inline-block;
+	    color: black;
 	}
   
   .form-control label:after {
@@ -159,10 +166,22 @@ function addCookStep() {
 	height: 10px;
 	background: #f7863b50;
   }
+  
+	 .Pstep{
+		margin-bottom: 20px;
+		font-size: 30px;
+		color: #f7863b;
+		font-weight: 900;	
+	}
+	
+	.MARG{
+		margin-bottom: 50px;
+	}
   </style>
   
 </head>
 <body>
+
 	<!-- Header -->
 	<%@ include file="../common/header.jsp"%>
 
@@ -180,10 +199,10 @@ function addCookStep() {
 
 		<form class="form-control" method="post" action="/recipe/postWrite" enctype="multipart/form-data"> 	
   		
-  		 <input type="hidden" name="mno" value="30">
-  		<input type="hidden" name="nickName" value="부붐">
+  		 <input type="hidden" name="mno" value="${mno}">
+  		<input type="hidden" name="nickName" value="${nickName}">
 		<!-- 제목 입력란  -->
-			<div class="rec_title">
+			<div class="rec_title MARG">
 				<label>레시피 제목 </label> 
 				<input type="text" name="title" placeholder="예) 학교앞 분식집 떡볶이 만들기" value="${board.title}">
 			</div>
@@ -191,7 +210,7 @@ function addCookStep() {
 			<br><br>
 
 		<!-- 요리소개  -->
-			<div class="rec_intro">
+			<div class="rec_intro MARG">
 				<label >요리 소개</label>
 				<textarea
 					placeholder="이 레시피의 탄생배경을 적어주세요. 예)어릴적 학교앞 분식집에서 먹던 떡볶이 맛이 그리우셨다면 한번 만들어보세요~"
@@ -216,11 +235,11 @@ function addCookStep() {
 			<br><br>
 			
 		<!-- 동영상 링크  -->
-			<div>
+			<div >
 				<label  style="display: inline;">동영상</label>
 				<i class="bi bi-camera-reels" style="display: inline; color: pink;"></i>
 			</div>
-			<textarea
+			<textarea class="MARG"
 				placeholder="동영상이 있으면 주소를 입력하세요. 예)http://youtu.be/lA0Bxo3IZmM" name="videolink"
 				style="height: 50px; width: 100%; resize: none;">${board.videolink }</textarea>
 				
@@ -302,7 +321,7 @@ function addCookStep() {
 				    </div>
 				    <br>
 				    <!-- 재료추가 버튼을 누르면 박스2개 생성! -->
-				    <button type="button" onclick="addMaterial()">
+				    <button class="MARG" type="button" onclick="addMaterial()">
 				        <span style="color: #fff;">재료추가</span>
 				    </button>
 				</div>
@@ -314,14 +333,14 @@ function addCookStep() {
     	<br>
 			<label>요리순서</label>
 			<div id="cookStep">
-			    <p>step 1</p>
+			    <p style="margin-bottom: 20px;font-size: 30px;color: #f7863b;font-weight: 900;">Step 1</p>
 			    <textarea placeholder="예) 떡볶이는 미리 물에 담궈놔 주세요~" name="step_content" style="display: inline-block; width: 100%; resize: none;">${stepvo.step_content}</textarea>
 			    <input type="file" name="Sphotos" multiple="multiple" style="display: inline-block; margin-bottom: 50px;"><br>
 			</div>
 			
 			<!-- 순서추가 버튼 -->
 			<div>
-			    <button type="button" onclick="addCookStep()" style="color: #fff;">순서추가</button>
+			    <button class="MARG" type="button" onclick="addCookStep()" style="color: #fff;">순서추가</button>
 			</div>
 				
 				<br><br>

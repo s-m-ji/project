@@ -183,7 +183,7 @@ function delRes(map) {
 		<tr style="border: 1px solid white;">
 		<td align = "center" class = "formtd searchBox">
 			<select name ="sField" class="searchField">
-				<option value="">전체</option>
+				<option value="all">전체</option>
 				<option value = "name"${pageDtoA.cri.SField eq "name" ? "selected" : ""}>회원명</option>
 				<option value = "grade"${pageDtoA.cri.SField eq "grade" ? "selected" : ""}>회원등급명</option>
 				<option value = "delYN"${pageDtoA.cri.SField eq "delYN" ? "selected" : ""}>탈퇴신청여부</option>

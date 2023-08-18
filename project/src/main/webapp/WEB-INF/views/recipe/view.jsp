@@ -788,8 +788,8 @@
 		    container: '#kakaotalk-sharing-btn',
 		    objectType: 'feed',
 		    content: {
-		      title: '딸기 치즈 케익',
-		      description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+		      title: '${board.title}',
+		      description: '${board.intro}',
 		      imageUrl:
 		        'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
 		      link: {

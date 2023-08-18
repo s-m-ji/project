@@ -25,7 +25,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1200px;
+    width: 1200px;S
   }
 
 .listHeader h3 {
@@ -213,6 +213,7 @@ body {
 } 
 
 </style>
+<%@ include file="../common/header.jsp" %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -225,7 +226,6 @@ body {
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 
-<%@ include file="../common/header.jsp" %>
 <body>
 <!-- Main -->
 	<section id="main">
@@ -365,7 +365,7 @@ body {
                 	</tr>
             	</thead>
         	</table>
-        	<table id="conversation" class="table table-striped" onDOMSubtreeModified="checkAndAddScroll()">
+        	<table id="conversation1" class="table table-striped" onDOMSubtreeModified="checkAndAddScroll()">
             	<tbody id="showMessage"></tbody>
         	</table>
     	</div>
@@ -378,7 +378,7 @@ body {
            	</div>
     	</div>
 	</div>
-<div style="background:#F7863B; width: 50px; height: 50px; margin: 12.5px 10px; border-radius: 30px; text-align:center; line-height:50px; z-index:999; position: fixed; right: 10px; bottom: 70px;">
+<div style="background:#F7863B; width: 50px; height: 50px; margin: 12.5px 10px; border-radius: 30px; text-align:center; line-height:50px; /* z-index:999; */ position: fixed; right: 10px; bottom: 70px;">
 	<i class="fa-solid fa-headset" id="chat-connect" style="color:#fff; font-size: 30px; line-height:50px;"></i>
 </div>
 <!-- <img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="z-index:999; width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;"> -->

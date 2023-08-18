@@ -154,6 +154,21 @@ function replyDelete(R_NO){
   	display: flex;
   	justify-content: betwwen;
   } */
+  
+  p.bno {
+  	color: #F7863B;
+    font-weight: bold;
+  }
+  
+  p.name {
+  	    font-size: 14px;
+    margin-top: 20px;
+    color: #999;
+  }
+  
+  .mb-3 {
+  	    margin: 0 0 30px 0 !important;
+  }
   </style>
 </head>
 
@@ -175,14 +190,22 @@ function replyDelete(R_NO){
 <div class="comViewTop">
 
 	<div class="mb-3">
+		<p class="mb-0 bno" >No. ${board.com_bno}</p>
+	</div>
+	
+	<div class="mb-3">
 	  <label for="title" class="form-label">제목</label>
-	  <h6>${board.com_title }</h6>
+	  <h5>${board.com_title }</h5>
 	</div>
 	
 	
 	<div class="mb-3">
 	  <label for="content" class="form-label">망하게 된 사연...</label>
-	  <h6>${board.com_content }</h6>
+	  <h5>${board.com_content }</h5>
+	</div>
+	
+	<div class="mb-3 ">
+	  <p class="name">${board.regdate}</p>
 	</div>
 </div>
 	

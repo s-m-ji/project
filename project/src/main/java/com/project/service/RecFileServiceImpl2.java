@@ -45,12 +45,14 @@ public class RecFileServiceImpl2  implements RecFileService2{
 	
 	
 	
+	
+	
 	///////////////////////////////////////////////////////////////////////// 요리순서 
 	
 	@Override
 	public int Sfileupload(List<MultipartFile> files, int bno, Model model) throws Exception {
 		int insertRes = 0;
-		List<Integer> arr = new ArrayList<Integer>();
+		
 		int index = 0;
 		for(MultipartFile file : files) {
 			// 선택된 파일이 없는경우 다음파일로 이동
@@ -108,10 +110,6 @@ public class RecFileServiceImpl2  implements RecFileService2{
 				}
 				
 				vo.setS_NO(stepS.selectStepSEQ());
-				
-				arr.set(index,vo.getS_NO());
-				index++;
-				
 				vo.setFiletype("S");
 				vo.setB_NO(bno);
 				vo.setFilename(file.getOriginalFilename());
@@ -136,7 +134,7 @@ public class RecFileServiceImpl2  implements RecFileService2{
 			}
 		}
 		
-			model.addAttribute("arrSno",arr);
+			
 		return insertRes;
 	}
 	
