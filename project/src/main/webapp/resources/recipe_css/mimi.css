@@ -243,9 +243,9 @@ form input[type="text"], form input[type="email"], form input[type="password"], 
 } 
 
 .start-90 {
-	left: 85%;
+	left:  40px;
     color: #fff !important;
-    top: 10% !important;
+    top: -20px !important;
 }
 
 .title, .intro {
