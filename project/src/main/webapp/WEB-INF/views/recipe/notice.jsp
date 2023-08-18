@@ -61,12 +61,12 @@ window.addEventListener('load', function(){
 <body>
  <!-- Main -->
 <section id="main">
-	<div class="container">
+	<div class="container" style="padding-top: 0px;">
 
-	<div class="container">
+	<div class="container" style="padding-top: 0px;">
 
 <!--검색 폼 -->
-<%-- <div class="list-group w-auto searchDiv">
+<div class="list-group w-auto searchDiv">
 <form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
 
 <input type="hidden" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input> 
@@ -80,12 +80,12 @@ window.addEventListener('load', function(){
 			</select>
 	</div>
 </form> 	
-</div> --%>
+</div>
 
 <!--공지 총 개수   -->
 <div style="display: flex;justify-content: flex-end;" > 
-<%-- <p style="margin: 0px;"> 오늘의 공지<b style="font-size: 1.8em">${totalNcnt}</b>개📜</p>
- --%></div>
+<p style="margin: 0px;"> 오늘의 공지<b style="font-size: 1.8em">${totalNcnt}</b>개📜</p>
+</div>
 <c:set  value="${notList}" var="notice"></c:set>  
 
 <!--  관리자 adminRole 이 포함되어있으면 보여주고 아니면 x  -->
@@ -131,29 +131,19 @@ window.addEventListener('load', function(){
     </form>
 
   </div> 
+<%-- </c:if> --%>
 <!-- 공지 목록  -->
 <form method="get" name="viewForm" accept-charset="UTF-8" >
  	
                 <section class="NoticeContentstyle__Container-sc-12y37o4-0 ihesfa">
-                    <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv">
+                    <div class="NoticeContentstyle__TitleBox-sc-12y37o4-1 laHiqv"
+                    style="
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 860px;
+    margin-left: 30px;">
                         <h2>공지사항</h2>
-                        <div class="list-group w-auto searchDiv" style="display: inline-block;padding-left: 480px;">
-<form name ="noticeForm" method ="get" action="/recipe/notice"  class="row g-3 justify-content-center">
-
-<input type="hidden" name ='pageNo' value ="${pageDtoN.cri.pageNo}"></input> 
-
-  <div class="col-sm-2">
-			<select name ="sField" class="form-select" aria-label="Default select example" style="width: 200px;"  onchange="this.form.submit();" >
-				<option value="">전체</option>
-				<option value = "일반"${pageDtoN.cri.SField eq "일반" ? "selected" : ""}>일반</option>
-				<option value = "이벤트"${pageDtoN.cri.SField eq "이벤트" ? "selected" : ""}>이벤트</option>
-				<option value = "자주 묻는 질문"${pageDtoN.cri.SField eq "자주 묻는 질문" ? "selected" : ""}>자주 묻는 질문</option>
-			</select>
-	</div>
-</form> 	
-</div>
-                        <p style="display: inline-block;padding-left: 400px;"> 오늘의 공지<b style="font-size: 1.8em">${totalNcnt}</b>개📜</p>
-       
                     </div>
                
                     <c:forEach items="${notList}" var="notice" step="1">
@@ -261,7 +251,7 @@ window.addEventListener('load', function(){
 <c:set var="pageDto" value="${pageDtoN}"/>
 <div class="text-center pageNavi" style="padding: 10px;">
 	<nav aria-label="Page navigation example">
-	  <ul class="pagination justify-content-center">
+	  <ul class="pagination justify-content-center" style="padding-top: 10px;">
 	    <li class="page-item ${pageDtoN.prev? '' : 'disabled'}">
 	      <a class="page-link" onclick="goNotice(1)" href="#"><i class="bi bi-chevron-double-left"></i></a>
 	    </li>
