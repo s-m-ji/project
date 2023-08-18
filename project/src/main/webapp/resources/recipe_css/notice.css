@@ -138,24 +138,47 @@ data-styled.g295[id="ServiceItemstyle__ContainerBtn-sc-1omzxdj-0"] {
 }
 
 
+
+.laHiqv{
+	
+	 margin-top: 50px;
+     text-align: center;
+}
+.laHiqv h2{
+	text-align: center;
+    font-weight: 800;
+    font-size: 1.75rem;
+    position: relative;
+    display: inline-block;
+}
+
+.laHiqv h2:after {
+	                position: absolute;
+                bottom: 0;
+                display: block;
+                content: "";
+                width: 100%;
+                height: 10px;
+                background: #f7863b50;
+}
 /* 공지사항선 */
-.laHiqv {
+/* .laHiqv {
     position: relative;
     border-bottom: 1px solid hsl(210,20%,86%,1);
     
 }
 
-/* 공지사항 선 색깔*/
+공지사항 선 색깔
 .laHiqv:after {
     position: absolute;
     left: 0;
     bottom: -1px;
-    width: 38px; /**/
+    width: 38px;
     height: 1px;
     background-color: hsl(24, 100%, 53%);
     content: '';
     padding-left: 50px;
-}
+} */
 /*공지사항*/
 @media screen and (max-width: 1200px) {
     .laHiqv {
