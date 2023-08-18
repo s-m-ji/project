@@ -11,11 +11,7 @@
 		<!-- view.jsp를 위한 게시글 번호 -->
 		
 		<input type="hidden" name="b_no" value="${param.b_no}" placeholder="param.b_no -> 추후  hidden 처리">
-		<div class="container text-center">
-		<div class="container text-center">
-		<div class="container text-center">
-		<div class="container text-center">
-		<div class="container text-center">
+		<div class="container text-center" style="width:50%;      padding-top: 0;">
 			<div class="d-flex justify-content-between">
 				<div class="p-2 flex-fill">
 					<input type="text" name="sWord" class="form-control" value="${pDto.cri.SWord}" placeholder="검색어">
@@ -24,10 +20,6 @@
 					<button type="submit" class="btn btn-primary mb-3" onclick="go(1);">검색</button>
 				</div>
 			</div>
-		</div>
-		</div>
-		</div>
-		</div>
 		</div>
 		<div class="container text-center">
 			<input type="hidden" name="pageNo" value="${pDto.cri.pageNo}">

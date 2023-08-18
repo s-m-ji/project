@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>커뮤니티 상세</title>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 <!-- Header -->
 	<%@ include file="../common/header.jsp" %>
 	
@@ -155,8 +157,6 @@ function replyDelete(R_NO){
   </style>
 </head>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
 <body>
 
 

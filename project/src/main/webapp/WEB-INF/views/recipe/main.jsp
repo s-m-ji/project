@@ -207,8 +207,13 @@ display: inline-block;
     background: #ffd5b9;  /*스크롤바 뒷 배경 색상*/
 }
 
+body {
+	padding : 0;
+	margin: 0;
+} 
+
 </style>
-<%@ include file="../common/header.jsp" %>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -219,6 +224,8 @@ display: inline-block;
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
+
+<%@ include file="../common/header.jsp" %>
 <body>
 <!-- Main -->
 	<section id="main">
@@ -371,7 +378,7 @@ display: inline-block;
            	</div>
     	</div>
 	</div>
-<div style="background:#F7863B; width: 50px; height: 50px; margin: 12.5px 10px; border-radius: 30px; text-align:center; line-height:50px; z-index:999; position: fixed; right: 20px; bottom: 0;">
+<div style="background:#F7863B; width: 50px; height: 50px; margin: 12.5px 10px; border-radius: 30px; text-align:center; line-height:50px; z-index:999; position: fixed; right: 10px; bottom: 70px;">
 	<i class="fa-solid fa-headset" id="chat-connect" style="color:#fff; font-size: 30px; line-height:50px;"></i>
 </div>
 <!-- <img id="chat-connect" src="/resources/img/pingwing-bee_sad.png" style="z-index:999; width: 150px; height: 150px; position: fixed; right: 0; bottom: 0;"> -->

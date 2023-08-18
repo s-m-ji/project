@@ -111,7 +111,8 @@
 	}
 	</script>
 	
-	<!-- Main -->
+	<!-- Main --> 
+	
 	<section id="main">
 		<div class="container text-center">
 	     <!--  <div class="bg-light p-5 rounded"><h1>👩‍🍳  레시피 👩‍🍳</h1> <sup>※ 제목 추후 삭제</sup></div> -->

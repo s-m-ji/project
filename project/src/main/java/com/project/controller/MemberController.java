@@ -526,12 +526,7 @@ public class MemberController {
 		session.invalidate();
 		return "/recipe/login";
 	}
-
-	@GetMapping("/main")
-	public String main() {
-		return "recipe/main";
-	}
-
+	
 	@GetMapping("/register")
 	public String registerPage() {
 		return "recipe/register";

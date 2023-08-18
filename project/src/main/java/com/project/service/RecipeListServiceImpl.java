@@ -27,7 +27,7 @@ public class RecipeListServiceImpl implements RecipeListService {
 	public void getRecList(Model model, Criteria cri) {
 		System.out.println("[RecipeListServiceImpl] getRecList 실행");
 			if(cri.getAmount() == 10) {
-				cri.setAmount(12);
+				cri.setAmount(6);
 			} else {
 				cri.setAmount(cri.getAmount());
 			}

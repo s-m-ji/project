@@ -117,9 +117,9 @@
 				<div class="p-2">
 					<select class="form-control" name="amount"
 						onchange="changePageSize(this.value)">
-						<option value="12" ${ param.amount eq '12' ? "selected" : "" }>12개씩 보기  </option>
+						<option value="6" ${ param.amount eq '6' ? "selected" : "" }>6개씩 보기  </option>
+						<option value="12" ${ param.amount eq '12' ? "selected" : "" }>12개씩 보기</option>
 						<option value="24" ${ param.amount eq '24' ? "selected" : "" }>24개씩 보기</option>
-						<option value="48" ${ param.amount eq '48' ? "selected" : "" }>48개씩 보기</option>
 					</select>
 				</div>
 				<div class="p-2">
